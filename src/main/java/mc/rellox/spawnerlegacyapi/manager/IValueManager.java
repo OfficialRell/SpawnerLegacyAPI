@@ -2,8 +2,6 @@ package mc.rellox.spawnerlegacyapi.manager;
 
 import java.util.function.Function;
 
-import javax.swing.GroupLayout.Group;
-
 import mc.rellox.spawnerlegacyapi.configuration.IFile;
 import mc.rellox.spawnerlegacyapi.configuration.settings.IBooleanValue;
 import mc.rellox.spawnerlegacyapi.configuration.settings.IDoubleValue;
@@ -18,6 +16,7 @@ import mc.rellox.spawnerlegacyapi.configuration.settings.ITypePermissions;
 import mc.rellox.spawnerlegacyapi.configuration.settings.IValue;
 import mc.rellox.spawnerlegacyapi.configuration.settings.IValueBuilder;
 import mc.rellox.spawnerlegacyapi.configuration.settings.IValueHeld;
+import mc.rellox.spawnerlegacyapi.price.Group;
 
 public interface IValueManager {
 	
