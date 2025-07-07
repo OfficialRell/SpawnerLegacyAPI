@@ -7,9 +7,12 @@ import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import mc.rellox.spawnerlegacyapi.utility.reflect.Reflect.RF;
+import mc.rellox.spawnerlegacyapi.version.Version;
+import mc.rellox.spawnerlegacyapi.version.Version.VersionType;
 
 public final class Utility {
 	
@@ -50,5 +53,13 @@ public final class Utility {
 
 	public static final Attribute attribute_damage = RF.fielded(Attribute.class, "GENERIC_ATTACK_DAMAGE", "ATTACK_DAMAGE");
 	public static final Attribute attribute_speed = RF.fielded(Attribute.class, "GENERIC_MOVEMENT_SPEED", "MOVEMENT_SPEED");
+
+	public static boolean isWindCharge(Entity entity) {
+		if(Version.version.high(VersionType.v_21_1) == false) return false;
+		return switch (entity.getType().name()) {
+		case "WIND_CHARGE", "BREEZE_WIND_CHARGE" -> true;
+		default -> false;
+		};
+	}
 
 }
