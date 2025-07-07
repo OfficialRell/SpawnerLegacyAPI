@@ -1,6 +1,14 @@
-package mc.rellox.spawnerlegacyapi.configuration;
+package mc.rellox.spawnerlegacyapi.configuration.player;
 
 import org.bukkit.entity.Player;
+
+import mc.rellox.spawnerlegacyapi.configuration.ICommit;
+
+/**
+ * This limit data allows players to only have a specific amount
+ * of a specific limit type per a defined time period. <br>
+ * After a limit reset all players will have their limits reset.
+ */
 
 public interface ILimitData extends ICommit {
 	

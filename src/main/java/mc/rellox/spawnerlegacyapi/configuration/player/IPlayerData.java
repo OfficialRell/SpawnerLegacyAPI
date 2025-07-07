@@ -1,4 +1,4 @@
-package mc.rellox.spawnerlegacyapi.configuration;
+package mc.rellox.spawnerlegacyapi.configuration.player;
 
 import java.util.Set;
 import java.util.UUID;
@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
+import mc.rellox.spawnerlegacyapi.configuration.ICommit;
 import mc.rellox.spawnerlegacyapi.spawner.location.ILocationMutable;
 
 public interface IPlayerData extends ILocationMutable, ICommit {

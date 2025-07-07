@@ -1,4 +1,4 @@
-package mc.rellox.spawnerlegacyapi.configuration;
+package mc.rellox.spawnerlegacyapi.configuration.player;
 
 public enum LimitType {
 	
