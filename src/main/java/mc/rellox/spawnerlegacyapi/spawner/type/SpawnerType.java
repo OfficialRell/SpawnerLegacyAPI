@@ -58,7 +58,7 @@ public enum SpawnerType {
 	ILLUSIONER(EntityType.ILLUSIONER, "Illusioner", null, EntityBox.doubled),
 	IRON_GOLEM(EntityType.IRON_GOLEM, "Iron Golem", _m("IRON_GOLEM_SPAWN_EGG"), EntityBox.box(2, 3, 2)),
 	LLAMA(EntityType.LLAMA, "Llama", Material.LLAMA_SPAWN_EGG, EntityBox.doubled),
-	MAGMA_CUBE(EntityType.MAGMA_CUBE, "Magma Cube", Material.MAGMA_CUBE_SPAWN_EGG, SLAPI.get().settings().magmaMultibox()),
+	MAGMA_CUBE(EntityType.MAGMA_CUBE, "Magma Cube", Material.MAGMA_CUBE_SPAWN_EGG, SLAPI.get().spawners().magmaBox()),
 	MINECART(EntityType.MINECART, "Minecart", Material.MINECART, true, EntityBox.single),
 	MINECART_CHEST(_e("MINECART_CHEST", "CHEST_MINECART"), "Minecart with Chest", Material.CHEST_MINECART, true, EntityBox.single),
 	MINECART_COMMAND(_e("MINECART_COMMAND", "COMMAND_BLOCK_MINECART"), "Minecart with Command Block", Material.COMMAND_BLOCK_MINECART, true, EntityBox.single),
@@ -87,7 +87,7 @@ public enum SpawnerType {
 	SILVERFISH(EntityType.SILVERFISH, "Silverfish", Material.SILVERFISH_SPAWN_EGG, EntityBox.single),
 	SKELETON(EntityType.SKELETON, "Skeleton", Material.SKELETON_SPAWN_EGG, EntityBox.doubled),
 	SKELETON_HORSE(EntityType.SKELETON_HORSE, "Skeleton Horse", Material.SKELETON_HORSE_SPAWN_EGG, EntityBox.doubled),
-	SLIME(EntityType.SLIME, "Slime", Material.SLIME_SPAWN_EGG, SLAPI.get().settings().slimeMultibox()),
+	SLIME(EntityType.SLIME, "Slime", Material.SLIME_SPAWN_EGG, SLAPI.get().spawners().slimeBox()),
 	SNIFFER(_e("SNIFFER"), "Sniffer", _m("SNIFFER_SPAWN_EGG"), EntityBox.box(2, 2, 2)),
 	SNOWMAN(_e("SNOWMAN", "SNOW_GOLEM"), "Snowman", _m("SNOW_GOLEM_SPAWN_EGG"), EntityBox.doubled),
 	SPIDER(EntityType.SPIDER, "Spider", Material.SPIDER_SPAWN_EGG, EntityBox.box(2, 1, 2)),
@@ -207,7 +207,7 @@ public enum SpawnerType {
 	 */
 	
 	public IContent formatted() {
-		return SLAPI.get().language().or("Entities.name." + name(), text());
+		return SLAPI.language().or("Entities.name." + name(), text());
 	}
 	
 	/**
@@ -215,16 +215,16 @@ public enum SpawnerType {
 	 */
 	
 	public Material material() {
-		return SLAPI.get().settings().material(this, material);
+		return SLAPI.spawners().material(this, material);
 	}
 	
-//	/**
-//	 * @return {@code true} if this type is disabled
-//	 */
-//	
-//	public boolean disabled() {
-//		return Settings.settings.disabled_spawners.has(this);
-//	}
+	/**
+	 * @return {@code true} if this type is disabled
+	 */
+	
+	public boolean disabled() {
+		return SLAPI.spawners().disabled(this);
+	}
 	
 	public static SpawnerType of(String name) {
 		try {

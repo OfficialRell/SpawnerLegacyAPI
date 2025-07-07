@@ -33,7 +33,7 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.util.Vector;
 
 import mc.rellox.spawnerlegacyapi.SLAPI;
-import mc.rellox.spawnerlegacyapi.item.ItemManager;
+import mc.rellox.spawnerlegacyapi.item.ItemUtility;
 import mc.rellox.spawnerlegacyapi.registry.KeyType;
 import mc.rellox.spawnerlegacyapi.registry.Keys;
 import mc.rellox.spawnerlegacyapi.text.Text;
@@ -229,7 +229,7 @@ public final class ItemBuilder {
 	
 	public ItemBuilder shining(boolean b) {
 		return b ? modify(meta -> {
-			ItemManager.glint(meta);
+			ItemUtility.glint(meta);
 			meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 		}) : this;
 	}
