@@ -2,6 +2,7 @@ package mc.rellox.spawnerlegacyapi.item;
 
 import java.util.stream.IntStream;
 
+import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Item;
@@ -16,7 +17,11 @@ import mc.rellox.spawnerlegacyapi.utility.reflect.Reflect.RF;
 import mc.rellox.spawnerlegacyapi.version.Version;
 import mc.rellox.spawnerlegacyapi.version.Version.VersionType;
 
-public final class ItemManager {
+public final class ItemUtility {
+	
+	public static boolean nulled(ItemStack item) {
+		return item == null || item.getType() == Material.AIR;
+	}
 	
 	public static boolean has(Player player, ItemStack item, int a) {
 		if(Utility.op(player) == true) return true;
