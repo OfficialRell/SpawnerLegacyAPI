@@ -4,11 +4,16 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
 import mc.rellox.spawnerlegacyapi.manager.ICacheManager;
+import mc.rellox.spawnerlegacyapi.manager.IDataManager;
+import mc.rellox.spawnerlegacyapi.manager.IEntityManager;
+import mc.rellox.spawnerlegacyapi.manager.IEventManager;
 import mc.rellox.spawnerlegacyapi.manager.IGeneratorManager;
 import mc.rellox.spawnerlegacyapi.manager.IHologramManager;
 import mc.rellox.spawnerlegacyapi.manager.ILangaugeManager;
 import mc.rellox.spawnerlegacyapi.manager.ILayoutManager;
+import mc.rellox.spawnerlegacyapi.manager.IPriceManager;
 import mc.rellox.spawnerlegacyapi.manager.ISpawnerManager;
+import mc.rellox.spawnerlegacyapi.manager.IToolManager;
 import mc.rellox.spawnerlegacyapi.manager.IValueManager;
 import mc.rellox.spawnerlegacyapi.manager.IViewManager;
 
@@ -88,6 +93,46 @@ public final class SLAPI {
 	
 	public static ILayoutManager layouts() {
 		return INSTANCE.layouts();
+	}
+	
+	/**
+	 * @return Data manager
+	 */
+	
+	public static IDataManager data() {
+		return INSTANCE.data();
+	}
+	
+	/**
+	 * @return Tool manager
+	 */
+	
+	public static IToolManager tools() {
+		return INSTANCE.tools();
+	}
+	
+	/**
+	 * @return Entity stacking manager
+	 */
+	
+	public static IEntityManager entities() {
+		return INSTANCE.entities();
+	}
+	
+	/**
+	 * @return Event manager
+	 */
+	
+	public static IEventManager events() {
+		return INSTANCE.events();
+	}
+	
+	/**
+	 * @return Price manager
+	 */
+	
+	public static IPriceManager prices() {
+		return INSTANCE.prices();
 	}
 	
 	public interface ISpawnerLegacyPlugin extends Plugin {
