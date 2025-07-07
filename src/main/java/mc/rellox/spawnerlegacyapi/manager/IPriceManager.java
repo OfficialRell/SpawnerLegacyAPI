@@ -19,7 +19,7 @@ public interface IPriceManager {
 
 	public static interface IPriceProvider {
 
-		IPrice of(double i);
+		IPrice of(double value);
 
 	}
 

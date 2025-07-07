@@ -3,12 +3,16 @@ package mc.rellox.spawnerlegacyapi;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import mc.rellox.spawnerlegacyapi.manager.ICacheManager;
+import mc.rellox.spawnerlegacyapi.manager.IDataManager;
+import mc.rellox.spawnerlegacyapi.manager.IEntityManager;
+import mc.rellox.spawnerlegacyapi.manager.IEventManager;
 import mc.rellox.spawnerlegacyapi.manager.IGeneratorManager;
 import mc.rellox.spawnerlegacyapi.manager.IHologramManager;
 import mc.rellox.spawnerlegacyapi.manager.ILangaugeManager;
 import mc.rellox.spawnerlegacyapi.manager.ILayoutManager;
-import mc.rellox.spawnerlegacyapi.manager.ISettingsManager;
+import mc.rellox.spawnerlegacyapi.manager.IPriceManager;
 import mc.rellox.spawnerlegacyapi.manager.ISpawnerManager;
+import mc.rellox.spawnerlegacyapi.manager.IToolManager;
 import mc.rellox.spawnerlegacyapi.manager.IValueManager;
 import mc.rellox.spawnerlegacyapi.manager.IViewManager;
 
@@ -69,9 +73,33 @@ public interface ISpawnerLegacy {
 	ILayoutManager layouts();
 	
 	/**
-	 * @return Settings manager
+	 * @return Data manager
 	 */
 	
-	ISettingsManager settings();
+	IDataManager data();
+	
+	/**
+	 * @return Tool manager
+	 */
+	
+	IToolManager tools();
+	
+	/**
+	 * @return Entity stacking manager
+	 */
+	
+	IEntityManager entities();
+	
+	/**
+	 * @return Event manager
+	 */
+	
+	IEventManager events();
+	
+	/**
+	 * @return Price manager
+	 */
+	
+	IPriceManager prices();
 
 }

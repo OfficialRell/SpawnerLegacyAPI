@@ -8,7 +8,6 @@ import mc.rellox.spawnerlegacyapi.manager.IGeneratorManager;
 import mc.rellox.spawnerlegacyapi.manager.IHologramManager;
 import mc.rellox.spawnerlegacyapi.manager.ILangaugeManager;
 import mc.rellox.spawnerlegacyapi.manager.ILayoutManager;
-import mc.rellox.spawnerlegacyapi.manager.ISettingsManager;
 import mc.rellox.spawnerlegacyapi.manager.ISpawnerManager;
 import mc.rellox.spawnerlegacyapi.manager.IValueManager;
 import mc.rellox.spawnerlegacyapi.manager.IViewManager;
@@ -89,14 +88,6 @@ public final class SLAPI {
 	
 	public static ILayoutManager layouts() {
 		return INSTANCE.layouts();
-	}
-	
-	/**
-	 * @return Settings manager
-	 */
-	
-	public static ISettingsManager settings() {
-		return INSTANCE.settings();
 	}
 	
 	public interface ISpawnerLegacyPlugin extends Plugin {
