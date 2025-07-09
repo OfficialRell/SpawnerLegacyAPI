@@ -19,7 +19,7 @@ public class IVersion1_21_5 implements IVersion {
 	private static final Class<?> _entity = RF.get("net.minecraft.world.entity.Entity");
 	
 	private static final Invoker<?> _player = RF.order(RF.craft_player(), "getHandle");
-	private static final Accessor<?> _connection = RF.access(_player.returns(), "f");
+	private static final Accessor<?> _connection = RF.access(_player.returns(), "g");
 	private static final Invoker<?> _send = RF.order(_connection.type(), "b",
 			RF.get("net.minecraft.network.protocol.Packet"));
 
