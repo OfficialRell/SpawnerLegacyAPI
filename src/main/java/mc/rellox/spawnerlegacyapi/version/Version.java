@@ -16,7 +16,8 @@ public final class Version {
 		String bukkit = Bukkit.getBukkitVersion();
 
 		if(server.contains("v1_21_R5") == true
-				|| bukkit.startsWith("1.21.6-R0.1") == true) version = VersionType.v_21_5;
+				|| bukkit.startsWith("1.21.6-R0.1") == true
+				|| bukkit.startsWith("1.21.7-R0.1") == true) version = VersionType.v_21_5;
 		else if(server.contains("v1_21_R4") == true
 				|| bukkit.startsWith("1.21.5-R0.1") == true) version = VersionType.v_21_4;
 		else if(server.contains("v1_21_R3") == true
