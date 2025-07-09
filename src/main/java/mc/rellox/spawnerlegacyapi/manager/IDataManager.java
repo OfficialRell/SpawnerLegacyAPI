@@ -70,16 +70,6 @@ public interface IDataManager {
 	IPlayerData find(String player);
 	
 	/**
-	 * Tries to find a player data file from the specified spawner block
-	 * where the spawner owner is the player.
-	 * 
-	 * @param block - spawner block
-	 * @return Player data file
-	 */
-	
-	IPlayerData fromBlock(Block block);
-	
-	/**
 	 * Tries to find a player data file from the specified generator
 	 * where the spawner owner is the player.
 	 * 
@@ -88,6 +78,16 @@ public interface IDataManager {
 	 */
 	
 	IPlayerData fromGenerator(IGenerator generator);
+	
+	/**
+	 * Tries to find a player data file from the specified spawner block
+	 * where the spawner owner is the player.
+	 * 
+	 * @param block - spawner block
+	 * @return Player data file
+	 */
+	
+	IPlayerData fromBlock(Block block);
 	
 	/**
 	 * @return Player limit data file
