@@ -25,73 +25,31 @@ public final class Text {
 	public static final String multiple = "" + '\u00d7';
 	public static final char color_char = ChatColor.COLOR_CHAR;
 	
-//	public static void logLoad(String version) {
-//		Bukkit.getConsoleSender().sendMessage(_info(version) + ChatColor.GREEN + "enabled!");
-//	}
-//	
-//	public static void logUnload(String version) {
-//		Bukkit.getConsoleSender().sendMessage(_info(version) + ChatColor.RED + "disabled!");
-//	}
-//	
-//	public static void logOutdated(String version, double v) {
-//		Bukkit.getConsoleSender().sendMessage(_info(version)
-//				+ ChatColor.YELLOW + "New version is available: v" + v + "! " + ChatColor.GOLD + "To download visit: "
-//				+ "https://www.spigotmc.org/resources/spawnermeta.74188/"); // replace
-//	}
+	private static final String color_aqua = color(Colors.aqua);
+	private static final String color_dark_red = color(Colors.red_50);
+	private static final String color_yellow = color(Colors.yellow);
+	private static final String color_orange = color(Colors.orange);
+	private static final String color_dark_green = color(Colors.green_50);
+	private static final String color_green = color(Colors.green);
 
-	
-//	private static final String c_0 = color(Colors.purple_50); // dark purple
-//	private static final String c_1 = color(Colors.purple); // purple
-	private static final String c_2 = color(Colors.aqua); // aqua
-	private static final String c_3 = color(Colors.red_50); // dark red
-	private static final String c_4 = color(Colors.yellow); // yellow
-	private static final String c_5 = color(Colors.orange); // orange
-	private static final String c_6 = color(Colors.green_50); // dark green
-//	private static final String c_7 = color(Colors.gray_75); // light gray
-	private static final String c_8 = color(Colors.green); // green
-
-//	private static String _info(String version) {
-//		return c_0 + "[" + c_1 + "SpawnerLegacy " + c_2 + "v" + version + c_0 + "] ";
-//	}
-//	
-//	public static void logInfo(String info) {
-//		Bukkit.getConsoleSender().sendMessage(c_0 + "[" + c_1 + "SpawnerLegacy"
-//				+ c_0 + "] " + c_7 + info);
-//	}
-//	
-//	public static void logFail(String fail, String version) {
-//		Bukkit.getConsoleSender().sendMessage(_info(version) + c_3 + fail);
-//	}
 	
 	public static void success(String success, Object... os) {
-		String w = c_6 + "(!) " + c_8 + success;
-		if(os != null) for(int i = 0; i < os.length; i++) w = w.replace("#" + i, c_2 + os[i].toString() + c_8);
+		String w = color_dark_green + "(!) " + color_green + success;
+		if(os != null) for(int i = 0; i < os.length; i++) w = w.replace("#" + i, color_aqua + os[i].toString() + color_green);
 		Bukkit.getConsoleSender().sendMessage(w);
 	}
 	
 	public static void failure(String warning, Object... os) {
-		String w = c_3 + "(!) " + c_5 + warning;
-		if(os != null) for(int i = 0; i < os.length; i++) w = w.replace("#" + i, c_4 + os[i].toString() + c_5);
+		String w = color_dark_red + "(!) " + color_orange + warning;
+		if(os != null) for(int i = 0; i < os.length; i++) w = w.replace("#" + i, color_yellow + os[i].toString() + color_orange);
 		Bukkit.getConsoleSender().sendMessage(w);
 	}
 	
 	public static void warning(String warning, Object... os) {
-		String w = c_5 + "(!) " + c_4 + warning;
-		if(os != null) for(int i = 0; i < os.length; i++) w = w.replace("#" + i, c_2 + os[i].toString() + c_4);
+		String w = color_orange + "(!) " + color_yellow + warning;
+		if(os != null) for(int i = 0; i < os.length; i++) w = w.replace("#" + i, color_aqua + os[i].toString() + color_yellow);
 		Bukkit.getConsoleSender().sendMessage(w);
 	}
-//	
-//	public static void logVersion(String v) {
-//		if(SpawnerLegacy.PLUGIN_VERSION.equalsIgnoreCase(v) == true) return;
-//		Bukkit.getConsoleSender().sendMessage(available(v));
-//	}
-//	
-//	public static String available(String v) {
-//		return c_0 + "[" + c_1 + "SpawnerLegacy " + c_2 + c_0 + "] "
-//				+ c_4 + "New version is available: v" + v + "! "
-//				+ c_5 + "To download visit: "
-//				+ "https://www.spigotmc.org/resources/spawnerlegacy.116287/";
-//	}
 	
 	public static List<String> toText(List<IContent> list) {
 		return list.stream()
@@ -149,7 +107,9 @@ public final class Text {
 			} else if(Version.version == VersionType.v_21_1) {
 				a = "w";
 			} else if(Version.version == VersionType.v_21_2
-					||Version.version == VersionType.v_21_3) {
+					|| Version.version == VersionType.v_21_3
+					|| Version.version == VersionType.v_21_4
+					|| Version.version == VersionType.v_21_5) {
 				a = "y";
 			} else {
 				a = "getName";
