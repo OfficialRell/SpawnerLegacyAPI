@@ -2,7 +2,6 @@ package mc.rellox.spawnerlegacyapi.registry;
 
 import java.util.EnumMap;
 import java.util.Map;
-import java.util.stream.Stream;
 
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -15,17 +14,8 @@ public final class Keys {
 
 	private static final Map<KeyType, NamespacedKey> KEYS = new EnumMap<>(KeyType.class);
 	
-	public static void initialize() {
-		KEYS.clear();
-		Stream.of(KeyType.values())
-			.forEach(type -> {
-				NamespacedKey key = new NamespacedKey(SLAPI.get().plugin(), type.key);
-				KEYS.put(type, key);
-			});
-	}
-	
 	public static NamespacedKey of(KeyType key) {
-		return KEYS.get(key);
+		return KEYS.computeIfAbsent(key, k -> new NamespacedKey(SLAPI.get().plugin(), k.key));
 	}
 	
 	public static <Z> void set(ItemStack item, KeyType key, PersistentDataType<?, Z> data, Z value) {
