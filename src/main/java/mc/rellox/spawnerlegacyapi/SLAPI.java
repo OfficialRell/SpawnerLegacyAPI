@@ -31,9 +31,17 @@ public final class SLAPI {
 		INSTANCE = ((ISpawnerLegacyPlugin) plugin).instance();
 	}
 	
+	/**
+	 * @return SpawnerLegacy instance class
+	 */
+	
 	public static ISpawnerLegacy get() {
 		return INSTANCE;
 	}
+	
+	/**
+	 * @return Generator manager
+	 */
 	
 	public static IGeneratorManager generators() {
 		return INSTANCE.generators();
