@@ -1,8 +1,12 @@
 package mc.rellox.spawnerlegacyapi.text.content;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 import mc.rellox.spawnerlegacyapi.price.IPrice;
 import mc.rellox.spawnerlegacyapi.spawner.type.SpawnerType;
@@ -143,6 +147,29 @@ public interface IContent {
 	
 	default KeyedContent keyed(String key) {
 		return new KeyedContent(key, this);
+	}
+	
+	/**
+	 * Sends this text to the player only if it is not empty.
+	 * 
+	 * @param player - player
+	 */
+	
+	default void send(Player player) {
+		String text = text();
+		if(text == null || text.isEmpty() == true) return;
+		player.sendMessage(text);
+	}
+
+	/**
+	 * Sends this text the player that has this id and is online.
+	 * 
+	 * @param id - player's {@link UUID}
+	 */
+	
+	default void send(UUID id) {
+		Player player = Bukkit.getPlayer(id);
+		if(player != null) send(player);
 	}
 	
 	// Classes
