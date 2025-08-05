@@ -1,7 +1,10 @@
 package mc.rellox.spawnerlegacyapi.modifier;
 
+import org.bukkit.NamespacedKey;
+
 import mc.rellox.spawnerlegacyapi.item.IItemConstant;
 import mc.rellox.spawnerlegacyapi.modifier.effect.IEffect;
+import mc.rellox.spawnerlegacyapi.modifier.effect.ModifierEffectType;
 
 public interface IModifier {
 	
@@ -10,6 +13,12 @@ public interface IModifier {
 	 */
 	
 	String key();
+	
+	/**
+	 * @return Namespaced key of this modifier
+	 */
+	
+	NamespacedKey namespaced();
 	
 	/**
 	 * @return Modifier requirements
@@ -24,21 +33,17 @@ public interface IModifier {
 	IEffect effect();
 	
 	/**
-	 * @return Default modifier usage
-	 */
-	
-	int usage();
-	
-	/**
-	 * @return Activation chance
-	 */
-	
-	int chance();
-	
-	/**
 	 * @return Modifier item
 	 */
 	
 	IItemConstant item();
+	
+	/**
+	 * @return Modifier effect type
+	 */
+	
+	default ModifierEffectType type() {
+		return effect().type();
+	}
 
 }

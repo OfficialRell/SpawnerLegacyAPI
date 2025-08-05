@@ -7,6 +7,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
 import mc.rellox.spawnerlegacyapi.hologram.IHologramHolder;
+import mc.rellox.spawnerlegacyapi.modifier.instance.IModifierMap;
 import mc.rellox.spawnerlegacyapi.spawner.cache.ICache;
 import mc.rellox.spawnerlegacyapi.spawner.location.Pos;
 import mc.rellox.spawnerlegacyapi.spawner.meta.IDisplay;
@@ -72,6 +73,12 @@ public interface IGenerator extends IGeneratorTags {
 	 */
 	
 	IHologramHolder holograms();
+	
+	/**
+	 * @return Spawner modifiers
+	 */
+	
+	IModifierMap modifiers();
 	
 	/**
 	 * @return {@code true} if this generator is active (not removed), otherwise {@code false}

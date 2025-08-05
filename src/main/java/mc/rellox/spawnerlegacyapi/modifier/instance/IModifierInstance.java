@@ -1,7 +1,8 @@
 package mc.rellox.spawnerlegacyapi.modifier.instance;
 
-import java.util.List;
+import org.bukkit.inventory.ItemStack;
 
+import mc.rellox.spawnerlegacyapi.SLAPI;
 import mc.rellox.spawnerlegacyapi.modifier.IModifier;
 import mc.rellox.spawnerlegacyapi.modifier.effect.IEffect;
 import mc.rellox.spawnerlegacyapi.spawner.IGenerator;
@@ -9,10 +10,21 @@ import mc.rellox.spawnerlegacyapi.spawner.IGenerator;
 public interface IModifierInstance {
 	
 	/**
-	 * @return Generator
+	 * If this modifier instance is not applied to any generator
+	 * then it will return {@code null}.
+	 * 
+	 * @return Generator or {@code null}
 	 */
 	
 	IGenerator generator();
+	
+	/**
+	 * @return {@code true} if this modifier instance is applied to a generator
+	 */
+	
+	default boolean applied() {
+		return generator() != null;
+	}
 	
 	/**
 	 * @return The modifier of this instance
@@ -24,20 +36,14 @@ public interface IModifierInstance {
 	 * @return The modifier effect instance
 	 */
 	
-	List<IEffectInstance<? extends IEffect>> effects();
+	IEffectInstance<? extends IEffect> effect();
 	
 	/**
-	 * @return Current modifier usage
+	 * @return Item stack with data about this modifier instance
 	 */
 	
-	int usage();
-	
-	/**
-	 * Removed the specified modifier usage.
-	 * 
-	 * @param usage - usage to remove
-	 */
-	
-	void reduce(int usage);
+	default ItemStack item() {
+		return SLAPI.modifiers().item(this);
+	}
 
 }
