@@ -16,7 +16,7 @@ public interface IExecutor {
 	
 	interface IExecutorUpgrades extends IExecutor {
 		
-		void execute(int[] values);
+		void execute(double[] values);
 		
 	}
 
