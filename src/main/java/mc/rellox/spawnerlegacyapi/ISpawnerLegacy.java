@@ -10,6 +10,7 @@ import mc.rellox.spawnerlegacyapi.manager.IGeneratorManager;
 import mc.rellox.spawnerlegacyapi.manager.IHologramManager;
 import mc.rellox.spawnerlegacyapi.manager.ILangaugeManager;
 import mc.rellox.spawnerlegacyapi.manager.ILayoutManager;
+import mc.rellox.spawnerlegacyapi.manager.IModifierManager;
 import mc.rellox.spawnerlegacyapi.manager.IPriceManager;
 import mc.rellox.spawnerlegacyapi.manager.ISpawnerManager;
 import mc.rellox.spawnerlegacyapi.manager.IToolManager;
@@ -53,6 +54,12 @@ public interface ISpawnerLegacy {
 	 */
 	
 	ISpawnerManager spawners();
+	
+	/**
+	 * @return Modifier manager
+	 */
+	
+	IModifierManager modifiers();
 	
 	/**
 	 * @return Inventory view manager

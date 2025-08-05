@@ -11,6 +11,7 @@ import mc.rellox.spawnerlegacyapi.manager.IGeneratorManager;
 import mc.rellox.spawnerlegacyapi.manager.IHologramManager;
 import mc.rellox.spawnerlegacyapi.manager.ILangaugeManager;
 import mc.rellox.spawnerlegacyapi.manager.ILayoutManager;
+import mc.rellox.spawnerlegacyapi.manager.IModifierManager;
 import mc.rellox.spawnerlegacyapi.manager.IPriceManager;
 import mc.rellox.spawnerlegacyapi.manager.ISpawnerManager;
 import mc.rellox.spawnerlegacyapi.manager.IToolManager;
@@ -69,6 +70,14 @@ public final class SLAPI {
 	
 	public static ICacheManager cache() {
 		return INSTANCE.cache();
+	}
+	
+	/**
+	 * @return Modifier manager
+	 */
+	
+	public static IModifierManager modifiers() {
+		return INSTANCE.modifiers();
 	}
 	
 	/**
