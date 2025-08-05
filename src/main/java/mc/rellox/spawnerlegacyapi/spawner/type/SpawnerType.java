@@ -52,6 +52,7 @@ public enum SpawnerType {
 	GLOW_SQUID(_e("GLOW_SQUID"), "Glow Squid", _m("GLOW_SQUID_SPAWN_EGG"), EntityBox.single),
 	GOAT(_e("GOAT"), "Goat", _m("GOAT_SPAWN_EGG"), EntityBox.doubled),
 	GUARDIAN(EntityType.GUARDIAN, "Guardian", Material.GUARDIAN_SPAWN_EGG, EntityBox.single),
+	HAPPY_GHAST(_e("HAPPY_GHAST"), "Happy Ghast", _m("HAPPY_GHAST_SPAWN_EGG"), EntityBox.box(4, 4, 4)),
 	HOGLIN(_e("HOGLIN"), "Hoglin", _m("HOGLIN_SPAWN_EGG"), EntityBox.box(2, 2, 2)),
 	HORSE(EntityType.HORSE, "Horse", Material.HORSE_SPAWN_EGG, EntityBox.doubled),
 	HUSK(EntityType.HUSK, "Husk", Material.HUSK_SPAWN_EGG, EntityBox.doubled),
