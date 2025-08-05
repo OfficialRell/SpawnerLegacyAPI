@@ -30,6 +30,13 @@ public enum KeyType {
 	
 	CROWBAR_USAGE("usage"),
 	CROWBAR_CHANCE("chance"),
+
+	MODIFIER_KEY("modifier_key"),
+	MODIFIER_VALUE("modifier_value"),
+	MODIFIER_USAGE("modifier_usage"),
+	MODIFIER_CHANCE("modifier_chance"),
+	MODIFIER_DURATION("modifier_duration"),
+	MODIFIER_AMPLIFIER("modifier_amplifier"),
 	
 	RANDOM("random");
 	
