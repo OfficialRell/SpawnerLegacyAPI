@@ -48,6 +48,12 @@ public final class Version {
 		v = version == null ? null : version.build();
 	}
 	
+	public static IVersion last() {
+		VersionType[] values = VersionType.values();
+		VersionType last = values[values.length - 1];
+		return last.build();
+	}
+	
 	public static enum VersionType {
 		
 		v_14_1,

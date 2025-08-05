@@ -13,8 +13,14 @@ import mc.rellox.spawnerlegacyapi.utility.reflect.type.Accessor;
 import mc.rellox.spawnerlegacyapi.utility.reflect.type.Construct;
 import mc.rellox.spawnerlegacyapi.utility.reflect.type.Invoker;
 import mc.rellox.spawnerlegacyapi.version.IVersion;
+import mc.rellox.spawnerlegacyapi.version.Version.VersionType;
 
 public class IVersion1_21_1 implements IVersion {
+	
+	@Override
+	public VersionType type() {
+		return VersionType.v_21_1;
+	}
 	
 	private static final Class<?> _entity = RF.get("net.minecraft.world.entity.Entity");
 	

@@ -9,8 +9,14 @@ import org.bukkit.entity.Player;
 import mc.rellox.spawnerlegacyapi.utility.reflect.Reflect.RF;
 import mc.rellox.spawnerlegacyapi.utility.reflect.type.Invoker;
 import mc.rellox.spawnerlegacyapi.version.IVersion;
+import mc.rellox.spawnerlegacyapi.version.Version.VersionType;
 
 public class IVersion1_14_1 implements IVersion {
+	
+	@Override
+	public VersionType type() {
+		return VersionType.v_14_1;
+	}
 
 	@Override
 	public void send(Collection<? extends Player> players, Object... os) {

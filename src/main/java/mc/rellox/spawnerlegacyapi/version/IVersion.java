@@ -9,8 +9,11 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import mc.rellox.spawnerlegacyapi.utility.reflect.Reflect.RF;
+import mc.rellox.spawnerlegacyapi.version.Version.VersionType;
 
 public interface IVersion {
+	
+	VersionType type();
 	
 	void send(Collection<? extends Player> players, Object... os);
 	
