@@ -241,18 +241,11 @@ public final class ItemBuilder {
 	 */
 
 	public ItemBuilder flaged() {
+		if(Version.version == null) return this;
 		return modify(meta -> {
-			if(Version.version.high(VersionType.v_20_4) == true)
+			if(Version.version == VersionType.v_20_4)
 				meta.addAttributeModifier(Utility.attribute_damage, attribute());
-			meta.addItemFlags(ItemFlag.values());
-			if(Version.version.high(VersionType.v_21_4) == true) {
-				for(var i : ItemFlag.values()) {
-					if(i.name().equals("HIDE_LORE") == true) {
-						meta.removeItemFlags(i);
-						break;
-					}
-				}
-			}
+			meta.addItemFlags(Text.item_flags);
 		});
 	}
 	
@@ -270,7 +263,7 @@ public final class ItemBuilder {
 	 */
 	
 	public ItemBuilder hidden() {
-		if(Version.version.high(VersionType.v_20_4) == false) return this;
+		if(Version.version != null && Version.version.high(VersionType.v_20_4) == false) return this;
 		return modify(meta -> {
 			RF.order(meta, "setHideTooltip", boolean.class).invoke(true);
 		});
