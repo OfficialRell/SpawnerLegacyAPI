@@ -11,6 +11,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 
 import mc.rellox.spawnerlegacyapi.text.content.IColorer.Colors;
@@ -31,7 +32,15 @@ public final class Text {
 	private static final String color_orange = color(Colors.orange);
 	private static final String color_dark_green = color(Colors.green_50);
 	private static final String color_green = color(Colors.green);
-
+	
+	public static final ItemFlag[] item_flags;
+	
+	static {
+		var ignore = List.of("HIDE_CUSTOM_NAME", "HIDE_ITEM_NAME", "HIDE_LORE");
+		item_flags = Stream.of(ItemFlag.values())
+				.filter(flag -> ignore.contains(flag.name()) == false)
+				.toArray(ItemFlag[]::new);
+	}
 	
 	public static void success(String success, Object... os) {
 		String w = color_dark_green + "(!) " + color_green + success;
