@@ -21,6 +21,7 @@ public interface IItemConstant {
 		boolean glint = file.getBoolean(path + ".glint");
 		IContent name = ContentParser.parse(file.getString(path + ".name"));
 		List<IContent> lore = ContentParser.parse(file.getStringOrStrings(path + ".lore"));
+		int model = file.getInteger(path + ".model");
 		return new IItemConstant() {
 			@Override
 			public Material material() {
@@ -37,6 +38,10 @@ public interface IItemConstant {
 			@Override
 			public List<IContent> lore() {
 				return lore;
+			}
+			@Override
+			public int model() {
+				return model;
 			}
 		};
 	}
@@ -66,6 +71,12 @@ public interface IItemConstant {
 	List<IContent> lore();
 	
 	/**
+	 * @return Item custom model data
+	 */
+	
+	int model();
+	
+	/**
 	 * @return New item builder
 	 */
 	
@@ -74,6 +85,7 @@ public interface IItemConstant {
 				.shining(glint())
 				.named(name())
 				.describe(lore())
+				.modelled(model())
 				.flaged();
 	}
 
