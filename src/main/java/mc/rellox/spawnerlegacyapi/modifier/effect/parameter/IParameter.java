@@ -30,7 +30,7 @@ public interface IParameter<T> {
 	 * @return {@code true} if the value is valid
 	 */
 	
-	boolean valid(T value);
+	boolean valid(Object value);
 	
 	/**
 	 * @return List of default values for tab completion
@@ -45,7 +45,7 @@ public interface IParameter<T> {
 	 * @param value - value
 	 */
 	
-	void replace(ItemBuilder builder, T value);
+	void replace(ItemBuilder builder, Object value);
 	
 	/**
 	 * @return Parameter namespaced key
@@ -66,7 +66,7 @@ public interface IParameter<T> {
 	 * @param value - value
 	 */
 	
-	void write(PersistentDataContainer container, T value);
+	void write(PersistentDataContainer container, Object value);
 	
 	/**
 	 * Reads the value from the container, never {@code null}.
