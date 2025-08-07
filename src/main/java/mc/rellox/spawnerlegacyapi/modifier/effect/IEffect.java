@@ -3,6 +3,7 @@ package mc.rellox.spawnerlegacyapi.modifier.effect;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.potion.PotionEffectType;
 
+import mc.rellox.spawnerlegacyapi.modifier.effect.parameter.IParameterMap;
 import mc.rellox.spawnerlegacyapi.modifier.instance.IEffectInstance;
 import mc.rellox.spawnerlegacyapi.modifier.instance.IModifierInstance;
 import mc.rellox.spawnerlegacyapi.spawner.type.UpgradeType;
@@ -26,10 +27,10 @@ public interface IEffect {
 	IEffectInstance<? extends IEffect> read(IModifierInstance instance, PersistentDataContainer container);
 	
 	/**
-	 * @return Array of required parameters
+	 * @return Required effect parameters
 	 */
 	
-	String[] parameters();
+	IParameterMap parameters();
 
 	interface IEffectEvaluate extends IEffect {
 
@@ -46,11 +47,6 @@ public interface IEffect {
 		default ModifierEffectType type() {
 			return ModifierEffectType.EVALUATE_DAMAGE;
 		}
-		
-		@Override
-		default String[] parameters() {
-			return new String[] {"value", "usage", "chance"};
-		}
 
 	}
 
@@ -59,11 +55,6 @@ public interface IEffect {
 		@Override
 		default ModifierEffectType type() {
 			return ModifierEffectType.EVALUATE_HEALTH;
-		}
-		
-		@Override
-		default String[] parameters() {
-			return new String[] {"value", "usage", "chance"};
 		}
 
 	}
@@ -80,11 +71,6 @@ public interface IEffect {
 		 */
 
 		UpgradeType upgrade();
-		
-		@Override
-		default String[] parameters() {
-			return new String[] {"value"};
-		}
 
 	}
 
@@ -100,11 +86,6 @@ public interface IEffect {
 		 */
 
 		PotionEffectType potion();
-		
-		@Override
-		default String[] parameters() {
-			return new String[] {"duration", "amplifier", "usage", "chance"};
-		}
 
 	}
 
