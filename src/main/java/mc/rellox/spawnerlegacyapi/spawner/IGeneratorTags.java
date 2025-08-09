@@ -197,7 +197,12 @@ public interface IGeneratorTags {
 		/**
 		 * Ignores ground material requirement.
 		 */
-		GROUND_REQUIREMENT_IGNORE;
+		GROUND_REQUIREMENT_IGNORE,
+		/**
+		 * Ignores spawner stopping/disabling with redstone power,
+		 * if the option 'disable-with_power' is enabled.
+		 */
+		STOP_WITH_REDSTONE_POWER_IGNORE;
 		
 		/**
 		 * @return The index of the tag
