@@ -39,6 +39,23 @@ public interface IModifierInstance {
 	IEffectInstance<? extends IEffect> effect();
 	
 	/**
+	 * Will return {@code false} if this modifier has reached 0 usage,
+	 * otherwise {@code true}.
+	 * 
+	 * @return {@code true} if this modifier still has usage
+	 */
+	
+	boolean active();
+	
+	/**
+	 * @return {@code true} if this modifier has ran out of usage
+	 */
+	
+	default boolean inactive() {
+		return !active();
+	}
+	
+	/**
 	 * @return Item stack with data about this modifier instance
 	 */
 	
