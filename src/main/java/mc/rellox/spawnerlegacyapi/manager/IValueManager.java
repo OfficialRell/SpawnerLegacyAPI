@@ -4,12 +4,14 @@ import java.util.function.Function;
 
 import mc.rellox.spawnerlegacyapi.configuration.IFile;
 import mc.rellox.spawnerlegacyapi.configuration.settings.IBooleanValue;
+import mc.rellox.spawnerlegacyapi.configuration.settings.IDoubleArrayValue;
 import mc.rellox.spawnerlegacyapi.configuration.settings.IDoubleValue;
 import mc.rellox.spawnerlegacyapi.configuration.settings.IEnumSet;
 import mc.rellox.spawnerlegacyapi.configuration.settings.IIntValue;
 import mc.rellox.spawnerlegacyapi.configuration.settings.IPermissions;
 import mc.rellox.spawnerlegacyapi.configuration.settings.IPlayerOptions;
 import mc.rellox.spawnerlegacyapi.configuration.settings.IPriceValue;
+import mc.rellox.spawnerlegacyapi.configuration.settings.IPricesArrayValue;
 import mc.rellox.spawnerlegacyapi.configuration.settings.IPricesValue;
 import mc.rellox.spawnerlegacyapi.configuration.settings.ISimpleSet;
 import mc.rellox.spawnerlegacyapi.configuration.settings.ITypePermissions;
@@ -48,6 +50,14 @@ public interface IValueManager {
 	
 	IDoubleValue ofDouble(IFile file, String path, double min, double max);
 	
+	IDoubleArrayValue ofDoubleArray(IFile file, String path, String suffix);
+	
+	IDoubleArrayValue ofDoubleArray(IFile file, String path, String suffix, double min, double max);
+	
+	IDoubleArrayValue ofDoubleArray(IFile file, String path);
+	
+	IDoubleArrayValue ofDoubleArray(IFile file, String path, double min, double max);
+	
 	IBooleanValue ofBoolean(IFile file, String path, String suffix);
 	
 	IBooleanValue ofBoolean(IFile file, String path);
@@ -61,6 +71,10 @@ public interface IValueManager {
 	IPricesValue ofPrices(IFile file, String path, String suffix, Group group);
 	
 	IPricesValue ofPrices(IFile file, String path, Group group);
+	
+	IPricesArrayValue ofPricesArray(IFile file, String path, String suffix, Group group);
+	
+	IPricesArrayValue ofPricesArray(IFile file, String path, Group group);
 	
 	IPlayerOptions ofOptions(IFile file, String path);
 	
