@@ -59,15 +59,5 @@ public interface IModifierMap {
 	 */
 	
 	<E extends IExecutor> void execute(Class<E> clazz, Consumer<E> action);
-	
-//	/**
-//	 * Returns a map for all modifier instance and effect that match the specified class.
-//	 * 
-//	 * @param <E> - effect instance type
-//	 * @param clazz - effect instance class
-//	 * @return Modifier instance and effect map
-//	 */
-//	
-//	<E extends IEffectInstance<? extends IEffect>> Map<IModifierInstance, List<E>> find(Class<E> clazz);
 
 }

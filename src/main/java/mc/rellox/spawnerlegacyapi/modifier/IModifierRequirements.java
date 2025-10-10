@@ -33,7 +33,8 @@ public interface IModifierRequirements {
 	 */
 	
 	default boolean allow(SpawnerType type) {
-		return types().contains(type) != invert();
+		var types = types();
+		return types.isEmpty() ? true : types().contains(type) ^ invert();
 	}
 
 }

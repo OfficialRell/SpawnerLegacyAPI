@@ -54,21 +54,17 @@ public interface IEffectInstance<E extends IEffect> {
 	
 	void replace(ItemBuilder builder);
 	
-	interface IEffectInstanceEvaluateHealth extends IEffectInstance<IEffectEvaluateHealth>, IExecutorEntity {
+	interface IEffectInstanceEvaluateHealth extends IEffectInstance<IEffectEvaluateHealth>, IExecutorEntity, IUsage {
 		
 		double value();
-		
-		int usage();
 		
 		double chance();
 		
 	}
 	
-	interface IEffectInstanceEvaluateDamage extends IEffectInstance<IEffectEvaluateDamage>, IExecutorEntity {
+	interface IEffectInstanceEvaluateDamage extends IEffectInstance<IEffectEvaluateDamage>, IExecutorEntity, IUsage {
 		
 		double value();
-		
-		int usage();
 		
 		double chance();
 		
@@ -80,13 +76,11 @@ public interface IEffectInstance<E extends IEffect> {
 		
 	}
 	
-	interface IEffectInstanceGivePotion extends IEffectInstance<IEffectGivePotion>, IExecutorEntity {
+	interface IEffectInstanceGivePotion extends IEffectInstance<IEffectGivePotion>, IExecutorEntity, IUsage {
 		
 		int duration();
 		
 		int amplifier();
-		
-		int usage();
 		
 		double chance();
 		
