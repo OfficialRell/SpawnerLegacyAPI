@@ -74,7 +74,7 @@ public final class Version {
 		
 		private IVersion build() {
 			return RF.build(
-					RF.get("mc.rellox.spawnerlegacyapi.version.type.IVersion1"
+					RF.get("mc.rellox.spawnerlegacy.version.IVersion1"
 			+ name().substring(1)))
 					.as(IVersion.class)
 					.instance();
