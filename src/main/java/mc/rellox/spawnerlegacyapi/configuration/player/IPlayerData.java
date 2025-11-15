@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 
 import mc.rellox.spawnerlegacyapi.configuration.ICommit;
 import mc.rellox.spawnerlegacyapi.spawner.location.ILocationMutable;
+import mc.rellox.spawnerlegacyapi.spawner.type.SpawnerType;
 
 public interface IPlayerData extends ILocationMutable, ICommit {
 	
@@ -169,5 +170,23 @@ public interface IPlayerData extends ILocationMutable, ICommit {
 	 */
 	
 	int reset(LimitType limit);
+	
+	/**
+	 * Checks if the spawner type in spawner type GUI is unlocked.
+	 * 
+	 * @param type - type
+	 * @return {@code true} if the spawner type is unlocked, otherwise {@code false}
+	 */
+	
+	boolean unlocked(SpawnerType type);
+	
+	/**
+	 * Unlocks the spawner type in spawner type GUI.
+	 * 
+	 * @param type - type
+	 * @param unlock - {@code true} to unlock, {@code false} to lock
+	 */
+	
+	void unlock(SpawnerType type, boolean unlock);
 	
 }
