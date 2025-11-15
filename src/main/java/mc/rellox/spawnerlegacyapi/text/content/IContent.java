@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import mc.rellox.spawnerlegacyapi.price.IPrice;
@@ -170,6 +171,18 @@ public interface IContent {
 	default void send(UUID id) {
 		Player player = Bukkit.getPlayer(id);
 		if(player != null) send(player);
+	}
+	
+	/**
+	 * Sends this text to the command sender only if it is not empty.
+	 * 
+	 * @param sender - sender
+	 */
+	
+	default void send(CommandSender sender) {
+		String text = text();
+		if(text == null || text.isEmpty() == true) return;
+		sender.sendMessage(text);
 	}
 	
 	// Classes
