@@ -9,6 +9,7 @@ public enum Group {
 	stacking,
 	breaking,
 	changing,
-	crowbar;
+	crowbar,
+	types;
 
 }
