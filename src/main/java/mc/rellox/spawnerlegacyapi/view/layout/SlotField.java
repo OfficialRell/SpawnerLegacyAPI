@@ -10,6 +10,12 @@ public enum SlotField {
 	upgrade_xp("xp"),
 	upgrade_drops("drops"),
 	upgrade_charges("charges"),
+	upgrade_types("types"),
+
+	spawners_current("current"),
+	spawners_page("page"),
+	spawners_previous("previous"),
+	spawners_next("next"),
 	
 	shop_page("page"),
 	shop_previous("previous"),
@@ -31,7 +37,7 @@ public enum SlotField {
 		return new SlotField[] {
 				upgrade_stats, upgrade_range, upgrade_delay,
 				upgrade_amount, upgrade_nearby, upgrade_xp,
-				upgrade_drops, upgrade_charges
+				upgrade_drops, upgrade_charges, upgrade_types
 		};
 	}
 	
@@ -44,6 +50,15 @@ public enum SlotField {
 	public static SlotField[] selling() {
 		return new SlotField[] {
 				shop_sell
+		};
+	}
+	
+	public static SlotField[] spawners() {
+		return new SlotField[] {
+				spawners_current,
+				spawners_page,
+				spawners_previous,
+				spawners_next
 		};
 	}
 
