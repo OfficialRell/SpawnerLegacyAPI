@@ -9,10 +9,6 @@ import mc.rellox.spawnerlegacyapi.utility.Calculate;
 
 public interface ISelector extends Supplier<Block> {
 	
-//	static ISelector of(SpawnerType type, List<Block> list) {
-//		return Settings.settings.spawning_type.get(type).get(list);
-//	}
-	
 	enum Selection {
 		SINGLE {
 			@Override
@@ -28,10 +24,10 @@ public interface ISelector extends Supplier<Block> {
 		}, ABOVE {
 			@Override
 			public ISelector get(List<Block> list) {
-				return () -> list.get(0);
+				var block = list.get(0);
+				return () -> block;
 			}
 		};
-		
 		
 		/**
 		 * @param list - list of blocks
