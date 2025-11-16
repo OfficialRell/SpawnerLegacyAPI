@@ -7,6 +7,11 @@ import mc.rellox.spawnerlegacyapi.event.IGeneratorEvent;
 import mc.rellox.spawnerlegacyapi.item.tool.ICrowbar;
 import mc.rellox.spawnerlegacyapi.spawner.IGenerator;
 
+/**
+ * This event is called onyl for Bukkit
+ * to allow other plugins to manipulate.
+ */
+
 public class CrowbarSpawnerBreakEvent extends BlockBreakEvent implements IGeneratorEvent {
 
 	private final IGenerator generator;
