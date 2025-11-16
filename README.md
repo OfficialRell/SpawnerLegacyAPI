@@ -6,7 +6,7 @@
 <dependency>
   <groupId>com.github.OfficialRell</groupId>
   <artifactId>spawnerlegacyapi</artifactId>
-  <version>1.4.9</version>
+  <version>1.4.10</version>
   <scope>provided</scope>
 </dependency>
 
