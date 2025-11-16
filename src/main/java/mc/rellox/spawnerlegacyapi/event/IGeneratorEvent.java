@@ -2,6 +2,7 @@ package mc.rellox.spawnerlegacyapi.event;
 
 import mc.rellox.spawnerlegacyapi.spawner.IGenerator;
 import mc.rellox.spawnerlegacyapi.spawner.ISpawner;
+import mc.rellox.spawnerlegacyapi.spawner.cache.ICache;
 
 public interface IGeneratorEvent extends IEvent {
 	
@@ -17,6 +18,14 @@ public interface IGeneratorEvent extends IEvent {
 	
 	default ISpawner spawner() {
 		return generator().spawner();
+	}
+	
+	/**
+	 * @return Cache of this generator
+	 */
+	
+	default ICache cache() {
+		return generator().cache();
 	}
 
 }
