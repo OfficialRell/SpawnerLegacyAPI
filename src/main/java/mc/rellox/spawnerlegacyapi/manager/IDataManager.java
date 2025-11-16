@@ -8,6 +8,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
 import mc.rellox.spawnerlegacyapi.configuration.INaturalData;
+import mc.rellox.spawnerlegacyapi.configuration.player.IData;
 import mc.rellox.spawnerlegacyapi.configuration.player.ILimitData;
 import mc.rellox.spawnerlegacyapi.configuration.player.IPlayerData;
 import mc.rellox.spawnerlegacyapi.spawner.IGenerator;
@@ -129,5 +130,17 @@ public interface IDataManager {
 	 */
 	
 	ILocationMutable fromWorlds(List<World> worlds);
+	
+	/**
+	 * Submits a new external player data.<br>
+	 * This data is individual for each player.
+	 * 
+	 * @param <T> - data type
+	 * @param data - data provider
+	 * 
+	 * @throws IllegalArgumentException if submitted duplicate data
+	 */
+	
+	<T> void submit(IData<T> data);
 
 }
