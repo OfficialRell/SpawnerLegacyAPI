@@ -202,7 +202,19 @@ public interface IGeneratorTags {
 		 * Ignores spawner stopping/disabling with redstone power,
 		 * if the option 'disable-with_power' is enabled.
 		 */
-		STOP_WITH_REDSTONE_POWER_IGNORE;
+		STOP_WITH_REDSTONE_POWER_IGNORE,
+		/**
+		 * Disables types GUI access in upgrade GUI.
+		 */
+		UPGRADES_TYPES_DISABLE,
+		/**
+		 * Disables types selection in types GUI.
+		 */
+		TYPES_SELECT_DISABLE,
+		/**
+		 * Disables types purchasing in types GUI.
+		 */
+		TYPES_PURCHASE_DISABLE;
 		
 		/**
 		 * @return The index of the tag
