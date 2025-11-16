@@ -1,6 +1,5 @@
 package mc.rellox.spawnerlegacyapi.configuration.player;
 
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -182,10 +181,10 @@ public interface IPlayerData extends ILocationMutable, ICommit {
 	boolean unlocked(SpawnerType type);
 	
 	/**
-	 * @return List of all unlocked spawner types in spawner type GUI
+	 * @return Set of all unlocked spawner types in spawner type GUI
 	 */
 	
-	List<SpawnerType> unlocked();
+	Set<SpawnerType> unlocked();
 	
 	/**
 	 * Unlocks the spawner type in spawner type GUI.
@@ -195,5 +194,24 @@ public interface IPlayerData extends ILocationMutable, ICommit {
 	 */
 	
 	void unlock(SpawnerType type, boolean unlock);
+	
+	/**
+	 * Gets the data value.
+	 * 
+	 * @param <T> - data type
+	 * @param data - data parser
+	 * @return Data value or {@code null} if absent
+	 */
+	
+	<T> T get(IData<T> data);
+	
+	/**
+	 * @param <T> - data type
+	 * @param data - data parser
+	 * @param value - new value
+	 * @return Old value or {@code null} if none was set before
+	 */
+	
+	<T> T set(IData<T> data, T value);
 	
 }
