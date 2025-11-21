@@ -25,5 +25,15 @@ public interface IData<T> {
 	 */
 	
 	void save(IFile file, T data);
+	
+	/**
+	 * This value is returned if the value in a player file is absent ({@link IPlayerData#get(IData)}).
+	 * 
+	 * @return Default value for this data
+	 */
+	
+	default T defaulted() {
+		return null;
+	}
 
 }
