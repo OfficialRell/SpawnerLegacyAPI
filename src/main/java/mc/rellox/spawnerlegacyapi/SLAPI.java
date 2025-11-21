@@ -2,6 +2,7 @@ package mc.rellox.spawnerlegacyapi;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import mc.rellox.spawnerlegacyapi.manager.ICacheManager;
 import mc.rellox.spawnerlegacyapi.manager.IDataManager;
@@ -30,6 +31,14 @@ public final class SLAPI {
 		if(plugin == null)
 			throw new NullPointerException("Cannot initialize SpawnerLegacy API");
 		INSTANCE = ((ISpawnerLegacyPlugin) plugin).instance();
+	}
+	
+	/**
+	 * @return SpawnerLegacy plugin instance
+	 */
+	
+	public static JavaPlugin plugin() {
+		return INSTANCE.plugin();
 	}
 	
 	/**
