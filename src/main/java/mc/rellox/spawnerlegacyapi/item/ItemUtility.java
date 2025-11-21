@@ -24,11 +24,11 @@ public final class ItemUtility {
 	}
 	
 	public static boolean has(Player player, ItemStack item, int a) {
-		if(Utility.op(player) == true) return true;
+		if(Utility.op(player)) return true;
 		PlayerInventory v = player.getInventory();
 		int t = IntStream.range(0, 36).map(i -> {
 			ItemStack slot = v.getItem(i);
-			if(item.isSimilar(slot) == false) return 0;
+			if(!item.isSimilar(slot)) return 0;
 			return slot.getAmount();
 		}).sum();
 		return t >= a;
@@ -40,7 +40,7 @@ public final class ItemUtility {
 		ItemStack slot;
 		for(int i = 0; f < a && i < 36; i++) {
 			if((slot = pi.getItem(i)) == null) f += 64;
-			else if(slot.isSimilar(item) == true) f += 64 - slot.getAmount();
+			else if(slot.isSimilar(item)) f += 64 - slot.getAmount();
 		}
 		if(f >= a) pi.addItem(item);
 		else {
@@ -55,7 +55,7 @@ public final class ItemUtility {
 	}
 	
 	public static void remove(Player player, ItemStack item, int a) {
-		if(Utility.op(player) == true) return;
+		if(Utility.op(player)) return;
 		ItemStack r = item.clone();
 		r.setAmount(a);
 		player.getInventory().removeItem(r);
@@ -69,7 +69,7 @@ public final class ItemUtility {
 	
 	@SuppressWarnings("deprecation")
 	public static void glint(ItemMeta meta) {
-		if(Version.version.high(VersionType.v_20_4) == true) {
+		if(Version.version.high(VersionType.v_20_4)) {
 			RF.order(meta, "setEnchantmentGlintOverride", Boolean.class).invoke(true);
 		} else {
 			meta.addEnchant(Enchantment.getByKey(NamespacedKey.minecraft("power")), 0, true);

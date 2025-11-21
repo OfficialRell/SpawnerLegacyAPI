@@ -178,7 +178,7 @@ public final class ItemBuilder {
 	 */
 	
 	public ItemBuilder named(List<IContent> name) {
-		if(name.isEmpty() == true) return this;
+		if(name.isEmpty()) return this;
 		List<IContent> copy = new ArrayList<>(name);
 		content.name = copy.remove(0);
 		content.lore.addAll(0, copy);
@@ -263,7 +263,7 @@ public final class ItemBuilder {
 	 */
 	
 	public ItemBuilder hidden() {
-		if(Version.version != null && Version.version.high(VersionType.v_20_4) == false) return this;
+		if(Version.version != null && !Version.version.high(VersionType.v_20_4)) return this;
 		return modify(meta -> {
 			RF.order(meta, "setHideTooltip", boolean.class).invoke(true);
 		});
@@ -489,7 +489,7 @@ public final class ItemBuilder {
 	 */
 	
 	public <A> ItemBuilder describe(List<A> list, Function<A, IContent> f) {
-		return list.isEmpty() == true ? this : describe(list, f, null);
+		return list.isEmpty() ? this : describe(list, f, null);
 	}
 	
 	/**
@@ -504,7 +504,7 @@ public final class ItemBuilder {
 	 */
 	
 	public <A> ItemBuilder describe(List<A> list, Function<A, IContent> f, IContent or) {
-		return list.isEmpty() == true ? (or == null ? this : describe(or))
+		return list.isEmpty() ? (or == null ? this : describe(or))
 				: describe(list.stream()
 						.map(f)
 						.collect(Collectors.toList()));
@@ -521,7 +521,7 @@ public final class ItemBuilder {
 	
 	public ItemBuilder variate(boolean value, Consumer<ItemBuilder> if_true,
 			Consumer<ItemBuilder> if_false) {
-		if(value == true) if_true.accept(this);
+		if(value) if_true.accept(this);
 		else if_false.accept(this);
 		return this;
 	}
@@ -629,17 +629,17 @@ public final class ItemBuilder {
 		}
 		
 		private void modify(ItemMeta meta) {
-			Variables vars = replace.isEmpty() == true
+			Variables vars = replace.isEmpty()
 					? Variables.empty : Variables.with(replace.toArray());
 			if(name != null) meta.setDisplayName(name.text(vars));
 			List<String> previous = meta.getLore();
-			if(lore.isEmpty() == false) {
+			if(!lore.isEmpty()) {
 				List<String> list = lore.stream()
 					.map(c -> c.text(vars))
 					.collect(Collectors.toList());
 				Text.clean(list);
 				if(previous != null) list.addAll(0, previous);
-				meta.setLore(list.isEmpty() == true ? null : list);
+				meta.setLore(list.isEmpty() ? null : list);
 			}
 		}
 		

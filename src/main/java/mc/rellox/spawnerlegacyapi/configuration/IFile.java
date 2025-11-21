@@ -113,10 +113,10 @@ public interface IFile extends IFileValues {
 	
 	default void copy(String from, String to, boolean save) {
 		Object o = file().get(from);
-		if(save == true) clear(from);
+		if(save) clear(from);
 		else delete(from);
 		if(o != null) {
-			if(save == true) set(to, o);
+			if(save) set(to, o);
 			else hold(to, o);
 		}
 	}
@@ -127,7 +127,7 @@ public interface IFile extends IFileValues {
 	 */
 	
 	default boolean exists(String path) {
-		return file().isSet(path) == true;
+		return file().isSet(path);
 	}
 	
 	/**
@@ -177,7 +177,7 @@ public interface IFile extends IFileValues {
 	
 	default void header(String... header) {
 		FileConfigurationOptions o = file().options();
-		if(Version.version.high(VersionType.v_18_1) == true) {
+		if(Version.version.high(VersionType.v_18_1)) {
 			RF.order(o, "setHeader", List.class).invoke(List.of(header));
 			RF.order(o, "parseComments", boolean.class).invoke(true);
 		} else {
@@ -191,7 +191,7 @@ public interface IFile extends IFileValues {
 	 */
 	
 	default Commenter commenter() {
-		return Version.version.high(VersionType.v_18_1) == true
+		return Version.version.high(VersionType.v_18_1)
 				? new Commenter(this) : null;
 	}
 	

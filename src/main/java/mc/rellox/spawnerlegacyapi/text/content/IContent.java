@@ -50,9 +50,9 @@ public interface IContent {
 		return wrap(v -> text);
 	}
 	
-	static IContent of(Object o) {
-		if(o instanceof IContent c) return c;
-		String text = o.toString();
+	static IContent of(Object object) {
+		if(object instanceof IContent content) return content;
+		String text = object.toString();
 		return wrap(v -> text);
 	}
 	
@@ -158,7 +158,7 @@ public interface IContent {
 	
 	default void send(Player player) {
 		String text = text();
-		if(text == null || text.isEmpty() == true) return;
+		if(text == null || text.isEmpty()) return;
 		player.sendMessage(text);
 	}
 
@@ -181,7 +181,7 @@ public interface IContent {
 	
 	default void send(CommandSender sender) {
 		String text = text();
-		if(text == null || text.isEmpty() == true) return;
+		if(text == null || text.isEmpty()) return;
 		sender.sendMessage(text);
 	}
 	
@@ -200,7 +200,7 @@ public interface IContent {
 			return v -> {
 				int i = 0, m = vs.length;
 				do {
-					if(v.equals(vs[i]) == true)
+					if(v.equals(vs[i]))
 						return convert(vs[i + 1]);
 				} while((i += 2) < m);
 				return v;
@@ -209,11 +209,12 @@ public interface IContent {
 		
 		String get(String key);
 		
-		private static String convert(Object o) {
-			if(o instanceof IContent c) return c.text();
-			if(o instanceof SpawnerType s) return s.formatted().text();
-			if(o instanceof IPrice p) return p.text().text();
-			return o.toString();
+		private static String convert(Object object) {
+			if(object instanceof IContent content) return content.text();
+			if(object instanceof SpawnerType type) return type.formatted().text();
+			if(object instanceof IPrice price) return price.text().text();
+			if(object instanceof Enum<?> enum_) return enum_.name();
+			return object.toString();
 		}
 		
 	}

@@ -34,6 +34,9 @@ public interface ISpawnerTypeChangeEvent extends IEvent {
 		
 		SPAWN_EGG,
 		TYPES_GUI,
+		/**
+		 * Cannot be cancelled
+		 */
 		COMMAND;
 		
 	}

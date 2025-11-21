@@ -14,7 +14,7 @@ public interface IEntityModifierAge extends IEntityModifier {
 	@Override
 	default void modify(Entity entity) {
 		if(entity instanceof Ageable ageable) {
-			if(adult() == true) ageable.setAdult();
+			if(adult()) ageable.setAdult();
 			else ageable.setBaby();
 		}
 	}

@@ -3,6 +3,7 @@ package mc.rellox.spawnerlegacyapi.view.layout;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
@@ -21,42 +22,42 @@ public interface IViewMeta<T> {
 	static IViewMeta<String> STRING = a("STRING", o -> o == null ? null : o.toString());
 	static IViewMeta<byte[]> BYTE_ARRAY = a("BYTE_ARRAY", o -> {
 		List<Byte> list = toParsed(o, IViewMeta::parseByte);
-		if(list.isEmpty() == true) return null;
+		if(list.isEmpty()) return null;
 		byte[] is = new byte[list.size()];
 		for(int i = 0; i < is.length; i++) is[i] = list.get(i);
 		return is;
 	});
 	static IViewMeta<int[]> INTEGER_ARRAY = a("INTEGER_ARRAY", o -> {
 		List<Integer> list = toParsed(o, IViewMeta::parseInteger);
-		if(list.isEmpty() == true) return null;
+		if(list.isEmpty()) return null;
 		int[] is = new int[list.size()];
 		for(int i = 0; i < is.length; i++) is[i] = list.get(i);
 		return is;
 	});
 	static IViewMeta<short[]> SHORT_ARRAY = a("SHORT_ARRAY", o -> {
 		List<Short> list = toParsed(o, IViewMeta::parseShort);
-		if(list.isEmpty() == true) return null;
+		if(list.isEmpty()) return null;
 		short[] is = new short[list.size()];
 		for(int i = 0; i < is.length; i++) is[i] = list.get(i);
 		return is;
 	});
 	static IViewMeta<long[]> LONG_ARRAY = a("LONG_ARRAY", o -> {
 		List<Long> list = toParsed(o, IViewMeta::parseLong);
-		if(list.isEmpty() == true) return null;
+		if(list.isEmpty()) return null;
 		long[] is = new long[list.size()];
 		for(int i = 0; i < is.length; i++) is[i] = list.get(i);
 		return is;
 	});
 	static IViewMeta<float[]> FLOAT_ARRAY = a("FLOAT_ARRAY", o -> {
 		List<Float> list = toParsed(o, IViewMeta::parseFloat);
-		if(list.isEmpty() == true) return null;
+		if(list.isEmpty()) return null;
 		float[] is = new float[list.size()];
 		for(int i = 0; i < is.length; i++) is[i] = list.get(i);
 		return is;
 	});
 	static IViewMeta<double[]> DOUBLE_ARRAY = a("DOUBLE_ARRAY", o -> {
 		List<Double> list = toParsed(o, IViewMeta::parseDouble);
-		if(list.isEmpty() == true) return null;
+		if(list.isEmpty()) return null;
 		double[] is = new double[list.size()];
 		for(int i = 0; i < is.length; i++) is[i] = list.get(i);
 		return is;
@@ -98,7 +99,7 @@ public interface IViewMeta<T> {
 	
 	default Object savable(T value) {
 		if(value instanceof Object[] array) return List.of(array);
-		if(value instanceof IViewItem i) return i.id();
+		if(value instanceof IViewItem item) return item.id();
 		return value;
 	}
 	
@@ -121,7 +122,7 @@ public interface IViewMeta<T> {
 		else stream = Stream.of(object);
 		return stream
 				.map(f)
-				.filter(x -> x != null)
+				.filter(Objects::nonNull)
 				.toList();
 	}
 	

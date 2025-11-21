@@ -80,11 +80,11 @@ public interface IMetaItem extends ISave {
 		String path = p + "." + id();
 		file.set(path + ".material", material().name());
 		if(name() != null) file.set(path + ".name", ((KeyedContent) name()).key());
-		if(lore().isEmpty() == false) file.set(path + ".lore", lore().stream()
+		if(!lore().isEmpty()) file.set(path + ".lore", lore().stream()
 				.map(KeyedContent.class::cast)
 				.map(KeyedContent::key)
 				.toList());
-		if(enchantments().isEmpty() == false) {
+		if(!enchantments().isEmpty()) {
 			enchantments().forEach((e, i) -> {
 				NamespacedKey key = e.getKey();
 				if(key == null) return;

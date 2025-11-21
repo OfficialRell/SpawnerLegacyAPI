@@ -99,7 +99,7 @@ public interface IInventory {
 	 */
 	
 	default void exit(Player player) {
-		if(viewers().contains(player) == false) return;
+		if(!viewers().contains(player)) return;
 		player.closeInventory();
 		closing(player);
 		viewers().remove(player);
@@ -116,7 +116,7 @@ public interface IInventory {
 	
 	private void close() {
 		List<HumanEntity> list = inventory().getViewers();
-		if(list.isEmpty() == false) {
+		if(!list.isEmpty()) {
 			int i = list.size() - 1;
 			do {
 				HumanEntity human = list.get(i);

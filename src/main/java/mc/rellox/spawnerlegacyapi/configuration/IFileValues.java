@@ -119,10 +119,10 @@ public interface IFileValues {
 	
 	default List<String> getStringOrStrings(String path) {
 		List<String> list = new ArrayList<>();
-		if(file().isList(path) == true) list.addAll(file().getStringList(path));
+		if(file().isList(path)) list.addAll(file().getStringList(path));
 		else {
 			String value = file().getString(path);
-			if(value != null && value.isEmpty() == false) list.add(value);
+			if(value != null && !value.isEmpty()) list.add(value);
 		}
 		return list;
 	}

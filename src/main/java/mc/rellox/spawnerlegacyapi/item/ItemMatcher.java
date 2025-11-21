@@ -24,8 +24,8 @@ public final class ItemMatcher {
 		file.set(path + ".material", item.getType().name());
 		ItemMeta meta = item.getItemMeta();
 		if(meta != null) {
-			if(meta.hasDisplayName() == true) file.set(path + ".name", meta.getDisplayName());
-			if(meta.hasCustomModelData() == true) file.set(path + ".model", meta.getCustomModelData());
+			if(meta.hasDisplayName()) file.set(path + ".name", meta.getDisplayName());
+			if(meta.hasCustomModelData()) file.set(path + ".model", meta.getCustomModelData());
 		}
 	}
 	
@@ -35,10 +35,10 @@ public final class ItemMatcher {
 		if(material == null) return DEFAULT;
 		ItemMatcher matcher = new ItemMatcher(material);
 		String name = file.getString(path + ".name");
-		if(name != null && name.isEmpty() == false) 
+		if(name != null && !name.isEmpty()) 
 			matcher.name(ContentParser.parse(name));
 		List<String> lore = file.getStrings(path + ".lore");
-		if(lore != null && lore.isEmpty() == false)
+		if(lore != null && !lore.isEmpty())
 			matcher.lore(ContentParser.parse(lore));
 		int model = file.getInteger(path + ".model");
 		if(model > 0) matcher.model(model);
@@ -97,7 +97,7 @@ public final class ItemMatcher {
 			@Override
 			public boolean match(ItemMeta meta) {
 				List<String> list = meta.getLore();
-				if(list == null || list.isEmpty() == true
+				if(list == null || list.isEmpty()
 						|| list.size() != lore.size()) return false;
 				return IntStream.range(0, ss.size())
 						.allMatch(i -> ChatColor.stripColor(list.get(i)).equals(ss.get(i)));

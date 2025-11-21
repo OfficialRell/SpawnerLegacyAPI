@@ -32,7 +32,7 @@ public final class Calculate {
 
 	public static boolean isInteger(String... l) {
 		if(l == null) return false;
-		for(String s : l) if(isInteger(s) == false) return false;
+		for(String s : l) if(!isInteger(s)) return false;
 		return true;
 	}
 	

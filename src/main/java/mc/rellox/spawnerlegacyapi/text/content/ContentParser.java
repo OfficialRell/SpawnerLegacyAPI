@@ -20,7 +20,7 @@ public final class ContentParser {
 	}
 	
 	public static IContent parse(String text) {
-		return text == null || text.isEmpty() == true
+		return text == null || text.isEmpty()
 				? IContent.empty() : new ContentParser(text).parse();
 	}
 	
@@ -49,7 +49,7 @@ public final class ContentParser {
 	}
 	
 	public IContent parse() {
-		if(text == null || text.isEmpty() == true) return IContent.empty();
+		if(text == null || text.isEmpty()) return IContent.empty();
 		List<Text> list = text();
 		List<IContent> result = new ArrayList<>();
 		ContentBuilder builder = new ContentBuilder();
@@ -62,7 +62,7 @@ public final class ContentParser {
 			else if(t.type == Type.gradient) builder.gradient(t.text);
 			else builder.format(t.text);
 		}
-		return result.isEmpty() == true ? IContent.empty()
+		return result.isEmpty() ? IContent.empty()
 				: result.size() == 1 ? result.get(0) : IContent.of(result);
 	}
 	
@@ -70,7 +70,7 @@ public final class ContentParser {
 		List<Text> list = new ArrayList<>();
 		Matcher m = colors.matcher(text);
 		int e = 0, s;
-		while(m.find() == true) {
+		while(m.find()) {
 			s = m.start();
 			if(s > e) list.add(new Text(text.substring(e, s), Type.text));
 			e = m.end();
@@ -85,11 +85,11 @@ public final class ContentParser {
 	}
 	
 	private IContent variabled(String t) {
-		if(t.isEmpty() == true) return IContent.empty();
+		if(t.isEmpty()) return IContent.empty();
 		List<IContent> list = new ArrayList<>();
 		Matcher m = variables.matcher(t);
 		int e = 0, s;
-		while(m.find() == true) {
+		while(m.find()) {
 			s = m.start();
 			if(s > e) list.add(IContent.of(t.substring(e, s)));
 			e = m.end();
@@ -101,24 +101,29 @@ public final class ContentParser {
 	}
 	
 	private class ContentBuilder {
-		private int[] is;
-		private final List<Format> fs = new ArrayList<>();
+		
+		private int[] colors;
+		private final List<Format> formats = new ArrayList<>();
+		
 		private void reset() {
-			is = null;
-			fs.clear();
+			colors = null;
+			formats.clear();
 		}
+		
 		private void color(String s) {
 			try {
-				is = new int[] {Integer.parseInt(s.substring(1), 16)};
+				colors = new int[] {Integer.parseInt(s.substring(1), 16)};
 			} catch (Exception e) {}
 		}
+		
 		private void gradient(String s) {
 			try {
-				is = Stream.of(s.split("-"))
+				colors = Stream.of(s.split("-"))
 						.mapToInt(t -> Integer.parseInt(t.substring(1), 16))
 						.toArray();
 			} catch (Exception e) {}
 		}
+		
 		private void format(String s) {
 			Format f = switch(s.substring(1)) {
 			case "bold", "b" -> Format.bold;
@@ -128,19 +133,20 @@ public final class ContentParser {
 			case "underline", "u" -> Format.underline;
 			default -> null;
 			};
-			if(f != null) fs.add(f);
+			if(f != null) formats.add(f);
 		}
+		
 		private IContent build(IContent input) {
 			IColorer color;
-			if(is != null) {
-				if(is.length == 1) {
-					if(fs.isEmpty() == true) color = IColorer.of(is[0]);
-					else color = IColorer.of(is[0], Format.of(fs));
+			if(colors != null) {
+				if(colors.length == 1) {
+					if(formats.isEmpty()) color = IColorer.of(colors[0]);
+					else color = IColorer.of(colors[0], Format.of(formats));
 				} else {
-					if(fs.isEmpty() == true) color = IColorer.of(Colors.of(is));
-					else color = IColorer.of(Colors.of(is), Format.of(fs));
+					if(formats.isEmpty()) color = IColorer.of(Colors.of(colors));
+					else color = IColorer.of(Colors.of(colors), Format.of(formats));
 				}
-			} else if(fs.isEmpty() == false) color = IColorer.of(Colors.white, Format.of(fs));
+			} else if(!formats.isEmpty()) color = IColorer.of(Colors.white, Format.of(formats));
 			else color = null;
 			return color == null ? input : IContent.of(color, input);
 		}

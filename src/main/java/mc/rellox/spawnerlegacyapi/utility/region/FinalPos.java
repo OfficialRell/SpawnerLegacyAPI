@@ -94,10 +94,11 @@ public record FinalPos(World world, int x, int y, int z) {
 	
 	public static FinalPos parse(World world, String s) {
 		try {
-			if(s.matches("(-?\\d+)((,\\s?)(-?\\d+)){2}") == false)
-				return null;
+			if(!s.matches("(-?\\d+)((,\\s?)(-?\\d+)){2}")) return null;
+			
 			String[] ps = s.replace(" ", "").split(",");
 			if(ps.length != 3) return null;
+			
 			return new FinalPos(world, from(ps[0]), from(ps[1]), from(ps[2]));
 		} catch (Exception e) {
 			RF.debug(e);
@@ -110,7 +111,7 @@ public record FinalPos(World world, int x, int y, int z) {
 	}
 	
 	private static int from(String s) {
-		if(s.equals("-0") == true) return -1;
+		if(s.equals("-0")) return -1;
 		int i = Integer.parseInt(s);
 		return i < 0 ? (i - 1) : i;
 	}

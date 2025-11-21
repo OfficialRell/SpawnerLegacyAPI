@@ -39,7 +39,7 @@ public class ErrorCounter {
 	}
 	
 	public boolean valid() {
-		return found == true;
+		return found;
 	}
 
 	@Override
@@ -58,15 +58,14 @@ public class ErrorCounter {
 		private boolean light, lighted, ground, environment;
 		
 		public void submit() {
-			if(light == false) light0--;
-			if(lighted == false) light1++;
-			if(ground == false) ground0--;
-			if(environment == false) environment0--;
+			if(!light) light0--;
+			if(!lighted) light1++;
+			if(!ground) ground0--;
+			if(!environment) environment0--;
 		}
 		
 		public boolean valid() {
-			return light == true && lighted == true && ground == true
-					&& environment == true;
+			return light && lighted && ground && environment;
 		}
 		
 		public void light() {

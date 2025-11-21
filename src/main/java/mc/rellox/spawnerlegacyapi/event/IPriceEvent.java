@@ -31,9 +31,9 @@ public interface IPriceEvent extends IEvent {
 	default boolean withdraw(Player player) {
 		IPrice price = price();
 		if(price == null) return true;
-		boolean b = price.has(player);
-		if(b == true) price.remove(player);
-		return b;
+		boolean has = price.has(player);
+		if(has) price.remove(player);
+		return has;
 	}
 
 }

@@ -113,7 +113,7 @@ public interface ILight {
 	interface LightFinder {
 		
 		static LightFinder of(boolean daylight) {
-			return daylight == true
+			return daylight
 					? block -> {
 						long time = block.getWorld().getTime();
 						return (byte) Math.max(block.getLightFromBlocks(),

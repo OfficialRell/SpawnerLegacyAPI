@@ -14,9 +14,9 @@ public interface IMaterial {
 	static IMaterial empty = block -> true;
 	static IMaterial air = block -> {
 		Material type = block.getType();
-		return type.getHardness() <= 0 || type.isAir() == true;
+		return type.getHardness() <= 0 || type.isAir();
 	};
-	static IMaterial solid = block -> block.getType().isSolid() == true;
+	static IMaterial solid = block -> block.getType().isSolid();
 	static IMaterial water = block -> {
 		var type = block.getType();
 		if(type == Material.WATER) return true;
@@ -48,7 +48,7 @@ public interface IMaterial {
 			final Set<Material> set = new HashSet<>(is);
 			@Override
 			public boolean is(Block block) {
-				return set.contains(block.getType()) == true;
+				return set.contains(block.getType());
 			}
 		};
 	}
@@ -69,7 +69,7 @@ public interface IMaterial {
 			final Set<Material> set = new HashSet<>(not);
 			@Override
 			public boolean is(Block block) {
-				return set.contains(block.getType()) == false;
+				return !set.contains(block.getType());
 			}
 		};
 	}

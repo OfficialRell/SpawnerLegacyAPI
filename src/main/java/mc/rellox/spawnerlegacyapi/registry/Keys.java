@@ -50,7 +50,7 @@ public final class Keys {
 	}
 	
 	public static <Z> Z get(ItemStack item, KeyType key, PersistentDataType<?, Z> data, Z def) {
-		if(item == null || item.hasItemMeta() == false) return def;
+		if(item == null || !item.hasItemMeta()) return def;
 		ItemMeta meta = item.getItemMeta();
 		return meta.getPersistentDataContainer().get(of(key), data);
 	}

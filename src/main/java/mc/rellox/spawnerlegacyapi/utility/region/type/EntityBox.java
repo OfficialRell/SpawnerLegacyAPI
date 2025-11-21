@@ -81,14 +81,14 @@ public abstract class EntityBox {
 	
 	protected static boolean light(Block block, IRequirements requirements,
 			IGenerator generator) {
-		return !(requirements.light().is(block) == true
-				|| generator.match(Tag.LIGHT_REQUIREMENT_IGNORE) == true);
+		return !(requirements.light().is(block)
+				|| generator.match(Tag.LIGHT_REQUIREMENT_IGNORE));
 	}
 	
 	protected static boolean ground(Block block, IRequirements requirements,
 			IGenerator generator) {
-		return !(requirements.ground().is(block) == true
-				|| generator.match(Tag.GROUND_REQUIREMENT_IGNORE) == true);
+		return !(requirements.ground().is(block)
+				|| generator.match(Tag.GROUND_REQUIREMENT_IGNORE));
 	}
 	
 	private static class EntityBoxSingle extends EntityBox {
@@ -100,12 +100,12 @@ public abstract class EntityBox {
 		@Override
 		public Location check(Block block, IRequirements requirements,
 				IGenerator generator, ErrorSubmit submit) {
-			boolean l = light(block, requirements, generator);
-			if(requirements.environment().is(block) == false) {
+			boolean light = light(block, requirements, generator);
+			if(!requirements.environment().is(block)) {
 				submit.environment();
-				if(l == true) submit.light();
-			} else if(l == true) submit.lighted();
-			if(ground(block.getRelative(0, -1, 0), requirements, generator) == true) submit.ground();
+				if(light) submit.light();
+			} else if(light) submit.lighted();
+			if(ground(block.getRelative(0, -1, 0), requirements, generator)) submit.ground();
 			submit.submit();
 			return submit.valid() ? location(block) : null;
 		}
@@ -126,18 +126,18 @@ public abstract class EntityBox {
 		@Override
 		public Location check(Block block, IRequirements requirements,
 				IGenerator generator, ErrorSubmit submit) {
-			if(ground(block.getRelative(0, -1, 0), requirements, generator) == true) submit.ground();
-			boolean e = false, l = false;
+			if(ground(block.getRelative(0, -1, 0), requirements, generator)) submit.ground();
+			boolean environment = false, light = false;
 			int i = 0;
 			do {
 				Block relative = block.getRelative(0, i, 0);
-				if(requirements.environment().is(relative) == false) e = true;
-				if(light(relative, requirements, generator) == true) l = true;
+				if(!requirements.environment().is(relative)) environment = true;
+				if(light(relative, requirements, generator)) light = true;
 			} while(++i < y);
-			if(e == true) {
+			if(environment) {
 				submit.environment();
-				if(l == true) submit.light();
-			} else if(l == true) submit.lighted();
+				if(light) submit.light();
+			} else if(light) submit.lighted();
 			submit.submit();
 			return submit.valid() ? location(block) : null;
 		}
@@ -158,7 +158,7 @@ public abstract class EntityBox {
 		@Override
 		public Location check(Block block, IRequirements requirements,
 				IGenerator generator, ErrorSubmit submit) {
-			boolean e = false, l = false;
+			boolean envoronment = false, light = false;
 			int ix = 0, iy, iz;
 			Block b;
 			do {
@@ -167,17 +167,17 @@ public abstract class EntityBox {
 					iz = 0;
 					do {
 						b = block.getRelative(ix, iy, iz);
-						if(iy == 0 && ground(b.getRelative(0, -1, 0), requirements, generator) == true)
+						if(iy == 0 && ground(b.getRelative(0, -1, 0), requirements, generator))
 							submit.ground();
-						if(requirements.environment().is(b) == false) e = true;
-						if(light(b, requirements, generator) == true) l = true;
+						if(!requirements.environment().is(b)) envoronment = true;
+						if(light(b, requirements, generator)) light = true;
 					} while(++iz < z);
 				} while(++iy < y);
 			} while(++ix < x);
-			if(e == true) {
+			if(envoronment) {
 				submit.environment();
-				if(l == true) submit.light();
-			} else if(l == true) submit.lighted();
+				if(light) submit.light();
+			} else if(light) submit.lighted();
 			submit.submit();
 			return submit.valid() ? location(block) : null;
 		}

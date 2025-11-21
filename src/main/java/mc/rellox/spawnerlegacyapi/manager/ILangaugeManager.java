@@ -6,17 +6,59 @@ import mc.rellox.spawnerlegacyapi.text.content.IContent;
 
 public interface ILangaugeManager {
 	
+	/**
+	 * @param key - key
+	 * @return Single content or {@link IContent#empty} if not found
+	 */
+	
 	IContent get(String key);
+	
+	/**
+	 * @param key - key
+	 * @param k - placeholder key
+	 * @param o - placeholder value
+	 * @return Single content or {@link IContent#empty} if not found
+	 */
 	
 	IContent get(String key, String k, Object o);
 	
+	/**
+	 * @param key - key
+	 * @param vs - placeholder key-value pairs
+	 * @return Single content or {@link IContent#empty} if not found
+	 */
+	
 	IContent get(String key, Object... vs);
+	
+	/**
+	 * @param key - key
+	 * @return List of contents or empty list if not found
+	 */
 	
 	List<IContent> list(String key);
 	
+	/**
+	 * @param key - key
+	 * @param k - placeholder key
+	 * @param o - placeholder value
+	 * @return List of contents or empty list if not found
+	 */
+	
 	List<IContent> list(String key, String k, Object o);
 	
+	/**
+	 * @param key - key
+	 * @param vs - placeholder key-value pairs
+	 * @return List of contents or empty list if not found
+	 */
+	
 	List<IContent> list(String key, Object... vs);
+	
+	/**
+	 * @param key - key
+	 * @param text - default content
+	 * @return Single content or default if not found
+	 */
 	
 	IContent or(String key, IContent text);
 

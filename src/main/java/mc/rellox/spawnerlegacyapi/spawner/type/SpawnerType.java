@@ -148,7 +148,7 @@ public enum SpawnerType {
 	 */
 	
 	public boolean regular() {
-		return this != EMPTY && exists() == true;
+		return this != EMPTY && exists();
 	}
 
 	/**
@@ -231,7 +231,7 @@ public enum SpawnerType {
 	public static SpawnerType of(String name) {
 		try {
 			SpawnerType type = valueOf(name.toUpperCase());
-			return type.exists() == true ? type : null;
+			return type.exists() ? type : null;
 		} catch (Exception e) {
 			return null;
 		}

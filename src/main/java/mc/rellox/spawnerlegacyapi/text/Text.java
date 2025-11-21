@@ -38,7 +38,7 @@ public final class Text {
 	static {
 		var ignore = List.of("HIDE_CUSTOM_NAME", "HIDE_ITEM_NAME", "HIDE_LORE");
 		item_flags = Stream.of(ItemFlag.values())
-				.filter(flag -> ignore.contains(flag.name()) == false)
+				.filter(flag -> !ignore.contains(flag.name()))
 				.toArray(ItemFlag[]::new);
 	}
 	
@@ -149,7 +149,7 @@ public final class Text {
 	
 	public static boolean isKey(String s) {
 		for(char c : s.toCharArray())
-			if(isLetter(c) == false && isNumber(c) == false && c != '_' && c != '.')
+			if(!isLetter(c) && !isNumber(c) && c != '_' && c != '.')
 				return false;
 		return true;
 	}
@@ -191,23 +191,23 @@ public final class Text {
 	
 	public static String path(String s) {
 		if(s == null) return null;
-		if(s.isEmpty() == true) return "";
+		if(s.isEmpty()) return "";
 		return s.toLowerCase().replace('_', '-');
 	}
 	
 	public static String normalize(String s) {
 		if(s == null) return null;
-		if(s.isEmpty() == true) return "";
+		if(s.isEmpty()) return "";
 		
 		return Stream.of(s.split("[\\s_-]"))
-				.filter(t -> t.isEmpty() == false)
+				.filter(t -> !t.isEmpty())
 				.map(Text::upper)
 				.collect(Collectors.joining(" "));
 	}
 	
 	private static String upper(String s) {
 		if(s == null) return "";
-		if(s.isEmpty() == true) return "";
+		if(s.isEmpty()) return "";
 		return Character.toUpperCase(s.charAt(0))
 				+ s.substring(1).toLowerCase();
 	}
@@ -215,15 +215,15 @@ public final class Text {
 	public static List<String> clean(List<String> list) {
 		boolean n = false;
 		Iterator<String> it = list.iterator();
-		while(it.hasNext() == true) {
-			if(it.next().isEmpty() == true) {
-				if(n == true) it.remove();
+		while(it.hasNext()) {
+			if(it.next().isEmpty()) {
+				if(n) it.remove();
 				n = true;
 			} else n = false;
 		}
-		if(list.isEmpty() == false) {
+		if(!list.isEmpty()) {
 			int last = list.size() - 1;
-			if(list.get(last).isEmpty() == true)
+			if(list.get(last).isEmpty())
 				list.remove(last);
 		}
 		return list;
@@ -252,7 +252,7 @@ public final class Text {
 			else if(c == '&') l = true;
 			else if(c == '#') h = true;
 			else {
-				if(l == true) {
+				if(l) {
 					String o = switch (c) {
 					case 'a' -> "<#00ff00>"; case 'b' -> "<#00ffff>";
 					case 'c' -> "<#ff0000>"; case 'd' -> "<#ff00ff>";
@@ -268,7 +268,7 @@ public final class Text {
 					};
 					sb.append(o);
 					l = false;
-				} else if(h == true) {
+				} else if(h) {
 					x += "" + c;
 					if(x.length() >= 6) {
 						sb.append("<#").append(x).append('>');
@@ -277,7 +277,7 @@ public final class Text {
 					}
 				} else sb.append(c);
 			}
-			if(i == true && l == true || h == true) return s;
+			if(i && l || h) return s;
 			i = false;
 		}
 		return sb.toString();
@@ -286,14 +286,14 @@ public final class Text {
 	public static void send(Player player, IContent content) {
 		if(content == null) return;
 		String text = content.text();
-		if(text.isEmpty() == false) player.sendMessage(text);
+		if(!text.isEmpty()) player.sendMessage(text);
 	}
 	
 	public static void send(Player player, List<IContent> list) {
-		if(list.isEmpty() == true) return;
+		if(list.isEmpty()) return;
 		if(list.size() == 1) {
 			String text = list.get(0).text();
-			if(text.isEmpty() == false) player.sendMessage(text);
+			if(!text.isEmpty()) player.sendMessage(text);
 		} else list.stream()
 			.map(IContent::text)
 			.forEach(player::sendMessage);

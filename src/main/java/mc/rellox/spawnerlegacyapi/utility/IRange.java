@@ -17,11 +17,11 @@ public interface IRange {
 	
 	static IRange of(String s) {
 		try {
-			if(s.matches("\\d+") == true) {
+			if(s.matches("\\d+")) {
 				int i = Integer.parseInt(s);
 				return of(i);
 			}
-			if(s.matches("\\d+-\\d+") == true) {
+			if(s.matches("\\d+-\\d+")) {
 				String[] ss = s.split("-");
 				int a = Integer.parseInt(ss[0]);
 				int b = Integer.parseInt(ss[1]);

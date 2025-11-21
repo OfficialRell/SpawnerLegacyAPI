@@ -239,7 +239,7 @@ public interface IGenerator extends IGeneratorTags {
 	
 	default boolean in(Chunk chunk) {
 		Block block = block();
-		if(block.getWorld().equals(chunk.getWorld()) == false) return false;
+		if(!block.getWorld().equals(chunk.getWorld())) return false;
 		return chunk.getX() == (block.getX() >> 4) && chunk.getZ() == (block.getZ() >> 4);
 	}
 

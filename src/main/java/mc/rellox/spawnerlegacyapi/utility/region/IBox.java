@@ -106,8 +106,8 @@ public interface IBox {
 	
 	default boolean any(Iterable<? extends Player> players) {
 		for(Player player : players)
-			if(in(player) == true
-			&& player.getGameMode() != GameMode.SPECTATOR) return true;
+			if(in(player) && player.getGameMode() != GameMode.SPECTATOR)
+				return true;
 		return false;
 	}
 

@@ -24,7 +24,7 @@ public final class Utility {
 	}
 	
 	public static boolean op(Player player) {
-		return player.isOp() == true && player.getGameMode() == GameMode.CREATIVE;
+		return player.isOp() && player.getGameMode() == GameMode.CREATIVE;
 	}
 	
 	public static Location center(Block block) {
@@ -37,7 +37,7 @@ public final class Utility {
 	
 	public static int dist2(Location first, Location second) {
 		if(first == null || second == null) return Integer.MAX_VALUE;
-		if(first.getWorld().equals(second.getWorld()) == false) return Integer.MAX_VALUE;
+		if(!first.getWorld().equals(second.getWorld())) return Integer.MAX_VALUE;
 		return (int) first.distanceSquared(second);
 	}
 	
@@ -55,7 +55,7 @@ public final class Utility {
 	public static final Attribute attribute_speed = RF.fielded(Attribute.class, "GENERIC_MOVEMENT_SPEED", "MOVEMENT_SPEED");
 
 	public static boolean isWindCharge(Entity entity) {
-		if(Version.version.high(VersionType.v_21_1) == false) return false;
+		if(!Version.version.high(VersionType.v_21_1)) return false;
 		return switch (entity.getType().name()) {
 		case "WIND_CHARGE", "BREEZE_WIND_CHARGE" -> true;
 		default -> false;

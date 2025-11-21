@@ -29,7 +29,7 @@ public interface ITicker {
 		
 		public Ticker(int value, boolean offset) {
 			this.value = value;
-			if(offset == true) ticks = Calculate.random(value);
+			if(offset) ticks = Calculate.random(value);
 		}
 
 		@Override
