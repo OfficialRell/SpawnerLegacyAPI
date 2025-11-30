@@ -35,5 +35,17 @@ public interface IData<T> {
 	default T defaulted() {
 		return null;
 	}
+	
+	/**
+	 * When set to {@code true}, this data will be automatically saved when the player file is cleared from cache.
+	 * When {@code false}, the data will only be saved when using {@link IPlayerData#set(IData, Object)}
+	 * or other method (not guaranteed) that writes to the file.
+	 * 
+	 * @return Autosave this data when clearing player file from cache
+	 */
+	
+	default boolean autosave() {
+		return false;
+	}
 
 }
