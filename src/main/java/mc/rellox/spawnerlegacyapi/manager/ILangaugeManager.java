@@ -7,6 +7,24 @@ import mc.rellox.spawnerlegacyapi.text.content.IContent;
 public interface ILangaugeManager {
 	
 	/**
+	 * Caches text contents.
+	 * 
+	 * @param key
+	 * @param contents
+	 */
+	
+	void add(String key, List<IContent> contents);
+	
+	/**
+	 * Caches text contents.
+	 * 
+	 * @param key - key
+	 * @param contents - text content array
+	 */
+	
+	void add(String key, IContent... contents);
+	
+	/**
 	 * @param key - key
 	 * @return Single content or {@link IContent#empty} if not found
 	 */
@@ -56,10 +74,10 @@ public interface ILangaugeManager {
 	
 	/**
 	 * @param key - key
-	 * @param text - default content
+	 * @param def - default content
 	 * @return Single content or default if not found
 	 */
 	
-	IContent or(String key, IContent text);
+	IContent or(String key, IContent def);
 
 }
