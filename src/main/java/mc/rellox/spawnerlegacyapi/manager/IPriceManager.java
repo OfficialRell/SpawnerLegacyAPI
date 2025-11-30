@@ -4,6 +4,8 @@ import java.util.function.Consumer;
 
 import mc.rellox.spawnerlegacyapi.price.Group;
 import mc.rellox.spawnerlegacyapi.price.IPrice;
+import mc.rellox.spawnerlegacyapi.price.IPriceSupplier;
+import mc.rellox.spawnerlegacyapi.price.PriceType;
 
 public interface IPriceManager {
 	
@@ -36,17 +38,24 @@ public interface IPriceManager {
 
 	/**
 	 * @param key - key
-	 * @return Price provider or {@code null}
+	 * @return Price supplier or {@code null}
 	 */
 	
-	IPriceProvider of(String key);
+	IPriceSupplier of(String key);
 
 	/**
 	 * @param group - group
-	 * @return Price provider, never {@code null}
+	 * @return Price supplier, never {@code null}
 	 */
 	
-	IPriceProvider of(Group group);
+	IPriceSupplier of(Group group);
+	
+	/**
+	 * @param type - price type
+	 * @return Price supplier or {@code null}
+	 */
+	
+	IPriceSupplier of(PriceType type);
 
 	/**
 	 * @param group - group
@@ -56,8 +65,14 @@ public interface IPriceManager {
 	
 	IPrice price(Group group, double value);
 
+	/**
+	 * Use {@link IPriceSupplier} instead.
+	 */
+	
+	@Deprecated(since = "1.4.12", forRemoval = true)
 	public static interface IPriceProvider {
 
+		@Deprecated(since = "1.4.12", forRemoval = true)
 		IPrice of(double value);
 
 	}
