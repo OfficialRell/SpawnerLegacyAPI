@@ -1,5 +1,7 @@
 package mc.rellox.spawnerlegacyapi.price;
 
+import java.util.UUID;
+
 import org.bukkit.entity.Player;
 
 import mc.rellox.spawnerlegacyapi.manager.IPriceManager.IPriceProvider;
@@ -23,5 +25,12 @@ public interface IPriceSupplier extends IPriceProvider {
 	 */
 	
 	double balance(Player player);
+	
+	/**
+	 * @param id - player id
+	 * @return Player balance or -1 if cannot be determined
+	 */
+	
+	double balance(UUID id);
 
 }

@@ -1,5 +1,6 @@
 package mc.rellox.spawnerlegacyapi.price;
 
+import java.util.UUID;
 import java.util.function.DoubleUnaryOperator;
 
 import org.bukkit.entity.Player;
@@ -32,6 +33,13 @@ public interface IPrice {
 	 */
 	
 	int balance(Player player);
+	
+	/**
+	 * @param id - player id
+	 * @return The balance the player has or -1 if cannot be determined
+	 */
+	
+	int balance(UUID id);
 	
 	/**
 	 * @param player - player
