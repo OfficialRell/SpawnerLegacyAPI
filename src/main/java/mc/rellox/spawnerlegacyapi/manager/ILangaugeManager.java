@@ -9,8 +9,8 @@ public interface ILangaugeManager {
 	/**
 	 * Caches text contents.
 	 * 
-	 * @param key
-	 * @param contents
+	 * @param key - key
+	 * @param contents - text content list
 	 */
 	
 	void add(String key, List<IContent> contents);
