@@ -8,7 +8,6 @@ import org.bukkit.inventory.ItemStack;
 
 import mc.rellox.spawnerlegacyapi.configuration.IFile;
 import mc.rellox.spawnerlegacyapi.spawner.meta.IDisplay;
-import mc.rellox.spawnerlegacyapi.text.content.KeyedContent;
 import mc.rellox.spawnerlegacyapi.utility.Calculate;
 import mc.rellox.spawnerlegacyapi.utility.ISave;
 
@@ -66,7 +65,8 @@ public interface IItemData extends ISave, IDisplay {
 	
 	@Override
 	default void save(IFile file, String path) {
-		if(display() instanceof KeyedContent keyed) file.set(path + "." + id() + ".display-name", keyed.key());
+		var key = display().key();
+		if(key != null) file.set(path + "." + id() + ".display-name", key);
 		file.set(path + "." + id() + ".display-inside", inside().id());
 		items().forEach(item -> item.save(file, path + "." + id() + ".list"));
 	}

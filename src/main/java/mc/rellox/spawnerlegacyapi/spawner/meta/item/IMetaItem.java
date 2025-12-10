@@ -2,6 +2,7 @@ package mc.rellox.spawnerlegacyapi.spawner.meta.item;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -11,7 +12,6 @@ import org.bukkit.inventory.ItemStack;
 import mc.rellox.spawnerlegacyapi.configuration.IFile;
 import mc.rellox.spawnerlegacyapi.item.builder.ItemBuilder;
 import mc.rellox.spawnerlegacyapi.text.content.IContent;
-import mc.rellox.spawnerlegacyapi.text.content.KeyedContent;
 import mc.rellox.spawnerlegacyapi.utility.ISave;
 
 public interface IMetaItem extends ISave {
@@ -79,10 +79,10 @@ public interface IMetaItem extends ISave {
 	default void save(IFile file, String p) {
 		String path = p + "." + id();
 		file.set(path + ".material", material().name());
-		if(name() != null) file.set(path + ".name", ((KeyedContent) name()).key());
+		if(name() != null) file.set(path + ".name", name().key());
 		if(!lore().isEmpty()) file.set(path + ".lore", lore().stream()
-				.map(KeyedContent.class::cast)
-				.map(KeyedContent::key)
+				.map(IContent::key)
+				.filter(Objects::nonNull)
 				.toList());
 		if(!enchantments().isEmpty()) {
 			enchantments().forEach((e, i) -> {

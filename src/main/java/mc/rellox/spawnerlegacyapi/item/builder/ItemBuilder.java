@@ -38,7 +38,7 @@ import mc.rellox.spawnerlegacyapi.registry.KeyType;
 import mc.rellox.spawnerlegacyapi.registry.Keys;
 import mc.rellox.spawnerlegacyapi.text.Text;
 import mc.rellox.spawnerlegacyapi.text.content.IContent;
-import mc.rellox.spawnerlegacyapi.text.content.IContent.Variables;
+import mc.rellox.spawnerlegacyapi.text.content.variable.IVariables;
 import mc.rellox.spawnerlegacyapi.utility.Calculate;
 import mc.rellox.spawnerlegacyapi.utility.Utility;
 import mc.rellox.spawnerlegacyapi.utility.reflect.Reflect.RF;
@@ -623,14 +623,14 @@ public final class ItemBuilder {
 			this.replace = new ArrayList<>();
 		}
 		
-		public void replace(String var, IContent c) {
-			replace.add(var);
-			replace.add(c);
+		public void replace(String variable, IContent content) {
+			replace.add(variable);
+			replace.add(content);
 		}
 		
 		private void modify(ItemMeta meta) {
-			Variables vars = replace.isEmpty()
-					? Variables.empty : Variables.with(replace.toArray());
+			IVariables vars = replace.isEmpty()
+					? IVariables.empty : IVariables.with(replace.toArray());
 			if(name != null) meta.setDisplayName(name.text(vars));
 			List<String> previous = meta.getLore();
 			if(!lore.isEmpty()) {
