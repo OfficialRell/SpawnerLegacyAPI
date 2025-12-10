@@ -12,28 +12,90 @@ public final class Calculate {
 		return (double) (i / 100.0);
 	}
 	
-	public static boolean isInteger(String s) {
+	public static IInteger toInteger(String s) {
+		return toInteger(s, 10);
+	}
+	
+	public static IInteger toHex(String s) {
+		return toInteger(s, 16);
+	}
+	
+	public static IInteger toInteger(String s, int radix) {
 		try {
-			Integer.parseInt(s);
-			return true;
-		} catch(Exception e) {
-			return false;
+			int i = Integer.parseInt(s, radix);
+			return new IInteger() {
+				@Override
+				public boolean invalid() {return false;}
+				@Override
+				public String input() {return s;}
+				@Override
+				public int get() {return i;}
+			};
+		} catch (Exception e) {
+			return new IInteger() {
+				@Override
+				public int get() {throw new NumberFormatException(s + " is not an integer");}
+				@Override
+				public boolean invalid() {return true;}
+				@Override
+				public String input() {return s;}
+			};
 		}
 	}
 
-	public static boolean isDouble(String s) {
+	public static interface INumber {
+		
+		String input();
+		
+		boolean invalid();
+		
+		default boolean valid() {
+			return !invalid();
+		}
+		
+	}
+
+	public static interface IInteger extends INumber {
+		
+		int get();
+		
+		default int get(int d) {
+			return invalid() ? d : get();
+		}
+		
+	}
+	
+	public static IDouble toDouble(String s) {
 		try {
-			Double.parseDouble(s);
-			return true;
-		} catch(Exception e) {
-			return false;
+			double i = Double.parseDouble(s);
+			return new IDouble() {
+				@Override
+				public boolean invalid() {return false;}
+				@Override
+				public String input() {return s;}
+				@Override
+				public double get() {return i;}
+			};
+		} catch (Exception e) {
+			return new IDouble() {
+				@Override
+				public double get() {throw new NumberFormatException(s + " is not a double");}
+				@Override
+				public boolean invalid() {return true;}
+				@Override
+				public String input() {return s;}
+			};
 		}
 	}
 
-	public static boolean isInteger(String... l) {
-		if(l == null) return false;
-		for(String s : l) if(!isInteger(s)) return false;
-		return true;
+	public static interface IDouble extends INumber {
+		
+		double get();
+		
+		default double get(double d) {
+			return invalid() ? d : get();
+		}
+		
 	}
 	
 	public static boolean chance(double chance) {
