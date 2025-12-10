@@ -16,11 +16,11 @@ import mc.rellox.spawnerlegacyapi.version.Version.VersionType;
 
 public final class Utility {
 	
-	private static final Pattern uuid_validation =
+	private static final Pattern PATTERN_UUID =
 			Pattern.compile("[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}");
 	
-	public static boolean isUUID(String s) {
-		return uuid_validation.matcher(s).matches();
+	public static boolean isUUID(String input) {
+		return PATTERN_UUID.matcher(input).matches();
 	}
 	
 	public static boolean op(Player player) {
