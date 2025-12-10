@@ -14,8 +14,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 
-import mc.rellox.spawnerlegacyapi.text.content.IColorer.Colors;
 import mc.rellox.spawnerlegacyapi.text.content.IContent;
+import mc.rellox.spawnerlegacyapi.text.content.color.IColorer.Colors;
 import mc.rellox.spawnerlegacyapi.utility.reflect.Reflect.RF;
 import mc.rellox.spawnerlegacyapi.version.Version;
 import mc.rellox.spawnerlegacyapi.version.Version.VersionType;
@@ -156,9 +156,10 @@ public final class Text {
 
 	public static String color(String hex) {
 		if(hex.charAt(0) == '#') hex = hex.substring(1);
-		String s = color_char + "x";
-		for(char c : hex.toCharArray()) s += color_char + "" + c;
-		return s;
+		StringBuilder s = new StringBuilder();
+		s.append(color_char).append("x");
+		for(char c : hex.toCharArray()) s.append(color_char).append(c);
+		return s.toString();
 	}
 	
 	public static String color(int rgb) {
@@ -206,10 +207,20 @@ public final class Text {
 	}
 	
 	private static String upper(String s) {
-		if(s == null) return "";
-		if(s.isEmpty()) return "";
+		if(s == null || s.isEmpty()) return "";
 		return Character.toUpperCase(s.charAt(0))
 				+ s.substring(1).toLowerCase();
+	}
+	
+	public static String unicode(String code) {
+		try {
+			var number = code.substring(2); // skip "u+"
+			var value = Integer.parseInt(number, 16);
+			return String.valueOf(Character.toChars(value));
+		} catch (Exception e) {
+			RF.debug(e);
+		}
+		return code;
 	}
 	
 	public static List<String> clean(List<String> list) {

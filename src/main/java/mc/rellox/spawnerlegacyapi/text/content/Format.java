@@ -14,6 +14,7 @@ public record Format(String format) {
 	public static final Format underline = new Format(Text.color_char + "n");
 	public static final Format strikethrough = new Format(Text.color_char + "m");
 	public static final Format obfuscated = new Format(Text.color_char + "k");
+	public static final Format reset = new Format(Text.color_char + "r");
 	
 	public static Format of(Format... fs) {
 		return new Format(Stream.of(fs)

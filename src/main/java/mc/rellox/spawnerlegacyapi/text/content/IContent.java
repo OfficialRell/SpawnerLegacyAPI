@@ -2,23 +2,40 @@ package mc.rellox.spawnerlegacyapi.text.content;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import mc.rellox.spawnerlegacyapi.price.IPrice;
-import mc.rellox.spawnerlegacyapi.spawner.type.SpawnerType;
-import mc.rellox.spawnerlegacyapi.text.content.IColorer.Colors;
+import mc.rellox.spawnerlegacyapi.text.content.color.IColorer;
+import mc.rellox.spawnerlegacyapi.text.content.color.IColorer.Colors;
+import mc.rellox.spawnerlegacyapi.text.content.type.ContentColored;
+import mc.rellox.spawnerlegacyapi.text.content.type.ContentEmpty;
+import mc.rellox.spawnerlegacyapi.text.content.type.ContentKeyed;
+import mc.rellox.spawnerlegacyapi.text.content.type.ContentList;
+import mc.rellox.spawnerlegacyapi.text.content.type.ContentUnicode;
+import mc.rellox.spawnerlegacyapi.text.content.type.ContentVariable;
+import mc.rellox.spawnerlegacyapi.text.content.type.ContentWrapped;
+import mc.rellox.spawnerlegacyapi.text.content.unicode.IUnicode;
+import mc.rellox.spawnerlegacyapi.text.content.variable.IVariable;
+import mc.rellox.spawnerlegacyapi.text.content.variable.IVariables;
 
 public interface IContent {
+	
+	// Parse
+	
+	static IContent parse(String text) {
+		return ContentParser.parse(text);
+	}
+	
+	static List<IContent> parse(List<String> list) {
+		return ContentParser.parse(list);
+	}
 	
 	// Statics
 	
 	static IContent empty() {
-		return EmptyContent.empty;
+		return ContentEmpty.empty;
 	}
 	
 	static IContent empty(int e) {
@@ -31,19 +48,15 @@ public interface IContent {
 	}
 	
 	static IContent of(List<IContent> list) {
-		return wrap(v -> list.stream()
-				.map(c -> c.text(v))
-				.collect(Collectors.joining()));
+		return new ContentList(list);
 	}
 	
 	static IContent of(IContent... cs) {
-		return wrap(v -> Stream.of(cs)
-				.map(c -> c.text(v))
-				.collect(Collectors.joining()));
+		return new ContentList(cs);
 	}
 	
 	static IContent of(IColorer colorer, IContent content) {
-		return new ContentText(colorer, content);
+		return new ContentColored(content, colorer);
 	}
 	
 	static IContent of(String text) {
@@ -56,8 +69,12 @@ public interface IContent {
 		return wrap(v -> text);
 	}
 	
-	static IContent of(Variable variable) {
-		return new ContentVariable(variable.key);
+	static IContent of(IVariable variable) {
+		return new ContentVariable(variable);
+	}
+	
+	static IContent of(IUnicode unicode) {
+		return new ContentUnicode(unicode);
 	}
 	
 	static IContent of(int rgb, Object o) {
@@ -89,30 +106,7 @@ public interface IContent {
 	}
 	
 	private static IContent wrap(IContent content) {
-		return new WrappedContent(content);
-	}
-	
-	class EmptyContent implements IContent {
-		private static final EmptyContent empty = new EmptyContent(); 
-		@Override
-		public String text(Variables variables) {
-			return "";
-		}
-		@Override
-		public String toString() {
-			return "";
-		}
-	}
-	
-	record WrappedContent(IContent content) implements IContent {
-		@Override
-		public String text(Variables variables) {
-			return content.text(variables);
-		}
-		@Override
-		public String toString() {
-			return text();
-		}
+		return new ContentWrapped(content);
 	}
 	
 	// Methods
@@ -122,14 +116,14 @@ public interface IContent {
 	 * @return Final text
 	 */
 	
-	String text(Variables variables);
+	String text(IVariables variables);
 	
 	/**
 	 * @return Final text
 	 */
 	
 	default String text() {
-		return text(Variables.empty);
+		return text(IVariables.empty);
 	}
 	
 	/**
@@ -137,8 +131,16 @@ public interface IContent {
 	 * @return Content with variables
 	 */
 	
-	default IContent modified(Variables variables) {
+	default IContent modified(IVariables variables) {
 		return wrap(v -> text(variables));
+	}
+	
+	/**
+	 * @return Raw text that is not parsed or {@code null} if not applicable
+	 */
+	
+	default String key() {
+		return this instanceof ContentKeyed keyed ? keyed.key() : null;
 	}
 	
 	/**
@@ -146,8 +148,8 @@ public interface IContent {
 	 * @return Keyed content
 	 */
 	
-	default KeyedContent keyed(String key) {
-		return new KeyedContent(key, this);
+	default ContentKeyed keyed(String key) {
+		return new ContentKeyed(key, this);
 	}
 	
 	/**
@@ -183,68 +185,6 @@ public interface IContent {
 		String text = text();
 		if(text == null || text.isEmpty()) return;
 		sender.sendMessage(text);
-	}
-	
-	// Classes
-	
-	interface Variables {
-		
-		static final Variables empty = k -> k;
-		
-		static Variables with(String k, Object o) {
-			return v -> v.equals(k) ? convert(o) : v;
-		}
-		
-		static Variables with(Object... vs) {
-			if(vs.length == 2) return v -> v.equals(vs[0]) ? convert(vs[1]) : v;
-			return v -> {
-				int i = 0, m = vs.length;
-				do {
-					if(v.equals(vs[i]))
-						return convert(vs[i + 1]);
-				} while((i += 2) < m);
-				return v;
-			};
-		}
-		
-		String get(String key);
-		
-		private static String convert(Object object) {
-			if(object instanceof IContent content) return content.text();
-			if(object instanceof SpawnerType type) return type.formatted().text();
-			if(object instanceof IPrice price) return price.text().text();
-			if(object instanceof Enum<?> enum_) return enum_.name();
-			return object.toString();
-		}
-		
-	}
-	
-	record Variable(String key) {
-		public static Variable of(String key) {
-			return new Variable(key);
-		}
-	}
-	
-	record ContentText(IColorer colorer, IContent content) implements IContent {
-		@Override
-		public String text(Variables variables) {
-			return colorer.color(content.text(variables));
-		}
-		@Override
-		public String toString() {
-			return text();
-		}
-	}
-	
-	record ContentVariable(String key) implements IContent {
-		@Override
-		public String text(Variables variables) {
-			return variables.get(key);
-		}
-		@Override
-		public String toString() {
-			return text();
-		}
 	}
 
 }
