@@ -139,14 +139,14 @@ public interface Accessor<R> {
 	}
 
 	private static Field field(Class<?> clazz, String name, boolean warn) {
-		Field f = field0(clazz, name);
-		if(f != null) return f;
+		Field field = field0(clazz, name);
+		if(field != null) return field;
 		RF.debug(new NoSuchFieldException("No such field with name: " + name), warn);
 		return null;
 	}
 	
 	private static Field field0(Class<?> clazz, String name) {
-		if(clazz.equals(Object.class)
+		if(clazz == null || clazz.equals(Object.class)
 				|| clazz.getName().equals("java.lang.Object"))
 			return null;
 		try {
@@ -158,19 +158,19 @@ public interface Accessor<R> {
 		return field0(clazz.getSuperclass(), name);
 	}
 	
-	private static Set<Field> fields(Class<?> c) {
+	private static Set<Field> fields(Class<?> clazz) {
 		Set<Field> set = new HashSet<>();
-		fields0(set, c);
+		fields0(set, clazz);
 		return set;
 	}
 	
-	private static void fields0(Set<Field> set, Class<?> c) {
-		if(c.equals(Object.class)
-				|| c.getName().equals("java.lang.Object"))
+	private static void fields0(Set<Field> set, Class<?> clazz) {
+		if(clazz == null || clazz.equals(Object.class)
+				|| clazz.getName().equals("java.lang.Object"))
 			return;
-		Stream.of(c.getFields()).forEach(set::add);
-		Stream.of(c.getDeclaredFields()).forEach(set::add);
-		fields0(set, c.getSuperclass());
+		Stream.of(clazz.getFields()).forEach(set::add);
+		Stream.of(clazz.getDeclaredFields()).forEach(set::add);
+		fields0(set, clazz.getSuperclass());
 	}
 
 }
