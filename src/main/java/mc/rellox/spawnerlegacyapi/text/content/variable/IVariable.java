@@ -8,7 +8,8 @@ import mc.rellox.spawnerlegacyapi.utility.Calculate;
 public interface IVariable {
 	
 	static IVariable of(String input) {
-		if(!input.contains(":")) new VariableImpl(input);
+		if(!input.contains(":")) return new VariableImpl(input);
+		
 		try {
 			var split = input.split(":");
 			String key = split[0], suffix = split[1];
