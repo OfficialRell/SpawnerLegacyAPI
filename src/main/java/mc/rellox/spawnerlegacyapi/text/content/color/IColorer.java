@@ -33,7 +33,16 @@ public interface IColorer {
 		return new ColorerImpl("", Format.reset);
 	}
 	
+	/**
+	 * @param text - input text
+	 * @return colored text
+	 */
+	
 	String color(String text);
+	
+	/**
+	 * @return format of the colorer
+	 */
 	
 	Format format();
 	

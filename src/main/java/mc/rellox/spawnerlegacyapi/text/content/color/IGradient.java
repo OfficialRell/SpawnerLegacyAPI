@@ -12,8 +12,10 @@ public interface IGradient extends IColorer {
 		return new GradientImpl(colors, format);
 	}
 	
-	Colors colors();
+	/**
+	 * @return The colors used in this gradient
+	 */
 	
-	Format format();
+	Colors colors();
 
 }

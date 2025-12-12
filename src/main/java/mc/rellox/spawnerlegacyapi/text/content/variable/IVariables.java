@@ -20,12 +20,26 @@ public interface IVariables {
 		return () -> vs;
 	}
 	
+	/**
+	 * @return An array of key-value pairs representing the variables
+	 */
+	
 	Object[] variables();
+	
+	/**
+	 * @param variable - variable to get the value for
+	 * @return The value associated with the given variable, or {@code null} if not found
+	 */
 	
 	default String get(IVariable variable) {
 		if(variable == null) return null;
 		return get(variable.key());
 	}
+	
+	/**
+	 * @param key - key of the variable to get the value for
+	 * @return The value associated with the given key, or {@code null} if not found
+	 */
 	
 	default String get(String key) {
 		Object[] vars = variables();
@@ -37,6 +51,11 @@ public interface IVariables {
 		} while((i += 2) < m);
 		return null;
 	}
+	
+	/**
+	 * @param other - other variables to combine with this
+	 * @return A new IVariables instance containing variables from both this and the other
+	 */
 	
 	default IVariables combine(IVariables other) {
 		if(other == null || other.variables() == null) return this;
