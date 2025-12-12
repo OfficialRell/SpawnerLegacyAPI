@@ -9,7 +9,7 @@ public record ContentVariable(IVariable variable) implements IContent {
 	@Override
 	public String text(IVariables variables) {
 		var string = variables.get(variable);
-		if(string.isEmpty() || variable.key().equals(string))
+		if(string == null || string.isEmpty() || variable.key().equals(string))
 			return variable.key();
 		return variable.map(string);
 	}
