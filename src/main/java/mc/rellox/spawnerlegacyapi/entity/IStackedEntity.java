@@ -39,6 +39,13 @@ public interface IStackedEntity {
 	boolean exists();
 	
 	/**
+	 * @param other - other entity
+	 * @return {@code true} if this entity can stack with the other entity
+	 */
+	
+	boolean stackable(LivingEntity other);
+	
+	/**
 	 * @return Current entity stack size
 	 */
 	
@@ -152,5 +159,16 @@ public interface IStackedEntity {
 	default void clear() {
 		clear(true);
 	}
+	
+	/**
+	 * Creates a copy of this stacked entity with the new entity and size.
+	 * 
+	 * @param next - next entity
+	 * @param size - size
+	 * @param update - should update
+	 * @return A copy of this stacked entity with the new entity and size
+	 */
+	
+	IStackedEntity copy(LivingEntity next, int size, boolean update);
 
 }
