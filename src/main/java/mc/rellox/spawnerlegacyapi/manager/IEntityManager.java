@@ -12,6 +12,8 @@ import org.bukkit.entity.LivingEntity;
 import mc.rellox.spawnerlegacyapi.entity.IEntityWorld;
 import mc.rellox.spawnerlegacyapi.entity.IStackedEntity;
 import mc.rellox.spawnerlegacyapi.entity.state.IEntityState;
+import mc.rellox.spawnerlegacyapi.entity.state.IStates;
+import mc.rellox.spawnerlegacyapi.spawner.IGenerator;
 import mc.rellox.spawnerlegacyapi.spawner.type.SpawnerType;
 
 public interface IEntityManager {
@@ -44,6 +46,79 @@ public interface IEntityManager {
 	 */
 	
 	IStackedEntity get(LivingEntity living);
+	
+	/**
+	 * Spawns a new stacked entity and applies any generator upgrade values (xp, drops).
+	 * 
+	 * @param generator - spawner generator
+	 * @param type - spawner type
+	 * @param location - spawn location
+	 * @return Newly spawned stacked entity or {@code null} if spawn failed
+	 */
+	
+	IStackedEntity spawn(IGenerator generator, SpawnerType type, Location location);
+	
+	/**
+	 * Spawns a new stacked entity and applies any generator upgrade values (xp, drops).
+	 * 
+	 * @param generator - spawner generator
+	 * @param type - spawner type
+	 * @param location - spawn location
+	 * @param states - entity states to apply
+	 * @return Newly spawned stacked entity or {@code null} if spawn failed
+	 */
+	
+	IStackedEntity spawn(IGenerator generator, SpawnerType type, Location location,
+			Set<IEntityState> states);
+	
+	/**
+	 * Spawns a new stacked entity and applies any generator upgrade values (xp, drops).
+	 * 
+	 * @param generator - spawner generator
+	 * @param type - spawner type
+	 * @param location - spawn location
+	 * @param states - entity states to apply
+	 * @param stack - initial stack size
+	 * @return Newly spawned stacked entity or {@code null} if spawn failed
+	 */
+	
+	IStackedEntity spawn(IGenerator generator, SpawnerType type, Location location,
+			Set<IEntityState> states, int stack);
+	
+	/**
+	 * Spawns a new stacked entity.
+	 * 
+	 * @param type - spawner type
+	 * @param location - spawn location
+	 * @return Newly spawned stacked entity or {@code null} if spawn failed
+	 */
+	
+	IStackedEntity spawn(SpawnerType type, Location location);
+	
+	/**
+	 * Spawns a new stacked entity.
+	 * 
+	 * @param type - spawner type
+	 * @param location - spawn location
+	 * @param states - entity states to apply
+	 * @return Newly spawned stacked entity or {@code null} if spawn failed
+	 */
+	
+	IStackedEntity spawn(SpawnerType type, Location location,
+			Set<IEntityState> states);
+	
+	/**
+	 * Spawns a new stacked entity.
+	 * 
+	 * @param type - spawner type
+	 * @param location - spawn location
+	 * @param states - entity states to apply
+	 * @param stack - initial stack size
+	 * @return Newly spawned stacked entity or {@code null} if spawn failed
+	 */
+	
+	IStackedEntity spawn(SpawnerType type, Location location,
+			Set<IEntityState> states, int stack);
 	
 	/**
 	 * @param location - center location
@@ -117,11 +192,10 @@ public interface IEntityManager {
 	void transfer(LivingEntity from, LivingEntity to);
 	
 	/**
-	 * @param size - slime size
-	 * @return New entity state for slime size
+	 * @return Entity states manager
 	 */
 	
-	IEntityState stateSlimeSize(int size);
+	IStates states();
 	
 	/**
 	 * @param type - type to match
@@ -138,11 +212,44 @@ public interface IEntityManager {
 	 *  matches with the state
 	 */
 	
-	static Predicate<IStackedEntity> stackable(IEntityState state) {
-		return entity -> entity.stackable(state);
+	static Predicate<IStackedEntity> matching(IEntityState state) {
+		return entity -> entity.matching(state);
 	}
 	
 	/**
+	 * @param states - entity states
+	 * @return Entity filter that check if the entity
+	 *  matches with all states
+	 */
+	
+	static Predicate<IStackedEntity> matching(IEntityState... states) {
+		return entity -> entity.matching(states);
+	}
+	
+	/**
+	 * @param states - entity states
+	 * @return Entity filter that check if the entity
+	 *  matches with all states
+	 */
+	
+	static Predicate<IStackedEntity> matching(Set<IEntityState> states) {
+		return entity -> entity.matching(states);
+	}
+	
+	/**
+	 * @param other - other stacked entity
+	 * @return Entity filter that check if the entity
+	 *  matches with the other stacked entity
+	 */
+	
+	static Predicate<IStackedEntity> matching(IStackedEntity other) {
+		var states = other.states(); // cache states once
+		return matching(states);
+	}
+	
+	/**
+	 * Checks if type and states are matching.
+	 * 
 	 * @param other - other entity
 	 * @return Entity filter that check if the entity
 	 *  can stack with the other entity
@@ -153,6 +260,8 @@ public interface IEntityManager {
 	}
 	
 	/**
+	 * Checks if type and states are matching.
+	 * 
 	 * @param other - other stacked entity
 	 * @return Entity filter that check if the entity
 	 *  can stack with the other stacked entity

@@ -1,5 +1,7 @@
 package mc.rellox.spawnerlegacyapi.entity;
 
+import java.util.Set;
+
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.LivingEntity;
@@ -56,12 +58,44 @@ public interface IStackedEntity {
 	boolean stackable(LivingEntity other);
 	
 	/**
+	 * @return Set of all states that this entity has
+	 */
+	
+	Set<IEntityState> states();
+	
+	/**
 	 * @param state - entity state
 	 * @return {@code true} if this entity matches with the state
 	 */
 	
-	default boolean stackable(IEntityState state) {
+	default boolean matching(IEntityState state) {
 		return state.match(this);
+	}
+	
+	/**
+	 * @param states - entity states
+	 * @return {@code true} if this entity matches with all states
+	 */
+	
+	default boolean matching(IEntityState... states) {
+		for(IEntityState state : states)
+			if(!matching(state)) return false;
+		return true;
+	}
+
+	/**
+	 * @param states - entity states
+	 * @return {@code true} if this entity matches with all states
+	 */
+	
+	default boolean matching(Set<IEntityState> states) {
+		for(IEntityState state : states)
+			if(!matching(state)) return false;
+		return true;
+	}
+	
+	default boolean matching(IStackedEntity other) {
+		return matching(other.states());
 	}
 	
 	/**
