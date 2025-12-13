@@ -263,7 +263,7 @@ public final class ItemBuilder {
 	 */
 	
 	public ItemBuilder hidden() {
-		if(Version.version != null && !Version.version.high(VersionType.v_20_4)) return this;
+		if(Version.version != null && !Version.version.atleast(VersionType.v_20_4)) return this;
 		return modify(meta -> {
 			RF.order(meta, "setHideTooltip", boolean.class).invoke(true);
 		});

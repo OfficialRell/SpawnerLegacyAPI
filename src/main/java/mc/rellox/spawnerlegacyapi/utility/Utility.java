@@ -55,7 +55,7 @@ public final class Utility {
 	public static final Attribute attribute_speed = RF.fielded(Attribute.class, "GENERIC_MOVEMENT_SPEED", "MOVEMENT_SPEED");
 
 	public static boolean isWindCharge(Entity entity) {
-		if(!Version.version.high(VersionType.v_21_1)) return false;
+		if(!Version.version.atleast(VersionType.v_21_1)) return false;
 		return switch (entity.getType().name()) {
 		case "WIND_CHARGE", "BREEZE_WIND_CHARGE" -> true;
 		default -> false;

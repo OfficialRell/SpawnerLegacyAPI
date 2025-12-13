@@ -69,7 +69,7 @@ public final class ItemUtility {
 	
 	@SuppressWarnings("deprecation")
 	public static void glint(ItemMeta meta) {
-		if(Version.version.high(VersionType.v_20_4)) {
+		if(Version.version.atleast(VersionType.v_20_4)) {
 			RF.order(meta, "setEnchantmentGlintOverride", Boolean.class).invoke(true);
 		} else {
 			meta.addEnchant(Enchantment.getByKey(NamespacedKey.minecraft("power")), 0, true);

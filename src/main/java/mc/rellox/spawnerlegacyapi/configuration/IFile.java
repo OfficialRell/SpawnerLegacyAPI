@@ -177,7 +177,7 @@ public interface IFile extends IFileValues {
 	
 	default void header(String... header) {
 		FileConfigurationOptions o = file().options();
-		if(Version.version.high(VersionType.v_18_1)) {
+		if(Version.version.atleast(VersionType.v_18_1)) {
 			RF.order(o, "setHeader", List.class).invoke(List.of(header));
 			RF.order(o, "parseComments", boolean.class).invoke(true);
 		} else {
@@ -191,7 +191,7 @@ public interface IFile extends IFileValues {
 	 */
 	
 	default Commenter commenter() {
-		return Version.version.high(VersionType.v_18_1)
+		return Version.version.atleast(VersionType.v_18_1)
 				? new Commenter(this) : null;
 	}
 	

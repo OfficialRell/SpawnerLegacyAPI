@@ -68,14 +68,17 @@ public final class Version {
 		v_20_1, v_20_2, v_20_3, v_20_4,
 		v_21_1, v_21_2, v_21_3, v_21_4, v_21_5, v_21_6;
 		
-		public boolean high(VersionType type) {
+		public boolean atleast(VersionType type) {
 			return ordinal() >= type.ordinal();
 		}
 		
+		@Deprecated(since = "1.4.18", forRemoval = true)
+		public boolean high(VersionType type) {
+			return atleast(type);
+		}
+		
 		private IVersion build() {
-			return RF.build(
-					RF.get("mc.rellox.spawnerlegacy.version.IVersion1"
-			+ name().substring(1)))
+			return RF.build("mc.rellox.spawnerlegacy.version.IVersion1" + name().substring(1))
 					.as(IVersion.class)
 					.instance();
 		}
