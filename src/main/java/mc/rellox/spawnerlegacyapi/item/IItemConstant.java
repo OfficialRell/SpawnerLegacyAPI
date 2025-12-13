@@ -7,7 +7,6 @@ import org.bukkit.Material;
 import mc.rellox.spawnerlegacyapi.configuration.IFile;
 import mc.rellox.spawnerlegacyapi.item.builder.ItemBuilder;
 import mc.rellox.spawnerlegacyapi.text.Text;
-import mc.rellox.spawnerlegacyapi.text.content.ContentParser;
 import mc.rellox.spawnerlegacyapi.text.content.IContent;
 
 public interface IItemConstant {
@@ -19,8 +18,8 @@ public interface IItemConstant {
 			return null;
 		}
 		boolean glint = file.getBoolean(path + ".glint");
-		IContent name = ContentParser.parse(file.getString(path + ".name"));
-		List<IContent> lore = ContentParser.parse(file.getStringOrStrings(path + ".lore"));
+		IContent name = IContent.parse(file.getString(path + ".name"));
+		List<IContent> lore = IContent.parse(file.getStringOrStrings(path + ".lore"));
 		int model = file.getInteger(path + ".model");
 		return new IItemConstant() {
 			@Override
