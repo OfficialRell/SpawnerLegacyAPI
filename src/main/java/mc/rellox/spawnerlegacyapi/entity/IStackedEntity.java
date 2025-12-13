@@ -4,6 +4,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.LivingEntity;
 
+import mc.rellox.spawnerlegacyapi.entity.state.IEntityState;
 import mc.rellox.spawnerlegacyapi.spawner.type.SpawnerType;
 
 public interface IStackedEntity {
@@ -39,11 +40,29 @@ public interface IStackedEntity {
 	boolean exists();
 	
 	/**
+	 * @param other - other stacked entity
+	 * @return {@code true} if this entity can stack with the other stacked entity
+	 */
+	
+	default boolean stackable(IStackedEntity other) {
+		return stackable(other.entity());
+	}
+	
+	/**
 	 * @param other - other entity
 	 * @return {@code true} if this entity can stack with the other entity
 	 */
 	
 	boolean stackable(LivingEntity other);
+	
+	/**
+	 * @param state - entity state
+	 * @return {@code true} if this entity matches with the state
+	 */
+	
+	default boolean stackable(IEntityState state) {
+		return state.match(this);
+	}
 	
 	/**
 	 * @return Current entity stack size
