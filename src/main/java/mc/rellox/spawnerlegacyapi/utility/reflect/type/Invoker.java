@@ -1,6 +1,10 @@
 package mc.rellox.spawnerlegacyapi.utility.reflect.type;
 
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.MethodType;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -93,14 +97,45 @@ public interface Invoker<T> {
 		} catch (Exception e) {
 			RF.debug(e, warn);
 		}
+
+		MethodHandle fast_handle = null;
+		try {
+			MethodHandles.Lookup lookup = MethodHandles.lookup();
+			MethodHandle method_handle = lookup.unreflect(method);
+
+			int param_count = method.getParameterCount();
+
+			method_handle = method_handle.asSpreader(Object[].class, param_count);
+
+			boolean is_static = Modifier.isStatic(method.getModifiers());
+			if(is_static) {
+				method_handle = MethodHandles.dropArguments(method_handle, 0, Object.class);
+			}
+
+			method_handle = method_handle.asType(MethodType.methodType(Object.class, Object.class, Object[].class));
+
+			fast_handle = method_handle;
+		} catch (Throwable t) {
+			fast_handle = null;
+		}
+		
+		final MethodHandle method_handle = fast_handle;
+
 		return new Invoker<>() {
 			@Override
 			public R invoke(Object... os) {
 				return objected(object, os);
 			}
+
 			@SuppressWarnings("unchecked")
 			@Override
 			public R objected(Object object, Object... os) {
+				if(method_handle != null) {
+					try {
+						return (R) method_handle.invokeExact(object, os);
+					} catch (Throwable t) {}
+				}
+
 				try {
 					return (R) method.invoke(object, os);
 				} catch (Exception e) {
@@ -108,14 +143,17 @@ public interface Invoker<T> {
 				}
 				return null;
 			}
+
 			@Override
 			public String name() {
 				return method.getName();
 			}
+
 			@Override
 			public Class<?>[] parameters() {
 				return params;
 			}
+
 			@Override
 			public Class<?> returns() {
 				return method.getReturnType();
