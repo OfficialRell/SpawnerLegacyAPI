@@ -166,16 +166,23 @@ public final class Text {
 		return color(String.format("%06x", rgb));
 	}
 	
+	private static final char[] HEX = "0123456789abcdef".toCharArray();
+
 	public static String colorFast(int rgb) {
-		String hex = "000000" + Integer.toHexString(rgb);
-		int i = hex.length() - 6;
-		return color_char + "x"
-				+ color_char + hex.charAt(i++)
-				+ color_char + hex.charAt(i++)
-				+ color_char + hex.charAt(i++)
-				+ color_char + hex.charAt(i++)
-				+ color_char + hex.charAt(i++)
-				+ color_char + hex.charAt(i);
+	    int v = rgb & 0xFFFFFF;
+	    char[] out = new char[14];
+	    out[0] = color_char;
+	    out[1] = 'x';
+
+	    int shift = 20;
+	    int pos = 2;
+	    for (int i = 0; i < 6; i++) {
+	        int nibble = (v >> shift) & 0xF;
+	        out[pos++] = color_char;
+	        out[pos++] = HEX[nibble];
+	        shift -= 4;
+	    }
+	    return new String(out);
 	}
 	
 	public static String format(double value, int p) {

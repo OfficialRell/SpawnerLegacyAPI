@@ -13,7 +13,7 @@ public record GradientImpl(Colors colors, Format format) implements IGradient {
 		else {
 			double v = 1.0 / (l - 1);
 			for(int i = 0; i < l; i++)
-				builder.append(Text.color(merge(v * i, colors.rgb())))
+				builder.append(Text.colorFast(merge(v * i, colors.rgb())))
 				.append(format).append(text.charAt(i));
 		}
 		return builder.toString();
