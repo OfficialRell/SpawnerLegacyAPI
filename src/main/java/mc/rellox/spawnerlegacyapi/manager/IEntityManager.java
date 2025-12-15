@@ -77,6 +77,19 @@ public interface IEntityManager {
 	 * @param generator - spawner generator
 	 * @param type - spawner type
 	 * @param location - spawn location
+	 * @param stack - initial stack size
+	 * @return Newly spawned stacked entity or {@code null} if spawn failed
+	 */
+	
+	IStackedEntity spawn(IGenerator generator, SpawnerType type, Location location,
+			int stack);
+	
+	/**
+	 * Spawns a new stacked entity and applies any generator upgrade values (xp, drops).
+	 * 
+	 * @param generator - spawner generator
+	 * @param type - spawner type
+	 * @param location - spawn location
 	 * @param states - entity states to apply
 	 * @param stack - initial stack size
 	 * @return Newly spawned stacked entity or {@code null} if spawn failed
@@ -106,6 +119,17 @@ public interface IEntityManager {
 	
 	IStackedEntity spawn(SpawnerType type, Location location,
 			Set<IEntityState> states);
+	
+	/**
+	 * Spawns a new stacked entity.
+	 * 
+	 * @param type - spawner type
+	 * @param location - spawn location
+	 * @param stack - initial stack size
+	 * @return Newly spawned stacked entity or {@code null} if spawn failed
+	 */
+	
+	IStackedEntity spawn(SpawnerType type, Location location, int stack);
 	
 	/**
 	 * Spawns a new stacked entity.
@@ -166,6 +190,13 @@ public interface IEntityManager {
 	 */
 	
 	void size(LivingEntity entity, int stack);
+	
+	/**
+	 * @param type - spawner type
+	 * @return Stack limit for the type or {@link Integer#MAX_VALUE} if unlimited
+	 */
+	
+	int limit(SpawnerType type);
 	
 	/**
 	 * @param stacked - stacked entity
