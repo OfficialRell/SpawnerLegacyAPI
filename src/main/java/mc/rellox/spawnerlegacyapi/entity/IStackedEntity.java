@@ -58,10 +58,19 @@ public interface IStackedEntity {
 	boolean stackable(LivingEntity other);
 	
 	/**
+	 * @param recache - should recache states
 	 * @return Set of all states that this entity has
 	 */
 	
-	Set<IEntityState> states();
+	Set<IEntityState> states(boolean recache);
+	
+	/**
+	 * @return Set of all states that this entity has
+	 */
+	
+	default Set<IEntityState> states() {
+		return states(false);
+	}
 	
 	/**
 	 * @param state - entity state
@@ -214,12 +223,13 @@ public interface IStackedEntity {
 	}
 	
 	/**
-	 * Creates a copy of this stacked entity with the new entity and size.
+	 * Creates a copy of this stacked entity with the new entity, size and states.<br>
+	 * This does not cache the newly created stacked entity.
 	 * 
 	 * @param next - next entity
 	 * @param size - size
 	 * @param update - should update
-	 * @return A copy of this stacked entity with the new entity and size
+	 * @return A copy of this stacked entity with the new entity, size and states
 	 */
 	
 	IStackedEntity copy(LivingEntity next, int size, boolean update);
