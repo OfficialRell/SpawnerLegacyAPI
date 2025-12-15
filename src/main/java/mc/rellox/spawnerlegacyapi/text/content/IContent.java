@@ -136,6 +136,14 @@ public interface IContent {
 	}
 	
 	/**
+	 * @return {@code true} if this content is keyed
+	 */
+	
+	default boolean keyed() {
+		return this instanceof ContentKeyed;
+	}
+	
+	/**
 	 * @return Raw text that is not parsed or {@code null} if not applicable
 	 */
 	
