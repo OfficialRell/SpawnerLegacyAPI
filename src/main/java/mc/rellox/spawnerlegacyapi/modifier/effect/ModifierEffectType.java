@@ -8,5 +8,7 @@ public enum ModifierEffectType {
 	EVALUATE_UPGRADE, // change upgrade value
 	
 	GIVE_POTION, // give potion effect
+	
+	EVALUATE_SCALE, // changes entity scale
 
 }

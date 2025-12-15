@@ -88,5 +88,14 @@ public interface IEffect {
 		PotionEffectType potion();
 
 	}
+	
+	interface IEffectEvaluateScale extends IEffectEvaluate {
+
+		@Override
+		default ModifierEffectType type() {
+			return ModifierEffectType.EVALUATE_SCALE;
+		}
+
+	}
 
 }
