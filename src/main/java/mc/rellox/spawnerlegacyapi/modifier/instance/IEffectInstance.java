@@ -7,6 +7,7 @@ import mc.rellox.spawnerlegacyapi.modifier.IModifier;
 import mc.rellox.spawnerlegacyapi.modifier.effect.IEffect;
 import mc.rellox.spawnerlegacyapi.modifier.effect.IEffect.IEffectEvaluateDamage;
 import mc.rellox.spawnerlegacyapi.modifier.effect.IEffect.IEffectEvaluateHealth;
+import mc.rellox.spawnerlegacyapi.modifier.effect.IEffect.IEffectEvaluateScale;
 import mc.rellox.spawnerlegacyapi.modifier.effect.IEffect.IEffectEvaluateUpgrade;
 import mc.rellox.spawnerlegacyapi.modifier.effect.IEffect.IEffectGivePotion;
 import mc.rellox.spawnerlegacyapi.modifier.executor.IExecutor.IExecutorEntity;
@@ -81,6 +82,14 @@ public interface IEffectInstance<E extends IEffect> {
 		int duration();
 		
 		int amplifier();
+		
+		double chance();
+		
+	}
+	
+	interface IEffectInstanceEvaluateScale extends IEffectInstance<IEffectEvaluateScale>, IExecutorEntity, IUsage {
+		
+		double value();
 		
 		double chance();
 		
