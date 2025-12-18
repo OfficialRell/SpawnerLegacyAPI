@@ -5,7 +5,7 @@
   
   <groupId>mc.rellox</groupId>
   <artifactId>SpawnerLegacyAPI</artifactId>
-  <version>1.4.21</version>
+  <version>1.4.22</version>
   <name>SpawnerLegacyAPI</name>
   
   <properties>
