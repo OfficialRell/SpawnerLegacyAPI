@@ -6,7 +6,7 @@
 <dependency>
   <groupId>com.github.OfficialRell</groupId>
   <artifactId>spawnerlegacyapi</artifactId>
-  <version>1.4.21</version>
+  <version>latest</version>
   <scope>provided</scope>
 </dependency>
 
@@ -15,6 +15,20 @@
   <url>https://jitpack.io</url>
 </repository>
 ```
+
+## Using with Gradle:
+
+```
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+dependencies {
+    compile 'com.github.OfficialRell:spawnerlegacyapi:latest'
+}
+```
+
+## API versions:
+https://github.com/OfficialRell/SpawnerLegacyAPI/releases
 
 ## Contacting me
 
