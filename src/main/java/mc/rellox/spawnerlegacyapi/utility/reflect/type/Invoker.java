@@ -108,13 +108,14 @@ public interface Invoker<T> {
 			method_handle = method_handle.asSpreader(Object[].class, param_count);
 
 			boolean is_static = Modifier.isStatic(method.getModifiers());
-			if(is_static) {
-				method_handle = MethodHandles.dropArguments(method_handle, 0, Object.class);
-			}
-
-			method_handle = method_handle.asType(MethodType.methodType(Object.class, Object.class, Object[].class));
-
-			fast_handle = method_handle;
+			
+			if(!is_static && object != null) {
+		        method_handle = method_handle.bindTo(object);
+		    }
+			
+			method_handle = method_handle.asType(MethodType.methodType(Object.class, Object[].class));
+			
+		    fast_handle = method_handle;
 		} catch (Throwable t) {
 			fast_handle = null;
 		}
@@ -132,7 +133,9 @@ public interface Invoker<T> {
 			public R objected(Object object, Object... os) {
 				if(method_handle != null) {
 					try {
-						return (R) method_handle.invokeExact(object, os);
+						return (R) (object != null
+								? method_handle.invokeExact(os)
+								: method_handle.invokeExact(object, os));
 					} catch (Throwable t) {}
 				}
 
