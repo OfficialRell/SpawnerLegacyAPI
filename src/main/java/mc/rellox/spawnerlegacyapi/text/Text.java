@@ -18,7 +18,6 @@ import mc.rellox.spawnerlegacyapi.text.content.IContent;
 import mc.rellox.spawnerlegacyapi.text.content.color.IColorer.Colors;
 import mc.rellox.spawnerlegacyapi.utility.reflect.Reflect.RF;
 import mc.rellox.spawnerlegacyapi.version.Version;
-import mc.rellox.spawnerlegacyapi.version.Version.VersionType;
 
 public final class Text {
 	
@@ -95,36 +94,17 @@ public final class Text {
 		try {
 			Class<?> clazz = RF.craft("inventory.CraftItemStack");
 			Object nms_item = RF.order(clazz, "asNMSCopy", ItemStack.class).invoke(item);
-			String a, b = "getString";
 			
-			if(Version.version == VersionType.v_18_1) {
-				a = "v";
-				b = "a";
-			} else if(Version.version == VersionType.v_18_2) {
-				a = "w";
-				b = "a";
-			} else if(Version.version == VersionType.v_19_1
-					|| Version.version == VersionType.v_19_2
-					|| Version.version == VersionType.v_19_3) {
-				a ="x";
-			} else if(Version.version == VersionType.v_20_1
-					|| Version.version == VersionType.v_20_2
-					|| Version.version == VersionType.v_20_3) {
-				a = "y";
-			} else if(Version.version == VersionType.v_20_4) {
-				a = "x";
-			} else if(Version.version == VersionType.v_21_1) {
-				a = "w";
-			} else if(Version.version == VersionType.v_21_2
-					|| Version.version == VersionType.v_21_3
-					|| Version.version == VersionType.v_21_4
-					|| Version.version == VersionType.v_21_5
-					|| Version.version == VersionType.v_21_6) {
-				a = "y";
-			} else {
-				a = "getName";
-				b = "getText";
-			}
+			String[] names = switch (Version.version) {
+				case v_18_1 -> new String[] {"v", "a"};
+				case v_18_2 -> new String[] {"w", "a"};
+				case v_19_1, v_19_2, v_19_3, v_20_4 -> new String[] {"x", "getString"};
+				case v_21_1 -> new String[] {"w", "getString"};
+				default -> new String[] {"y", "getString"};
+			};
+			
+			String a = names[0];
+			String b = names[1];
 			
 			Object component = RF.direct(nms_item, a);
 			String name = RF.direct(component, b, String.class);
