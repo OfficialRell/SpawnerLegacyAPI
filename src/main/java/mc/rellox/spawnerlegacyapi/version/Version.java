@@ -51,23 +51,12 @@ public final class Version {
 		else if(server.contains("v1_14_R1")) version = VersionType.v_14_1;
 		else version = null;
 		
-		if(version != null && invalid()) {
-			instance = new NullVersion(version);
-			Bukkit.getLogger().warning("[SpawnerLegacy] Missing NMS classes, holograms will not work!");
+		if(version == null) {
+			instance = new NullVersion(VersionType.values()[VersionType.values().length - 1]);
+			Bukkit.getLogger().warning("[SpawnerLegacy] Missing NMS classes, "
+					+ "holograms and version specfic features will not work!");
 		} else
-			instance = version == null ? null : version.build();
-	}
-	
-	private static boolean invalid() {
-		if(!version.atleast(VersionType.v_21_7)) return false;
-		try {
-			// force check for existing classes
-			Class.forName("net.minecraft.world.level.World");
-			Class.forName("net.minecraft.world.entity.decoration.EntityArmorStand");
-			return false;
-		} catch (Exception e) {
-			return true;
-		}
+			instance = version.build();
 	}
 	
 	public static IVersion last() {
