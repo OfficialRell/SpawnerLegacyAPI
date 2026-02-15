@@ -5,6 +5,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import mc.rellox.spawnerlegacyapi.manager.ICacheManager;
+import mc.rellox.spawnerlegacyapi.manager.ICraftingManager;
 import mc.rellox.spawnerlegacyapi.manager.IDataManager;
 import mc.rellox.spawnerlegacyapi.manager.IEntityManager;
 import mc.rellox.spawnerlegacyapi.manager.IEventManager;
@@ -159,6 +160,14 @@ public final class SLAPI {
 	
 	public static IPriceManager prices() {
 		return INSTANCE.prices();
+	}
+	
+	/**
+	 * @return Crafting manager
+	 */
+	
+	public static ICraftingManager crafting() {
+		return INSTANCE.crafting();
 	}
 	
 	public interface ISpawnerLegacyPlugin extends Plugin {

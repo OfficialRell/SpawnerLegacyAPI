@@ -3,6 +3,7 @@ package mc.rellox.spawnerlegacyapi;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import mc.rellox.spawnerlegacyapi.manager.ICacheManager;
+import mc.rellox.spawnerlegacyapi.manager.ICraftingManager;
 import mc.rellox.spawnerlegacyapi.manager.IDataManager;
 import mc.rellox.spawnerlegacyapi.manager.IEntityManager;
 import mc.rellox.spawnerlegacyapi.manager.IEventManager;
@@ -108,5 +109,11 @@ public interface ISpawnerLegacy {
 	 */
 	
 	IPriceManager prices();
+	
+	/**
+	 * @return Crafting manager
+	 */
+	
+	ICraftingManager crafting();
 
 }
