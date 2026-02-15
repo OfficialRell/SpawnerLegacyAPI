@@ -17,6 +17,11 @@ public enum SlotField {
 	spawners_previous("previous"),
 	spawners_next("next"),
 	
+	crafting_craft("craft"),
+	crafting_page("page"),
+	crafting_previous("previous"),
+	crafting_next("next"),
+	
 	shop_page("page"),
 	shop_previous("previous"),
 	shop_next("next"),
@@ -59,6 +64,15 @@ public enum SlotField {
 				spawners_page,
 				spawners_previous,
 				spawners_next
+		};
+	}
+	
+	public static SlotField[] crafting() {
+		return new SlotField[] {
+				crafting_craft,
+				crafting_page,
+				crafting_previous,
+				crafting_next
 		};
 	}
 

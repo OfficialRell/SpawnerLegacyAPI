@@ -10,6 +10,7 @@ public enum Group {
 	breaking,
 	changing,
 	crowbar,
-	types;
+	types,
+	crafting,
 
 }
