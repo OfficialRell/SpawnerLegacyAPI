@@ -9,6 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import mc.rellox.spawnerlegacyapi.SLAPI;
 import mc.rellox.spawnerlegacyapi.spawner.IGeneratorTags.Tag;
 import mc.rellox.spawnerlegacyapi.spawner.type.SpawnerType;
+import mc.rellox.spawnerlegacyapi.spawner.type.UpgradeType;
 
 public interface IVirtual {
 	
@@ -135,7 +136,15 @@ public interface IVirtual {
 		}
 		
 		public Builder levels(int[] levels) {
+			if(levels != null && levels.length != UpgradeType.values().length)
+				throw new IllegalArgumentException("Levels array must have a length of " + UpgradeType.values().length);
 			this.levels = levels;
+			return this;
+		}
+		
+		public Builder level(UpgradeType upgrade, int level) {
+			if(levels == null) levels = new int[UpgradeType.values().length];
+			levels[upgrade.ordinal()] = Math.max(1, level);
 			return this;
 		}
 		
@@ -172,7 +181,7 @@ public interface IVirtual {
 		}
 		
 		public IVirtual build() {
-			return SLAPI.get().spawners().of(type, levels, charges, spawnable, empty, meta, tags);
+			return SLAPI.spawners().of(type, levels, charges, spawnable, empty, meta, tags);
 		}
 		
 		private int or(int a, int b) {
