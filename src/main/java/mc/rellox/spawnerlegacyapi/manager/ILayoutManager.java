@@ -19,7 +19,7 @@ public interface ILayoutManager {
 	/**
 	 * Gets the layout for the upgrade GUI of the given spawner type.
 	 * 
-	 * @param type - type
+	 * @param type - spawner type
 	 * @return Layout for upgrade GUI
 	 */
 	
@@ -44,7 +44,12 @@ public interface ILayoutManager {
 	ILayout types();
 	
 	/**
-	 * 
+	 * @return Layout for spawner crafting GUI
+	 */
+	
+	ILayout crafting();
+	
+	/**
 	 * @param key - order key
 	 * @return Item orderer, never {@code null}
 	 */
