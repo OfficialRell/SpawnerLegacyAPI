@@ -70,7 +70,7 @@ public interface IViewMeta<T> {
 		return null;
 	});
 	static IViewMeta<IViewItem> ITEM = a("ITEM", o -> {
-		if(o instanceof String s) return SLAPI.get().layouts().item(s);
+		if(o instanceof String s) return SLAPI.layouts().item(s);
 		return null;
 	});
 	

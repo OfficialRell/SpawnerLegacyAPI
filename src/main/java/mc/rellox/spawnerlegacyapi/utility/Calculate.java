@@ -3,6 +3,8 @@ package mc.rellox.spawnerlegacyapi.utility;
 import java.util.List;
 import java.util.Random;
 
+import mc.rellox.spawnerlegacyapi.SLAPI;
+
 public final class Calculate {
 	
 	private static final Random R = new Random();
@@ -117,6 +119,74 @@ public final class Calculate {
 	public static <E> E random(List<E> list) {
 		int size = list.size();
 		return size > 0 ? list.get(R.nextInt(size)) : null;
+	}
+	
+	private static final long[] time_maximum = {Integer.MAX_VALUE, 11, 30, 23, 59, 59};
+	private static final long[] time_units = {31536000, 2592000, 86400, 3600, 60, 1};
+	private static final String[] time_keys = {
+			"Time.values.year", "Time.values.month", "Time.values.day",
+			"Time.values.hour", "Time.values.minute", "Time.values.second"
+	};
+	
+	/**
+	 * Parses time: &lt;years&gt;:&lt;months&gt;:&lt;days&gt;:&lt;hours&gt;:&lt;minutes&gt;:&lt;seconds&gt;
+	 * into seconds.<br>
+	 * Can pass less values (e.g. &lt;minutes&gt;:&lt;seconds&gt).
+	 * 
+	 * @param time - time value
+	 * @return parsed time in seconds
+	 */
+	
+	public static long time(String time) {
+		String[] parts = time.split(":");
+        int m = parts.length;
+        if(m > 6 || m == 0) return -1;
+        
+        long t = 0;
+        for(int i = 0; i < m; i++) {
+            try {
+                int value = Integer.parseInt(parts[i]);
+                if(value > time_maximum[6 - m + i]) return -1;
+                t += value * time_units[6 - m + i];
+            } catch(Exception e) {
+                return -1;
+            }
+        }
+        
+        return t;
+	}
+	
+	/**
+	 * Converts seconds into a human-readable format.
+	 * 
+	 * @param cooldown - time in seconds
+	 * @return Human-readable time
+	 */
+
+	public static String time(long cooldown) {
+		StringBuilder sb = new StringBuilder();
+
+		for(int i = 0; i < time_units.length; i++) {
+			long value = cooldown / time_units[i];
+			if (value > 0) {
+				String key = time_keys[i] + (value == 1 ? ".single" : ".multiple");
+				String part = SLAPI.language().get(key, "value", value).text();
+				sb.append(part).append(" ");
+				cooldown %= time_units[i];
+			}
+		}
+
+		return sb.toString().trim();
+	}
+	
+	/**
+	 * This method helps runnables to always start a task at the same interval.
+	 * 
+	 * @return Ticks until the next second
+	 */
+	
+	public static long sync() {
+		return (System.currentTimeMillis() / 50) % 20;
 	}
 
 }

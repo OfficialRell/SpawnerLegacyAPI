@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 
+import mc.rellox.spawnerlegacyapi.text.content.IContent;
 import mc.rellox.spawnerlegacyapi.utility.reflect.Reflect.RF;
 
 public interface IFileValues {
@@ -38,6 +40,28 @@ public interface IFileValues {
 	
 	/**
 	 * @param path - path
+	 * @param fallback - fallback value
+	 * @return Integer value or fallback if not found
+	 */
+	
+	default int getInteger(String path, int fallback) {
+		return file().getInt(path, fallback);
+	}
+	
+	/**
+	 * @param path - path
+	 * @param min - minimum value
+	 * @param max - maximum value
+	 * @return Safe integer value
+	 */
+	
+	default int getInteger(String path, int min, int max) {
+		int i = file().getInt(path);
+		return i < min ? min : i > max ? max : i;
+	}
+	
+	/**
+	 * @param path - path
 	 * @return Integer list value
 	 */
 	
@@ -56,6 +80,68 @@ public interface IFileValues {
 	
 	/**
 	 * @param path - path
+	 * @param fallback - fallback value
+	 * @return Double value or fallback if not found
+	 */
+	
+	default double getDouble(String path, double fallback) {
+		return file().getDouble(path, fallback);
+	}
+	
+	/**
+	 * @param path - path
+	 * @param min - minimum value
+	 * @param max - maximum value
+	 * @return Safe double value
+	 */
+	
+	default double getDouble(String path, double min, double max) {
+		double i = file().getDouble(path);
+		return i < min ? min : i > max ? max : i;
+	}
+	
+	/**
+	 * @param path - path
+	 * @return Long value
+	 */
+	
+	default long getLong(String path) {
+		return file().getLong(path);
+	}
+	
+	/**
+	 * @param path - path
+	 * @param fallback - fallback value
+	 * @return Long value or fallback if not found
+	 */
+	
+	default long getLong(String path, int fallback) {
+		return file().getLong(path, fallback);
+	}
+	
+	/**
+	 * @param path - path
+	 * @param min - minimum value
+	 * @param max - maximum value
+	 * @return Safe long value
+	 */
+	
+	default long getLong(String path, long min, long max) {
+		long i = file().getLong(path);
+		return i < min ? min : i > max ? max : i;
+	}
+	
+	/**
+	 * @param path - path
+	 * @return Long list value
+	 */
+	
+	default List<Long> getLongs(String path) {
+		return file().getLongList(path);
+	}
+	
+	/**
+	 * @param path - path
 	 * @return String value
 	 */
 	
@@ -65,12 +151,12 @@ public interface IFileValues {
 	
 	/**
 	 * @param path - path
-	 * @param def - default value
-	 * @return String value
+	 * @param fallback - fallback value
+	 * @return String value or fallback if not found
 	 */
 	
-	default String getString(String path, String def) {
-		return file().getString(path, def);
+	default String getString(String path, String fallback) {
+		return file().getString(path, fallback);
 	}
 	
 	/**
@@ -84,12 +170,12 @@ public interface IFileValues {
 	
 	/**
 	 * @param path - path
-	 * @param def - default value
-	 * @return Boolean value or default if not found
+	 * @param fallback - fallback value
+	 * @return Boolean value or fallback if not found
 	 */
 	
-	default boolean getBoolean(String path, boolean def) {
-		return file().getBoolean(path, def);
+	default boolean getBoolean(String path, boolean fallback) {
+		return file().getBoolean(path, fallback);
 	}
 	
 	/**
@@ -125,30 +211,6 @@ public interface IFileValues {
 			if(value != null && !value.isEmpty()) list.add(value);
 		}
 		return list;
-	}
-	
-	/**
-	 * @param path - path
-	 * @param min - minimum value
-	 * @param max - maximum value
-	 * @return Safe integer value
-	 */
-	
-	default int getInteger(String path, int min, int max) {
-		int i = file().getInt(path);
-		return i < min ? min : i > max ? max : i;
-	}
-	
-	/**
-	 * @param path - path
-	 * @param min - minimum value
-	 * @param max - maximum value
-	 * @return Safe double value
-	 */
-	
-	default double getDouble(String path, double min, double max) {
-		double i = file().getDouble(path);
-		return i < min ? min : i > max ? max : i;
 	}
 	
 	/**
@@ -215,13 +277,57 @@ public interface IFileValues {
 		return getMaterial(path, null);
 	}
 	
+	/**
+	 * @param path - path
+	 * @return IContent value or {@code null}
+	 */
+	
+	default IContent getContent(String path) {
+		String value = getString(path);
+		return value == null ? null : IContent.parse(value);
+	}
+	
+	/**
+	 * @param path - path
+	 * @return IContent value list
+	 */
+	
+	default List<IContent> getContents(String path) {
+		return getStringOrStrings(path).stream()
+				.map(IContent::parse)
+				.collect(Collectors.toList());
+	}
+	
+	/**
+	 * Sets a value at the specified path.<br>
+	 * Does not update the file.
+	 * 
+	 * @param path - path
+	 * @param value - value
+	 */
+	
 	default void set(String path, Object value) {
 		file().set(path, value);
 	}
 	
+	/**
+	 * Deletes a value at the specified path.<br>
+	 * Does not update the file.
+	 * 
+	 * @param path - path
+	 */
+	
 	default void delete(String path) {
 		file().set(path, null);
 	}
+	
+	/**
+	 * Replaces a value from one path to another.<br>
+	 * Does not update the file.
+	 * 
+	 * @param from - source path
+	 * @param to - destination path
+	 */
 	
 	default void replace(String from, String to) {
 		var value = get(from);

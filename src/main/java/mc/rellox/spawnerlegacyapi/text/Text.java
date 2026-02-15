@@ -9,11 +9,13 @@ import java.util.stream.Stream;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 
+import mc.rellox.spawnerlegacyapi.SLAPI;
 import mc.rellox.spawnerlegacyapi.text.content.IContent;
 import mc.rellox.spawnerlegacyapi.text.content.color.IColorer.Colors;
 import mc.rellox.spawnerlegacyapi.utility.reflect.Reflect.RF;
@@ -295,6 +297,11 @@ public final class Text {
 		} else list.stream()
 			.map(IContent::text)
 			.forEach(player::sendMessage);
+	}
+	
+	public static void warn(Player player, String path) {
+		Text.send(player, SLAPI.language().list(path));
+		player.playSound(player.getEyeLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 2f, 1f);
 	}
 	
 	public static void debug(Block block, String text) {
