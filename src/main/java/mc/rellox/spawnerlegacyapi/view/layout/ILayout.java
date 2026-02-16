@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
 import mc.rellox.spawnerlegacyapi.item.builder.ItemBuilder;
 import mc.rellox.spawnerlegacyapi.text.content.IContent;
@@ -67,10 +68,30 @@ public interface ILayout extends ISave {
 	 * @param inventory - inventory
 	 * @param field - layout field
 	 * @param modifier - item modifier
-	 * @param a - amount
+	 * @param amount - amount
 	 */
 	
-	void fill(Inventory inventory, SlotField field, Consumer<ItemBuilder> modifier, int a);
+	void fill(Inventory inventory, SlotField field, Consumer<ItemBuilder> modifier, int amount);
+	
+	/**
+	 * Safely fills the slot with the item.
+	 * 
+	 * @param inventory - inventory
+	 * @param slot - slot
+	 * @param item - item
+	 */
+	
+	void fill(Inventory inventory, int slot, ItemBuilder item);
+	
+	/**
+	 * Safely fills the slot with the item.
+	 * 
+	 * @param inventory - inventory
+	 * @param slot - slot
+	 * @param item - item
+	 */
+	
+	void fill(Inventory inventory, int slot, ItemStack item);
 	
 	/**
 	 * @param field - layout field
