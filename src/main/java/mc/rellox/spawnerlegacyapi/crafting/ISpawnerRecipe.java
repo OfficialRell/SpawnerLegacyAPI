@@ -5,6 +5,7 @@ import java.util.List;
 import mc.rellox.spawnerlegacyapi.item.builder.ItemBuilder;
 import mc.rellox.spawnerlegacyapi.price.IPrice;
 import mc.rellox.spawnerlegacyapi.spawner.IVirtual;
+import mc.rellox.spawnerlegacyapi.text.content.IContent;
 
 public interface ISpawnerRecipe {
 	
@@ -13,6 +14,18 @@ public interface ISpawnerRecipe {
 	 */
 	
 	String key();
+	
+	/**
+	 * @return Recipe name
+	 */
+	
+	IContent name();
+	
+	/**
+	 * @return Recipe description
+	 */
+	
+	List<IContent> description();
 	
 	/**
 	 * Get the recipe display item.
@@ -39,6 +52,12 @@ public interface ISpawnerRecipe {
 	List<IPrice> prices();
 	
 	/**
+	 * @return Crafted spawner amount
+	 */
+	
+	int amount();
+	
+	/**
 	 * @return Crafting duration in seconds
 	 */
 	
@@ -49,11 +68,5 @@ public interface ISpawnerRecipe {
 	 */
 	
 	IVirtual result();
-	
-	/**
-	 * @return Crafted spawner amount
-	 */
-	
-	int amount();
 	
 }
