@@ -15,7 +15,7 @@ public final class Keys {
 	private static final Map<KeyType, NamespacedKey> KEYS = new EnumMap<>(KeyType.class);
 	
 	public static NamespacedKey of(KeyType key) {
-		return KEYS.computeIfAbsent(key, k -> new NamespacedKey(SLAPI.get().plugin(), k.key));
+		return KEYS.computeIfAbsent(key, k -> new NamespacedKey(SLAPI.plugin(), k.key));
 	}
 	
 	public static <Z> void set(ItemStack item, KeyType key, PersistentDataType<?, Z> data, Z value) {
@@ -49,10 +49,10 @@ public final class Keys {
 		set(item, key, PersistentDataType.BYTE, (byte) (value ? 1 : 0));
 	}
 	
-	public static <Z> Z get(ItemStack item, KeyType key, PersistentDataType<?, Z> data, Z def) {
-		if(item == null || !item.hasItemMeta()) return def;
+	public static <Z> Z get(ItemStack item, KeyType key, PersistentDataType<?, Z> data, Z fallback) {
+		if(item == null || !item.hasItemMeta()) return fallback;
 		ItemMeta meta = item.getItemMeta();
-		return meta.getPersistentDataContainer().get(of(key), data);
+		return meta.getPersistentDataContainer().getOrDefault(of(key), data, fallback);
 	}
 	
 	public static String getString(ItemStack item, KeyType key) {
