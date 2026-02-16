@@ -161,6 +161,17 @@ public interface IContent {
 	}
 	
 	/**
+	 * Indents this content with the specified number of spaces.
+	 * 
+	 * @param spaces - spaces to indent
+	 * @return Indented content
+	 */
+	
+	default IContent indent(int spaces) {
+		return of(empty(spaces), this);
+	}
+	
+	/**
 	 * Sends this text to the player only if it is not empty.
 	 * 
 	 * @param player - player
