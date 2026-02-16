@@ -4,22 +4,22 @@ public enum IncreaseType {
 
 	ADDITION() {
 		@Override
-		public String format(IPrice c) {
-			return c.text().text();
+		public String format(IPrice price) {
+			return price.text().text();
 		}
 		@Override
-		public double price(double c, double i) {
-			return c + i;
+		public double price(double value, double increase) {
+			return value + increase;
 		}
 	},
 	MULTIPLICATION() {
 		@Override
-		public String format(IPrice c) {
-			return c.value() + "%";
+		public String format(IPrice price) {
+			return price.value() + "%";
 		}
 		@Override
-		public double price(double c, double i) {
-			return c * i;
+		public double price(double value, double increase) {
+			return value * increase;
 		}
 	};
 	
@@ -28,9 +28,9 @@ public enum IncreaseType {
 		return name();
 	}
 	
-	public abstract String format(IPrice c);
+	public abstract String format(IPrice price);
 	
-	public abstract double price(double c, double i);
+	public abstract double price(double value, double increase);
 	
 	public static IncreaseType of(String name) {
 		try {
