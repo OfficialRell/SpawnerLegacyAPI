@@ -23,7 +23,7 @@ public interface ISpawnerCraft {
 	/**
 	 * Checks if the craft is complete.
 	 * 
-	 * @return {@code true} if complete, {@code false} otherwise
+	 * @return {@code true} if complete
 	 */
 	
 	boolean completed();
@@ -41,7 +41,7 @@ public interface ISpawnerCraft {
 	long start();
 	
 	/**
-	 * Gets the remaining craft time in seconds.
+	 * Gets the remaining craft duration in seconds.
 	 * 
 	 * @return Seconds remaining
 	 */
@@ -49,15 +49,15 @@ public interface ISpawnerCraft {
 	int remaining();
 	
 	/**
-	 * Gets the total craft time in seconds.
+	 * Gets the total craft duration in seconds.
 	 * 
-	 * @return Total craft time in seconds
+	 * @return Total craft duration in seconds
 	 */
 	
 	int duration();
 	
 	/**
-	 * Increases the craft time.
+	 * Increases the craft duration.
 	 * 
 	 * @param seconds - seconds to add
 	 */
@@ -65,7 +65,7 @@ public interface ISpawnerCraft {
 	void increase(int seconds);
 	
 	/**
-	 * Decreases the craft time.
+	 * Decreases the craft duration.
 	 * 
 	 * @param seconds - seconds to subtract
 	 */
