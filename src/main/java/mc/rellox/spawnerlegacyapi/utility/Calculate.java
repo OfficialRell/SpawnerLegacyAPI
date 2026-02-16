@@ -139,21 +139,21 @@ public final class Calculate {
 	
 	public static long time(String time) {
 		String[] parts = time.split(":");
-        int m = parts.length;
-        if(m > 6 || m == 0) return -1;
+        int size = parts.length;
+        if(size > 6 || size == 0) return -1;
         
-        long t = 0;
-        for(int i = 0; i < m; i++) {
+        long seconds = 0;
+        for(int i = 0; i < size; i++) {
             try {
                 int value = Integer.parseInt(parts[i]);
-                if(value > time_maximum[6 - m + i]) return -1;
-                t += value * time_units[6 - m + i];
+                if(value > time_maximum[6 - size + i]) return -1;
+                seconds += value * time_units[6 - size + i];
             } catch(Exception e) {
                 return -1;
             }
         }
         
-        return t;
+        return seconds;
 	}
 	
 	/**
@@ -164,19 +164,22 @@ public final class Calculate {
 	 */
 
 	public static String time(long cooldown) {
-		StringBuilder sb = new StringBuilder();
+		if(cooldown <= 0)
+			return SLAPI.language().get(time_keys[5] + ".single", "value", 0).text();
+		
+		StringBuilder builder = new StringBuilder();
 
 		for(int i = 0; i < time_units.length; i++) {
 			long value = cooldown / time_units[i];
 			if (value > 0) {
 				String key = time_keys[i] + (value == 1 ? ".single" : ".multiple");
 				String part = SLAPI.language().get(key, "value", value).text();
-				sb.append(part).append(" ");
+				builder.append(part).append(" ");
 				cooldown %= time_units[i];
 			}
 		}
 
-		return sb.toString().trim();
+		return builder.toString().trim();
 	}
 	
 	/**
