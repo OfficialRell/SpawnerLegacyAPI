@@ -2,6 +2,8 @@ package mc.rellox.spawnerlegacyapi.crafting;
 
 import java.util.List;
 
+import org.bukkit.inventory.ItemStack;
+
 import mc.rellox.spawnerlegacyapi.item.builder.ItemBuilder;
 import mc.rellox.spawnerlegacyapi.price.IPrice;
 import mc.rellox.spawnerlegacyapi.spawner.IVirtual;
@@ -67,6 +69,14 @@ public interface ISpawnerRecipe {
 	 * @return Virtual spawner result
 	 */
 	
-	IVirtual result();
+	IVirtual virtual();
+	
+	/**
+	 * @return Crafted spawner result as item stack
+	 */
+	
+	default ItemStack result() {
+		return virtual().toItem(amount());
+	}
 	
 }
