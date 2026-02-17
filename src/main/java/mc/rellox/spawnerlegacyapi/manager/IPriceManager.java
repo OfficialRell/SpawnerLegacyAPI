@@ -1,8 +1,10 @@
 package mc.rellox.spawnerlegacyapi.manager;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 import mc.rellox.spawnerlegacyapi.price.Group;
+import mc.rellox.spawnerlegacyapi.price.IDefinedItem;
 import mc.rellox.spawnerlegacyapi.price.IPrice;
 import mc.rellox.spawnerlegacyapi.price.IPriceSupplier;
 import mc.rellox.spawnerlegacyapi.price.PriceType;
@@ -64,6 +66,19 @@ public interface IPriceManager {
 	 */
 	
 	IPrice price(Group group, double value);
+	
+	/**
+	 * @return All defined items
+	 */
+	
+	List<IDefinedItem> items();
+	
+	/**
+	 * @param key - item key
+	 * @return Defined item or {@code null}
+	 */
+	
+	IDefinedItem item(String key);
 
 	/**
 	 * Use {@link IPriceSupplier} instead.

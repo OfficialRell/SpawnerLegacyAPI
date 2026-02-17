@@ -84,6 +84,14 @@ public interface IPrice {
 	void refund(Player player);
 	
 	/**
+	 * @return Defined item if this price is of a defined item type, otherwise {@code null}
+	 */
+	
+	default IDefinedItem defined() {
+		return null;
+	}
+	
+	/**
 	 * Returns a new price object using the unary operator.
 	 * 
 	 * @param operator - value operator

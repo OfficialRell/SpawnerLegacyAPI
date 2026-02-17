@@ -38,6 +38,8 @@ public enum KeyType {
 	MODIFIER_DURATION("modifier_duration"),
 	MODIFIER_AMPLIFIER("modifier_amplifier"),
 	
+	DEFINED_ITEM("defined_item"),
+	
 	RANDOM("random");
 	
 	public final String key;
