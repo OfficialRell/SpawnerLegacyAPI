@@ -171,7 +171,7 @@ public final class Calculate {
 
 		for(int i = 0; i < time_units.length; i++) {
 			long value = cooldown / time_units[i];
-			if (value > 0) {
+			if(value > 0) {
 				String key = time_keys[i] + (value == 1 ? ".single" : ".multiple");
 				String part = SLAPI.language().get(key, "value", value).text();
 				builder.append(part).append(" ");
@@ -189,7 +189,8 @@ public final class Calculate {
 	 */
 	
 	public static long sync() {
-		return (System.currentTimeMillis() / 50) % 20;
+		long ticks = (System.currentTimeMillis() / 50) % 20;
+		return ticks == 0 ? 0 : 20 - ticks;
 	}
 
 }
