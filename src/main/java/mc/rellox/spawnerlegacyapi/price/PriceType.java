@@ -2,11 +2,12 @@ package mc.rellox.spawnerlegacyapi.price;
 
 public enum PriceType {
 	
-	EXPERIENCE(),
-	LEVELS(),
-	MATERIAL(),
-	ECONOMY(),
-	FLARE_TOKENS();
+	EXPERIENCE,
+	LEVELS,
+	MATERIAL,
+	ECONOMY,
+	FLARE_TOKENS,
+	DEFINED_ITEM;
 	
 	public String key() {
 		return name().replace('_', '-').toLowerCase();
