@@ -99,10 +99,20 @@ public interface IGenerator extends IGeneratorTags {
 	boolean changed();
 	
 	/**
+	 * Deprecated, use {@link #examine()} instead.<br>
+	 * 
 	 * @return {@code true} if this generator ia a spawner block, otherwise {@code false}
 	 */
 	
+	@Deprecated(since = "1.5.5", forRemoval = true)
 	boolean present();
+	
+	/**
+	 * Checks if this spawner is valid or exists in the world.<br>
+	 * It will be marked for removal if invalid.
+	 */
+	
+	void examine();
 	
 	/**
 	 * @return {@code true} if this spawner is rotating
