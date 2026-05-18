@@ -1,11 +1,10 @@
 package mc.rellox.spawnerlegacyapi.text;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
+import mc.rellox.spawnerlegacyapi.SLAPI;
+import mc.rellox.spawnerlegacyapi.text.content.IContent;
+import mc.rellox.spawnerlegacyapi.text.content.color.IColorer.Colors;
+import mc.rellox.spawnerlegacyapi.utility.reflect.Reflect.RF;
+import mc.rellox.spawnerlegacyapi.version.Version;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -15,11 +14,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 
-import mc.rellox.spawnerlegacyapi.SLAPI;
-import mc.rellox.spawnerlegacyapi.text.content.IContent;
-import mc.rellox.spawnerlegacyapi.text.content.color.IColorer.Colors;
-import mc.rellox.spawnerlegacyapi.utility.reflect.Reflect.RF;
-import mc.rellox.spawnerlegacyapi.version.Version;
+import java.util.Iterator;
+import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public final class Text {
 	
@@ -102,6 +101,7 @@ public final class Text {
 				case v_18_2 -> new String[] {"w", "a"};
 				case v_19_1, v_19_2, v_19_3, v_20_4 -> new String[] {"x", "getString"};
 				case v_21_1 -> new String[] {"w", "getString"};
+				case v_26 -> new String[] {"getHoverName", "getString"};
 				default -> new String[] {"y", "getString"};
 			};
 			
@@ -292,7 +292,7 @@ public final class Text {
 	public static void send(Player player, List<IContent> list) {
 		if(list.isEmpty()) return;
 		if(list.size() == 1) {
-			String text = list.get(0).text();
+			String text = list.getFirst().text();
 			if(!text.isEmpty()) player.sendMessage(text);
 		} else list.stream()
 			.map(IContent::text)

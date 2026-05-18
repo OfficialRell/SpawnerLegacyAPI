@@ -14,7 +14,7 @@ import mc.rellox.spawnerlegacyapi.text.content.variable.IVariable;
 
 public final class ContentParser {
 	
-	protected static final Pattern PATTERN_COLOR, PATTERN_TOKEN;
+	private static final Pattern PATTERN_COLOR, PATTERN_TOKEN;
 	static {
 		// Matches <#RRGGBB(-#RRGGBB)*> or <!format>
 		PATTERN_COLOR = Pattern.compile("<((#[a-f\\d]{6}(-#[a-f\\d]{6})*)|(![a-z]+))>",
@@ -70,7 +70,7 @@ public final class ContentParser {
 			else builder.format(t.text);
 		}
 		return result.isEmpty() ? IContent.empty()
-				: result.size() == 1 ? result.get(0) : IContent.of(result);
+				: result.size() == 1 ? result.getFirst() : IContent.of(result);
 	}
 	
 	private List<Text> text() {
@@ -124,10 +124,10 @@ public final class ContentParser {
 	    if(pos < input.length())
 	        list.add(IContent.of(input.substring(pos)));
 
-	    return list.size() == 1 ? list.get(0) : IContent.of(list);
+	    return list.size() == 1 ? list.getFirst() : IContent.of(list);
 	}
 	
-	private class ContentBuilder {
+	private static class ContentBuilder {
 		
 		private int[] colors;
 		private final List<Format> formats = new ArrayList<>();
@@ -135,7 +135,7 @@ public final class ContentParser {
 		private void color(String s) {
 			try {
 				colors = new int[] {Integer.parseInt(s.substring(1), 16)};
-			} catch (Exception e) {}
+			} catch (Exception ignored) {}
 		}
 		
 		private void gradient(String s) {
@@ -143,17 +143,17 @@ public final class ContentParser {
 				colors = Stream.of(s.split("-"))
 						.mapToInt(t -> Integer.parseInt(t.substring(1), 16))
 						.toArray();
-			} catch (Exception e) {}
+			} catch (Exception ignored) {}
 		}
 		
 		private void format(String s) {
 			Format f = switch(s.substring(1)) {
-			case "bold", "b" -> Format.bold;
-			case "italic", "i" -> Format.italic;
-			case "obfuscated", "o" -> Format.obfuscated;
-			case "strikethrough", "s" -> Format.strikethrough;
-			case "underline", "u" -> Format.underline;
-			default -> null;
+				case "bold", "b" -> Format.bold;
+				case "italic", "i" -> Format.italic;
+				case "obfuscated", "o" -> Format.obfuscated;
+				case "strikethrough", "s" -> Format.strikethrough;
+				case "underline", "u" -> Format.underline;
+				default -> null;
 			};
 			if(f != null) formats.add(f);
 		}

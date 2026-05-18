@@ -1,18 +1,15 @@
 package mc.rellox.spawnerlegacyapi.configuration;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
+import mc.rellox.spawnerlegacyapi.utility.reflect.Reflect.RF;
+import mc.rellox.spawnerlegacyapi.version.Version;
+import mc.rellox.spawnerlegacyapi.version.Version.VersionType;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.FileConfigurationOptions;
 
-import mc.rellox.spawnerlegacyapi.utility.reflect.Reflect.RF;
-import mc.rellox.spawnerlegacyapi.version.Version;
-import mc.rellox.spawnerlegacyapi.version.Version.VersionType;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public interface IFile extends IFileValues {
 	
@@ -60,7 +57,7 @@ public interface IFile extends IFileValues {
 	/**
 	 * Removes specified path, without saving this file.
 	 * 
-	 * @param path - path to remove
+	 * @param path path to remove
 	 */
 	
 	default void delete(String path) {
@@ -70,8 +67,8 @@ public interface IFile extends IFileValues {
 	/**
 	 * Sets an object to the path and saves this file.
 	 * 
-	 * @param path - path
-	 * @param object - object to set
+	 * @param path path
+	 * @param object object to set
 	 */
 	
 	default void set(String path, Object object) {
@@ -82,7 +79,7 @@ public interface IFile extends IFileValues {
 	/**
 	 * Removes specified path and saved this file.
 	 * 
-	 * @param path - path to remove
+	 * @param path path to remove
 	 */
 	
 	default void clear(String path) {
@@ -94,8 +91,8 @@ public interface IFile extends IFileValues {
 	 * Copies the object from the specified path to a different path,
 	 *  removing the previous path, without saving
 	 * 
-	 * @param from - path from
-	 * @param to - path to copy
+	 * @param from path from
+	 * @param to path to copy
 	 */
 	
 	default void copy(String from, String to) {
@@ -106,9 +103,9 @@ public interface IFile extends IFileValues {
 	 * Copies the object from the specified path to a different path,
 	 *  removing the previous path.
 	 * 
-	 * @param from - path from
-	 * @param to - path to copy
-	 * @param save - should save
+	 * @param from path from
+	 * @param to path to copy
+	 * @param save should save
 	 */
 	
 	default void copy(String from, String to, boolean save) {
@@ -122,7 +119,7 @@ public interface IFile extends IFileValues {
 	}
 	
 	/**
-	 * @param path - path
+	 * @param path path
 	 * @return {@code true} if this path has a value, otherwise {@code false}
 	 */
 	
@@ -133,7 +130,7 @@ public interface IFile extends IFileValues {
 	/**
 	 * Get all keys from the specified path.
 	 * 
-	 * @param path - path
+	 * @param path path
 	 * @return Set of path keys
 	 */
 	
@@ -145,8 +142,8 @@ public interface IFile extends IFileValues {
 	/**
 	 * Sets a default value.
 	 * 
-	 * @param path - path
-	 * @param value - default value
+	 * @param path path
+	 * @param value default value
 	 */
 	
 	default void defaulted(String path, Object value) {
@@ -162,7 +159,7 @@ public interface IFile extends IFileValues {
 	/**
 	 * Sets a header to this file.
 	 * 
-	 * @param header - header separated by '\n'
+	 * @param header header separated by '\n'
 	 */
 	
 	default void header(String header) {
@@ -172,54 +169,54 @@ public interface IFile extends IFileValues {
 	/**
 	 * Sets a header to this file.
 	 * 
-	 * @param header - file header
+	 * @param header file header
 	 */
 	
 	default void header(String... header) {
 		FileConfigurationOptions o = file().options();
-		if(Version.version.atleast(VersionType.v_18_1)) {
+		if(Version.instance.type().atleast(VersionType.v_18_1)) {
 			RF.order(o, "setHeader", List.class).invoke(List.of(header));
 			RF.order(o, "parseComments", boolean.class).invoke(true);
 		} else {
-			RF.order(o, "header", String.class).invoke(Stream.of(header).collect(Collectors.joining("\n")));
+			RF.order(o, "header", String.class).invoke(String.join("\n", header));
 			RF.order(o, "copyHeader", boolean.class).invoke(true);
 		}
 	}
-	
+
 	/**
 	 * @return New commenter or {@code null} if server version is 1.17 or lower
 	 */
-	
+
 	default Commenter commenter() {
 		return Version.version.atleast(VersionType.v_18_1)
 				? new Commenter(this) : null;
 	}
-	
+
 	record Commenter(IFile file) {
-		
+
 		/**
 		 * Adds comments to this path.
-		 * 
-		 * @param path - path
-		 * @param cs - comments
+		 *
+		 * @param path path
+		 * @param cs comments
 		 */
-		
+
 		public void comment(String path, String... cs) {
 			comment(path, List.of(cs));
 		}
-		
+
 		/**
 		 * Adds comments to this path.
-		 * 
-		 * @param path - path
-		 * @param list - comments
+		 *
+		 * @param path path
+		 * @param list comments
 		 */
-		
+
 		public void comment(String path, List<String> list) {
 			RF.order(file.file(), "setComments", String.class, List.class)
 				.invoke(path, list);
 		}
-		
+
 	}
 
 }
