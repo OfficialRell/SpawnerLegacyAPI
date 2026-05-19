@@ -3,11 +3,12 @@ package mc.rellox.spawnerlegacyapi.configuration.settings;
 import java.util.List;
 
 import mc.rellox.spawnerlegacyapi.configuration.IFile;
+import mc.rellox.spawnerlegacyapi.configuration.IFileValues;
 
 public interface ValueType<U> {
 	
-	public static final ValueType<String> STRING = (file, path) -> file.getString(path);
-	public static final ValueType<List<String>> STRINGS = (file, path) -> file.getStrings(path);
+	ValueType<String> STRING = IFileValues::getString;
+	ValueType<List<String>> STRINGS = IFileValues::getStrings;
 	
 	U get(IFile file, String path);
 

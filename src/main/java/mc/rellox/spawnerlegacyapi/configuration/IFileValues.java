@@ -21,7 +21,7 @@ public interface IFileValues {
 	ConfigurationSection file();
 	
 	/**
-	 * @param path - path
+	 * @param path path
 	 * @return Object value
 	 */
 	
@@ -30,7 +30,7 @@ public interface IFileValues {
 	}
 	
 	/**
-	 * @param path - path
+	 * @param path path
 	 * @return Integer value
 	 */
 	
@@ -39,8 +39,8 @@ public interface IFileValues {
 	}
 	
 	/**
-	 * @param path - path
-	 * @param fallback - fallback value
+	 * @param path path
+	 * @param fallback fallback value
 	 * @return Integer value or fallback if not found
 	 */
 	
@@ -49,19 +49,19 @@ public interface IFileValues {
 	}
 	
 	/**
-	 * @param path - path
-	 * @param min - minimum value
-	 * @param max - maximum value
+	 * @param path path
+	 * @param min minimum value
+	 * @param max maximum value
 	 * @return Safe integer value
 	 */
 	
 	default int getInteger(String path, int min, int max) {
 		int i = file().getInt(path);
-		return i < min ? min : i > max ? max : i;
+		return Math.clamp(i, min, max);
 	}
 	
 	/**
-	 * @param path - path
+	 * @param path path
 	 * @return Integer list value
 	 */
 	
@@ -70,7 +70,7 @@ public interface IFileValues {
 	}
 	
 	/**
-	 * @param path - path
+	 * @param path path
 	 * @return Double value
 	 */
 	
@@ -79,8 +79,8 @@ public interface IFileValues {
 	}
 	
 	/**
-	 * @param path - path
-	 * @param fallback - fallback value
+	 * @param path path
+	 * @param fallback fallback value
 	 * @return Double value or fallback if not found
 	 */
 	
@@ -89,19 +89,19 @@ public interface IFileValues {
 	}
 	
 	/**
-	 * @param path - path
-	 * @param min - minimum value
-	 * @param max - maximum value
+	 * @param path path
+	 * @param min minimum value
+	 * @param max maximum value
 	 * @return Safe double value
 	 */
 	
 	default double getDouble(String path, double min, double max) {
 		double i = file().getDouble(path);
-		return i < min ? min : i > max ? max : i;
+		return Math.clamp(i, min, max);
 	}
 	
 	/**
-	 * @param path - path
+	 * @param path path
 	 * @return Long value
 	 */
 	
@@ -110,8 +110,8 @@ public interface IFileValues {
 	}
 	
 	/**
-	 * @param path - path
-	 * @param fallback - fallback value
+	 * @param path path
+	 * @param fallback fallback value
 	 * @return Long value or fallback if not found
 	 */
 	
@@ -120,19 +120,19 @@ public interface IFileValues {
 	}
 	
 	/**
-	 * @param path - path
-	 * @param min - minimum value
-	 * @param max - maximum value
+	 * @param path path
+	 * @param min minimum value
+	 * @param max maximum value
 	 * @return Safe long value
 	 */
 	
 	default long getLong(String path, long min, long max) {
 		long i = file().getLong(path);
-		return i < min ? min : i > max ? max : i;
+		return Math.clamp(i, min, max);
 	}
 	
 	/**
-	 * @param path - path
+	 * @param path path
 	 * @return Long list value
 	 */
 	
@@ -141,7 +141,7 @@ public interface IFileValues {
 	}
 	
 	/**
-	 * @param path - path
+	 * @param path path
 	 * @return String value
 	 */
 	
@@ -150,8 +150,8 @@ public interface IFileValues {
 	}
 	
 	/**
-	 * @param path - path
-	 * @param fallback - fallback value
+	 * @param path path
+	 * @param fallback fallback value
 	 * @return String value or fallback if not found
 	 */
 	
@@ -160,7 +160,7 @@ public interface IFileValues {
 	}
 	
 	/**
-	 * @param path - path
+	 * @param path path
 	 * @return Boolean value
 	 */
 	
@@ -169,8 +169,8 @@ public interface IFileValues {
 	}
 	
 	/**
-	 * @param path - path
-	 * @param fallback - fallback value
+	 * @param path path
+	 * @param fallback fallback value
 	 * @return Boolean value or fallback if not found
 	 */
 	
@@ -179,7 +179,7 @@ public interface IFileValues {
 	}
 	
 	/**
-	 * @param path - path
+	 * @param path path
 	 * @return String list value
 	 */
 	
@@ -188,7 +188,7 @@ public interface IFileValues {
 	}
 	
 	/**
-	 * @param path - path
+	 * @param path path
 	 * @return String set value
 	 */
 	
@@ -199,7 +199,7 @@ public interface IFileValues {
 	/**
 	 * Returns a list of strings even if this path is a single string.
 	 * 
-	 * @param path - path
+	 * @param path path
 	 * @return String list value
 	 */
 	
@@ -214,21 +214,21 @@ public interface IFileValues {
 	}
 	
 	/**
-	 * @param <E> - enum type
-	 * @param path - path
-	 * @param clazz - enum class
-	 * @param def - default value
+	 * @param <E> enum type
+	 * @param path path
+	 * @param clazz enum class
+	 * @param fallback fallback value
 	 * @return Enum value or {@code default} value
 	 */
 	
-	default <E extends Enum<E>> E getEnum(String path, Class<E> clazz, E def) {
-		return RF.enumerate(clazz, getString(path), def);
+	default <E extends Enum<E>> E getEnum(String path, Class<E> clazz, E fallback) {
+		return RF.enumerate(clazz, getString(path), fallback);
 	}
 	
 	/**
-	 * @param <E> - enum type
-	 * @param path - path
-	 * @param clazz - enum class
+	 * @param <E> enum type
+	 * @param path path
+	 * @param clazz enum class
 	 * @return Enum value or {@code null}
 	 */
 	
@@ -237,9 +237,9 @@ public interface IFileValues {
 	}
 	
 	/**
-	 * @param <E> - enum type
-	 * @param path - path
-	 * @param clazz - enum class
+	 * @param <E> enum type
+	 * @param path path
+	 * @param clazz enum class
 	 * @return Enum value list, can be empty
 	 */
 	
@@ -248,9 +248,9 @@ public interface IFileValues {
 	}
 	
 	/**
-	 * @param <E> - enum type
-	 * @param path - path
-	 * @param clazz - enum class
+	 * @param <E> enum type
+	 * @param path path
+	 * @param clazz enum class
 	 * @return Enum value set, can be empty
 	 */
 	
@@ -259,17 +259,17 @@ public interface IFileValues {
 	}
 	
 	/**
-	 * @param path - path
-	 * @param def - default value
-	 * @return Material or {@code default} value
+	 * @param path path
+	 * @param fallback fallback value
+	 * @return Material or {@code fallback} value
 	 */
 	
-	default Material getMaterial(String path, Material def) {
-		return getEnum(path, Material.class, def);
+	default Material getMaterial(String path, Material fallback) {
+		return getEnum(path, Material.class, fallback);
 	}
 	
 	/**
-	 * @param path - path
+	 * @param path path
 	 * @return Material or {@code null}
 	 */
 	
@@ -278,7 +278,7 @@ public interface IFileValues {
 	}
 	
 	/**
-	 * @param path - path
+	 * @param path path
 	 * @return IContent value or {@code null}
 	 */
 	
@@ -288,7 +288,7 @@ public interface IFileValues {
 	}
 	
 	/**
-	 * @param path - path
+	 * @param path path
 	 * @return IContent value list
 	 */
 	
@@ -302,8 +302,8 @@ public interface IFileValues {
 	 * Sets a value at the specified path.<br>
 	 * Does not update the file.
 	 * 
-	 * @param path - path
-	 * @param value - value
+	 * @param path path
+	 * @param value value
 	 */
 	
 	default void set(String path, Object value) {
@@ -314,7 +314,7 @@ public interface IFileValues {
 	 * Deletes a value at the specified path.<br>
 	 * Does not update the file.
 	 * 
-	 * @param path - path
+	 * @param path path
 	 */
 	
 	default void delete(String path) {
@@ -325,8 +325,8 @@ public interface IFileValues {
 	 * Replaces a value from one path to another.<br>
 	 * Does not update the file.
 	 * 
-	 * @param from - source path
-	 * @param to - destination path
+	 * @param from source path
+	 * @param to destination path
 	 */
 	
 	default void replace(String from, String to) {

@@ -1,14 +1,13 @@
 package mc.rellox.spawnerlegacyapi.version;
 
-import java.util.Collection;
-
+import mc.rellox.spawnerlegacyapi.utility.reflect.Reflect.RF;
+import mc.rellox.spawnerlegacyapi.version.Version.VersionType;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
-import mc.rellox.spawnerlegacyapi.utility.reflect.Reflect.RF;
-import mc.rellox.spawnerlegacyapi.version.Version.VersionType;
+import java.util.Collection;
 
 public interface IVersion {
 	

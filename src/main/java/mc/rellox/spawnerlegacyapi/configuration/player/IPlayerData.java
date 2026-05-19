@@ -64,21 +64,21 @@ public interface IPlayerData extends ILocationMutable, ICommit {
 	/**
 	 * Tried to find the UUID from the player name.
 	 * 
-	 * @param name - trusted player name
+	 * @param name trusted player name
 	 * @return UUID of the player or {@code null} if no player found
 	 */
 	
 	UUID trusted(String name);
 	
 	/**
-	 * @param id - player id
+	 * @param id player id
 	 * @return {@code true} if this player is trusted
 	 */
 	
 	boolean trusts(UUID id);
 	
 	/**
-	 * @param player - player
+	 * @param player player
 	 * @return {@code true} if this player is trusted
 	 */
 	
@@ -87,7 +87,7 @@ public interface IPlayerData extends ILocationMutable, ICommit {
 	/**
 	 * Adds this player to the trust list.
 	 * 
-	 * @param id - player id
+	 * @param id player id
 	 * @return {@code true} if this player was not trusted before, otherwise {@code false}
 	 */
 	
@@ -96,7 +96,7 @@ public interface IPlayerData extends ILocationMutable, ICommit {
 	/**
 	 * Adds this player to the trust list.
 	 * 
-	 * @param player - player
+	 * @param player player
 	 * @return {@code true} if this player was not trusted before, otherwise {@code false}
 	 */
 	
@@ -105,7 +105,7 @@ public interface IPlayerData extends ILocationMutable, ICommit {
 	/**
 	 * Removes this player from the trust list.
 	 * 
-	 * @param id - player id
+	 * @param id player id
 	 * @return {@code true} if this player was trusted before, otherwise {@code false}
 	 */
 	
@@ -114,7 +114,7 @@ public interface IPlayerData extends ILocationMutable, ICommit {
 	/**
 	 * Removes this player from the trust list.
 	 * 
-	 * @param player - player
+	 * @param player player
 	 * @return {@code true} if this player was trusted before, otherwise {@code false}
 	 */
 	
@@ -131,8 +131,8 @@ public interface IPlayerData extends ILocationMutable, ICommit {
 	/**
 	 * Removes the specified spawner location.
 	 * 
-	 * @param block - spawner block
-	 * @return {@code true} if this location did not exists
+	 * @param block spawner block
+	 * @return {@code true} if this location did not exist
 	 */
 	
 	boolean remove(Block block);
@@ -140,14 +140,14 @@ public interface IPlayerData extends ILocationMutable, ICommit {
 	/**
 	 * Adds the specified spawner location.
 	 * 
-	 * @param block - spawner block
+	 * @param block spawner block
 	 * @return {@code true} if this location was added, otherwise {@code false}
 	 */
 	
 	boolean add(Block block);
 	
 	/**
-	 * @param limit - limit type
+	 * @param limit limit type
 	 * @return The specified limit value
 	 */
 	
@@ -156,8 +156,8 @@ public interface IPlayerData extends ILocationMutable, ICommit {
 	/**
 	 * Adds or subtracts the value from the limit.
 	 * 
-	 * @param limit - limit type
-	 * @param value - value
+	 * @param limit limit type
+	 * @param value value
 	 */
 	
 	void limit(LimitType limit, int value);
@@ -165,7 +165,7 @@ public interface IPlayerData extends ILocationMutable, ICommit {
 	/**
 	 * Resets the limit value.
 	 * 
-	 * @param limit - limit type
+	 * @param limit limit type
 	 * @return Previous limit value
 	 */
 	
@@ -174,7 +174,7 @@ public interface IPlayerData extends ILocationMutable, ICommit {
 	/**
 	 * Checks if the spawner type in spawner type GUI is unlocked.
 	 * 
-	 * @param type - type
+	 * @param type type
 	 * @return {@code true} if the spawner type is unlocked, otherwise {@code false}
 	 */
 	
@@ -189,8 +189,8 @@ public interface IPlayerData extends ILocationMutable, ICommit {
 	/**
 	 * Unlocks the spawner type in spawner type GUI.
 	 * 
-	 * @param type - type
-	 * @param unlock - {@code true} to unlock, {@code false} to lock
+	 * @param type type
+	 * @param unlock {@code true} to unlock, {@code false} to lock
 	 */
 	
 	void unlock(SpawnerType type, boolean unlock);
@@ -198,17 +198,17 @@ public interface IPlayerData extends ILocationMutable, ICommit {
 	/**
 	 * Gets the data value.
 	 * 
-	 * @param <T> - data type
-	 * @param data - data parser
+	 * @param <T> data type
+	 * @param data data parser
 	 * @return Data value or {@code null} if absent
 	 */
 	
 	<T> T get(IData<T> data);
 	
 	/**
-	 * @param <T> - data type
-	 * @param data - data parser
-	 * @param value - new value
+	 * @param <T> data type
+	 * @param data data parser
+	 * @param value new value
 	 * @return Old value or {@code null} if none was set before
 	 */
 	

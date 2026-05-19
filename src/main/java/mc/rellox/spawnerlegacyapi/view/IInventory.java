@@ -1,15 +1,14 @@
 package mc.rellox.spawnerlegacyapi.view;
 
-import java.util.List;
-import java.util.Set;
-
+import mc.rellox.spawnerlegacyapi.SLAPI;
+import mc.rellox.spawnerlegacyapi.view.layout.ILayout;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.Inventory;
 
-import mc.rellox.spawnerlegacyapi.SLAPI;
-import mc.rellox.spawnerlegacyapi.view.layout.ILayout;
+import java.util.List;
+import java.util.Set;
 
 public interface IInventory {
 	
@@ -46,13 +45,13 @@ public interface IInventory {
 	Set<Player> viewers();
 	
 	/**
-	 * @param player - player who clicked
-	 * @param click - click type
-	 * @param s - slot
-	 * @param bottom - if bottom inventory was clicked
+	 * @param player player who clicked
+	 * @param click click type
+	 * @param slot slot
+	 * @param bottom if bottom inventory was clicked
 	 */
 	
-	void click(Player player, ClickType click, int s, boolean bottom);
+	void click(Player player, ClickType click, int slot, boolean bottom);
 	
 	/**
 	 * Updates this inventory.
@@ -63,7 +62,7 @@ public interface IInventory {
 	/**
 	 * Registers and opens this inventory for the player.
 	 * 
-	 * @param player - player
+	 * @param player player
 	 */
 	
 	default void open(Player player) {
@@ -77,7 +76,7 @@ public interface IInventory {
 	/**
 	 * This method is called when a player has opened this inventory.
 	 * 
-	 * @param player - player
+	 * @param player player
 	 */
 	
 	default void opening(Player player) {}
@@ -87,7 +86,7 @@ public interface IInventory {
 	 * Does check or gives items to the player who is exiting
 	 * this inventory.
 	 * 
-	 * @param player - player
+	 * @param player player
 	 */
 	
 	default void closing(Player player) {}
@@ -95,7 +94,7 @@ public interface IInventory {
 	/**
 	 * Removes this player from this inventory.
 	 * 
-	 * @param player - player
+	 * @param player player
 	 */
 	
 	default void exit(Player player) {
@@ -143,7 +142,7 @@ public interface IInventory {
 	 */
 	
 	default IInventory register() {
-		SLAPI.get().views().add(this);
+		SLAPI.views().add(this);
 		return this;
 	}
 	
@@ -153,7 +152,7 @@ public interface IInventory {
 	
 	default IInventory unregister() {
 		close();
-		SLAPI.get().views().remove(this);
+		SLAPI.views().remove(this);
 		return this;
 	}
 

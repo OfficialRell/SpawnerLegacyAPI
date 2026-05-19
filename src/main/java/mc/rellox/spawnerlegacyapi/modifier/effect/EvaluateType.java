@@ -43,8 +43,8 @@ public enum EvaluateType {
 	 * Returns the calculated change value.<br>
 	 * This value is not added to the base value.
 	 * 
-	 * @param value - base value
-	 * @param change - change value
+	 * @param value base value
+	 * @param change change value
 	 * @return The calculated change value
 	 */
 	

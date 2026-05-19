@@ -22,7 +22,7 @@ public interface IModifierMap {
 	List<IModifierInstance> modifiers();
 	
 	/**
-	 * @param modifier - modifier
+	 * @param modifier modifier
 	 * @return {@code true} if a modifier instance with the specified modifier exists
 	 */
 	
@@ -31,7 +31,7 @@ public interface IModifierMap {
 	/**
 	 * Adds a modifier instance to this generator.
 	 * 
-	 * @param instance - modifier instance
+	 * @param instance modifier instance
 	 * 
 	 * @throws IllegalArgumentException if an instance with the same
 	 * modifier already exists
@@ -53,9 +53,9 @@ public interface IModifierMap {
 	/**
 	 * Runs the action for all matching executor type classes.
 	 * 
-	 * @param <E> - executor type
-	 * @param clazz - executor class
-	 * @param action - action to perform
+	 * @param <E> executor type
+	 * @param clazz executor class
+	 * @param action action to perform
 	 */
 	
 	<E extends IExecutor> void execute(Class<E> clazz, Consumer<E> action);

@@ -14,9 +14,9 @@ import mc.rellox.spawnerlegacyapi.modifier.executor.IExecutor.IExecutorEntity;
 import mc.rellox.spawnerlegacyapi.modifier.executor.IExecutor.IExecutorUpgrades;
 
 /**
- * Represents an modifier item that is inserted into spawner upgrade menu.
+ * Represents a modifier item that is inserted into spawner upgrade menu.
  * 
- * @param <E> - effect type
+ * @param <E> effect type
  */
 
 public interface IEffectInstance<E extends IEffect> {
@@ -42,7 +42,7 @@ public interface IEffectInstance<E extends IEffect> {
 	/**
 	 * Write all data to the specified persistent data container.
 	 * 
-	 * @param container - container
+	 * @param container container
 	 */
 	
 	void write(PersistentDataContainer container);
@@ -50,7 +50,7 @@ public interface IEffectInstance<E extends IEffect> {
 	/**
 	 * Inserts all modifier values into the specified item builders placeholders.
 	 * 
-	 * @param builder - item builder
+	 * @param builder item builder
 	 */
 	
 	void replace(ItemBuilder builder);

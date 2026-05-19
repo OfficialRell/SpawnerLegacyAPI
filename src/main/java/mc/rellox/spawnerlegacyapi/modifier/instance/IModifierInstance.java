@@ -48,7 +48,7 @@ public interface IModifierInstance {
 	boolean active();
 	
 	/**
-	 * @return {@code true} if this modifier has ran out of usage
+	 * @return {@code true} if this modifier has run out of usage
 	 */
 	
 	default boolean inactive() {

@@ -1,8 +1,8 @@
 package mc.rellox.spawnerlegacyapi.modifier;
 
-import java.util.Set;
-
 import mc.rellox.spawnerlegacyapi.spawner.type.SpawnerType;
+
+import java.util.Set;
 
 public interface IModifierRequirements {
 	
@@ -28,13 +28,13 @@ public interface IModifierRequirements {
 	boolean invert();
 	
 	/**
-	 * @param type - type
+	 * @param type type
 	 * @return If this type is allowed
 	 */
 	
 	default boolean allow(SpawnerType type) {
 		var types = types();
-		return types.isEmpty() ? true : types().contains(type) ^ invert();
+		return types.isEmpty() || types().contains(type) ^ invert();
 	}
 
 }

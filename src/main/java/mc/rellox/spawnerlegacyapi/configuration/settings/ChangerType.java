@@ -59,12 +59,12 @@ public enum ChangerType {
 	public abstract double change(double value, double other);
 
 	public static ChangerType of(char c) {
-		return switch (c) {
-		case '+' -> ADD;
-		case '-' -> SUBTRACT;
-		case '*' -> MULTIPLY;
-		case '/' -> DIVIDE;
-		default -> NONE;
+		return switch(c) {
+			case '+' -> ADD;
+			case '-' -> SUBTRACT;
+			case '*' -> MULTIPLY;
+			case '/' -> DIVIDE;
+			default -> NONE;
 		};
 	}
 

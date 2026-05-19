@@ -26,14 +26,14 @@ public interface IDefinedItem {
 	ItemBuilder item();
 	
 	/**
-	 * @param item - item
+	 * @param item item
 	 * @return {@code true} if item matches this item
 	 */
 	
 	boolean matches(ItemStack item);
 	
 	/**
-	 * @param amount - price amount
+	 * @param amount price amount
 	 * @return Price of this item with given amount
 	 */
 	

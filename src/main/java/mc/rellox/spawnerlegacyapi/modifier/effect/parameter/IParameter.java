@@ -20,7 +20,7 @@ public interface IParameter<T> {
 	 * Tries to parse the argument to the correct type.<br>
 	 * Returns {@code null} if failed.
 	 * 
-	 * @param argument - argument
+	 * @param argument argument
 	 * @return Parsed value or {@code null}
 	 */
 	
@@ -41,8 +41,8 @@ public interface IParameter<T> {
 	/**
 	 * Replaces all placeholders with the value.
 	 * 
-	 * @param builder - builder
-	 * @param value - value
+	 * @param builder builder
+	 * @param value value
 	 */
 	
 	void replace(ItemBuilder builder, Object value);
@@ -62,8 +62,8 @@ public interface IParameter<T> {
 	/**
 	 * Writes the value to the container.
 	 * 
-	 * @param container - container
-	 * @param value - value
+	 * @param container container
+	 * @param value value
 	 */
 	
 	void write(PersistentDataContainer container, Object value);
@@ -71,7 +71,7 @@ public interface IParameter<T> {
 	/**
 	 * Reads the value from the container, never {@code null}.
 	 * 
-	 * @param container - container
+	 * @param container container
 	 * @return Read value
 	 */
 	

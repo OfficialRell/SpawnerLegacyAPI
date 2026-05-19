@@ -17,8 +17,8 @@ public interface IParameterMap {
 	/**
 	 * Replaces all placeholders the values.
 	 * 
-	 * @param builder - builder
-	 * @param values - values
+	 * @param builder builder
+	 * @param values values
 	 */
 	
 	void replace(ItemBuilder builder, Object... values);
@@ -26,8 +26,8 @@ public interface IParameterMap {
 	/**
 	 * Writes all parameter values.
 	 * 
-	 * @param container - container
-	 * @param values - values
+	 * @param container container
+	 * @param values values
 	 * 
 	 * @throws IllegalArgumentException if parameter count does not
 	 * match specified value count
@@ -38,7 +38,7 @@ public interface IParameterMap {
 	/**
 	 * Reads all parameter values.
 	 * 
-	 * @param container - container
+	 * @param container container
 	 * @return Read values
 	 */
 	

@@ -11,7 +11,7 @@ public interface IData<T> {
 	String id();
 	
 	/**
-	 * @param file - file
+	 * @param file file
 	 * @return The loaded data
 	 */
 	
@@ -20,8 +20,8 @@ public interface IData<T> {
 	/**
 	 * Saves the data to this file.
 	 * 
-	 * @param file - file
-	 * @param data - data
+	 * @param file file
+	 * @param data data
 	 */
 	
 	void save(IFile file, T data);

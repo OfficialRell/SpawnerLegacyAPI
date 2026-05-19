@@ -39,7 +39,7 @@ public interface INaturalData extends ICommit {
 	/**
 	 * Clears the specifier amount of spawner locations.
 	 * 
-	 * @param limit - limit
+	 * @param limit limit
 	 * @return Amount of successfully cleared spawner locations
 	 */
 	
@@ -56,7 +56,7 @@ public interface INaturalData extends ICommit {
 	/**
 	 * Adds the spawner to the natural spawner list.
 	 * 
-	 * @param block - spawner block
+	 * @param block spawner block
 	 */
 	
 	void add(Block block);
@@ -64,7 +64,7 @@ public interface INaturalData extends ICommit {
 	/**
 	 * Removed the spawner from the natural spawner list.
 	 * 
-	 * @param block - spawner block
+	 * @param block spawner block
 	 */
 	
 	void remove(Block block);

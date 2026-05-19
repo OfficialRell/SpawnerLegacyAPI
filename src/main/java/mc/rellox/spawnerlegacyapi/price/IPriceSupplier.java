@@ -1,10 +1,9 @@
 package mc.rellox.spawnerlegacyapi.price;
 
-import java.util.UUID;
-
+import mc.rellox.spawnerlegacyapi.manager.IPriceManager.IPriceProvider;
 import org.bukkit.entity.Player;
 
-import mc.rellox.spawnerlegacyapi.manager.IPriceManager.IPriceProvider;
+import java.util.UUID;
 
 @SuppressWarnings("removal")
 public interface IPriceSupplier extends IPriceProvider {
@@ -12,7 +11,7 @@ public interface IPriceSupplier extends IPriceProvider {
 	/**
 	 * Creates a price with the given value.
 	 * 
-	 * @param value - value
+	 * @param value value
 	 * 
 	 * @return Created price
 	 */
@@ -20,15 +19,15 @@ public interface IPriceSupplier extends IPriceProvider {
 	IPrice of(double value);
 	
 	/**
-	 * @param player - player
+	 * @param player player
 	 * @return Player balance
 	 */
 	
 	double balance(Player player);
 	
 	/**
-	 * @param id - player id
-	 * @return Player balance or -1 if cannot be determined
+	 * @param id player id
+	 * @return Player balance or -1 if it cannot be determined
 	 */
 	
 	double balance(UUID id);

@@ -1,11 +1,10 @@
 package mc.rellox.spawnerlegacyapi.modifier;
 
-import org.bukkit.NamespacedKey;
-
 import mc.rellox.spawnerlegacyapi.item.IItemConstant;
 import mc.rellox.spawnerlegacyapi.modifier.effect.IEffect;
 import mc.rellox.spawnerlegacyapi.modifier.effect.ModifierEffectType;
 import mc.rellox.spawnerlegacyapi.text.content.IContent;
+import org.bukkit.NamespacedKey;
 
 public interface IModifier {
 	

@@ -1,12 +1,11 @@
 package mc.rellox.spawnerlegacyapi.modifier.effect;
 
-import org.bukkit.persistence.PersistentDataContainer;
-import org.bukkit.potion.PotionEffectType;
-
 import mc.rellox.spawnerlegacyapi.modifier.effect.parameter.IParameterMap;
 import mc.rellox.spawnerlegacyapi.modifier.instance.IEffectInstance;
 import mc.rellox.spawnerlegacyapi.modifier.instance.IModifierInstance;
 import mc.rellox.spawnerlegacyapi.spawner.type.UpgradeType;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.potion.PotionEffectType;
 
 public interface IEffect {
 
@@ -19,8 +18,8 @@ public interface IEffect {
 	/**
 	 * Reads the modifier effect instance from the specified persistent data container.
 	 * 
-	 * @param instance - instance
-	 * @param container - container
+	 * @param instance instance
+	 * @param container container
 	 * @return Modifier effect instance
 	 */
 	

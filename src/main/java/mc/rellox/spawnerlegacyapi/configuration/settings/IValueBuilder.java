@@ -24,7 +24,7 @@ public interface IValueBuilder<T, U> {
 	T build(String path);
 	
 	default boolean exists(String path) {
-		return file().exists(path) == true;
+		return file().exists(path);
 	}
 
 	record GenericBuilder<T, U>(IFile file, ValueType<U> type, Function<U, T> parser) implements IValueBuilder<T, U> {
@@ -41,8 +41,9 @@ public interface IValueBuilder<T, U> {
 
 		@Override
 		public IHeldValue<J> build(String path) {
-			if(exists(path) == false) return null;
-			return IHeldValue.of(file, path, parser);
+			return exists(path)
+					? IHeldValue.of(file, path, parser)
+					: null;
 		}
 
 	}

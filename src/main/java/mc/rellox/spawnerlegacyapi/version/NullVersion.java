@@ -1,11 +1,10 @@
 package mc.rellox.spawnerlegacyapi.version;
 
-import java.util.Collection;
-
+import mc.rellox.spawnerlegacyapi.version.Version.VersionType;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import mc.rellox.spawnerlegacyapi.version.Version.VersionType;
+import java.util.Collection;
 
 public record NullVersion(VersionType type) implements IVersion {
 

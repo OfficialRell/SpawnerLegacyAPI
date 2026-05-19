@@ -188,7 +188,7 @@ public interface IFile extends IFileValues {
 	 */
 
 	default Commenter commenter() {
-		return Version.version.atleast(VersionType.v_18_1)
+		return Version.instance.type().atleast(VersionType.v_18_1)
 				? new Commenter(this) : null;
 	}
 

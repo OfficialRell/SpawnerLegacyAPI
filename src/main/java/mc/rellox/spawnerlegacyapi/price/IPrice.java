@@ -1,11 +1,10 @@
 package mc.rellox.spawnerlegacyapi.price;
 
-import java.util.UUID;
-import java.util.function.DoubleUnaryOperator;
-
+import mc.rellox.spawnerlegacyapi.text.content.IContent;
 import org.bukkit.entity.Player;
 
-import mc.rellox.spawnerlegacyapi.text.content.IContent;
+import java.util.UUID;
+import java.util.function.DoubleUnaryOperator;
 
 public interface IPrice {
 	
@@ -28,21 +27,21 @@ public interface IPrice {
 	double precise();
 	
 	/**
-	 * @param player - player
+	 * @param player player
 	 * @return The balance the player has
 	 */
 	
 	int balance(Player player);
 	
 	/**
-	 * @param id - player id
-	 * @return The balance the player has or -1 if cannot be determined
+	 * @param id player id
+	 * @return The balance the player has or -1 if it cannot be determined
 	 */
 	
 	int balance(UUID id);
 	
 	/**
-	 * @param player - player
+	 * @param player player
 	 * @return {@code true} if this player has the price value in their balance
 	 */
 	
@@ -51,7 +50,7 @@ public interface IPrice {
 	/**
 	 * Removes the price value from the player's balance.
 	 * 
-	 * @param player - player
+	 * @param player player
 	 */
 	
 	void remove(Player player);
@@ -69,7 +68,7 @@ public interface IPrice {
 	IContent text();
 	
 	/**
-	 * @param player - player
+	 * @param player player
 	 * @return Text with the required balance
 	 */
 	
@@ -78,7 +77,7 @@ public interface IPrice {
 	/**
 	 * Adds this price value to the player's balance.
 	 * 
-	 * @param player - player
+	 * @param player player
 	 */
 	
 	void refund(Player player);
@@ -86,14 +85,14 @@ public interface IPrice {
 	/**
 	 * Returns a new price object using the unary operator.
 	 * 
-	 * @param operator - value operator
+	 * @param operator value operator
 	 * @return The new price object
 	 */
 	
 	IPrice copy(DoubleUnaryOperator operator);
 	
 	/**
-	 * @param value - value to set
+	 * @param value value to set
 	 * @return Price with the value
 	 */
 	
@@ -102,7 +101,7 @@ public interface IPrice {
 	}
 	
 	/**
-	 * @param value - value to add
+	 * @param value value to add
 	 * @return Price with the added value
 	 */
 	
@@ -111,8 +110,8 @@ public interface IPrice {
 	}
 	
 	/**
-	 * @param value - value to subtract
-	 * @return Price with the substracted value
+	 * @param value -value to subtract
+	 * @return Price with the subtracted value
 	 */
 	
 	default IPrice subtract(double value) {
@@ -120,7 +119,7 @@ public interface IPrice {
 	}
 	
 	/**
-	 * @param value - value to multiply
+	 * @param value value to multiply
 	 * @return Price with the multiplied value
 	 */
 	
@@ -129,7 +128,7 @@ public interface IPrice {
 	}
 	
 	/**
-	 * @param price - price to add
+	 * @param price price to add
 	 * @return Price with the other price added
 	 */
 	

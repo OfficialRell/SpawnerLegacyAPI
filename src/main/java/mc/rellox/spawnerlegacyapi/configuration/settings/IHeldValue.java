@@ -1,12 +1,11 @@
 package mc.rellox.spawnerlegacyapi.configuration.settings;
 
-import java.util.function.Function;
-import java.util.stream.Stream;
-
-import org.bukkit.configuration.ConfigurationSection;
-
 import mc.rellox.spawnerlegacyapi.configuration.IFile;
 import mc.rellox.spawnerlegacyapi.utility.reflect.Reflect.RF;
+import org.bukkit.configuration.ConfigurationSection;
+
+import java.util.function.Function;
+import java.util.stream.Stream;
 
 public interface IHeldValue<T> {
 
@@ -18,20 +17,20 @@ public interface IHeldValue<T> {
 		try {
 			if(object instanceof ConfigurationSection cs) {
 				String initial = cs.getString("initial");
-				if(initial == null || initial.isEmpty() == true)
+				if(initial == null || initial.isEmpty())
 					throw new NullPointerException("Initial value for path '" + path + "' cannot be null");
 				T value = parser.apply(initial);
 				Object[] values = Stream.of(HolderType.values())
 						.map(type -> cs.getString(type.key()))
 						.map(parser)
 						.toArray();
-				return new HeldFilled<T>(value, values);
+				return new HeldFilled<>(value, values);
 			}
 			String initial = file.getString(path);
-			if(initial == null || initial.isEmpty() == true)
+			if(initial == null || initial.isEmpty())
 				throw new NullPointerException("Initial value for path '" + path + "' cannot be null");
 			T value = parser.apply(initial);
-			return new HeldSingle<T>(value);
+			return new HeldSingle<>(value);
 		} catch (Exception e) {
 			RF.debug(e);
 		}
