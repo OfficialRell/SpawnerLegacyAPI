@@ -95,7 +95,7 @@ public final class SLAPI {
 	 * @return Language/translation manager
 	 */
 	
-	public static ILangaugeManager language() {
+	public static ILanguageManager language() {
 		return INSTANCE.language();
 	}
 	

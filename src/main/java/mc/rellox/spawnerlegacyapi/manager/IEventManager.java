@@ -6,11 +6,11 @@ import mc.rellox.spawnerlegacyapi.event.IEvent;
 public interface IEventManager {
 	
 	/**
-	 * Registers an event of the speficied class type.
+	 * Registers an event of the specified class type.
 	 * 
-	 * @param <E> - event class type
-	 * @param clazz - event class
-	 * @param executor - event executor
+	 * @param <E> event class type
+	 * @param clazz event class
+	 * @param executor event executor
 	 * 
 	 * @throws NullPointerException if event class or executor is {@code null}
 	 */

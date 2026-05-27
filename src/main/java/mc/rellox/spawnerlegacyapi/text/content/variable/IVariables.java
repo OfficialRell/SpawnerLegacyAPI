@@ -6,7 +6,7 @@ import mc.rellox.spawnerlegacyapi.text.content.IContent;
 
 public interface IVariables {
 	
-	static final IVariables empty = () -> null;
+	IVariables empty = () -> null;
 	
 	static IVariables with(String k, Object o) {
 		var objects = new Object[] {k, o};
@@ -27,7 +27,7 @@ public interface IVariables {
 	Object[] variables();
 	
 	/**
-	 * @param variable - variable to get the value for
+	 * @param variable variable to get the value for
 	 * @return The value associated with the given variable, or {@code null} if not found
 	 */
 	
@@ -37,7 +37,7 @@ public interface IVariables {
 	}
 	
 	/**
-	 * @param key - key of the variable to get the value for
+	 * @param key key of the variable to get the value for
 	 * @return The value associated with the given key, or {@code null} if not found
 	 */
 	
@@ -53,7 +53,7 @@ public interface IVariables {
 	}
 	
 	/**
-	 * @param other - other variables to combine with this
+	 * @param other other variables to combine with this
 	 * @return A new IVariables instance containing variables from both this and the other
 	 */
 	

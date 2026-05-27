@@ -1,8 +1,5 @@
 package mc.rellox.spawnerlegacyapi.configuration;
 
-import mc.rellox.spawnerlegacyapi.utility.reflect.Reflect.RF;
-import mc.rellox.spawnerlegacyapi.version.Version;
-import mc.rellox.spawnerlegacyapi.version.Version.VersionType;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.FileConfigurationOptions;
@@ -179,7 +176,7 @@ public interface IFile extends IFileValues {
 	}
 
 	/**
-	 * @return New commenter or {@code null} if server version is 1.17 or lower
+	 * @return New commenter for this file
 	 */
 
 	default Commenter commenter() {
@@ -192,11 +189,11 @@ public interface IFile extends IFileValues {
 		 * Adds comments to this path.
 		 *
 		 * @param path path
-		 * @param cs comments
+		 * @param comments comments
 		 */
 
-		public void comment(String path, String... cs) {
-			comment(path, List.of(cs));
+		public void comment(String path, String... comments) {
+			comment(path, List.of(comments));
 		}
 
 		/**

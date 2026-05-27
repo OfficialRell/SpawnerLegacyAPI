@@ -11,7 +11,7 @@ public final class Calculate {
 	
 	public static double round(double d) {
 		int i = (int) (d * 100);
-		return (double) (i / 100.0);
+		return i / 100.0;
 	}
 	
 	public static IInteger toInteger(String s) {
@@ -45,7 +45,7 @@ public final class Calculate {
 		}
 	}
 
-	public static interface INumber {
+	public interface INumber {
 		
 		String input();
 		
@@ -57,7 +57,7 @@ public final class Calculate {
 		
 	}
 
-	public static interface IInteger extends INumber {
+	public interface IInteger extends INumber {
 		
 		int get();
 		
@@ -90,7 +90,7 @@ public final class Calculate {
 		}
 	}
 
-	public static interface IDouble extends INumber {
+	public interface IDouble extends INumber {
 		
 		double get();
 		
@@ -131,9 +131,9 @@ public final class Calculate {
 	/**
 	 * Parses time: &lt;years&gt;:&lt;months&gt;:&lt;days&gt;:&lt;hours&gt;:&lt;minutes&gt;:&lt;seconds&gt;
 	 * into seconds.<br>
-	 * Can pass less values (e.g. &lt;minutes&gt;:&lt;seconds&gt).
+	 * Can pass fewer values (e.g. &lt;minutes&gt;:&lt;seconds&gt).
 	 * 
-	 * @param time - time value
+	 * @param time time value
 	 * @return parsed time in seconds
 	 */
 	
@@ -159,7 +159,7 @@ public final class Calculate {
 	/**
 	 * Converts seconds into a human-readable format.
 	 * 
-	 * @param cooldown - time in seconds
+	 * @param cooldown time in seconds
 	 * @return Human-readable time
 	 */
 
@@ -183,7 +183,7 @@ public final class Calculate {
 	}
 	
 	/**
-	 * This method helps runnables to always start a task at the same interval.
+	 * This method helps runnable tasks to always start a task at the same interval.
 	 * 
 	 * @return Ticks until the next second
 	 */

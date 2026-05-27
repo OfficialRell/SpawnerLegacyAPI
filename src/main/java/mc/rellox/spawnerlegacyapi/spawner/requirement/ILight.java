@@ -4,7 +4,7 @@ import org.bukkit.block.Block;
 
 public interface ILight {
 
-	static ILight empty = new ILight() {
+	ILight empty = new ILight() {
 		@Override
 		public byte minimum() {
 			return 0;
@@ -28,7 +28,7 @@ public interface ILight {
 		return new ILight() {
 			final byte minimum = (byte) min,
 					maximum = (byte) max;
-			final LightFinder finder = LightFinder.of(daylight);
+			final ILightFinder finder = ILightFinder.of(daylight);
 			@Override
 			public byte minimum() {
 				return minimum;
@@ -51,7 +51,7 @@ public interface ILight {
 	static ILight of(int v, boolean daylight) {
 		return new ILight() {
 			final byte value = (byte) v;
-			final LightFinder finder = LightFinder.of(daylight);
+			final ILightFinder finder = ILightFinder.of(daylight);
 			@Override
 			public byte minimum() {
 				return value;
@@ -84,7 +84,7 @@ public interface ILight {
 	byte maximum();
 	
 	/**
-	 * @param block - block at
+	 * @param block block
 	 * @return Block light level
 	 */
 	
@@ -92,7 +92,7 @@ public interface ILight {
 	
 	/**
 	 * If daylight is {@code true} then the day time will be checked, if it is day
-	 * then the appropiate light level will be removed, otherwise if it is night time
+	 * then the appropriate light level will be removed, otherwise if it is nighttime
 	 * then light level of 0 will be returned.
 	 * 
 	 * @return {@code true} if daylight checking is enabled, otherwise {@code false}
@@ -101,7 +101,7 @@ public interface ILight {
 	boolean daylight();
 	
 	/**
-	 * @param block - block at
+	 * @param block block
 	 * @return {@code true} if block light level matches the required light level
 	 */
 	
@@ -110,9 +110,9 @@ public interface ILight {
 		return light >= minimum() && light <= maximum();
 	}
 	
-	interface LightFinder {
+	interface ILightFinder {
 		
-		static LightFinder of(boolean daylight) {
+		static ILightFinder of(boolean daylight) {
 			return daylight
 					? block -> {
 						long time = block.getWorld().getTime();
@@ -125,7 +125,7 @@ public interface ILight {
 		}
 
 		/**
-		 * @param block - block
+		 * @param block block
 		 * @return Light level of this block
 		 */
 		

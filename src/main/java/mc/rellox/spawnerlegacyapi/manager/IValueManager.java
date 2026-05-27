@@ -1,34 +1,20 @@
 package mc.rellox.spawnerlegacyapi.manager;
 
-import java.util.function.Function;
-
 import mc.rellox.spawnerlegacyapi.configuration.IFile;
-import mc.rellox.spawnerlegacyapi.configuration.settings.IBooleanValue;
-import mc.rellox.spawnerlegacyapi.configuration.settings.IDoubleArrayValue;
-import mc.rellox.spawnerlegacyapi.configuration.settings.IDoubleValue;
-import mc.rellox.spawnerlegacyapi.configuration.settings.IEnumSet;
-import mc.rellox.spawnerlegacyapi.configuration.settings.IIntValue;
-import mc.rellox.spawnerlegacyapi.configuration.settings.IPermissions;
-import mc.rellox.spawnerlegacyapi.configuration.settings.IPlayerOptions;
-import mc.rellox.spawnerlegacyapi.configuration.settings.IPriceValue;
-import mc.rellox.spawnerlegacyapi.configuration.settings.IPricesArrayValue;
-import mc.rellox.spawnerlegacyapi.configuration.settings.IPricesValue;
-import mc.rellox.spawnerlegacyapi.configuration.settings.ISimpleSet;
-import mc.rellox.spawnerlegacyapi.configuration.settings.ITypePermissions;
-import mc.rellox.spawnerlegacyapi.configuration.settings.IValue;
-import mc.rellox.spawnerlegacyapi.configuration.settings.IValueBuilder;
-import mc.rellox.spawnerlegacyapi.configuration.settings.IValueHeld;
+import mc.rellox.spawnerlegacyapi.configuration.settings.*;
 import mc.rellox.spawnerlegacyapi.price.Group;
+
+import java.util.function.Function;
 
 public interface IValueManager {
 	
 	<T> IValue<T> of(IValueBuilder<T, ?> builder, String path, String suffix);
 	
-	<T extends Enum<T>, U> IValue<T> of(IFile file, String path, String suffix, Class<T> type);
+	<T extends Enum<T>> IValue<T> of(IFile file, String path, String suffix, Class<T> type);
 	
-	<T, U> IValue<T> of(IValueBuilder<T, ?> builder, String path);
+	<T> IValue<T> of(IValueBuilder<T, ?> builder, String path);
 	
-	<T extends Enum<T>, U> IValue<T> of(IFile file, String path, Class<T> type);
+	<T extends Enum<T>> IValue<T> of(IFile file, String path, Class<T> type);
 	
 	<J> IValueHeld<J> of(IFile file, String path, Function<String, J> parser);
 	

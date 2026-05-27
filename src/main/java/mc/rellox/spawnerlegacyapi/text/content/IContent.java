@@ -112,7 +112,7 @@ public interface IContent {
 	// Methods
 	
 	/**
-	 * @param variables - text variables
+	 * @param variables text variables
 	 * @return Final text
 	 */
 	
@@ -127,7 +127,7 @@ public interface IContent {
 	}
 	
 	/**
-	 * @param variables - text variables
+	 * @param variables text variables
 	 * @return Content with variables
 	 */
 	
@@ -152,7 +152,7 @@ public interface IContent {
 	}
 	
 	/**
-	 * @param key - savable text key
+	 * @param key savable text key
 	 * @return Keyed content
 	 */
 	
@@ -163,7 +163,7 @@ public interface IContent {
 	/**
 	 * Indents this content with the specified number of spaces.
 	 * 
-	 * @param spaces - spaces to indent
+	 * @param spaces spaces to indent
 	 * @return Indented content
 	 */
 	
@@ -174,7 +174,7 @@ public interface IContent {
 	/**
 	 * Sends this text to the player only if it is not empty.
 	 * 
-	 * @param player - player
+	 * @param player player
 	 */
 	
 	default void send(Player player) {
@@ -186,7 +186,7 @@ public interface IContent {
 	/**
 	 * Sends this text the player that has this id and is online.
 	 * 
-	 * @param id - player's {@link UUID}
+	 * @param id player's {@link UUID}
 	 */
 	
 	default void send(UUID id) {
@@ -197,7 +197,7 @@ public interface IContent {
 	/**
 	 * Sends this text to the command sender only if it is not empty.
 	 * 
-	 * @param sender - sender
+	 * @param sender sender
 	 */
 	
 	default void send(CommandSender sender) {

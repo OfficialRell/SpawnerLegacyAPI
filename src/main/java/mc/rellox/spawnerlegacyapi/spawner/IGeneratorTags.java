@@ -15,7 +15,7 @@ public interface IGeneratorTags {
 	 * Returns the tags this generator has.<br>
 	 * If permanent is {@code false} then it will return only temporary tags.
 	 * 
-	 * @param permanent - permanent
+	 * @param permanent permanent
 	 * @return Permanent or temporary tags
 	 */
 	
@@ -38,7 +38,7 @@ public interface IGeneratorTags {
 	}
 	
 	/**
-	 * @param permanent - permanent
+	 * @param permanent permanent
 	 * @return Array of permanent or temporary tags
 	 */
 	
@@ -52,8 +52,8 @@ public interface IGeneratorTags {
 	 * and will not be saved on the spawner.<br>
 	 * This will not update the generator.
 	 * 
-	 * @param tag - tag
-	 * @param permanent - permanent
+	 * @param tag tag
+	 * @param permanent permanent
 	 */
 	
 	void tag(Tag tag, boolean permanent);
@@ -62,7 +62,7 @@ public interface IGeneratorTags {
 	 * Append the tag to this generator as permanent and saves it.<br>
 	 * This will not update the generator.
 	 * 
-	 * @param tag - tag
+	 * @param tag tag
 	 */
 	
 	default void tag(Tag tag) {
@@ -73,8 +73,8 @@ public interface IGeneratorTags {
 	 * Remove the tag from this generator and saves it.<br>
 	 * If permanent is {@code false} then the temporary tag will be removed.
 	 * 
-	 * @param tag - tag
-	 * @param permanent - permanent
+	 * @param tag tag
+	 * @param permanent permanent
 	 */
 	
 	void untag(Tag tag, boolean permanent);
@@ -82,7 +82,7 @@ public interface IGeneratorTags {
 	/**
 	 * Remove permanent tag from this generator and saves it.
 	 * 
-	 * @param tag - tag
+	 * @param tag tag
 	 */
 	
 	default void untag(Tag tag) {
@@ -90,8 +90,8 @@ public interface IGeneratorTags {
 	}
 	
 	/**
-	 * @param tag - tag
-	 * @param permanent - permanent
+	 * @param tag tag
+	 * @param permanent permanent
 	 * @return {@code true} if the tag matches
 	 */
 	
@@ -100,7 +100,7 @@ public interface IGeneratorTags {
 	}
 	
 	/**
-	 * @param tag - tag
+	 * @param tag tag
 	 * @return {@code true} if and only if the permanent tag matches
 	 */
 	
@@ -109,7 +109,7 @@ public interface IGeneratorTags {
 	}
 	
 	/**
-	 * @param tag - tag
+	 * @param tag tag
 	 * @return {@code true} if the permanent or temporary tag matches
 	 */
 	
@@ -225,7 +225,7 @@ public interface IGeneratorTags {
 		}
 		
 		/**
-		 * @param tags - tags
+		 * @param tags tags
 		 * @return {@code true} it this tag matches the specified tags
 		 */
 		

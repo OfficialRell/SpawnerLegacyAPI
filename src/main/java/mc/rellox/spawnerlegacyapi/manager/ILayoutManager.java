@@ -10,7 +10,7 @@ public interface ILayoutManager {
 	/**
 	 * Gets the layout item that is saved in the global item list.
 	 * 
-	 * @param key - layout item key
+	 * @param key layout item key
 	 * @return Layout item
 	 */
 	
@@ -19,20 +19,20 @@ public interface ILayoutManager {
 	/**
 	 * Gets the layout for the upgrade GUI of the given spawner type.
 	 * 
-	 * @param type - spawner type
+	 * @param type spawner type
 	 * @return Layout for upgrade GUI
 	 */
 	
 	ILayout upgrades(SpawnerType type);
 	
 	/**
-	 * @return Layout for purchase shop GUI
+	 * @return Layout for purchase-shop GUI
 	 */
 	
 	ILayout purchase();
 	
 	/**
-	 * @return Layout for sell shop GUI
+	 * @return Layout for sell-shop GUI
 	 */
 	
 	ILayout sell();
@@ -50,7 +50,7 @@ public interface ILayoutManager {
 	ILayout crafting();
 	
 	/**
-	 * @param key - order key
+	 * @param key order key
 	 * @return Item orderer, never {@code null}
 	 */
 	

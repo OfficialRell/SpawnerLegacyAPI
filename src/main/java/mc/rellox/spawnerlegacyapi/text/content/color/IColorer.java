@@ -34,7 +34,7 @@ public interface IColorer {
 	}
 	
 	/**
-	 * @param text - input text
+	 * @param text input text
 	 * @return colored text
 	 */
 	

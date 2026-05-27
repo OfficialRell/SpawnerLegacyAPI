@@ -20,7 +20,7 @@ public enum UpgradeType {
 	public final Color color;
 	public final SlotField field;
 	
-	private UpgradeType(String id, String values, Color color, SlotField field) {
+	UpgradeType(String id, String values, Color color, SlotField field) {
 		this.id = id;
 		this.values = values;
 		this.color = color;

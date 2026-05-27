@@ -4,8 +4,8 @@ import mc.rellox.spawnerlegacyapi.utility.reflect.Reflect.RF;
 
 public interface IRange {
 	
-	static IRange nulled = new RangeConstant(0);
-	static IRange singular = new RangeConstant(1);
+	IRange nulled = new RangeConstant(0);
+	IRange singular = new RangeConstant(1);
 	
 	static IRange of(int value) {
 		return value == 1 ? singular : new RangeConstant(value);
@@ -28,7 +28,7 @@ public interface IRange {
 				return of(a, b);
 			}
 			throw new IllegalArgumentException("int range value cannot be parsed (" + s + ")");
-		} catch (Exception e) {
+		} catch(Exception e) {
 			RF.debug(e);
 		}
 		return nulled;
@@ -69,13 +69,13 @@ public interface IRange {
 		return a == b ? a + "" : a + "-" + b;
 	}
 	
-	static record RangeConstant(int minimum, int maximum, int roll) implements IRange {
+	record RangeConstant(int minimum, int maximum, int roll) implements IRange {
 		public RangeConstant(int value) {
 			this(value, value, value);
 		}
 	}
 	
-	static record RangeRandom(int minimum, int maximum) implements IRange {
+	record RangeRandom(int minimum, int maximum) implements IRange {
 		@Override
 		public int roll() {
 			return Calculate.between(minimum, maximum);

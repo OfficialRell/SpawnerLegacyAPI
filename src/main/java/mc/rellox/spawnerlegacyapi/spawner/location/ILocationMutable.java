@@ -10,7 +10,7 @@ public interface ILocationMutable {
 	/**
 	 * Returns an unmodifiable set of spawner locations in the specified world.
 	 * 
-	 * @param world - world
+	 * @param world world
 	 * @return Set of locations
 	 */
 	
@@ -39,7 +39,7 @@ public interface ILocationMutable {
 	/**
 	 * Clears spawner locations in the specified world.
 	 * 
-	 * @param world - world
+	 * @param world world
 	 * @return Amount of cleared spawner locations
 	 */
 	
@@ -48,8 +48,8 @@ public interface ILocationMutable {
 	/**
 	 * Clears the specified amount of spawner locations in the specified world.
 	 * 
-	 * @param world - world
-	 * @param limit - limit
+	 * @param world world
+	 * @param limit limit
 	 * @return Amount of successfully cleared spawner locations
 	 */
 	
@@ -66,7 +66,7 @@ public interface ILocationMutable {
 	/**
 	 * Clears the specified amount of spawner locations.
 	 * 
-	 * @param limit - limit
+	 * @param limit limit
 	 * @return Amount of successfully cleared spawner locations
 	 */
 	
@@ -75,7 +75,7 @@ public interface ILocationMutable {
 	/**
 	 * Checks and removes any invalid spawner locations in the specified world.
 	 * 
-	 * @param world - world
+	 * @param world world
 	 * @return Amount of invalid spawner locations removed
 	 */
 	

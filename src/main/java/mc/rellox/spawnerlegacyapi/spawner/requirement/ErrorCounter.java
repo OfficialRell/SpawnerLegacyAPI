@@ -7,7 +7,7 @@ public class ErrorCounter {
 	public boolean found;
 	private int light0, light1, ground0, environment0;
 	// light = blocks that hide light
-	// lighed = blocks that need light
+	// lighted = blocks that need light
 	private final ErrorSubmit submit;
 	
 	public ErrorCounter(int total) {

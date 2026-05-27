@@ -37,7 +37,7 @@ public interface IFinder {
 	 * Returns a list of valid spawn locations.
 	 * This will return an empty list if no valid locations can be found.
 	 * 
-	 * @param count - count
+	 * @param count count
 	 * @return Returns all valid spawn locations
 	 */
 	
@@ -47,8 +47,8 @@ public interface IFinder {
 	 * This method can be called only once after method {@link #find(int)}.
 	 * 
 	 * @return Finder error counter 
-	 * @throws IllegalStateException if method {@link #find(int)} has not been ran
-	 *  or this method is ran twice
+	 * @throws IllegalStateException if method {@link #find(int)} has not been run
+	 *  or this method is run twice
 	 */
 	
 	ErrorCounter errors() throws IllegalStateException;

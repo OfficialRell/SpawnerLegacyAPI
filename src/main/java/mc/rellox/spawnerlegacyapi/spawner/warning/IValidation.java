@@ -38,13 +38,13 @@ public interface IValidation {
 	 * Adds this warning to the spawner, making it unable to spawn
 	 * until the spawner gets updated.
 	 * 
-	 * @param warning - warning type
+	 * @param warning warning type
 	 */
 	
 	void warn(WarningType warning);
 	
 	/**
-	 * @param warning - warning type
+	 * @param warning warning type
 	 * @return If this spawner has this warning
 	 */
 	
@@ -65,7 +65,7 @@ public interface IValidation {
 	/**
 	 * Validates the spawner.
 	 * 
-	 * @return True if the spawner can spawn
+	 * @return {@code true} if the spawner can spawn
 	 */
 	
 	boolean validate();
@@ -73,7 +73,7 @@ public interface IValidation {
 	/**
 	 * Validates and find all valid spawning locations.
 	 * 
-	 * @param count - entity count
+	 * @param count entity count
 	 * @return List of valid locations, can be empty
 	 */
 	

@@ -156,21 +156,21 @@ public enum SpawnerType {
 	}
 
 	/**
-	 * @param name - name
+	 * @param name name
 	 * @return {@code true} if equals the input name
 	 */
 	
 	public boolean equals(String name) {
-		return name.equalsIgnoreCase(name);
+		return this.name.equalsIgnoreCase(name);
 	}
 
 	/**
-	 * @param type - entity type
+	 * @param type entity type
 	 * @return {@code true} if equals the entity type
 	 */
 	
 	public boolean equals(EntityType type) {
-		return this.type == null ? false : this.type.equals(type);
+		return this.type != null && this.type.equals(type);
 	}
 	
 	/**
@@ -209,7 +209,7 @@ public enum SpawnerType {
 	}
 
 	/**
-	 * @return Formatted name that is defined in the langauge file
+	 * @return Formatted name that is defined in the language file
 	 */
 	
 	public IContent formatted() {

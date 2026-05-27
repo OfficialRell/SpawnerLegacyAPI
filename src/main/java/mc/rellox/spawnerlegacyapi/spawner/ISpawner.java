@@ -24,7 +24,7 @@ public interface ISpawner {
 	/**
 	 * Sets the spawner rotating or not.
 	 * 
-	 * @param rotate - is rotating
+	 * @param rotate is rotating
 	 */
 	
 	void rotating(boolean rotate);
@@ -40,8 +40,8 @@ public interface ISpawner {
 	 * If full is {@code true} then will update spawner
 	 * minimum and maximum delay values.
 	 * 
-	 * @param delay - spawn delay
-	 * @param full - should update delay constants
+	 * @param delay spawn delay
+	 * @param full should update delay constants
 	 */
 	
 	void redelay(int delay, boolean full);
@@ -51,7 +51,7 @@ public interface ISpawner {
 	 * If full is {@code true} then will update spawner
 	 * minimum and maximum delay values.
 	 * 
-	 * @param full - should update delay constants
+	 * @param full should update delay constants
 	 */
 	
 	default void redelay(boolean full) {
@@ -60,7 +60,7 @@ public interface ISpawner {
 	
 	/**
 	 * Sets the spawner entity spawn count to 1,
-	 * as SpawnerMeta uses a custom spawning system.
+	 * as this plugin uses a custom spawning system.
 	 */
 	
 	void singulate();

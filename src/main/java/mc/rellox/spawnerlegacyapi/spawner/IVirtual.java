@@ -13,12 +13,12 @@ import mc.rellox.spawnerlegacyapi.spawner.type.UpgradeType;
 
 public interface IVirtual {
 	
-	public static Builder builder(SpawnerType type) {
+	static Builder builder(SpawnerType type) {
 		return new Builder(type);
 	}
 	
 	/**
-	 * @param other - virtual spawner to compare with
+	 * @param other virtual spawner to compare with
 	 * @return {@code true} if virtual spawners are exactly equal, otherwise {@code false}
 	 */
 	
@@ -67,7 +67,7 @@ public interface IVirtual {
 	int tags();
 	
 	/**
-	 * @param player - player who placed
+	 * @param player player who placed
 	 */
 	
 	void player(Player player);
@@ -85,11 +85,11 @@ public interface IVirtual {
 	ItemStack spawner();
 	
 	/**
-	 * @param a - amount
+	 * @param amount amount
 	 * @return Virtual spawner item stack
 	 */
 	
-	ItemStack toItem(int a);
+	ItemStack toItem(int amount);
 	
 	/**
 	 * @return Virtual spawner item stack
@@ -102,7 +102,7 @@ public interface IVirtual {
 	/**
 	 * Places a natural spawner with this virtual spawner values at the specified block. 
 	 * 
-	 * @param block - block
+	 * @param block block
 	 */
 	
 	default void place(Block block) {
@@ -113,8 +113,8 @@ public interface IVirtual {
 	 * Places a natural (if owner is {@code null}) or owned spawner
 	 * with this virtual spawner values at the specified block. 
 	 * 
-	 * @param owner - owner
-	 * @param block - block
+	 * @param owner owner
+	 * @param block block
 	 */
 	
 	default void place(Player owner, Block block) {

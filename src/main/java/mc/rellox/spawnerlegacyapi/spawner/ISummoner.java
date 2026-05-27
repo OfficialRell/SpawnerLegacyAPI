@@ -18,8 +18,8 @@ public interface ISummoner {
 	/**
 	 * Summons entities in the world and returns a list of them.
 	 * 
-	 * @param locations - list of location
-	 * @param count - entity count
+	 * @param locations list of locations
+	 * @param count entity count
 	 * @return List of newly spawned entities
 	 */
 	

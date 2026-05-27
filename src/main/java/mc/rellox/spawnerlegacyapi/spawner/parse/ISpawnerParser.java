@@ -14,7 +14,7 @@ public interface ISpawnerParser {
 	/**
 	 * Checks if this spawner has old values and should be parsed.
 	 * 
-	 * @param spawner - spawner block
+	 * @param spawner spawner block
 	 * @return If this spawner should be parsed
 	 */
 	
@@ -23,7 +23,7 @@ public interface ISpawnerParser {
 	/**
 	 * Parses all old spawner values to the new spawner values.
 	 * 
-	 * @param spawner - spawner block
+	 * @param spawner spawner block
 	 */
 	
 	void parse(CreatureSpawner spawner);
@@ -31,7 +31,7 @@ public interface ISpawnerParser {
 	/**
 	 * Checks if this item has old values and should be parsed.
 	 * 
-	 * @param item - item
+	 * @param item item
 	 * @return If this item should be parsed
 	 */
 	
@@ -40,7 +40,7 @@ public interface ISpawnerParser {
 	/**
 	 * Parses all old spawner item values to the new spawner item values.
 	 * 
-	 * @param item - item
+	 * @param item item
 	 */
 	
 	void parse(ItemStack item);

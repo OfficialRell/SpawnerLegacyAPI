@@ -59,7 +59,7 @@ public interface ISpawnerCraft {
 	/**
 	 * Increases the craft duration.
 	 * 
-	 * @param seconds - seconds to add
+	 * @param seconds seconds to add
 	 */
 	
 	void increase(int seconds);
@@ -67,7 +67,7 @@ public interface ISpawnerCraft {
 	/**
 	 * Decreases the craft duration.
 	 * 
-	 * @param seconds - seconds to subtract
+	 * @param seconds seconds to subtract
 	 */
 	
 	void decrease(int seconds);

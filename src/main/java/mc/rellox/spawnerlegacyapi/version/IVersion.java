@@ -19,17 +19,17 @@ public interface IVersion {
 	
 	/**
 	 * @param players players to send to
-	 * @param os packets to send
+	 * @param packets packets to send
 	 */
 	
-	void send(Collection<? extends Player> players, Object... os);
+	void send(Collection<? extends Player> players, Object... packets);
 	
 	/**
 	 * @param player player to send to
-	 * @param os packets to send
+	 * @param packets packets to send
 	 */
 	
-	void send(Player player, Object... os);
+	void send(Player player, Object... packets);
 	
 	/**
 	 * @param entity entity to spawn

@@ -64,7 +64,7 @@ public interface ISpawnerLegacy {
 	 * @return Language/translation manager
 	 */
 	
-	ILangaugeManager language();
+	ILanguageManager language();
 	
 	/**
 	 * @return Layout manager

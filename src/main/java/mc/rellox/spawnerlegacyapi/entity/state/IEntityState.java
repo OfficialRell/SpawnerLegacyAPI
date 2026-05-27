@@ -1,14 +1,13 @@
 package mc.rellox.spawnerlegacyapi.entity.state;
 
+import mc.rellox.spawnerlegacyapi.entity.IStackedEntity;
 import org.bukkit.DyeColor;
 import org.bukkit.entity.LivingEntity;
-
-import mc.rellox.spawnerlegacyapi.entity.IStackedEntity;
 
 public interface IEntityState {
 	
 	/**
-	 * @param stacked - stacked entity
+	 * @param stacked stacked entity
 	 * @return {@code true} if the entity has this state
 	 */
 	
@@ -17,14 +16,14 @@ public interface IEntityState {
 	}
 	
 	/**
-	 * @param entity - entity
+	 * @param entity entity
 	 * @return {@code true} if the entity has this state
 	 */
 	
 	boolean match(LivingEntity entity);
 	
 	/**
-	 * @param stacked - stacked entity
+	 * @param stacked stacked entity
 	 * @return {@code true} if this state was applied to the entity
 	 */
 	
@@ -33,7 +32,7 @@ public interface IEntityState {
 	}
 	
 	/**
-	 * @param entity - entity
+	 * @param entity entity
 	 * @return {@code true} if this state was applied to the entity
 	 */
 	

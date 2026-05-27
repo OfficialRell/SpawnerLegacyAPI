@@ -123,7 +123,7 @@ public interface IGenerator extends IGeneratorTags {
 	/**
 	 * Always returns {@code true} if the owner is online or option 'spawn-if-online'
 	 * is set to true, otherwise checks if the owner is offline or has been offline
-	 * for more then the 'offline-timout' time.
+	 * for more then the 'offline-timeout' time.
 	 * 
 	 * @return {@code true} or {@code false}
 	 */
@@ -135,7 +135,7 @@ public interface IGenerator extends IGeneratorTags {
 	 * If fully is {@code true} then this generator will be
 	 *  fully removed including the block and location.
 	 * 
-	 * @param fully - should this generator be removed fully
+	 * @param fully should this generator be removed fully
 	 */
 	
 	void remove(boolean fully);
@@ -147,8 +147,8 @@ public interface IGenerator extends IGeneratorTags {
 	 * If files is {@code true} then it will remove this generator from files,
 	 *  only if fully is {@code true}.
 	 *  
-	 * @param fully - should this generator be removed fully
-	 * @param files - should this generator be removed from locatation files
+	 * @param fully should this generator be removed fully
+	 * @param files should this generator be removed from location files
 	 */
 	
 	void remove(boolean fully, boolean files);
@@ -216,9 +216,8 @@ public interface IGenerator extends IGeneratorTags {
 	/**
 	 * Opens upgrade GUI for the specific player.
 	 * 
-	 * @param player - player
-	 * @return Spawner upgrade GUI
-	 */
+	 * @param player player
+     */
 	
 	void open(Player player);
 	
@@ -243,7 +242,7 @@ public interface IGenerator extends IGeneratorTags {
 	}
 	
 	/**
-	 * @param chunk - chunk
+	 * @param chunk chunk
 	 * @return {@code true} if this spawner is in the specified chunk
 	 */
 	

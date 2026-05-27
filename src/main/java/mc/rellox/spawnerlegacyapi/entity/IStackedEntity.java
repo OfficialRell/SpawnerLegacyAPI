@@ -1,13 +1,12 @@
 package mc.rellox.spawnerlegacyapi.entity;
 
-import java.util.Set;
-
+import mc.rellox.spawnerlegacyapi.entity.state.IEntityState;
+import mc.rellox.spawnerlegacyapi.spawner.type.SpawnerType;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.LivingEntity;
 
-import mc.rellox.spawnerlegacyapi.entity.state.IEntityState;
-import mc.rellox.spawnerlegacyapi.spawner.type.SpawnerType;
+import java.util.Set;
 
 public interface IStackedEntity {
 	
@@ -42,7 +41,7 @@ public interface IStackedEntity {
 	boolean exists();
 	
 	/**
-	 * @param other - other stacked entity
+	 * @param other other stacked entity
 	 * @return {@code true} if this entity can stack with the other stacked entity
 	 */
 	
@@ -51,14 +50,14 @@ public interface IStackedEntity {
 	}
 	
 	/**
-	 * @param other - other entity
+	 * @param other other entity
 	 * @return {@code true} if this entity can stack with the other entity
 	 */
 	
 	boolean stackable(LivingEntity other);
 	
 	/**
-	 * @param recache - should recache states
+	 * @param recache should recache states
 	 * @return Set of all states that this entity has
 	 */
 	
@@ -73,7 +72,7 @@ public interface IStackedEntity {
 	}
 	
 	/**
-	 * @param state - entity state
+	 * @param state entity state
 	 * @return {@code true} if this entity matches with the state
 	 */
 	
@@ -82,7 +81,7 @@ public interface IStackedEntity {
 	}
 	
 	/**
-	 * @param states - entity states
+	 * @param states entity states
 	 * @return {@code true} if this entity matches with all states
 	 */
 	
@@ -93,7 +92,7 @@ public interface IStackedEntity {
 	}
 
 	/**
-	 * @param states - entity states
+	 * @param states entity states
 	 * @return {@code true} if this entity matches with all states
 	 */
 	
@@ -146,7 +145,7 @@ public interface IStackedEntity {
 	/**
 	 * Subtracts the value from the current stack size.
 	 * 
-	 * @param value - value
+	 * @param value value
 	 * @return The new stack size, will return {@code 0} if negative
 	 */
 	
@@ -155,8 +154,8 @@ public interface IStackedEntity {
 	/**
 	 * Adds the value to the current stack size.
 	 * 
-	 * @param value - value
-	 * @param force - should ignore limits
+	 * @param value value
+	 * @param force should ignore limits
 	 * @return The new stack size, might be limited if {@code force} is false
 	 */
 	
@@ -165,7 +164,7 @@ public interface IStackedEntity {
 	/**
 	 * Adds the value to the current stack size with limit checking.
 	 * 
-	 * @param value - value
+	 * @param value value
 	 * @return The new stack size or limit
 	 */
 	
@@ -176,8 +175,8 @@ public interface IStackedEntity {
 	/**
 	 * Sets the new stack size.
 	 * 
-	 * @param value - value 
-	 * @param force - should ignore limits
+	 * @param value value 
+	 * @param force should ignore limits
 	 * @return The new stack size, might be limited if {@code force} is false
 	 */
 	
@@ -186,7 +185,7 @@ public interface IStackedEntity {
 	/**
 	 * Sets the new stack size with limit checking.
 	 * 
-	 * @param value - value 
+	 * @param value value 
 	 * @return The new stack size or limit
 	 */
 	
@@ -197,7 +196,7 @@ public interface IStackedEntity {
 	/**
 	 * Removes this entity from the world.
 	 * 
-	 * @param drop - should drop loot
+	 * @param drop should drop loot
 	 */
 	
 	void kill(boolean drop);
@@ -208,7 +207,7 @@ public interface IStackedEntity {
 	 * If update is {@code true} then all values will be updated (Stack size value, name and tags)<br>
 	 * Does not remove from the stacked entity list instantly.
 	 * 
-	 * @param update - update 
+	 * @param update update 
 	 */
 	
 	void clear(boolean update);
@@ -226,9 +225,9 @@ public interface IStackedEntity {
 	 * Creates a copy of this stacked entity with the new entity, size and states.<br>
 	 * This does not cache the newly created stacked entity.
 	 * 
-	 * @param next - next entity
-	 * @param size - size
-	 * @param update - should update
+	 * @param next next entity
+	 * @param size size
+	 * @param update should update
 	 * @return A copy of this stacked entity with the new entity, size and states
 	 */
 	

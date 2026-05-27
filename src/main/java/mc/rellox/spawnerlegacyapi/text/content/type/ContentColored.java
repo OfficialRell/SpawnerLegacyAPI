@@ -10,9 +10,9 @@ public record ContentColored(IContent content, IColorer colorer) implements ICon
 	public String text(IVariables variables) {
 		return colorer.color(content.text(variables));
 	}
-	
-	@Override
-	public final String toString() {
+
+    @Override
+	public String toString() {
 		return text();
 	}
 

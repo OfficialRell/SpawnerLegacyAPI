@@ -5,11 +5,11 @@ public enum StackingType {
 	INFINITE,
 	FINITE;
 	
-	public static StackingType of(String name, StackingType def) {
+	public static StackingType of(String name, StackingType fallback) {
 		try {
 			return valueOf(name.toUpperCase());
-		} catch (Exception e) {}
-		return def;
+		} catch(Exception ignored) {}
+		return fallback;
 	}
 
 }

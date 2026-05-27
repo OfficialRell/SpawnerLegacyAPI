@@ -14,13 +14,13 @@ public interface ICache {
 
 	// static methods
 
-	public static <T> T read(Block block, ICacheType<T> type) {
+	static <T> T read(Block block, ICacheType<T> type) {
 		if(block.getState() instanceof CreatureSpawner spawner)
 			return type.read(spawner);
 		return null;
 	}
 
-	public static <T> void write(Block block, ICacheType<T> type, T value) {
+	static <T> void write(Block block, ICacheType<T> type, T value) {
 		if(block.getState() instanceof CreatureSpawner spawner)
 			type.write(spawner, value);
 	}
@@ -36,7 +36,7 @@ public interface ICache {
 	/**
 	 * Updates specified spawner types. No types will update all.
 	 * 
-	 * @param types - types to update
+	 * @param types types to update
 	 */
 
 	void update(ICacheType<?>... types);
@@ -44,8 +44,8 @@ public interface ICache {
 	/**
 	 * Gets the cached value.
 	 * 
-	 * @param <T> - value type
-	 * @param type - type
+	 * @param <T> value type
+	 * @param type type
 	 * @return Cached type value
 	 */
 
@@ -54,23 +54,23 @@ public interface ICache {
 	/**
 	 * Gets the cached value.
 	 * 
-	 * @param <T> - value type
-	 * @param type - type
-	 * @param def - default value
+	 * @param <T> value type
+	 * @param type type
+	 * @param fallback fallback value
 	 * @return Cached type value
 	 */
 
-	default <T> T get(ICacheType<T> type, T def) {
-		T t = get(type);
-		return t == null ? def : t;
+	default <T> T get(ICacheType<T> type, T fallback) {
+		T value = get(type);
+		return value == null ? fallback : value;
 	}
 
 	/**
 	 * Writes and updates the new value.
 	 * 
-	 * @param <T> - type value
-	 * @param type - type
-	 * @param value - value
+	 * @param <T> type value
+	 * @param type type
+	 * @param value value
 	 */
 
 	<T> void write(ICacheType<T> type, T value);
@@ -228,25 +228,25 @@ public interface ICache {
 	}
 
 	/**
-	 * @param player - player
-	 * @param def - defualt value
+	 * @param player player
+	 * @param fallback fallback value
 	 * @return {@code true} if this spawner is owned by the specified player
-	 * or the default value
+	 * or the fallback value
 	 * 
 	 */
-	default boolean owner(Player player, boolean def) {
+	default boolean owner(Player player, boolean fallback) {
 		UUID id = id();
-		return id == null ? def : player.getUniqueId().equals(id);
+		return id == null ? fallback : player.getUniqueId().equals(id);
 	}
 
 	/**
-	 * @param i - upgrade type index
+	 * @param index upgrade type index
 	 * @return The upgrade value at the specified upgrade type index
 	 */
 	
-	default double upgrade(int i) {
+	default double upgrade(int index) {
 		double[] is = get(ICacheType.UPGRADES);
-		return is == null ? 0 : is[i];
+		return is == null ? 0 : is[index];
 	}
 
 }

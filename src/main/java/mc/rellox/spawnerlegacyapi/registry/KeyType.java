@@ -44,7 +44,7 @@ public enum KeyType {
 	
 	public final String key;
 	
-	private KeyType(String key) {
+	KeyType(String key) {
 		this.key = key;
 	}
 	

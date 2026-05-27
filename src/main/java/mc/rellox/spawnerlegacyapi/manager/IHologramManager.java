@@ -8,7 +8,7 @@ public interface IHologramManager {
 	/**
 	 * Creates a new identity hologram.
 	 * 
-	 * @param generator - generator
+	 * @param generator generator
 	 * @return New identity hologram
 	 */
 	
@@ -17,7 +17,7 @@ public interface IHologramManager {
 	/**
 	 * Creates a new warning hologram.
 	 * 
-	 * @param generator - generator
+	 * @param generator generator
 	 * @return New warning hologram
 	 */
 	
@@ -26,7 +26,7 @@ public interface IHologramManager {
 	/**
 	 * Creates a new countdown hologram.
 	 * 
-	 * @param generator - generator
+	 * @param generator generator
 	 * @return New countdown hologram
 	 */
 	

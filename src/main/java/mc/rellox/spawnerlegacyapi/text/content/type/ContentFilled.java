@@ -11,7 +11,7 @@ public record ContentFilled(IContent content, IVariables vars) implements IConte
 	}
 	
 	@Override
-	public final String toString() {
+	public String toString() {
 		return text();
 	}
 

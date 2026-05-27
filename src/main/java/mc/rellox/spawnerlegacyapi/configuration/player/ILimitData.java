@@ -1,8 +1,7 @@
 package mc.rellox.spawnerlegacyapi.configuration.player;
 
-import org.bukkit.entity.Player;
-
 import mc.rellox.spawnerlegacyapi.configuration.ICommit;
+import org.bukkit.entity.Player;
 
 /**
  * This limit data allows players to only have a specific amount

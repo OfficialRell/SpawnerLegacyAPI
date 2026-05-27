@@ -1,8 +1,8 @@
 package mc.rellox.spawnerlegacyapi.spawner.requirement;
 
 public interface IRequirements {
-	
-	public static IRequirements empty = new IRequirements() {
+
+	IRequirements empty = new IRequirements() {
 		@Override
 		public ILight light() {
 			return ILight.empty;
@@ -39,7 +39,7 @@ public interface IRequirements {
 		return new Builder();
 	}
 	
-	public static class Builder {
+	class Builder {
 		
 		public ILight light;
 		public IMaterial ground;

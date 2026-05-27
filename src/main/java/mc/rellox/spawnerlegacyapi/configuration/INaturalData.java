@@ -1,10 +1,10 @@
 package mc.rellox.spawnerlegacyapi.configuration;
 
-import java.util.Set;
-
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+
+import java.util.Set;
 
 public interface INaturalData extends ICommit {
 	

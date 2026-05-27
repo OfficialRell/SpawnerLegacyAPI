@@ -10,13 +10,13 @@ public interface IUnicode {
 	}
 	
 	/**
-	 * @return The unicode code representation (e.g. "u+2605")
+	 * @return The Unicode code representation (e.g. "u+2605")
 	 */
 	
 	String code();
 	
 	/**
-	 * @return The actual characters represented by the unicode code
+	 * @return The actual characters represented by the Unicode code
 	 */
 	
 	String chars();

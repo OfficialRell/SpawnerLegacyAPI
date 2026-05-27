@@ -7,11 +7,11 @@ public enum WarningType {
 	 */
 	CHARGES,
 	/**
-	 * Warning when required enviroment is not met.
+	 * Warning when environment requirement is not met.
 	 */
 	ENVIRONMENT,
 	/**
-	 * Warning when required gound is not met.
+	 * Warning when ground requirement is not met.
 	 */
 	GROUND,
 	/**
@@ -25,6 +25,6 @@ public enum WarningType {
 	/**
 	 * Warning for other unidentifiable reasons.
 	 */
-	UNKNOWN;
+	UNKNOWN
 
 }

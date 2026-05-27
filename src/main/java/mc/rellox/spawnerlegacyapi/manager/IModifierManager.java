@@ -1,17 +1,16 @@
 package mc.rellox.spawnerlegacyapi.manager;
 
-import java.util.List;
-
-import org.bukkit.inventory.ItemStack;
-
 import mc.rellox.spawnerlegacyapi.modifier.IModifier;
 import mc.rellox.spawnerlegacyapi.modifier.instance.IModifierInstance;
 import mc.rellox.spawnerlegacyapi.spawner.IGenerator;
+import org.bukkit.inventory.ItemStack;
+
+import java.util.List;
 
 public interface IModifierManager {
 	
 	/**
-	 * @param key - key
+	 * @param key key
 	 * @return Modifier by the specified key or {@code null}
 	 */
 	
@@ -26,8 +25,8 @@ public interface IModifierManager {
 	/**
 	 * Tries to load the modifier instance specified by the modifier from this generator.
 	 * 
-	 * @param generator - generator
-	 * @param modifier - modifier
+	 * @param generator generator
+	 * @param modifier modifier
 	 * @return Modifier instance or {@code null}
 	 */
 	
@@ -36,7 +35,7 @@ public interface IModifierManager {
 	/**
 	 * Loads all modifier instances saved on the specified generator.
 	 * 
-	 * @param generator - generator
+	 * @param generator generator
 	 * @return List of all saved modifier instances
 	 */
 	
@@ -45,7 +44,7 @@ public interface IModifierManager {
 	/**
 	 * Saves all modifier instance values.
 	 * 
-	 * @param instance - instance
+	 * @param instance instance
 	 */
 	
 	void save(IModifierInstance instance);
@@ -53,8 +52,8 @@ public interface IModifierManager {
 	/**
 	 * Removes the modifier instance specified by the modifier.
 	 * 
-	 * @param generator - generator
-	 * @param modifier - modifier
+	 * @param generator generator
+	 * @param modifier modifier
 	 */
 	
 	void remove(IGenerator generator, IModifier modifier);
@@ -62,13 +61,13 @@ public interface IModifierManager {
 	/**
 	 * Removes the modifier instance.
 	 * 
-	 * @param instance - instance
+	 * @param instance instance
 	 */
 	
 	void remove(IModifierInstance instance);
 	
 	/**
-	 * @param instance - instance
+	 * @param instance instance
 	 * @return Item stack with data about the modifier instance
 	 */
 	
@@ -78,7 +77,7 @@ public interface IModifierManager {
 	 * Gets the modifier of the specified item or {@code null}
 	 * if not a modifier item.
 	 * 
-	 * @param item - item
+	 * @param item item
 	 * @return Modifier from this item or {@code null}
 	 */
 	
@@ -87,7 +86,7 @@ public interface IModifierManager {
 	/**
 	 * Tries to read the modifier instance from the specified item.
 	 * 
-	 * @param item - item
+	 * @param item item
 	 * @return Modifier instance from this item or {@code null}
 	 */
 	

@@ -1,47 +1,46 @@
 package mc.rellox.spawnerlegacyapi.manager;
 
-import java.util.Comparator;
-import java.util.Set;
-import java.util.function.Predicate;
-
-import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
-
 import mc.rellox.spawnerlegacyapi.entity.IEntityWorld;
 import mc.rellox.spawnerlegacyapi.entity.IStackedEntity;
 import mc.rellox.spawnerlegacyapi.entity.state.IEntityState;
 import mc.rellox.spawnerlegacyapi.entity.state.IStates;
 import mc.rellox.spawnerlegacyapi.spawner.IGenerator;
 import mc.rellox.spawnerlegacyapi.spawner.type.SpawnerType;
+import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
+
+import java.util.Comparator;
+import java.util.Set;
+import java.util.function.Predicate;
 
 public interface IEntityManager {
 	
 	/**
-	 * @param world - world
+	 * @param world world
 	 * @return Entity world or {@code null}
 	 */
 	
 	IEntityWorld world(World world);
 	
 	/**
-	 * @param entity - entity
+	 * @param entity entity
 	 * @return Stacked entity or {@code null}
 	 */
 	
 	IStackedEntity get(Entity entity);
 	
 	/**
-	 * @param living - entity
-	 * @param validate - would validate entity
+	 * @param living entity
+	 * @param validate would validate entity
 	 * @return Stacked entity or {@code null}
 	 */
 	
 	IStackedEntity get(LivingEntity living, boolean validate);
 	
 	/**
-	 * @param living - entity
+	 * @param living entity
 	 * @return Stacked entity or {@code null}
 	 */
 	
@@ -50,9 +49,9 @@ public interface IEntityManager {
 	/**
 	 * Spawns a new stacked entity and applies any generator upgrade values (xp, drops).
 	 * 
-	 * @param generator - spawner generator
-	 * @param type - spawner type
-	 * @param location - spawn location
+	 * @param generator spawner generator
+	 * @param type spawner type
+	 * @param location spawn location
 	 * @return Newly spawned stacked entity or {@code null} if spawn failed
 	 */
 	
@@ -61,10 +60,10 @@ public interface IEntityManager {
 	/**
 	 * Spawns a new stacked entity and applies any generator upgrade values (xp, drops).
 	 * 
-	 * @param generator - spawner generator
-	 * @param type - spawner type
-	 * @param location - spawn location
-	 * @param states - entity states to apply
+	 * @param generator spawner generator
+	 * @param type spawner type
+	 * @param location spawn location
+	 * @param states entity states to apply
 	 * @return Newly spawned stacked entity or {@code null} if spawn failed
 	 */
 	
@@ -74,10 +73,10 @@ public interface IEntityManager {
 	/**
 	 * Spawns a new stacked entity and applies any generator upgrade values (xp, drops).
 	 * 
-	 * @param generator - spawner generator
-	 * @param type - spawner type
-	 * @param location - spawn location
-	 * @param stack - initial stack size
+	 * @param generator spawner generator
+	 * @param type spawner type
+	 * @param location spawn location
+	 * @param stack initial stack size
 	 * @return Newly spawned stacked entity or {@code null} if spawn failed
 	 */
 	
@@ -87,11 +86,11 @@ public interface IEntityManager {
 	/**
 	 * Spawns a new stacked entity and applies any generator upgrade values (xp, drops).
 	 * 
-	 * @param generator - spawner generator
-	 * @param type - spawner type
-	 * @param location - spawn location
-	 * @param states - entity states to apply
-	 * @param stack - initial stack size
+	 * @param generator spawner generator
+	 * @param type spawner type
+	 * @param location spawn location
+	 * @param states entity states to apply
+	 * @param stack initial stack size
 	 * @return Newly spawned stacked entity or {@code null} if spawn failed
 	 */
 	
@@ -101,8 +100,8 @@ public interface IEntityManager {
 	/**
 	 * Spawns a new stacked entity.
 	 * 
-	 * @param type - spawner type
-	 * @param location - spawn location
+	 * @param type spawner type
+	 * @param location spawn location
 	 * @return Newly spawned stacked entity or {@code null} if spawn failed
 	 */
 	
@@ -111,9 +110,9 @@ public interface IEntityManager {
 	/**
 	 * Spawns a new stacked entity.
 	 * 
-	 * @param type - spawner type
-	 * @param location - spawn location
-	 * @param states - entity states to apply
+	 * @param type spawner type
+	 * @param location spawn location
+	 * @param states entity states to apply
 	 * @return Newly spawned stacked entity or {@code null} if spawn failed
 	 */
 	
@@ -123,9 +122,9 @@ public interface IEntityManager {
 	/**
 	 * Spawns a new stacked entity.
 	 * 
-	 * @param type - spawner type
-	 * @param location - spawn location
-	 * @param stack - initial stack size
+	 * @param type spawner type
+	 * @param location spawn location
+	 * @param stack initial stack size
 	 * @return Newly spawned stacked entity or {@code null} if spawn failed
 	 */
 	
@@ -134,10 +133,10 @@ public interface IEntityManager {
 	/**
 	 * Spawns a new stacked entity.
 	 * 
-	 * @param type - spawner type
-	 * @param location - spawn location
-	 * @param states - entity states to apply
-	 * @param stack - initial stack size
+	 * @param type spawner type
+	 * @param location spawn location
+	 * @param states entity states to apply
+	 * @param stack initial stack size
 	 * @return Newly spawned stacked entity or {@code null} if spawn failed
 	 */
 	
@@ -145,32 +144,32 @@ public interface IEntityManager {
 			Set<IEntityState> states, int stack);
 	
 	/**
-	 * @param location - center location
-	 * @param x - x radius
-	 * @param y - y radius
-	 * @param z - z radius
+	 * @param location center location
+	 * @param x x radius
+	 * @param y y radius
+	 * @param z z radius
 	 * @return Set of all nearby stacked entities
 	 */
 	
 	Set<IStackedEntity> find(Location location, double x, double y, double z);
 	
 	/**
-	 * @param location - center location
-	 * @param x - x radius
-	 * @param y - y radius
-	 * @param z - z radius
-	 * @param filter - entity filter
+	 * @param location center location
+	 * @param x x radius
+	 * @param y y radius
+	 * @param z z radius
+	 * @param filter entity filter
 	 * @return Set of filtered nearby stacked entities
 	 */
 	Set<IStackedEntity> find(Location location, double x, double y, double z,
 			Predicate<IStackedEntity> filter);
 	
 	/**
-	 * @param stacked - center location entity
-	 * @param x - x radius
-	 * @param y - y radius
-	 * @param z - z radius
-	 * @param filter - entity filter
+	 * @param stacked center location entity
+	 * @param x x radius
+	 * @param y y radius
+	 * @param z z radius
+	 * @param filter entity filter
 	 * @return Set of filtered nearby stacked entities
 	 */
 	
@@ -178,36 +177,36 @@ public interface IEntityManager {
 			Predicate<IStackedEntity> filter);
 	
 	/**
-	 * @param entity - entity
+	 * @param entity entity
 	 * @return Current entity stack size
 	 */
 	
 	int size(LivingEntity entity);
 	
 	/**
-	 * @param entity - entity
-	 * @param stack - new stack size
+	 * @param entity entity
+	 * @param stack new stack size
 	 */
 	
 	void size(LivingEntity entity, int stack);
 	
 	/**
-	 * @param type - spawner type
+	 * @param type spawner type
 	 * @return Stack limit for the type or {@link Integer#MAX_VALUE} if unlimited
 	 */
 	
 	int limit(SpawnerType type);
 	
 	/**
-	 * @param stacked - stacked entity
+	 * @param stacked stacked entity
 	 * @return Display name for the stacked entity
 	 */
 	
 	String name(IStackedEntity stacked);
 	
 	/**
-	 * @param stacked - stacked entity
-	 * @param update - whether to update the entity after unstacking
+	 * @param stacked stacked entity
+	 * @param update whether to update the entity after unstacking
 	 * @return Newly unstacked entity or {@code null} if size was 1
 	 */
 	
@@ -216,8 +215,8 @@ public interface IEntityManager {
 	/**
 	 * Transfers data from one entity to another.
 	 * 
-	 * @param from - source entity
-	 * @param to - target entity
+	 * @param from source entity
+	 * @param to target entity
 	 */
 	
 	void transfer(LivingEntity from, LivingEntity to);
@@ -229,7 +228,7 @@ public interface IEntityManager {
 	IStates states();
 	
 	/**
-	 * @param type - type to match
+	 * @param type type to match
 	 * @return Entity filter that checks for matching entity type
 	 */
 	
@@ -238,7 +237,7 @@ public interface IEntityManager {
 	}
 	
 	/**
-	 * @param state - entity state
+	 * @param state entity state
 	 * @return Entity filter that check if the entity
 	 *  matches with the state
 	 */
@@ -248,7 +247,7 @@ public interface IEntityManager {
 	}
 	
 	/**
-	 * @param states - entity states
+	 * @param states entity states
 	 * @return Entity filter that check if the entity
 	 *  matches with all states
 	 */
@@ -258,7 +257,7 @@ public interface IEntityManager {
 	}
 	
 	/**
-	 * @param states - entity states
+	 * @param states entity states
 	 * @return Entity filter that check if the entity
 	 *  matches with all states
 	 */
@@ -268,7 +267,7 @@ public interface IEntityManager {
 	}
 	
 	/**
-	 * @param other - other stacked entity
+	 * @param other other stacked entity
 	 * @return Entity filter that check if the entity
 	 *  matches with the other stacked entity
 	 */
@@ -281,7 +280,7 @@ public interface IEntityManager {
 	/**
 	 * Checks if type and states are matching.
 	 * 
-	 * @param other - other entity
+	 * @param other other entity
 	 * @return Entity filter that check if the entity
 	 *  can stack with the other entity
 	 */
@@ -293,7 +292,7 @@ public interface IEntityManager {
 	/**
 	 * Checks if type and states are matching.
 	 * 
-	 * @param other - other stacked entity
+	 * @param other other stacked entity
 	 * @return Entity filter that check if the entity
 	 *  can stack with the other stacked entity
 	 */
@@ -322,7 +321,7 @@ public interface IEntityManager {
 	
 	/**
 	 * @return Entity comparator that sorts by size first
-	 *  and then life time
+	 *  and then lifetime
 	 */
 
 	static Comparator<IStackedEntity> priority() {

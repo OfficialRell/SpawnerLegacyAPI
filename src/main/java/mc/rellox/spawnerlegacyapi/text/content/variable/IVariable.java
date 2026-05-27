@@ -39,7 +39,7 @@ public interface IVariable {
 					return String.format("%." + i + "f", ii.get());
 				});
 			}
-		} catch (Exception e) {}
+		} catch(Exception ignored) {}
 		throw new NullPointerException("unable to parse variable: " + input);
 	}
 	

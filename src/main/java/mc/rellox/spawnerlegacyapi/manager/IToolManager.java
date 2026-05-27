@@ -1,15 +1,14 @@
 package mc.rellox.spawnerlegacyapi.manager;
 
-import java.util.List;
-
+import mc.rellox.spawnerlegacyapi.item.tool.ICrowbar;
 import org.bukkit.inventory.ItemStack;
 
-import mc.rellox.spawnerlegacyapi.item.tool.ICrowbar;
+import java.util.List;
 
 public interface IToolManager {
 	
 	/**
-	 * @param item - item
+	 * @param item item
 	 * @return If this item is a tool
 	 */
 	
@@ -22,14 +21,14 @@ public interface IToolManager {
 	List<String> crowbars();
 	
 	/**
-	 * @param key - key
+	 * @param key key
 	 * @return Crowbar from the specified key
 	 */
 	
 	ICrowbar crowbar(String key);
 	
 	/**
-	 * @param item - item
+	 * @param item item
 	 * @return Crowbar from the specified item
 	 */
 	

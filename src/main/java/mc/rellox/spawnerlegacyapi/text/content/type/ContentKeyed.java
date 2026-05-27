@@ -11,7 +11,7 @@ public record ContentKeyed(String key, IContent content) implements IContent {
 	}
 	
 	@Override
-	public final String toString() {
+	public String toString() {
 		return text();
 	}
 

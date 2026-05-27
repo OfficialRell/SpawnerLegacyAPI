@@ -7,7 +7,7 @@ public interface IViewManager {
 	/**
 	 * Adds the inventory to active list.
 	 * 
-	 * @param inventory - inventory
+	 * @param inventory inventory
 	 * @return {@code true} if added
 	 */
 	
@@ -16,7 +16,7 @@ public interface IViewManager {
 	/**
 	 * Removes the inventory from active list.
 	 * 
-	 * @param inventory - inventory
+	 * @param inventory inventory
 	 * @return {@code true} if removed
 	 */
 	

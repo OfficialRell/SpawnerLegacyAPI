@@ -1,16 +1,15 @@
 package mc.rellox.spawnerlegacyapi.configuration;
 
+import mc.rellox.spawnerlegacyapi.text.content.IContent;
+import mc.rellox.spawnerlegacyapi.utility.reflect.Reflect.RF;
+import org.bukkit.Material;
+import org.bukkit.configuration.ConfigurationSection;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import org.bukkit.Material;
-import org.bukkit.configuration.ConfigurationSection;
-
-import mc.rellox.spawnerlegacyapi.text.content.IContent;
-import mc.rellox.spawnerlegacyapi.utility.reflect.Reflect.RF;
 
 public interface IFileValues {
 

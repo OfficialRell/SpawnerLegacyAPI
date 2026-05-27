@@ -27,7 +27,7 @@ public interface ILinkable {
 	/**
 	 * Sets the new linked entity.
 	 * 
-	 * @param stacked - stacked entity
+	 * @param stacked stacked entity
 	 */
 	
 	void link(IStackedEntity stacked);

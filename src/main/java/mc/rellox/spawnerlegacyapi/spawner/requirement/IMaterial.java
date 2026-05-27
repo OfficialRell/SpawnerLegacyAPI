@@ -11,13 +11,13 @@ import org.bukkit.block.data.Waterlogged;
 
 public interface IMaterial {
 	
-	static IMaterial empty = block -> true;
-	static IMaterial air = block -> {
+	IMaterial empty = block -> true;
+	IMaterial air = block -> {
 		Material type = block.getType();
 		return type.getHardness() <= 0 || type.isAir();
 	};
-	static IMaterial solid = block -> block.getType().isSolid();
-	static IMaterial water = block -> {
+	IMaterial solid = block -> block.getType().isSolid();
+	IMaterial water = block -> {
 		var type = block.getType();
 		if(type == Material.WATER) return true;
 		if(type.getHardness() > 0) return false;
@@ -26,9 +26,9 @@ public interface IMaterial {
 		return type == Material.SEAGRASS || type == Material.TALL_SEAGRASS
 				|| type == Material.KELP_PLANT;
 	};
-	static IMaterial slab = block -> block.getType().name().endsWith("_SLAB");
-	static IMaterial stairs = block -> block.getType().name().endsWith("_STAIRS");
-	static IMaterial fence = block -> block.getType().name().endsWith("_FENCE")
+	IMaterial slab = block -> block.getType().name().endsWith("_SLAB");
+	IMaterial stairs = block -> block.getType().name().endsWith("_STAIRS");
+	IMaterial fence = block -> block.getType().name().endsWith("_FENCE")
 			|| block.getType().name().endsWith("_FENCE_GATE")
 			|| block.getType().name().endsWith("_WALL");
 	
@@ -75,17 +75,17 @@ public interface IMaterial {
 	}
 	
 	static IMaterial any(List<IMaterial> list) {
-		if(list.size() == 1) return list.get(0);
+		if(list.size() == 1) return list.getFirst();
 		return block -> list.stream().anyMatch(i -> i.is(block));
 	}
 	
 	static IMaterial all(List<IMaterial> list) {
-		if(list.size() == 1) return list.get(0);
+		if(list.size() == 1) return list.getFirst();
 		return block -> list.stream().allMatch(i -> i.is(block));
 	}
 	
 	/**
-	 * @param block - block at
+	 * @param block block to check
 	 * @return {@code true} if this block matches
 	 */
 	

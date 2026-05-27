@@ -1,12 +1,12 @@
 package mc.rellox.spawnerlegacyapi.entity;
 
-import java.util.Set;
-import java.util.function.Predicate;
-
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
+
+import java.util.Set;
+import java.util.function.Predicate;
 
 public interface IEntityWorld {
 	
@@ -23,23 +23,23 @@ public interface IEntityWorld {
 	Set<IStackedEntity> entities();
 	
 	/**
-	 * This method will also try to initialise a stacked
+	 * This method will also try to initialize a stacked
 	 * entity if it was not already created.<br>
 	 * If validate is {@code true} then null will be returned
 	 * if the entity is dead or invalid.
 	 * 
-	 * @param living - living entity
-	 * @param validate - validate entity state
+	 * @param living living entity
+	 * @param validate validate entity state
 	 * @return Stacked entity or {@code null}
 	 */
 	
 	IStackedEntity get(LivingEntity living, boolean validate);
 
 	/**
-	 * This method will also try to initialise a stacked
+	 * This method will also try to initialize a stacked
 	 * entity if it was not already created.
 	 * 
-	 * @param living - living entity
+	 * @param living living entity
 	 * @return Stacked entity or {@code null}
 	 */
 	
@@ -48,10 +48,10 @@ public interface IEntityWorld {
 	}
 	
 	/**
-	 * This method will also try to initialise a stacked
+	 * This method will also try to initialize a stacked
 	 * entity if it was not already created.
 	 * 
-	 * @param entity - entity
+	 * @param entity entity
 	 * @return Stacked entity or {@code null}
 	 */
 	
@@ -63,7 +63,7 @@ public interface IEntityWorld {
 	/**
 	 * This method will not create any stacked entity.
 	 * 
-	 * @param living - living entity
+	 * @param living living entity
 	 * @return Stacked entity or {@code null}
 	 */
 	
@@ -93,8 +93,8 @@ public interface IEntityWorld {
 	 * Creates a new stacked entity if possible.<br>
 	 * Note, that this will override previous entity data.
 	 * 
-	 * @param living - living entity
-	 * @param stack - stack size
+	 * @param living living entity
+	 * @param stack stack size
 	 * @return Newly created stacked entity or {@code null}
 	 */
 	
@@ -103,23 +103,23 @@ public interface IEntityWorld {
 	/**
 	 * Removed this entity from the stacked list.
 	 * The unstacked entity will not be able to stack again.<br>
-	 * Returns a new stacked entity with the previous stack size - 1
+	 * Returns a new stacked entity with the previous stack size 1
 	 * or {@code null} if stack size was 1.<br>
 	 * If update is {@code true} then the previous entity will be updated. 
 	 * 
-	 * @param stacked - stacked entity
-	 * @param update - update clearing
+	 * @param stacked stacked entity
+	 * @param update update clearing
 	 * @return Newly spawned entity or {@code null}
 	 */
 	
 	IStackedEntity unstack(IStackedEntity stacked, boolean update);
 	
 	/**
-	 * @param location - center location
-	 * @param x - x radius
-	 * @param y - y radius
-	 * @param z - z radius
-	 * @param filter - filter
+	 * @param location center location
+	 * @param x x radius
+	 * @param y y radius
+	 * @param z z radius
+	 * @param filter filter
 	 * @return Set of filtered stacked entities
 	 */
 	
@@ -127,9 +127,9 @@ public interface IEntityWorld {
 			Predicate<IStackedEntity> filter);
 	
 	/**
-	 * @param location - center location
-	 * @param radius - search radius
-	 * @param filter - filter
+	 * @param location center location
+	 * @param radius search radius
+	 * @param filter filter
 	 * @return Set of filtered stacked entities
 	 */
 	
@@ -139,11 +139,11 @@ public interface IEntityWorld {
 	}
 	
 	/**
-	 * @param stacked - stacked entity
-	 * @param x - x radius
-	 * @param y - y radius
-	 * @param z - z radius
-	 * @param filter - filter
+	 * @param stacked stacked entity
+	 * @param x x radius
+	 * @param y y radius
+	 * @param z z radius
+	 * @param filter filter
 	 * @return Set of filtered stacked entities
 	 */
 	
@@ -151,9 +151,9 @@ public interface IEntityWorld {
 			Predicate<IStackedEntity> filter);
 	
 	/**
-	 * @param stacked - stacked entity
-	 * @param radius - search radius
-	 * @param filter - filter
+	 * @param stacked stacked entity
+	 * @param radius search radius
+	 * @param filter filter
 	 * @return Set of filtered stacked entities
 	 */
 	

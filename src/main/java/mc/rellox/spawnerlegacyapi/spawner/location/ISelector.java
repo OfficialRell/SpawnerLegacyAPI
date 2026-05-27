@@ -24,13 +24,13 @@ public interface ISelector extends Supplier<Block> {
 		}, ABOVE {
 			@Override
 			public ISelector get(List<Block> list) {
-				var block = list.get(0);
+				var block = list.getFirst();
 				return () -> block;
 			}
 		};
 		
 		/**
-		 * @param list - list of blocks
+		 * @param list list of blocks
 		 * @return New block location selector
 		 */
 		

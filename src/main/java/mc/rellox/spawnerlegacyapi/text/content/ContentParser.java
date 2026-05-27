@@ -180,7 +180,7 @@ public final class ContentParser {
 	private record Text(String text, Type type) {}
 	
 	private enum Type {
-		text, color, gradient, format;
-	}
+		text, color, gradient, format
+    }
 
 }

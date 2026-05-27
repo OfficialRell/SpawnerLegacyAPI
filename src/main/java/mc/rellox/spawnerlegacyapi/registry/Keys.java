@@ -68,7 +68,7 @@ public final class Keys {
 	}
 	
 	public static long getLong(ItemStack item, KeyType key) {
-		return get(item, key, PersistentDataType.LONG, 0l);
+		return get(item, key, PersistentDataType.LONG, 0L);
 	}
 	
 	public static byte getByte(ItemStack item, KeyType key) {
@@ -76,7 +76,7 @@ public final class Keys {
 	}
 	
 	public static boolean getBoolean(ItemStack item, KeyType key) {
-		return get(item, key, PersistentDataType.BYTE, (byte) 0) == 1 ? true : false;
+		return get(item, key, PersistentDataType.BYTE, (byte) 0) == 1;
 	}
 	
 }

@@ -1,27 +1,26 @@
 package mc.rellox.spawnerlegacyapi.manager;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.bukkit.World;
-import org.bukkit.block.Block;
-
 import mc.rellox.spawnerlegacyapi.spawner.IGenerator;
 import mc.rellox.spawnerlegacyapi.spawner.IVirtual;
 import mc.rellox.spawnerlegacyapi.spawner.info.IInfo;
 import mc.rellox.spawnerlegacyapi.spawner.world.IGeneratorWorld;
+import org.bukkit.World;
+import org.bukkit.block.Block;
+
+import java.util.List;
+import java.util.Optional;
 
 public interface IGeneratorManager {
 	
 	/**
-	 * @param world - world
+	 * @param world world
 	 * @return Information about generator in a world
 	 */
 	
 	IInfo info(World world);
 	
 	/**
-	 * @param world - world
+	 * @param world world
 	 * @return Generator world or {@code null} if disabled
 	 */
 	
@@ -31,8 +30,8 @@ public interface IGeneratorManager {
 	 * Created a new generator at the block from virtual data.<br>
 	 * Returns {@code null} if generators in that world are disabled.
 	 * 
-	 * @param block - block
-	 * @param virtual - virtual data
+	 * @param block block
+	 * @param virtual virtual data
 	 * @return New generator
 	 */
 	
@@ -42,8 +41,8 @@ public interface IGeneratorManager {
 	 * Gets existing generator at the block or creates a new one if absent.<br>
 	 * Returns {@code null} if generators in that world are disabled.
 	 * 
-	 * @param block - block
-	 * @param create - create if absent
+	 * @param block block
+	 * @param create create if absent
 	 * @return New or existing generator
 	 */
 	
@@ -53,7 +52,7 @@ public interface IGeneratorManager {
 	 * Gets existing generator at the block.<br>
 	 * Does not create a new one.
 	 * 
-	 * @param block - block
+	 * @param block block
 	 * @return Existing generator or {@code null} if absent
 	 */
 	
@@ -62,7 +61,7 @@ public interface IGeneratorManager {
 	/**
 	 * Returns a list of all active generators in a world or in all worlds if {@code null} is given.
 	 * 
-	 * @param world - world
+	 * @param world world
 	 * @return List of all generators in a world
 	 */
 	
@@ -79,7 +78,7 @@ public interface IGeneratorManager {
 	}
 	
 	/**
-	 * @param block - block
+	 * @param block block
 	 * @return Optional generator at the block or empty if absent or inactive
 	 */
 	
@@ -88,7 +87,7 @@ public interface IGeneratorManager {
 	/**
 	 * Updates generator at the block.
 	 * 
-	 * @param block - block
+	 * @param block block
 	 */
 	
 	void update(Block block);
@@ -103,7 +102,7 @@ public interface IGeneratorManager {
 	 * Removes generator at the block.<br>
 	 * Does not remove the spawner block.
 	 * 
-	 * @param block - block
+	 * @param block block
 	 */
 	
 	void remove(Block block);
@@ -111,8 +110,8 @@ public interface IGeneratorManager {
 	/**
 	 * Removes generator at the block.
 	 * 
-	 * @param block - block
-	 * @param fully - if {@code true}, removes spawner block
+	 * @param block block
+	 * @param fully if {@code true}, removes spawner block
 	 */
 	
 	void remove(Block block, boolean fully);
@@ -120,7 +119,7 @@ public interface IGeneratorManager {
 	/**
 	 * Same as {@link #raw(Block)} but deprecated to avoid confusion.
 	 * 
-	 * @param block - block
+	 * @param block block
 	 */
 	
 	@Deprecated(since = "1.4.11", forRemoval = true)

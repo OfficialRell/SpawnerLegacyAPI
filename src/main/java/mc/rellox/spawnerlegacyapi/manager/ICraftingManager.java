@@ -1,12 +1,11 @@
 package mc.rellox.spawnerlegacyapi.manager;
 
-import java.util.List;
-import java.util.UUID;
-
-import org.bukkit.entity.Player;
-
 import mc.rellox.spawnerlegacyapi.crafting.ISpawnerCraft;
 import mc.rellox.spawnerlegacyapi.crafting.ISpawnerRecipe;
+import org.bukkit.entity.Player;
+
+import java.util.List;
+import java.util.UUID;
 
 public interface ICraftingManager {
 	
@@ -21,7 +20,7 @@ public interface ICraftingManager {
 	/**
 	 * Gets the active craft for a player by UUID.
 	 * 
-	 * @param id - player id
+	 * @param id player id
 	 * @return Craft, or {@code null} if none exists
 	 */
 	
@@ -30,7 +29,7 @@ public interface ICraftingManager {
 	/**
 	 * Gets the active craft for a player.
 	 * 
-	 * @param player - player
+	 * @param player player
 	 * @return Craft, or {@code null} if none exists
 	 */
 	
@@ -39,7 +38,7 @@ public interface ICraftingManager {
 	/**
 	 * Checks if the player is currently crafting.
 	 * 
-	 * @param id - player id
+	 * @param id player id
 	 * @return {@code true} if crafting
 	 */
 	
@@ -48,7 +47,7 @@ public interface ICraftingManager {
 	/**
 	 * Checks if the player is currently crafting.
 	 * 
-	 * @param player - player
+	 * @param player player
 	 * @return {@code true} if crafting
 	 */
 	
@@ -57,7 +56,7 @@ public interface ICraftingManager {
 	/**
 	 * Starts the new craft.
 	 * 
-	 * @param craft - craft to start
+	 * @param craft craft to start
 	 */
 	
 	void start(ISpawnerCraft craft);
@@ -65,7 +64,7 @@ public interface ICraftingManager {
 	/**
 	 * Cancels and removes the craft, if any.
 	 * 
-	 * @param id - player id
+	 * @param id player id
 	 */
 	
 	void remove(UUID id);
@@ -73,7 +72,7 @@ public interface ICraftingManager {
 	/**
 	 * Cancels and removes the craft, if any.
 	 * 
-	 * @param player - player
+	 * @param player player
 	 */
 	
 	void remove(Player player);
@@ -81,7 +80,7 @@ public interface ICraftingManager {
 	/**
 	 * Gets the crafting result.
 	 * 
-	 * @param id - player id
+	 * @param id player id
 	 * @return Crafting result, or {@code null} if none exists
 	 */
 	
@@ -90,7 +89,7 @@ public interface ICraftingManager {
 	/**
 	 * Gets the crafting result.
 	 * 
-	 * @param player - player
+	 * @param player player
 	 * @return Crafting result, or {@code null} if none exists
 	 */
 	
@@ -99,7 +98,7 @@ public interface ICraftingManager {
 	/**
 	 * Takes the crafting result, removing it.
 	 * 
-	 * @param id - player id
+	 * @param id player id
 	 * @return Crafting result, or {@code null} if none exists
 	 */
 	
@@ -108,7 +107,7 @@ public interface ICraftingManager {
 	/**
 	 * Takes the crafting result, removing it.
 	 * 
-	 * @param player - player
+	 * @param player player
 	 * @return Crafting result, or {@code null} if none exists
 	 */
 	
