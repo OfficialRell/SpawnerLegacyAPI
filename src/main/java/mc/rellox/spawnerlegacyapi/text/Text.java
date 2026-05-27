@@ -97,9 +97,7 @@ public final class Text {
 			Object nms_item = RF.order(clazz, "asNMSCopy", ItemStack.class).invoke(item);
 			
 			String[] names = switch (Version.version) {
-				case v_18_1 -> new String[] {"v", "a"};
-				case v_18_2 -> new String[] {"w", "a"};
-				case v_19_1, v_19_2, v_19_3, v_20_4 -> new String[] {"x", "getString"};
+				case v_20_4 -> new String[] {"x", "getString"};
 				case v_21_1 -> new String[] {"w", "getString"};
 				case v_26 -> new String[] {"getHoverName", "getString"};
 				default -> new String[] {"y", "getString"};

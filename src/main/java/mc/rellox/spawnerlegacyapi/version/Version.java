@@ -40,17 +40,6 @@ public final class Version {
 		else if(server.contains("v1_20_R3")) version = VersionType.v_20_3;
 		else if(server.contains("v1_20_R2")) version = VersionType.v_20_2;
 		else if(server.contains("v1_20_R1")) version = VersionType.v_20_1;
-		else if(server.contains("v1_19_R3")) version = VersionType.v_19_3;
-		else if(server.contains("v1_19_R2")) version = VersionType.v_19_2;
-		else if(server.contains("v1_19_R1")) version = VersionType.v_19_1;
-		else if(server.contains("v1_18_R2")) version = VersionType.v_18_2;
-		else if(server.contains("v1_18_R1")) version = VersionType.v_18_1;
-		else if(server.contains("v1_17_R1")) version = VersionType.v_17_1;
-		else if(server.contains("v1_16_R3")) version = VersionType.v_16_3;
-		else if(server.contains("v1_16_R2")) version = VersionType.v_16_2;
-		else if(server.contains("v1_16_R1")) version = VersionType.v_16_1;
-		else if(server.contains("v1_15_R1")) version = VersionType.v_15_1;
-		else if(server.contains("v1_14_R1")) version = VersionType.v_14_1;
 		else version = null;
 		
 		if(version == null) {
@@ -68,13 +57,29 @@ public final class Version {
 	}
 	
 	public enum VersionType {
-		
+
+		@Deprecated(since = "1.6.1", forRemoval = true)
 		v_14_1,
+		@Deprecated(since = "1.6.1", forRemoval = true)
 		v_15_1,
-		v_16_1, v_16_2, v_16_3,
+		@Deprecated(since = "1.6.1", forRemoval = true)
+		v_16_1,
+		@Deprecated(since = "1.6.1", forRemoval = true)
+		v_16_2,
+		@Deprecated(since = "1.6.1", forRemoval = true)
+		v_16_3,
+		@Deprecated(since = "1.6.1", forRemoval = true)
 		v_17_1,
-		v_18_1, v_18_2,
-		v_19_1, v_19_2, v_19_3,
+		@Deprecated(since = "1.6.1", forRemoval = true)
+		v_18_1,
+		@Deprecated(since = "1.6.1", forRemoval = true)
+		v_18_2,
+		@Deprecated(since = "1.6.1", forRemoval = true)
+		v_19_1,
+		@Deprecated(since = "1.6.1", forRemoval = true)
+		v_19_2,
+		@Deprecated(since = "1.6.1", forRemoval = true)
+		v_19_3,
 		v_20_1, v_20_2, v_20_3, v_20_4,
 		v_21_1, v_21_2, v_21_3, v_21_4, v_21_5, v_21_6, v_21_7,
 		v_26;

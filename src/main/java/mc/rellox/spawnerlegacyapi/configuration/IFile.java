@@ -173,14 +173,9 @@ public interface IFile extends IFileValues {
 	 */
 	
 	default void header(String... header) {
-		FileConfigurationOptions o = file().options();
-		if(Version.instance.type().atleast(VersionType.v_18_1)) {
-			RF.order(o, "setHeader", List.class).invoke(List.of(header));
-			RF.order(o, "parseComments", boolean.class).invoke(true);
-		} else {
-			RF.order(o, "header", String.class).invoke(String.join("\n", header));
-			RF.order(o, "copyHeader", boolean.class).invoke(true);
-		}
+		FileConfigurationOptions options = file().options();
+		options.setHeader(List.of(header));
+		options.parseComments(true);
 	}
 
 	/**
@@ -188,8 +183,7 @@ public interface IFile extends IFileValues {
 	 */
 
 	default Commenter commenter() {
-		return Version.instance.type().atleast(VersionType.v_18_1)
-				? new Commenter(this) : null;
+		return new Commenter(this);
 	}
 
 	record Commenter(IFile file) {
@@ -213,8 +207,7 @@ public interface IFile extends IFileValues {
 		 */
 
 		public void comment(String path, List<String> list) {
-			RF.order(file.file(), "setComments", String.class, List.class)
-				.invoke(path, list);
+			file.file().setComments(path, list);
 		}
 
 	}

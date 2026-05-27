@@ -9,10 +9,10 @@ import java.util.Collection;
 public record NullVersion(VersionType type) implements IVersion {
 
 	@Override
-	public void send(Collection<? extends Player> players, Object... os) {}
+	public void send(Collection<? extends Player> players, Object... packets) {}
 
 	@Override
-	public void send(Player player, Object... os) {}
+	public void send(Player player, Object... packets) {}
 
 	@Override
 	public Object spawn(Object entity) {
