@@ -8,38 +8,38 @@ import java.util.Collection;
 
 public record NullVersion(VersionType type) implements IVersion {
 
-	@Override
-	public void send(Collection<? extends Player> players, Object... packets) {}
+    @Override
+    public void send(Collection<? extends Player> players, Object... packets) {}
 
-	@Override
-	public void send(Player player, Object... packets) {}
+    @Override
+    public void send(Player player, Object... packets) {}
 
-	@Override
-	public Object spawn(Object entity) {
-		return null;
-	}
+    @Override
+    public Object spawn(Object entity) {
+        return null;
+    }
 
-	@Override
-	public Object meta(Object entity) {
-		return null;
-	}
+    @Override
+    public Object meta(Object entity) {
+        return null;
+    }
 
-	@Override
-	public Object destroy(Object entity) {
-		return null;
-	}
+    @Override
+    public Object destroy(Object entity) {
+        return null;
+    }
 
-	@Override
-	public Object hologram(Location location, String name) {
-		return null;
-	}
+    @Override
+    public Object hologram(Location location, String name) {
+        return null;
+    }
 
-	@Override
-	public Object component(String name) {
-		return null;
-	}
+    @Override
+    public Object component(String name) {
+        return null;
+    }
 
-	@Override
-	public void name(Object entity, Object component) {}
+    @Override
+    public void name(Object entity, Object component) {}
 
 }
