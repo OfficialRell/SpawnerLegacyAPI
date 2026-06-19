@@ -1,9 +1,9 @@
 package mc.rellox.spawnerlegacyapi.spawner.location;
 
-import java.util.Set;
-
 import org.bukkit.Location;
 import org.bukkit.World;
+
+import java.util.Set;
 
 public interface ILocationMutable {
 	

@@ -1,8 +1,7 @@
 package mc.rellox.spawnerlegacyapi.event;
 
-import org.bukkit.entity.Player;
-
 import mc.rellox.spawnerlegacyapi.spawner.IGenerator;
+import org.bukkit.entity.Player;
 
 public abstract class SpawnerGeneratorEvent extends SpawnerPlayerEvent implements IGeneratorEvent {
 

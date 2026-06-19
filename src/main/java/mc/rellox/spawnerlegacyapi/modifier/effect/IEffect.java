@@ -9,92 +9,92 @@ import org.bukkit.potion.PotionEffectType;
 
 public interface IEffect {
 
-	/**
-	 * @return Modifier effect type
-	 */
+    /**
+     * @return Modifier effect type
+     */
 
-	ModifierEffectType type();
-	
-	/**
-	 * Reads the modifier effect instance from the specified persistent data container.
-	 * 
-	 * @param instance instance
-	 * @param container container
-	 * @return Modifier effect instance
-	 */
-	
-	IEffectInstance<? extends IEffect> read(IModifierInstance instance, PersistentDataContainer container);
-	
-	/**
-	 * @return Required effect parameters
-	 */
-	
-	IParameterMap parameters();
+    ModifierEffectType type();
 
-	interface IEffectEvaluate extends IEffect {
+    /**
+     * Reads the modifier effect instance from the specified persistent data container.
+     *
+     * @param instance  instance
+     * @param container container
+     * @return Modifier effect instance
+     */
 
-		/**
-		 * @return Evaluation type
-		 */
+    IEffectInstance<? extends IEffect> read(IModifierInstance instance, PersistentDataContainer container);
 
-		EvaluateType evaluate();
-	}
+    /**
+     * @return Required effect parameters
+     */
 
-	interface IEffectEvaluateDamage extends IEffectEvaluate {
+    IParameterMap parameters();
 
-		@Override
-		default ModifierEffectType type() {
-			return ModifierEffectType.EVALUATE_DAMAGE;
-		}
+    interface IEffectEvaluate extends IEffect {
 
-	}
+        /**
+         * @return Evaluation type
+         */
 
-	interface IEffectEvaluateHealth extends IEffectEvaluate {
+        EvaluateType evaluate();
+    }
 
-		@Override
-		default ModifierEffectType type() {
-			return ModifierEffectType.EVALUATE_HEALTH;
-		}
+    interface IEffectEvaluateDamage extends IEffectEvaluate {
 
-	}
+        @Override
+        default ModifierEffectType type() {
+            return ModifierEffectType.EVALUATE_DAMAGE;
+        }
 
-	interface IEffectEvaluateUpgrade extends IEffectEvaluate {
+    }
 
-		@Override
-		default ModifierEffectType type() {
-			return ModifierEffectType.EVALUATE_UPGRADE;
-		}
+    interface IEffectEvaluateHealth extends IEffectEvaluate {
 
-		/**
-		 * @return Upgrade type
-		 */
+        @Override
+        default ModifierEffectType type() {
+            return ModifierEffectType.EVALUATE_HEALTH;
+        }
 
-		UpgradeType upgrade();
+    }
 
-	}
+    interface IEffectEvaluateUpgrade extends IEffectEvaluate {
 
-	interface IEffectGivePotion extends IEffect {
+        @Override
+        default ModifierEffectType type() {
+            return ModifierEffectType.EVALUATE_UPGRADE;
+        }
 
-		@Override
-		default ModifierEffectType type() {
-			return ModifierEffectType.GIVE_POTION;
-		}
+        /**
+         * @return Upgrade type
+         */
 
-		/**
-		 * @return Potion effect type
-		 */
+        UpgradeType upgrade();
 
-		PotionEffectType potion();
+    }
 
-	}
-	
-	interface IEffectEvaluateScale extends IEffectEvaluate {
+    interface IEffectGivePotion extends IEffect {
 
-		@Override
-		default ModifierEffectType type() {
-			return ModifierEffectType.EVALUATE_SCALE;
-		}
+        @Override
+        default ModifierEffectType type() {
+            return ModifierEffectType.GIVE_POTION;
+        }
 
-	}
+        /**
+         * @return Potion effect type
+         */
+
+        PotionEffectType potion();
+
+    }
+
+    interface IEffectEvaluateScale extends IEffectEvaluate {
+
+        @Override
+        default ModifierEffectType type() {
+            return ModifierEffectType.EVALUATE_SCALE;
+        }
+
+    }
 
 }

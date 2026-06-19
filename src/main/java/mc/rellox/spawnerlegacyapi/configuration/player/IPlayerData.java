@@ -10,207 +10,207 @@ import java.util.Set;
 import java.util.UUID;
 
 public interface IPlayerData extends ILocationMutable, ICommit {
-	
-	/**
-	 * Loads all values from the file if not loaded already.
-	 */
-	
-	void load();
 
-	
-	/**
-	 * @return {@code true} if the player is online, otherwise {@code false}
-	 */
-	
-	boolean online();
-	
-	/**
-	 * If this file has not been used in the last 5 minutes then
-	 *  {@code false} is returned, otherwise {@code true}.
-	 * 
-	 * @return {@code true} if this file is in use
-	 */
-	
-	boolean using();
-	
-	/**
-	 * Refreshes the use time to disable this file from unloading.
-	 */
-	
-	void use();
-	
-	/**
-	 * @return ID of the player
-	 */
-	
-	UUID id();
-	
-	/**
-	 * @return Player object or {@code null} if offline
-	 */
-	
-	Player player();
-	
-	/**
-	 * Returns an unmodifiable set of all trusted player IDs.
-	 * <p> Trusted players can manipulate with spawners the same as their owner.
-	 * 
-	 * @return Set of player IDs
-	 */
-	
-	Set<UUID> trusted();
-	
-	/**
-	 * Tried to find the UUID from the player name.
-	 * 
-	 * @param name trusted player name
-	 * @return UUID of the player or {@code null} if no player found
-	 */
-	
-	UUID trusted(String name);
-	
-	/**
-	 * @param id player id
-	 * @return {@code true} if this player is trusted
-	 */
-	
-	boolean trusts(UUID id);
-	
-	/**
-	 * @param player player
-	 * @return {@code true} if this player is trusted
-	 */
-	
-	boolean trusts(Player player);
-	
-	/**
-	 * Adds this player to the trust list.
-	 * 
-	 * @param id player id
-	 * @return {@code true} if this player was not trusted before, otherwise {@code false}
-	 */
-	
-	boolean trust(UUID id);
-	
-	/**
-	 * Adds this player to the trust list.
-	 * 
-	 * @param player player
-	 * @return {@code true} if this player was not trusted before, otherwise {@code false}
-	 */
-	
-	boolean trust(Player player);
-	
-	/**
-	 * Removes this player from the trust list.
-	 * 
-	 * @param id player id
-	 * @return {@code true} if this player was trusted before, otherwise {@code false}
-	 */
-	
-	boolean untrust(UUID id);
-	
-	/**
-	 * Removes this player from the trust list.
-	 * 
-	 * @param player player
-	 * @return {@code true} if this player was trusted before, otherwise {@code false}
-	 */
-	
-	boolean untrust(Player player);
-	
-	/**
-	 * Clears all trusted players.
-	 * 
-	 * @return Amount of removed trusted players
-	 */
-	
-	int untrust();
-	
-	/**
-	 * Removes the specified spawner location.
-	 * 
-	 * @param block spawner block
-	 * @return {@code true} if this location did not exist
-	 */
-	
-	boolean remove(Block block);
-	
-	/**
-	 * Adds the specified spawner location.
-	 * 
-	 * @param block spawner block
-	 * @return {@code true} if this location was added, otherwise {@code false}
-	 */
-	
-	boolean add(Block block);
-	
-	/**
-	 * @param limit limit type
-	 * @return The specified limit value
-	 */
-	
-	int limit(LimitType limit);
-	
-	/**
-	 * Adds or subtracts the value from the limit.
-	 * 
-	 * @param limit limit type
-	 * @param value value
-	 */
-	
-	void limit(LimitType limit, int value);
-	
-	/**
-	 * Resets the limit value.
-	 * 
-	 * @param limit limit type
-	 * @return Previous limit value
-	 */
-	
-	int reset(LimitType limit);
-	
-	/**
-	 * Checks if the spawner type in spawner type GUI is unlocked.
-	 * 
-	 * @param type type
-	 * @return {@code true} if the spawner type is unlocked, otherwise {@code false}
-	 */
-	
-	boolean unlocked(SpawnerType type);
-	
-	/**
-	 * @return Set of all unlocked spawner types in spawner type GUI
-	 */
-	
-	Set<SpawnerType> unlocked();
-	
-	/**
-	 * Unlocks the spawner type in spawner type GUI.
-	 * 
-	 * @param type type
-	 * @param unlock {@code true} to unlock, {@code false} to lock
-	 */
-	
-	void unlock(SpawnerType type, boolean unlock);
-	
-	/**
-	 * Gets the data value.
-	 * 
-	 * @param <T> data type
-	 * @param data data parser
-	 * @return Data value or {@code null} if absent
-	 */
-	
-	<T> T get(IData<T> data);
-	
-	/**
-	 * @param <T> data type
-	 * @param data data parser
-	 * @param value new value
-	 * @return Old value or {@code null} if none was set before
-	 */
-	
-	<T> T set(IData<T> data, T value);
-	
+    /**
+     * Loads all values from the file if not loaded already.
+     */
+
+    void load();
+
+
+    /**
+     * @return {@code true} if the player is online, otherwise {@code false}
+     */
+
+    boolean online();
+
+    /**
+     * If this file has not been used in the last 5 minutes then
+     * {@code false} is returned, otherwise {@code true}.
+     *
+     * @return {@code true} if this file is in use
+     */
+
+    boolean using();
+
+    /**
+     * Refreshes the use time to disable this file from unloading.
+     */
+
+    void use();
+
+    /**
+     * @return ID of the player
+     */
+
+    UUID id();
+
+    /**
+     * @return Player object or {@code null} if offline
+     */
+
+    Player player();
+
+    /**
+     * Returns an unmodifiable set of all trusted player IDs.
+     * <p> Trusted players can manipulate with spawners the same as their owner.
+     *
+     * @return Set of player IDs
+     */
+
+    Set<UUID> trusted();
+
+    /**
+     * Tried to find the UUID from the player name.
+     *
+     * @param name trusted player name
+     * @return UUID of the player or {@code null} if no player found
+     */
+
+    UUID trusted(String name);
+
+    /**
+     * @param id player ID
+     * @return {@code true} if this player is trusted
+     */
+
+    boolean trusts(UUID id);
+
+    /**
+     * @param player player
+     * @return {@code true} if this player is trusted
+     */
+
+    boolean trusts(Player player);
+
+    /**
+     * Adds this player to the trust list.
+     *
+     * @param id player ID
+     * @return {@code true} if this player was not trusted before
+     */
+
+    boolean trust(UUID id);
+
+    /**
+     * Adds this player to the trust list.
+     *
+     * @param player player
+     * @return {@code true} if this player was not trusted before
+     */
+
+    boolean trust(Player player);
+
+    /**
+     * Removes this player from the trust list.
+     *
+     * @param id player ID
+     * @return {@code true} if this player was trusted before
+     */
+
+    boolean untrust(UUID id);
+
+    /**
+     * Removes this player from the trust list.
+     *
+     * @param player player
+     * @return {@code true} if this player was trusted before
+     */
+
+    boolean untrust(Player player);
+
+    /**
+     * Clears all trusted players.
+     *
+     * @return Amount of removed trusted players
+     */
+
+    int untrust();
+
+    /**
+     * Removes the specified spawner location.
+     *
+     * @param block spawner block
+     * @return {@code true} if this location did not exist
+     */
+
+    boolean remove(Block block);
+
+    /**
+     * Adds the specified spawner location.
+     *
+     * @param block spawner block
+     * @return {@code true} if this location was added
+     */
+
+    boolean add(Block block);
+
+    /**
+     * @param limit limit type
+     * @return The specified limit value
+     */
+
+    int limit(LimitType limit);
+
+    /**
+     * Adds or subtracts the value from the limit.
+     *
+     * @param limit limit type
+     * @param value value
+     */
+
+    void limit(LimitType limit, int value);
+
+    /**
+     * Resets the limit value.
+     *
+     * @param limit limit type
+     * @return Previous limit value
+     */
+
+    int reset(LimitType limit);
+
+    /**
+     * Checks if the spawner type in spawner type GUI is unlocked.
+     *
+     * @param type type
+     * @return {@code true} if the spawner type is unlocked
+     */
+
+    boolean unlocked(SpawnerType type);
+
+    /**
+     * @return Set of all unlocked spawner types in spawner type GUI
+     */
+
+    Set<SpawnerType> unlocked();
+
+    /**
+     * Unlocks the spawner type in spawner type GUI.
+     *
+     * @param type   type
+     * @param unlock {@code true} to unlock, {@code false} to lock
+     */
+
+    void unlock(SpawnerType type, boolean unlock);
+
+    /**
+     * Gets the data value.
+     *
+     * @param <T>  data type
+     * @param data data parser
+     * @return Data value or {@code null} if absent
+     */
+
+    <T> T get(IData<T> data);
+
+    /**
+     * @param <T>   data type
+     * @param data  data parser
+     * @param value new value
+     * @return Old value or {@code null} if none was set before
+     */
+
+    <T> T set(IData<T> data, T value);
+
 }

@@ -1,10 +1,9 @@
 package mc.rellox.spawnerlegacyapi.view.layout;
 
-import org.bukkit.Material;
-
 import mc.rellox.spawnerlegacyapi.configuration.IFile;
 import mc.rellox.spawnerlegacyapi.item.builder.ItemBuilder;
 import mc.rellox.spawnerlegacyapi.utility.ISave;
+import org.bukkit.Material;
 
 public interface IViewItem extends ISave {
 	
@@ -40,7 +39,7 @@ public interface IViewItem extends ISave {
 		return ItemBuilder.of(material())
 				.shining(glint())
 				.modelled(model())
-				.flaged();
+				.flagged();
 	}
 	
 	@Override

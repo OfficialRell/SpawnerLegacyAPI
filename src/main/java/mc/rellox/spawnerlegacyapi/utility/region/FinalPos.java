@@ -1,10 +1,9 @@
 package mc.rellox.spawnerlegacyapi.utility.region;
 
+import mc.rellox.spawnerlegacyapi.utility.reflect.Reflect.RF;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
-
-import mc.rellox.spawnerlegacyapi.utility.reflect.Reflect.RF;
 
 public record FinalPos(World world, int x, int y, int z) {
 	
@@ -78,7 +77,8 @@ public record FinalPos(World world, int x, int y, int z) {
 	public String toFixed() {
 		return fx() + ", " + fy() + ", " + fz();
 	}
-	
+
+	@Override
 	public String toString() {
 		return "[" + x + ", " + y + ", " + z + "]";
 	}

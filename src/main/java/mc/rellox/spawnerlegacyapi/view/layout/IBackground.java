@@ -6,7 +6,7 @@ import mc.rellox.spawnerlegacyapi.utility.ISave;
 
 public interface IBackground extends ISave {
 	
-	static IBackground empty = new IBackground() {
+	IBackground empty = new IBackground() {
 		@Override
 		public void save(IFile file, String path) {}
 		@Override
@@ -15,7 +15,7 @@ public interface IBackground extends ISave {
 	
 	
 	/**
-	 * @return List of background items or {@code null} if not specified
+	 * @return Array of background items or {@code null} if not specified
 	 */
 	
 	ItemBuilder[] items();

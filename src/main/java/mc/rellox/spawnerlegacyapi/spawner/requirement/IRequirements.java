@@ -45,7 +45,6 @@ public interface IRequirements {
 		public IMaterial ground;
 		public IMaterial environment;
 		
-		
 		public IRequirements build() {
 			if(light == null) light = ILight.empty;
 			if(ground == null || ground.equals(IMaterial.air)) ground = IMaterial.empty;

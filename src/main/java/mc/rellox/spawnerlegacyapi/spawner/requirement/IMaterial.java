@@ -1,13 +1,13 @@
 package mc.rellox.spawnerlegacyapi.spawner.requirement;
 
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.data.Waterlogged;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.block.data.Waterlogged;
 
 public interface IMaterial {
 	
@@ -32,46 +32,24 @@ public interface IMaterial {
 			|| block.getType().name().endsWith("_FENCE_GATE")
 			|| block.getType().name().endsWith("_WALL");
 	
-	static IMaterial is(Material m) {
-		return new IMaterial() {
-			final Material material = m;
-			@Override
-			public boolean is(Block block) {
-				return block.getType() == material;
-			}
-		};
+	static IMaterial is(final Material material) {
+		return block -> block.getType() == material;
 	}
 	
 	static IMaterial is(Collection<Material> is) {
 		if(is.size() == 1) return is(is.toArray(Material[]::new)[0]);
-		return new IMaterial() {
-			final Set<Material> set = new HashSet<>(is);
-			@Override
-			public boolean is(Block block) {
-				return set.contains(block.getType());
-			}
-		};
+		final Set<Material> set = new HashSet<>(is);
+		return block -> set.contains(block.getType());
 	}
 	
-	static IMaterial not(Material m) {
-		return new IMaterial() {
-			final Material material = m;
-			@Override
-			public boolean is(Block block) {
-				return block.getType() != material;
-			}
-		};
+	static IMaterial not(final Material material) {
+		return block -> block.getType() != material;
 	}
 	
 	static IMaterial not(Collection<Material> not) {
 		if(not.size() == 1) return not(not.toArray(Material[]::new)[0]);
-		return new IMaterial() {
-			final Set<Material> set = new HashSet<>(not);
-			@Override
-			public boolean is(Block block) {
-				return !set.contains(block.getType());
-			}
-		};
+		final Set<Material> set = new HashSet<>(not);
+		return block -> !set.contains(block.getType());
 	}
 	
 	static IMaterial any(List<IMaterial> list) {

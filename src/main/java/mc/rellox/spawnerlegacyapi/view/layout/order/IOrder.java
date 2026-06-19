@@ -1,14 +1,14 @@
 package mc.rellox.spawnerlegacyapi.view.layout.order;
 
+import mc.rellox.spawnerlegacyapi.text.content.IContent;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
-import mc.rellox.spawnerlegacyapi.text.content.IContent;
-
 public interface IOrder {
 	
-	static IOrder empty = new IOrder() {
+	IOrder empty = new IOrder() {
 		@Override
 		public void submit(String type, Supplier<List<IContent>> supplier) {}
 		@Override
@@ -20,8 +20,8 @@ public interface IOrder {
 	/**
 	 * Adds the content supplier to the lore line.
 	 * 
-	 * @param type - lore type
-	 * @param supplier - supplier
+	 * @param type lore type
+	 * @param supplier supplier
 	 */
 	
 	void submit(String type, Supplier<List<IContent>> supplier);
@@ -37,7 +37,7 @@ public interface IOrder {
 	/**
 	 * Adds the excess name content to the lore, below the name.
 	 * 
-	 * @param overflow - excess name content
+	 * @param overflow excess name content
 	 */
 	
 	void named(List<IContent> overflow);

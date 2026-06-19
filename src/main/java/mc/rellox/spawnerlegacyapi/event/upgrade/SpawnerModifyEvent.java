@@ -1,9 +1,8 @@
 package mc.rellox.spawnerlegacyapi.event.upgrade;
 
-import org.bukkit.entity.Player;
-
 import mc.rellox.spawnerlegacyapi.event.SpawnerGeneratorEvent;
 import mc.rellox.spawnerlegacyapi.spawner.IGenerator;
+import org.bukkit.entity.Player;
 
 /**
  * An event called when a player modifies (upgrades, switches or charges) a spawner.

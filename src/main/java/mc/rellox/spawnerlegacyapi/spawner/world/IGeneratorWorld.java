@@ -1,16 +1,14 @@
 package mc.rellox.spawnerlegacyapi.spawner.world;
 
-import java.util.List;
-import java.util.stream.Stream;
-
+import mc.rellox.spawnerlegacyapi.spawner.IGenerator;
+import mc.rellox.spawnerlegacyapi.spawner.IGeneratorSnapshot;
+import mc.rellox.spawnerlegacyapi.spawner.info.IInfo;
 import org.bukkit.Chunk;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 
-import mc.rellox.spawnerlegacyapi.spawner.IGenerator;
-import mc.rellox.spawnerlegacyapi.spawner.IVirtual;
-import mc.rellox.spawnerlegacyapi.spawner.info.IInfo;
-import org.jspecify.annotations.Nullable;
+import java.util.List;
+import java.util.stream.Stream;
 
 public interface IGeneratorWorld {
 	
@@ -86,10 +84,10 @@ public interface IGeneratorWorld {
 	 * Never {@code null}.
 	 * 
 	 * @param block block
-	 * @param virtual virtual spawner
+	 * @param snapshot generator snapshot
 	 * @return Newly created generator
 	 */
-	IGenerator put(Block block, IVirtual virtual);
+	IGenerator put(Block block, IGeneratorSnapshot snapshot);
 	
 	/**
 	 * Adds this generator to the list only if it does not already exist.

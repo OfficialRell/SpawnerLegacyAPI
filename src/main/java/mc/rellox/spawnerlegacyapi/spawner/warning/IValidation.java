@@ -1,12 +1,11 @@
 package mc.rellox.spawnerlegacyapi.spawner.warning;
 
-import java.util.List;
-
-import org.bukkit.Location;
-
 import mc.rellox.spawnerlegacyapi.hologram.IHologram;
 import mc.rellox.spawnerlegacyapi.spawner.IGenerator;
 import mc.rellox.spawnerlegacyapi.spawner.location.IFinder;
+import org.bukkit.Location;
+
+import java.util.List;
 
 public interface IValidation {
 	

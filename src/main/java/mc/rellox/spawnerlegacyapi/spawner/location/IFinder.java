@@ -1,11 +1,10 @@
 package mc.rellox.spawnerlegacyapi.spawner.location;
 
-import java.util.List;
-
-import org.bukkit.Location;
-
 import mc.rellox.spawnerlegacyapi.spawner.requirement.ErrorCounter;
 import mc.rellox.spawnerlegacyapi.spawner.requirement.IRequirements;
+import org.bukkit.Location;
+
+import java.util.List;
 
 public interface IFinder {
 	

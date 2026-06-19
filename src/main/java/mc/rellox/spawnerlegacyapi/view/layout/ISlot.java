@@ -18,7 +18,7 @@ public interface ISlot extends ISave {
 	ItemBuilder[] items();
 	
 	/**
-	 * @return Indecees of this slot
+	 * @return Indices of this slot
 	 */
 	
 	int[] slots();

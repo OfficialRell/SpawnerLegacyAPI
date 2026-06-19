@@ -1,15 +1,14 @@
 package mc.rellox.spawnerlegacyapi.utility.region.type;
 
-import java.util.function.IntSupplier;
-
-import org.bukkit.Location;
-import org.bukkit.block.Block;
-
 import mc.rellox.spawnerlegacyapi.spawner.IGenerator;
 import mc.rellox.spawnerlegacyapi.spawner.IGeneratorTags.Tag;
 import mc.rellox.spawnerlegacyapi.spawner.requirement.ErrorCounter.ErrorSubmit;
-import mc.rellox.spawnerlegacyapi.utility.region.IEntityMulitbox;
 import mc.rellox.spawnerlegacyapi.spawner.requirement.IRequirements;
+import mc.rellox.spawnerlegacyapi.utility.region.IEntityMulitbox;
+import org.bukkit.Location;
+import org.bukkit.block.Block;
+
+import java.util.function.IntSupplier;
 
 public abstract class EntityBox {
 	
@@ -159,25 +158,25 @@ public abstract class EntityBox {
 		public Location check(Block block, IRequirements requirements,
 				IGenerator generator, ErrorSubmit submit) {
 			boolean envoronment = false, light = false;
-			int ix = 0, iy, iz;
+
 			Block b;
-			do {
-				iy = 0;
-				do {
-					iz = 0;
-					do {
+			for(int ix = 0; ix < x; ix++) {
+				for(int iy = 0; iy < y; iy++) {
+					for(int iz = 0; iz < z; iz++) {
 						b = block.getRelative(ix, iy, iz);
 						if(iy == 0 && ground(b.getRelative(0, -1, 0), requirements, generator))
 							submit.ground();
 						if(!requirements.environment().is(b)) envoronment = true;
 						if(light(b, requirements, generator)) light = true;
-					} while(++iz < z);
-				} while(++iy < y);
-			} while(++ix < x);
+					}
+				}
+			}
+
 			if(envoronment) {
 				submit.environment();
 				if(light) submit.light();
 			} else if(light) submit.lighted();
+
 			submit.submit();
 			return submit.valid() ? location(block) : null;
 		}

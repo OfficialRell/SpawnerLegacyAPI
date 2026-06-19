@@ -6,86 +6,74 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public interface IPriceManager {
-	
-	/**
-	 * Returned price is 100 x experience points.
-	 * 
-	 * @return Default price
-	 */
-	
-	IPrice defaulted();
 
-	/**
-	 * Parses the key into a price.
-	 * 
-	 * @param group group
-	 * @param key key
-	 * @return Parsed price or default
-	 */
-	
-	IPrice parse(Group group, String key);
+    /**
+     * Returned price is 100 x experience points.
+     *
+     * @return Default price
+     */
 
-	/**
-	 * @param group group
-	 * @param key key
-	 * @param error error consumer
-	 * @return Parsed price or default
-	 */
-	
-	IPrice parse(Group group, String key, Consumer<String> error);
+    IPrice defaulted();
 
-	/**
-	 * @param key key
-	 * @return Price supplier or {@code null}
-	 */
-	
-	IPriceSupplier of(String key);
+    /**
+     * Parses the key into a price.
+     *
+     * @param group group
+     * @param key   key
+     * @return Parsed price or default
+     */
 
-	/**
-	 * @param group group
-	 * @return Price supplier, never {@code null}
-	 */
-	
-	IPriceSupplier of(Group group);
-	
-	/**
-	 * @param type price type
-	 * @return Price supplier or {@code null}
-	 */
-	
-	IPriceSupplier of(PriceType type);
+    IPrice parse(Group group, String key);
 
-	/**
-	 * @param group group
-	 * @param value value
-	 * @return Created price
-	 */
-	
-	IPrice price(Group group, double value);
-	
-	/**
-	 * @return All defined items
-	 */
-	
-	List<IDefinedItem> items();
-	
-	/**
-	 * @param key item key
-	 * @return Defined item or {@code null}
-	 */
-	
-	IDefinedItem item(String key);
+    /**
+     * @param group group
+     * @param key   key
+     * @param error error consumer
+     * @return Parsed price or default
+     */
 
-	/**
-	 * Use {@link IPriceSupplier} instead.
-	 */
-	
-	@Deprecated(since = "1.4.12", forRemoval = true)
-	interface IPriceProvider {
+    IPrice parse(Group group, String key, Consumer<String> error);
 
-		@Deprecated(since = "1.4.12", forRemoval = true)
-		IPrice of(double value);
+    /**
+     * @param key key
+     * @return Price supplier or {@code null}
+     */
 
-	}
+    IPriceSupplier of(String key);
+
+    /**
+     * @param group group
+     * @return Price supplier, never {@code null}
+     */
+
+    IPriceSupplier of(Group group);
+
+    /**
+     * @param type price type
+     * @return Price supplier or {@code null}
+     */
+
+    IPriceSupplier of(PriceType type);
+
+    /**
+     * @param group group
+     * @param value value
+     * @return Created price
+     */
+
+    IPrice price(Group group, double value);
+
+    /**
+     * @return All defined items
+     */
+
+    List<IDefinedItem> items();
+
+    /**
+     * @param key item key
+     * @return Defined item or {@code null}
+     */
+
+    IDefinedItem item(String key);
 
 }

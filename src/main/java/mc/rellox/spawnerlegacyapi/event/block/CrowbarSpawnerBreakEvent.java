@@ -1,14 +1,13 @@
 package mc.rellox.spawnerlegacyapi.event.block;
 
-import org.bukkit.entity.Player;
-import org.bukkit.event.block.BlockBreakEvent;
-
 import mc.rellox.spawnerlegacyapi.event.IGeneratorEvent;
 import mc.rellox.spawnerlegacyapi.item.tool.ICrowbar;
 import mc.rellox.spawnerlegacyapi.spawner.IGenerator;
+import org.bukkit.entity.Player;
+import org.bukkit.event.block.BlockBreakEvent;
 
 /**
- * This event is called onyl for Bukkit
+ * This event is called only for Bukkit
  * to allow other plugins to manipulate.
  */
 

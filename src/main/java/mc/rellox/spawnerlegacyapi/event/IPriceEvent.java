@@ -1,8 +1,7 @@
 package mc.rellox.spawnerlegacyapi.event;
 
-import org.bukkit.entity.Player;
-
 import mc.rellox.spawnerlegacyapi.price.IPrice;
+import org.bukkit.entity.Player;
 
 public interface IPriceEvent extends IEvent {
 	
@@ -25,12 +24,13 @@ public interface IPriceEvent extends IEvent {
 	 * If not price present returns {@code true}.
 	 * 
 	 * @param player - player
-	 * @return {@code true} if the withdraw was successful
+	 * @return {@code true} if the withdrawal was successful
 	 */
 	
 	default boolean withdraw(Player player) {
 		IPrice price = price();
 		if(price == null) return true;
+
 		boolean has = price.has(player);
 		if(has) price.remove(player);
 		return has;

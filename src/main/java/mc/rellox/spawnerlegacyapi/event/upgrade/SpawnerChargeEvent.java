@@ -1,10 +1,9 @@
 package mc.rellox.spawnerlegacyapi.event.upgrade;
 
-import org.bukkit.entity.Player;
-
 import mc.rellox.spawnerlegacyapi.event.IPriceEvent;
 import mc.rellox.spawnerlegacyapi.price.IPrice;
 import mc.rellox.spawnerlegacyapi.spawner.IGenerator;
+import org.bukkit.entity.Player;
 
 /**
  * An event called when a player purchases charges for a spawner.

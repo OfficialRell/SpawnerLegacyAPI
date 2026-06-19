@@ -1,26 +1,25 @@
 package mc.rellox.spawnerlegacyapi.view.layout;
 
-import java.util.List;
-import java.util.function.Consumer;
-
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
-
 import mc.rellox.spawnerlegacyapi.item.builder.ItemBuilder;
 import mc.rellox.spawnerlegacyapi.text.content.IContent;
 import mc.rellox.spawnerlegacyapi.utility.ISave;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+
+import java.util.List;
+import java.util.function.Consumer;
 
 public interface ILayout extends ISave {
 	
 	/**
-	 * @param slot - slot
+	 * @param slot slot
 	 */
 	
 	void set(ISlot slot);
 	
 	/**
-	 * @param slot - inventory slot
-	 * @param field - layout field
+	 * @param slot inventory slot
+	 * @param field layout field
 	 * @return {@code true} if this slot is defined by this layout field
 	 */
 	
@@ -33,7 +32,7 @@ public interface ILayout extends ISave {
 	List<ISlot> all();
 	
 	/**
-	 * @param field - layout field
+	 * @param field layout field
 	 * @return Slot of this layout field or {@code null}
 	 */
 	
@@ -46,7 +45,7 @@ public interface ILayout extends ISave {
 	int rows();
 	
 	/**
-	 * @param field - layout field
+	 * @param field layout field
 	 * @return All slots occupied by this layout field or {@code null}
 	 */
 	
@@ -55,9 +54,9 @@ public interface ILayout extends ISave {
 	/**
 	 * Fills all slots with this item stack.
 	 * 
-	 * @param inventory - inventory
-	 * @param field - layout field
-	 * @param modifier - item modifier
+	 * @param inventory inventory
+	 * @param field layout field
+	 * @param modifier item modifier
 	 */
 	
 	void fill(Inventory inventory, SlotField field, Consumer<ItemBuilder> modifier);
@@ -65,10 +64,10 @@ public interface ILayout extends ISave {
 	/**
 	 * Fills all slots with this item stack with an amount.
 	 * 
-	 * @param inventory - inventory
-	 * @param field - layout field
-	 * @param modifier - item modifier
-	 * @param amount - amount
+	 * @param inventory inventory
+	 * @param field layout field
+	 * @param modifier item modifier
+	 * @param amount amount
 	 */
 	
 	void fill(Inventory inventory, SlotField field, Consumer<ItemBuilder> modifier, int amount);
@@ -76,9 +75,9 @@ public interface ILayout extends ISave {
 	/**
 	 * Safely fills the slot with the item.
 	 * 
-	 * @param inventory - inventory
-	 * @param slot - slot
-	 * @param item - item
+	 * @param inventory inventory
+	 * @param slot slot
+	 * @param item item
 	 */
 	
 	void fill(Inventory inventory, int slot, ItemBuilder item);
@@ -86,15 +85,15 @@ public interface ILayout extends ISave {
 	/**
 	 * Safely fills the slot with the item.
 	 * 
-	 * @param inventory - inventory
-	 * @param slot - slot
-	 * @param item - item
+	 * @param inventory inventory
+	 * @param slot slot
+	 * @param item item
 	 */
 	
 	void fill(Inventory inventory, int slot, ItemStack item);
 	
 	/**
-	 * @param field - layout field
+	 * @param field layout field
 	 * @return {@code true} if this layout field is defined
 	 */
 	
@@ -113,30 +112,30 @@ public interface ILayout extends ISave {
 	void fill(Inventory inventory);
 	
 	/**
-	 * @param name - name of the inventory
+	 * @param name name of the inventory
 	 * @return Newly created inventory
 	 */
 	
 	Inventory create(IContent name);
 	
 	/**
-	 * Gets the meta data of this layout.
+	 * Gets the meta value of this layout.
 	 * 
-	 * @param <T> - data type
-	 * @param key - data key
-	 * @param type - parser
-	 * @return Meta data object or {@code null}
+	 * @param <T> meta type
+	 * @param key meta key
+	 * @param type parser
+	 * @return Meta value object or {@code null}
 	 */
 	
 	<T> T meta(String key, IViewMeta<T> type);
 	
 	/**
-	 * Sets meta data to this layout.
+	 * Sets meta value to this layout.
 	 * 
-	 * @param <T> - data type
-	 * @param key - data key
-	 * @param type - parser
-	 * @param value - meta value
+	 * @param <T> meta type
+	 * @param key meta key
+	 * @param type parser
+	 * @param value meta value
 	 */
 	
 	<T> void meta(String key, IViewMeta<T> type, T value);

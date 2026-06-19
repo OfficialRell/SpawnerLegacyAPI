@@ -30,14 +30,14 @@ public class SpawnerInteractEvent extends SpawnerGeneratorEvent implements IPric
 		this.price = price;
 	}
 	
-	public static enum InteractAction {
+	public enum InteractAction {
 		
 		/**
 		 * When a player breaks a spawner.
 		 */
 		BREAK,
 		/**
-		 * When a player changes the type of a spawner.
+		 * When a player changes the type of spawner.
 		 */
 		CHANGE,
 		/**

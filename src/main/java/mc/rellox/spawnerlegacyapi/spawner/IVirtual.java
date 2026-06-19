@@ -11,116 +11,47 @@ import mc.rellox.spawnerlegacyapi.spawner.IGeneratorTags.Tag;
 import mc.rellox.spawnerlegacyapi.spawner.type.SpawnerType;
 import mc.rellox.spawnerlegacyapi.spawner.type.UpgradeType;
 
+@Deprecated(since = "2.0.0", forRemoval = true)
 public interface IVirtual {
-	
+
+	@Deprecated(since = "2.0.0", forRemoval = true)
 	static Builder builder(SpawnerType type) {
 		return new Builder(type);
 	}
-	
-	/**
-	 * @param other virtual spawner to compare with
-	 * @return {@code true} if virtual spawners are exactly equal, otherwise {@code false}
-	 */
-	
-	boolean exact(IVirtual other);
-	
-	/**
-	 * @return Spawner type of this virtual spawner
-	 */
-	
+
+	boolean exact(IGeneratorSnapshot other);
+
 	SpawnerType type();
-	
-	/**
-	 * @return Upgrade levels of this virtual spawner
-	 */
-	
+
 	int[] levels();
-	
-	/**
-	 * @return Spawner charges of this virtual spawner
-	 */
-	
+
 	int charges();
-	
-	/**
-	 * @return Spawnable entity limit of this virtual spawner
-	 */
-	
+
 	int spawnable();
-	
-	/**
-	 * @return {@code true} if this virtual spawner is empty, otherwise {@code false}
-	 */
-	
+
 	boolean empty();
-	
-	/**
-	 * @return Spawner meta data or {@code null}
-	 */
-	
+
 	String meta();
-	
-	/**
-	 * @return Generator tags
-	 */
-	
+
 	int tags();
-	
-	/**
-	 * @param player player who placed
-	 */
-	
+
 	void player(Player player);
-	
-	/**
-	 * @return Player who played
-	 */
-	
+
 	Player player();
-	
-	/**
-	 * @return The placed spawner item or {@code null}
-	 */
-	
+
 	ItemStack spawner();
-	
-	/**
-	 * @param amount amount
-	 * @return Virtual spawner item stack
-	 */
-	
+
 	ItemStack toItem(int amount);
-	
-	/**
-	 * @return Virtual spawner item stack
-	 */
-	
+
 	default ItemStack toItem() {
 		return toItem(1);
 	}
-	
-	/**
-	 * Places a natural spawner with this virtual spawner values at the specified block. 
-	 * 
-	 * @param block block
-	 */
-	
-	default void place(Block block) {
-		place(null, block);
-	}
-	
-	/**
-	 * Places a natural (if owner is {@code null}) or owned spawner
-	 * with this virtual spawner values at the specified block. 
-	 * 
-	 * @param owner owner
-	 * @param block block
-	 */
-	
-	default void place(Player owner, Block block) {
-		SLAPI.get().spawners().place(block, owner, this);
-	}
-	
+
+	void place(Block block);
+
+	void place(Player owner, Block block);
+
+	@Deprecated(since = "2.0.0", forRemoval = true)
 	class Builder {
 		
 		SpawnerType type;
@@ -180,7 +111,7 @@ public interface IVirtual {
 			return this;
 		}
 		
-		public IVirtual build() {
+		public IGeneratorSnapshot build() {
 			return SLAPI.spawners().of(type, levels, charges, spawnable, empty, meta, tags);
 		}
 		

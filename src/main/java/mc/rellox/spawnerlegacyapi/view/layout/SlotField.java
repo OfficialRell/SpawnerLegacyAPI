@@ -30,7 +30,7 @@ public enum SlotField {
 	
 	private final String defines;
 	
-	private SlotField(String defines) {
+	SlotField(String defines) {
 		this.defines = defines;
 	}
 	

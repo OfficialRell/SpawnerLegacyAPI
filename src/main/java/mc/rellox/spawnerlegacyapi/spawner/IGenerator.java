@@ -1,18 +1,17 @@
 package mc.rellox.spawnerlegacyapi.spawner;
 
+import mc.rellox.spawnerlegacyapi.hologram.IHologramHolder;
+import mc.rellox.spawnerlegacyapi.modifier.instance.IModifierMap;
+import mc.rellox.spawnerlegacyapi.spawner.cache.ICache;
+import mc.rellox.spawnerlegacyapi.spawner.location.Pos;
+import mc.rellox.spawnerlegacyapi.spawner.summoner.ISummoner;
+import mc.rellox.spawnerlegacyapi.spawner.warning.IValidation;
+import mc.rellox.spawnerlegacyapi.view.IUpgrades;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-
-import mc.rellox.spawnerlegacyapi.hologram.IHologramHolder;
-import mc.rellox.spawnerlegacyapi.modifier.instance.IModifierMap;
-import mc.rellox.spawnerlegacyapi.spawner.cache.ICache;
-import mc.rellox.spawnerlegacyapi.spawner.location.Pos;
-import mc.rellox.spawnerlegacyapi.spawner.meta.IDisplay;
-import mc.rellox.spawnerlegacyapi.spawner.warning.IValidation;
-import mc.rellox.spawnerlegacyapi.view.IUpgrades;
 
 /**
  * Represents an entity generator.
@@ -97,15 +96,6 @@ public interface IGenerator extends IGeneratorTags {
 	 */
 	
 	boolean changed();
-	
-	/**
-	 * Deprecated, use {@link #examine()} instead.<br>
-	 * 
-	 * @return {@code true} if this generator ia a spawner block, otherwise {@code false}
-	 */
-	
-	@Deprecated(since = "1.5.5", forRemoval = true)
-	boolean present();
 	
 	/**
 	 * Checks if this spawner is valid or exists in the world.<br>

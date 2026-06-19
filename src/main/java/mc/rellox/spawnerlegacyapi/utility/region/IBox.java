@@ -1,12 +1,11 @@
 package mc.rellox.spawnerlegacyapi.utility.region;
 
+import mc.rellox.spawnerlegacyapi.utility.region.type.CubicBox;
+import mc.rellox.spawnerlegacyapi.utility.region.type.SphereBox;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-
-import mc.rellox.spawnerlegacyapi.utility.region.type.CubicBox;
-import mc.rellox.spawnerlegacyapi.utility.region.type.SphereBox;
 
 public interface IBox {
 	

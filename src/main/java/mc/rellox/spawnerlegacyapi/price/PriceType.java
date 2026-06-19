@@ -23,7 +23,7 @@ public enum PriceType {
 			if(name.equalsIgnoreCase("MONEY")) return ECONOMY;
 			if(name.equalsIgnoreCase("ITEM")) return MATERIAL;
 			return valueOf(name.toUpperCase());
-		} catch (Exception ignored) {}
+		} catch(Exception ignored) {}
 		return null;
 	}
 

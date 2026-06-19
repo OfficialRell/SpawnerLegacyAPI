@@ -1,6 +1,7 @@
 package mc.rellox.spawnerlegacyapi;
 
 import mc.rellox.spawnerlegacyapi.manager.*;
+import mc.rellox.spawnerlegacyapi.version.IVersion;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -10,155 +11,165 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 
 public final class SLAPI {
-	
-	private static final ISpawnerLegacy INSTANCE;
-	static {
-		var plugin = Bukkit.getPluginManager().getPlugin("SpawnerLegacy");
-		if(plugin == null)
-			throw new NullPointerException("Cannot initialize SpawnerLegacy API");
-		INSTANCE = ((ISpawnerLegacyPlugin) plugin).instance();
-	}
-	
-	/**
-	 * @return SpawnerLegacy plugin instance
-	 */
-	
-	public static JavaPlugin plugin() {
-		return INSTANCE.plugin();
-	}
-	
-	/**
-	 * @return SpawnerLegacy instance class
-	 */
-	
-	public static ISpawnerLegacy get() {
-		return INSTANCE;
-	}
-	
-	/**
-	 * @return Generator manager
-	 */
-	
-	public static IGeneratorManager generators() {
-		return INSTANCE.generators();
-	}
-	
-	/**
-	 * @return Hologram manager
-	 */
-	
-	public static IHologramManager holograms() {
-		return INSTANCE.holograms();
-	}
-	
-	/**
-	 * @return Setting value manager
-	 */
-	
-	public static IValueManager values() {
-		return INSTANCE.values();
-	}
-	
-	/**
-	 * @return Cache type manager
-	 */
-	
-	public static ICacheManager cache() {
-		return INSTANCE.cache();
-	}
-	
-	/**
-	 * @return Modifier manager
-	 */
-	
-	public static IModifierManager modifiers() {
-		return INSTANCE.modifiers();
-	}
-	
-	/**
-	 * @return Spawner value and item manager
-	 */
-	
-	public static ISpawnerManager spawners() {
-		return INSTANCE.spawners();
-	}
-	
-	/**
-	 * @return Inventory view manager
-	 */
-	
-	public static IViewManager views() {
-		return INSTANCE.views();
-	}
-	
-	/**
-	 * @return Language/translation manager
-	 */
-	
-	public static ILanguageManager language() {
-		return INSTANCE.language();
-	}
-	
-	/**
-	 * @return Layout manager
-	 */
-	
-	public static ILayoutManager layouts() {
-		return INSTANCE.layouts();
-	}
-	
-	/**
-	 * @return Data manager
-	 */
-	
-	public static IDataManager data() {
-		return INSTANCE.data();
-	}
-	
-	/**
-	 * @return Tool manager
-	 */
-	
-	public static IToolManager tools() {
-		return INSTANCE.tools();
-	}
-	
-	/**
-	 * @return Entity stacking manager
-	 */
-	
-	public static IEntityManager entities() {
-		return INSTANCE.entities();
-	}
-	
-	/**
-	 * @return Event manager
-	 */
-	
-	public static IEventManager events() {
-		return INSTANCE.events();
-	}
-	
-	/**
-	 * @return Price manager
-	 */
-	
-	public static IPriceManager prices() {
-		return INSTANCE.prices();
-	}
-	
-	/**
-	 * @return Crafting manager
-	 */
-	
-	public static ICraftingManager crafting() {
-		return INSTANCE.crafting();
-	}
-	
-	public interface ISpawnerLegacyPlugin extends Plugin {
-		
-		ISpawnerLegacy instance();
-		
-	}
+
+    private static final ISpawnerLegacy INSTANCE;
+
+    static {
+        var plugin = Bukkit.getPluginManager().getPlugin("SpawnerLegacy");
+        if(plugin == null)
+            throw new NullPointerException("Cannot initialize SpawnerLegacy API");
+        INSTANCE = ((ISpawnerLegacyPlugin) plugin).instance();
+    }
+
+    /**
+     * @return SpawnerLegacy plugin instance
+     */
+
+    public static JavaPlugin plugin() {
+        return INSTANCE.plugin();
+    }
+
+
+    /**
+     * @return Server version instance
+     */
+
+    public static IVersion version() {
+        return INSTANCE.version();
+    }
+
+    /**
+     * @return SpawnerLegacy instance class
+     */
+
+    public static ISpawnerLegacy get() {
+        return INSTANCE;
+    }
+
+    /**
+     * @return Generator manager
+     */
+
+    public static IGeneratorManager generators() {
+        return INSTANCE.generators();
+    }
+
+    /**
+     * @return Hologram manager
+     */
+
+    public static IHologramManager holograms() {
+        return INSTANCE.holograms();
+    }
+
+    /**
+     * @return Setting value manager
+     */
+
+    public static IValueManager values() {
+        return INSTANCE.values();
+    }
+
+    /**
+     * @return Cache type manager
+     */
+
+    public static ICacheManager cache() {
+        return INSTANCE.cache();
+    }
+
+    /**
+     * @return Modifier manager
+     */
+
+    public static IModifierManager modifiers() {
+        return INSTANCE.modifiers();
+    }
+
+    /**
+     * @return Spawner value and item manager
+     */
+
+    public static ISpawnerManager spawners() {
+        return INSTANCE.spawners();
+    }
+
+    /**
+     * @return Inventory view manager
+     */
+
+    public static IViewManager views() {
+        return INSTANCE.views();
+    }
+
+    /**
+     * @return Language/translation manager
+     */
+
+    public static ILanguageManager language() {
+        return INSTANCE.language();
+    }
+
+    /**
+     * @return Layout manager
+     */
+
+    public static ILayoutManager layouts() {
+        return INSTANCE.layouts();
+    }
+
+    /**
+     * @return Data manager
+     */
+
+    public static IDataManager data() {
+        return INSTANCE.data();
+    }
+
+    /**
+     * @return Tool manager
+     */
+
+    public static IToolManager tools() {
+        return INSTANCE.tools();
+    }
+
+    /**
+     * @return Entity stacking manager
+     */
+
+    public static IEntityManager entities() {
+        return INSTANCE.entities();
+    }
+
+    /**
+     * @return Event manager
+     */
+
+    public static IEventManager events() {
+        return INSTANCE.events();
+    }
+
+    /**
+     * @return Price manager
+     */
+
+    public static IPriceManager prices() {
+        return INSTANCE.prices();
+    }
+
+    /**
+     * @return Crafting manager
+     */
+
+    public static ICraftingManager crafting() {
+        return INSTANCE.crafting();
+    }
+
+    public interface ISpawnerLegacyPlugin extends Plugin {
+
+        ISpawnerLegacy instance();
+
+    }
 
 }

@@ -1,5 +1,7 @@
 package mc.rellox.spawnerlegacyapi.utility.reflect.type;
 
+import mc.rellox.spawnerlegacyapi.utility.reflect.Reflect.RF;
+
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
@@ -9,194 +11,195 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import mc.rellox.spawnerlegacyapi.utility.reflect.Reflect.RF;
-
 public interface Invoker<T> {
-	
-	static Invoker<?> empty = new Invoker<>() {
-		@Override
-		public Object invoke(Object... os) {return null;}
-		@Override
-		public Object objected(Object object, Object... os) {return null;}
-		@Override
-		public String name() {return "null";}
-		@Override
-		public Class<?>[] parameters() {return null;}
-		@Override
-		public Class<?> returns() {return null;}
-	};
-	
-	@SuppressWarnings("unchecked")
-	static <R> Invoker<R> empty() {
-		return (Invoker<R>) empty;
-	}
-	
-	T invoke(Object... os);
-	
-	T objected(Object object, Object... os);
-	
-	String name();
-	
-	Class<?>[] parameters();
-	
-	Class<?> returns();
 
-	default T invoke(T def, Object... os) {
-		T r = invoke(os);
-		return r == null ? def : r;
-	}
-	
-	@SuppressWarnings("unchecked")
-	default <E> Invoker<E> as(Class<E> c) {
-		return (Invoker<E>) this;
-	}
-	
-	static Invoker<?> of(Object object, String name, boolean warn, Class<?>... params) {
-		return of(object.getClass(), object, name, warn, params);
-	}
-	
-	static Invoker<?> of(Class<?> c, Object object, String name, boolean warn, Class<?>... params) {
-		try {
-			Method method = method(c, name, warn, params);
-			return of(method, object, warn, params);
-		} catch (Exception e) {
-			RF.debug(e, warn);
-		}
-		return empty;
-	}
-	
-	public static <R> Invoker<R> of(Class<?> clazz, Object object, Class<R> returns, boolean warn, Class<?>... params) {
-		if(clazz == null) return empty();
-		try {
-			Set<Method> set = methods(clazz);
-			Stream<Method> stream = set.stream();
-			if(returns != null) {
-				stream.filter(m -> m.getReturnType().equals(returns));
-			}
-			stream = stream.filter(m -> {
-				Class<?>[] ps = m.getParameterTypes();
-				if(ps == null || ps.length <= 0) return params == null;
-				for(int i = 0; i < ps.length && i < params.length; i++)
-					if(!ps[i].equals(params[i])) return false;
-				return true;
-			});
+    Invoker<?> empty = new Invoker<>() {
+        @Override
+        public Object invoke(Object... os) {return null;}
+        @Override
+        public Object objected(Object object, Object... arguments) {return null;}
+        @Override
+        public String name() {return "null";}
+        @Override
+        public Class<?>[] parameters() {return null;}
+        @Override
+        public Class<?> returns() {return null;}
+    };
+
+    @SuppressWarnings("unchecked")
+    static <R> Invoker<R> empty() {
+        return (Invoker<R>) empty;
+    }
+
+    T invoke(Object... os);
+
+    T objected(Object object, Object... arguments);
+
+    String name();
+
+    Class<?>[] parameters();
+
+    Class<?> returns();
+
+    default T invoke(T fallback, Object... arguments) {
+        T r = invoke(arguments);
+        return r == null ? fallback : r;
+    }
+
+    @SuppressWarnings("unchecked")
+    default <E> Invoker<E> as(Class<E> c) {
+        return (Invoker<E>) this;
+    }
+
+    static Invoker<?> of(Object object, String name, boolean warn, Class<?>... params) {
+        return of(object.getClass(), object, name, warn, params);
+    }
+
+    static Invoker<?> of(Class<?> c, Object object, String name, boolean warn, Class<?>... params) {
+        try {
+            Method method = method(c, name, warn, params);
+            return of(method, object, warn, params);
+        } catch(Exception e) {
+            RF.debug(e, warn);
+        }
+        return empty;
+    }
+
+    static <R> Invoker<R> of(Class<?> clazz, Object object, Class<R> returns, boolean warn, Class<?>... params) {
+        if(clazz == null) return empty();
+        try {
+            Set<Method> set = methods(clazz);
+			Stream<Method> stream = filter(set, returns, params);
 			Method method = stream
-					.findFirst()
-					.orElse(null);
-			return of(method, object, warn, params);
-		} catch (Exception e) {
-			RF.debug(e, warn);
+                    .findFirst()
+                    .orElse(null);
+            return of(method, object, warn, params);
+        } catch(Exception e) {
+            RF.debug(e, warn);
+        }
+        return empty();
+    }
+
+	private static <R> Stream<Method> filter(Set<Method> set, Class<R> returns, Class<?>[] params) {
+		Stream<Method> stream = set.stream();
+		if(returns != null) {
+			stream = stream.filter(m -> m.getReturnType().equals(returns));
 		}
-		return empty();
+		stream = stream.filter(m -> {
+			Class<?>[] ps = m.getParameterTypes();
+			if(ps.length == 0) return params == null;
+			if(params == null) return false;
+			for(int i = 0; i < ps.length && i < params.length; i++)
+				if(!ps[i].equals(params[i])) return false;
+			return true;
+		});
+		return stream;
 	}
-	
-	private static <R> Invoker<R> of(Method method, Object object, boolean warn, Class<?>...params) {
-		if(method == null) return empty();
-		try {
-			method.setAccessible(true);
-		} catch (Exception e) {
-			RF.debug(e, warn);
-		}
 
-		MethodHandle fast_handle = null;
-		try {
-			MethodHandles.Lookup lookup = MethodHandles.lookup();
-			MethodHandle method_handle = lookup.unreflect(method);
+	private static <R> Invoker<R> of(Method method, Object object, boolean warn, Class<?>... params) {
+        if(method == null) return empty();
+        try {
+            method.setAccessible(true);
+        } catch(Exception e) {
+            RF.debug(e, warn);
+        }
 
-			int param_count = method.getParameterCount();
+        MethodHandle fast_handle = null;
+        try {
+            MethodHandles.Lookup lookup = MethodHandles.lookup();
+            MethodHandle method_handle = lookup.unreflect(method);
 
-			method_handle = method_handle.asSpreader(Object[].class, param_count);
+            int param_count = method.getParameterCount();
 
-			boolean is_static = Modifier.isStatic(method.getModifiers());
-			
-			if(!is_static && object != null) {
-		        method_handle = method_handle.bindTo(object);
-		    }
-			
-			method_handle = method_handle.asType(MethodType.methodType(Object.class, Object[].class));
-			
-		    fast_handle = method_handle;
-		} catch (Throwable t) {
-			fast_handle = null;
-		}
-		
-		final MethodHandle method_handle = fast_handle;
+            method_handle = method_handle.asSpreader(Object[].class, param_count);
 
-		return new Invoker<>() {
-			@Override
-			public R invoke(Object... os) {
-				return objected(object, os);
-			}
+            boolean is_static = Modifier.isStatic(method.getModifiers());
 
-			@SuppressWarnings("unchecked")
-			@Override
-			public R objected(Object object, Object... os) {
-				if(method_handle != null) {
-					try {
-						return (R) (object != null
-								? method_handle.invokeExact(os)
-								: method_handle.invokeExact(object, os));
-					} catch (Throwable t) {}
-				}
+            if(!is_static && object != null)
+                method_handle = method_handle.bindTo(object);
 
-				try {
-					return (R) method.invoke(object, os);
-				} catch (Exception e) {
-					RF.debug(e, warn);
-				}
-				return null;
-			}
+            method_handle = method_handle.asType(MethodType.methodType(Object.class, Object[].class));
 
-			@Override
-			public String name() {
-				return method.getName();
-			}
+            fast_handle = method_handle;
+        } catch(Throwable ignored) {}
 
-			@Override
-			public Class<?>[] parameters() {
-				return params;
-			}
+        final MethodHandle method_handle = fast_handle;
 
-			@Override
-			public Class<?> returns() {
-				return method.getReturnType();
-			}
-		};
-	}
-	
-	private static Method method(Class<?> clazz, String name, boolean warn, Class<?>...params) {
-		Method m = method0(clazz, name, params);
-		if(m != null) return m;
-		RF.debug(new NoSuchMethodException("No method with name: " + name), warn);
-		return null;
-	}
-	
-	private static Method method0(Class<?> clazz, String name, Class<?>...params) {
-		if(clazz.equals(Object.class)
-				|| clazz.getName().equals("java.lang.Object"))
-			return null;
-		try {
-			return clazz.getDeclaredMethod(name, params);
-		} catch (Exception e) {}
-		try {
-			return clazz.getMethod(name, params);
-		} catch (Exception e) {}
-		return method0(clazz.getSuperclass(), name, params);
-	}
-	
-	private static Set<Method> methods(Class<?> clazz) {
-		Set<Method> set = new HashSet<>();
-		methods0(set, clazz);
-		return set;
-	}
-	
-	private static void methods0(Set<Method> set, Class<?> clazz) {
-		if(clazz.equals(Object.class)
-				|| clazz.getName().equals("java.lang.Object"))
-			return;
-		Stream.of(clazz.getMethods()).forEach(set::add);
-		Stream.of(clazz.getDeclaredMethods()).forEach(set::add);
-		methods0(set, clazz.getSuperclass());
-	}
+        return new Invoker<>() {
+            @Override
+            public R invoke(Object... os) {
+                return objected(object, os);
+            }
+
+            @SuppressWarnings("unchecked")
+            @Override
+            public R objected(Object object, Object... arguments) {
+                if(method_handle != null) {
+                    try {
+                        return (R) (object != null
+                                ? method_handle.invokeExact(arguments)
+                                : method_handle.invokeExact(object, arguments));
+                    } catch(Throwable ignored) {}
+                }
+
+                try {
+                    return (R) method.invoke(object, arguments);
+                } catch(Exception e) {
+                    RF.debug(e, warn);
+                }
+                return null;
+            }
+
+            @Override
+            public String name() {
+                return method.getName();
+            }
+
+            @Override
+            public Class<?>[] parameters() {
+                return params;
+            }
+
+            @Override
+            public Class<?> returns() {
+                return method.getReturnType();
+            }
+        };
+    }
+
+    private static Method method(Class<?> clazz, String name, boolean warn, Class<?>... params) {
+        Method m = method0(clazz, name, params);
+        if(m != null) return m;
+        RF.debug(new NoSuchMethodException("No method with name: " + name), warn);
+        return null;
+    }
+
+    private static Method method0(Class<?> clazz, String name, Class<?>... params) {
+        if(clazz.equals(Object.class)
+                || clazz.getName().equals("java.lang.Object"))
+            return null;
+        try {
+            return clazz.getDeclaredMethod(name, params);
+        } catch(Exception ignored) {}
+        try {
+            return clazz.getMethod(name, params);
+        } catch(Exception ignored) {}
+        return method0(clazz.getSuperclass(), name, params);
+    }
+
+    private static Set<Method> methods(Class<?> clazz) {
+        Set<Method> set = new HashSet<>();
+        methods0(set, clazz);
+        return set;
+    }
+
+    private static void methods0(Set<Method> set, Class<?> clazz) {
+        if(clazz.equals(Object.class)
+                || clazz.getName().equals("java.lang.Object"))
+            return;
+        Stream.of(clazz.getMethods()).forEach(set::add);
+        Stream.of(clazz.getDeclaredMethods()).forEach(set::add);
+        methods0(set, clazz.getSuperclass());
+    }
 
 }

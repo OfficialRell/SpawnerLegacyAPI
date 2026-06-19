@@ -30,12 +30,12 @@ public interface ISpawnerTypeChangeEvent extends IEvent {
 	
 	void to(SpawnerType to);
 	
-	public enum ChangeCauseType {
+	enum ChangeCauseType {
 		
 		SPAWN_EGG,
 		TYPES_GUI,
 		/**
-		 * Cannot be cancelled
+		 * Cannot be canceled
 		 */
 		COMMAND;
 		

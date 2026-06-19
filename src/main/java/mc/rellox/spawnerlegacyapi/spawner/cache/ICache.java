@@ -1,252 +1,251 @@
 package mc.rellox.spawnerlegacyapi.spawner.cache;
 
-import java.util.UUID;
-
+import mc.rellox.spawnerlegacyapi.spawner.IGenerator;
+import mc.rellox.spawnerlegacyapi.spawner.type.SpawnerType;
 import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.entity.Player;
 
-import mc.rellox.spawnerlegacyapi.spawner.IGenerator;
-import mc.rellox.spawnerlegacyapi.spawner.type.SpawnerType;
+import java.util.UUID;
 
 public interface ICache {
 
-	// static methods
+    // static methods
 
-	static <T> T read(Block block, ICacheType<T> type) {
-		if(block.getState() instanceof CreatureSpawner spawner)
-			return type.read(spawner);
-		return null;
-	}
+    static <T> T read(Block block, ICacheType<T> type) {
+        if(block.getState() instanceof CreatureSpawner spawner)
+            return type.read(spawner);
+        return null;
+    }
 
-	static <T> void write(Block block, ICacheType<T> type, T value) {
-		if(block.getState() instanceof CreatureSpawner spawner)
-			type.write(spawner, value);
-	}
+    static <T> void write(Block block, ICacheType<T> type, T value) {
+        if(block.getState() instanceof CreatureSpawner spawner)
+            type.write(spawner, value);
+    }
 
-	// class methods
+    // class methods
 
-	/**
-	 * @return Generator
-	 */
+    /**
+     * @return Generator
+     */
 
-	IGenerator generator();
+    IGenerator generator();
 
-	/**
-	 * Updates specified spawner types. No types will update all.
-	 * 
-	 * @param types types to update
-	 */
+    /**
+     * Updates specified spawner types. No types will update all.
+     *
+     * @param types types to update
+     */
 
-	void update(ICacheType<?>... types);
+    void update(ICacheType<?>... types);
 
-	/**
-	 * Gets the cached value.
-	 * 
-	 * @param <T> value type
-	 * @param type type
-	 * @return Cached type value
-	 */
+    /**
+     * Gets the cached value.
+     *
+     * @param <T>  value type
+     * @param type type
+     * @return Cached type value
+     */
 
-	<T> T get(ICacheType<T> type);
+    <T> T get(ICacheType<T> type);
 
-	/**
-	 * Gets the cached value.
-	 * 
-	 * @param <T> value type
-	 * @param type type
-	 * @param fallback fallback value
-	 * @return Cached type value
-	 */
+    /**
+     * Gets the cached value.
+     *
+     * @param <T>      value type
+     * @param type     type
+     * @param fallback fallback value
+     * @return Cached type value
+     */
 
-	default <T> T get(ICacheType<T> type, T fallback) {
-		T value = get(type);
-		return value == null ? fallback : value;
-	}
+    default <T> T get(ICacheType<T> type, T fallback) {
+        T value = get(type);
+        return value == null ? fallback : value;
+    }
 
-	/**
-	 * Writes and updates the new value.
-	 * 
-	 * @param <T> type value
-	 * @param type type
-	 * @param value value
-	 */
+    /**
+     * Writes and updates the new value.
+     *
+     * @param <T>   type value
+     * @param type  type
+     * @param value value
+     */
 
-	<T> void write(ICacheType<T> type, T value);
+    <T> void write(ICacheType<T> type, T value);
 
-	/**
-	 * Updates spawner attribute values.
-	 */
+    /**
+     * Updates spawner attribute values.
+     */
 
-	void refresh();
+    void refresh();
 
-	/**
-	 * @return Cached spawner type
-	 */
-	
-	default SpawnerType type() {
-		return get(ICacheType.TYPE);
-	}
+    /**
+     * @return Cached spawner type
+     */
 
-	/**
-	 * @return Cached spawner stack size
-	 */
-	
-	default int stack() {
-		return get(ICacheType.STACK);
-	}
+    default SpawnerType type() {
+        return get(ICacheType.TYPE);
+    }
 
-	/**
-	 * @return {@code true} if is a naturally generated spawner
-	 */
-	
-	default boolean natural() {
-		return get(ICacheType.OWNER) == null;
-	}
+    /**
+     * @return Cached spawner stack size
+     */
 
-	/**
-	 * @return {@code true} if is an empty spawner
-	 */
-	
-	default boolean empty() {
-		return get(ICacheType.EMPTY, false);
-	}
+    default int stack() {
+        return get(ICacheType.STACK);
+    }
 
-	/**
-	 * @return Cached spawner meta data
-	 */
-	
-	default String metadata() {
-		return get(ICacheType.METADATA);
-	}
-	
-	/**
-	 * @return Cached spawner tags
-	 */
-	
-	default int tags() {
-		return get(ICacheType.TAGS, 0);
-	}
+    /**
+     * @return {@code true} if is a naturally generated spawner
+     */
 
-	/**
-	 * @return Range upgrade value
-	 */
-	
-	default int range() {
-		return (int) upgrade(0);
-	}
+    default boolean natural() {
+        return get(ICacheType.OWNER) == null;
+    }
 
-	/**
-	 * @return Delay upgrade value
-	 */
-	
-	default int delay() {
-		return (int) upgrade(1);
-	}
+    /**
+     * @return {@code true} if is an empty spawner
+     */
 
-	/**
-	 * @return Amount upgrade value
-	 */
-	
-	default int amount() {
-		return (int) upgrade(2);
-	}
+    default boolean empty() {
+        return get(ICacheType.EMPTY, false);
+    }
 
-	/**
-	 * @return Limit upgrade value
-	 */
-	
-	default int nearby() {
-		return (int) upgrade(3);
-	}
+    /**
+     * @return Cached spawner meta data
+     */
 
-	/**
-	 * @return Wisdom upgrade value
-	 */
-	
-	default double xp() {
-		return upgrade(4);
-	}
+    default String metadata() {
+        return get(ICacheType.METADATA);
+    }
 
-	/**
-	 * @return Looting upgrade value
-	 */
-	
-	default double drops() {
-		return upgrade(5);
-	}
+    /**
+     * @return Cached spawner tags
+     */
 
-	/**
-	 * @return Spawner charges
-	 */
-	
-	default int charges() {
-		return get(ICacheType.CHARGES);
-	}
+    default int tags() {
+        return get(ICacheType.TAGS, 0);
+    }
 
-	/**
-	 * @return Spawnable entity amount
-	 */
-	
-	default int spawnable() {
-		return get(ICacheType.SPAWNABLE);
-	}
+    /**
+     * @return Range upgrade value
+     */
 
-	/**
-	 * @return {@code true} if enabled
-	 */
-	
-	default boolean enabled() {
-		return get(ICacheType.ENABLED);
-	}
+    default int range() {
+        return (int) upgrade(0);
+    }
 
-	/**
-	 * @return {@code true} if owned by a player
-	 */
-	
-	default boolean owned() {
-		return id() != null;
-	}
+    /**
+     * @return Delay upgrade value
+     */
 
-	/**
-	 * @return Owner UUID or {@code null} if this is a natural spawner
-	 */
-	
-	default UUID id() {
-		return get(ICacheType.OWNER);
-	}
+    default int delay() {
+        return (int) upgrade(1);
+    }
 
-	/**
-	 * @return Online player owned or {@code null} if player not online
-	 * or this is a natural spawner
-	 */
-	
-	default Player owner() {
-		UUID id = id();
-		return id == null ? null : Bukkit.getPlayer(id);
-	}
+    /**
+     * @return Amount upgrade value
+     */
 
-	/**
-	 * @param player player
-	 * @param fallback fallback value
-	 * @return {@code true} if this spawner is owned by the specified player
-	 * or the fallback value
-	 * 
-	 */
-	default boolean owner(Player player, boolean fallback) {
-		UUID id = id();
-		return id == null ? fallback : player.getUniqueId().equals(id);
-	}
+    default int amount() {
+        return (int) upgrade(2);
+    }
 
-	/**
-	 * @param index upgrade type index
-	 * @return The upgrade value at the specified upgrade type index
-	 */
-	
-	default double upgrade(int index) {
-		double[] is = get(ICacheType.UPGRADES);
-		return is == null ? 0 : is[index];
-	}
+    /**
+     * @return Limit upgrade value
+     */
+
+    default int nearby() {
+        return (int) upgrade(3);
+    }
+
+    /**
+     * @return Wisdom upgrade value
+     */
+
+    default double xp() {
+        return upgrade(4);
+    }
+
+    /**
+     * @return Looting upgrade value
+     */
+
+    default double drops() {
+        return upgrade(5);
+    }
+
+    /**
+     * @return Spawner charges
+     */
+
+    default int charges() {
+        return get(ICacheType.CHARGES);
+    }
+
+    /**
+     * @return Spawnable entity amount
+     */
+
+    default int spawnable() {
+        return get(ICacheType.SPAWNABLE);
+    }
+
+    /**
+     * @return {@code true} if enabled
+     */
+
+    default boolean enabled() {
+        return get(ICacheType.ENABLED);
+    }
+
+    /**
+     * @return {@code true} if owned by a player
+     */
+
+    default boolean owned() {
+        return id() != null;
+    }
+
+    /**
+     * @return Owner UUID or {@code null} if this is a natural spawner
+     */
+
+    default UUID id() {
+        return get(ICacheType.OWNER);
+    }
+
+    /**
+     * @return Online player owned or {@code null} if player not online
+     * or this is a natural spawner
+     */
+
+    default Player owner() {
+        UUID id = id();
+        return id == null ? null : Bukkit.getPlayer(id);
+    }
+
+    /**
+     * @param player   player
+     * @param fallback fallback value
+     * @return {@code true} if this spawner is owned by the specified player
+     * or the fallback value
+     */
+
+    default boolean owner(Player player, boolean fallback) {
+        UUID id = id();
+        return id == null ? fallback : player.getUniqueId().equals(id);
+    }
+
+    /**
+     * @param index upgrade type index
+     * @return The upgrade value at the specified upgrade type index
+     */
+
+    default double upgrade(int index) {
+        double[] is = get(ICacheType.UPGRADES);
+        return is == null ? 0 : is[index];
+    }
 
 }

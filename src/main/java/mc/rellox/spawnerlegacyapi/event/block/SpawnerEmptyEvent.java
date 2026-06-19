@@ -30,7 +30,7 @@ public class SpawnerEmptyEvent extends SpawnerGeneratorEvent {
 	/**
 	 * Sets the refund item.
 	 * 
-	 * @param item - refund item
+	 * @param item refund item
 	 */
 	
 	public void refund(ItemStack item) {

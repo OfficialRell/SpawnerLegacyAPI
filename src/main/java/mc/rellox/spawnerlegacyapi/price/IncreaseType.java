@@ -35,7 +35,7 @@ public enum IncreaseType {
 	public static IncreaseType of(String name) {
 		try {
 			return valueOf(name.toUpperCase());
-		} catch (Exception ignored) {}
+		} catch(Exception ignored) {}
 		return IncreaseType.ADDITION;
 	}
 

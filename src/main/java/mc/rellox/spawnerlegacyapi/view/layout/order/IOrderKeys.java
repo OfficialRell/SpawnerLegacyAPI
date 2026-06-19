@@ -14,6 +14,6 @@ public interface IOrderKeys {
 	 * @return New lore orderer
 	 */
 	
-	IOrder oderer();
+	IOrder orderer();
 
 }

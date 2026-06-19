@@ -1,11 +1,10 @@
 package mc.rellox.spawnerlegacyapi.spawner.location;
 
-import java.util.List;
-import java.util.function.Supplier;
-
+import mc.rellox.spawnerlegacyapi.utility.Calculate;
 import org.bukkit.block.Block;
 
-import mc.rellox.spawnerlegacyapi.utility.Calculate;
+import java.util.List;
+import java.util.function.Supplier;
 
 public interface ISelector extends Supplier<Block> {
 	

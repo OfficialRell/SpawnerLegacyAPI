@@ -1,7 +1,7 @@
 package mc.rellox.spawnerlegacyapi.event;
 
 /**
- * An event that can be cancelled.
+ * An event that can be canceled.
  */
 
 public abstract class SpawnerEvent implements IEvent {
@@ -9,7 +9,7 @@ public abstract class SpawnerEvent implements IEvent {
 	private boolean cancelled;
 
 	/**
-	 * Should this event be cancelled.
+	 * Should this event be canceled.
 	 * 
 	 * @param cancel - cancel
 	 */
@@ -19,7 +19,7 @@ public abstract class SpawnerEvent implements IEvent {
 	}
 
 	/**
-	 * @return {@code true} if the event should be cancelled
+	 * @return {@code true} if the event should be canceled
 	 */
 	
 	public final boolean cancelled() {
