@@ -2,6 +2,8 @@ package mc.rellox.spawnerlegacyapi.text.content.color;
 
 import mc.rellox.spawnerlegacyapi.text.Text;
 import mc.rellox.spawnerlegacyapi.text.content.Format;
+import mc.rellox.spawnerlegacyapi.text.content.IContent;
+import mc.rellox.spawnerlegacyapi.text.content.variable.IVariables;
 
 public interface IColorer {
 	
@@ -35,13 +37,23 @@ public interface IColorer {
 	
 	/**
 	 * @param text input text
-	 * @return colored text
+	 * @return Colored text
 	 */
-	
+
+	@Deprecated(since = "2.0.0", forRemoval = true)
 	String color(String text);
+
+	/**
+	 *
+	 * @param content input content
+	 * @param variables variables
+	 * @return Colored text
+	 */
+
+	String color(IContent content, IVariables variables);
 	
 	/**
-	 * @return format of the colorer
+	 * @return Format of the colorer
 	 */
 	
 	Format format();

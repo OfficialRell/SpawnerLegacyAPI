@@ -8,7 +8,7 @@ public record ContentColored(IContent content, IColorer colorer) implements ICon
 
 	@Override
 	public String text(IVariables variables) {
-		return colorer.color(content.text(variables));
+		return colorer.color(content, variables);
 	}
 
     @Override
