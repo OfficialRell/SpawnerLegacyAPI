@@ -1,97 +1,31 @@
 package mc.rellox.spawnerlegacyapi.spawner.meta.item;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-
+import mc.rellox.spawnerlegacyapi.text.content.IContent;
+import mc.rellox.spawnerlegacyapi.utility.ISave;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
-import mc.rellox.spawnerlegacyapi.configuration.IFile;
-import mc.rellox.spawnerlegacyapi.item.builder.ItemBuilder;
-import mc.rellox.spawnerlegacyapi.text.content.IContent;
-import mc.rellox.spawnerlegacyapi.utility.ISave;
+import java.util.List;
+import java.util.Map;
 
+@Deprecated(since = "2.0.0", forRemoval = true)
 public interface IMetaItem extends ISave {
-	
-	/**
-	 * @return Item material
-	 */
-	
-	Material material();
-	
-	/**
-	 * @return Item name or {@code null}
-	 */
-	
-	IContent name();
-	
-	/**
-	 * @return Item lore
-	 */
-	
-	List<IContent> lore();
-	
-	/**
-	 * @return Item enchantments
-	 */
-	
-	Map<Enchantment, Integer> enchantments();
-	
-	/**
-	 * @return Item model data
-	 */
-	
-	int model();
-	
-	/**
-	 * @return Item id
-	 */
-	
-	String id();
-	
-	/**
-	 * @return Created item stack
-	 */
-	
-	default ItemStack item() {
-		return item(1);
-	}
-	
-	/**
-	 * @param amount - amount
-	 * @return Created item stack
-	 */
-	
-	default ItemStack item(int amount) {
-		return ItemBuilder.of(material())
-				.named(name())
-				.describe(lore())
-				.modelled(model())
-				.enchanted(enchantments())
-				.build(amount);
-	}
 
-	@SuppressWarnings("deprecation")
-	@Override
-	default void save(IFile file, String p) {
-		String path = p + "." + id();
-		file.set(path + ".material", material().name());
-		if(name() != null) file.set(path + ".name", name().key());
-		if(!lore().isEmpty()) file.set(path + ".lore", lore().stream()
-				.map(IContent::key)
-				.filter(Objects::nonNull)
-				.toList());
-		if(!enchantments().isEmpty()) {
-			enchantments().forEach((e, i) -> {
-				NamespacedKey key = e.getKey();
-				if(key == null) return;
-				file.set(path + ".enchantments." + key.getKey(), i);
-			});
-		}
-		if(model() > 0) file.set(path + ".model", model());
-	}
+    Material material();
+
+    IContent name();
+
+    List<IContent> lore();
+
+    Map<Enchantment, Integer> enchantments();
+
+    int model();
+
+    String id();
+
+    ItemStack item();
+
+    ItemStack item(int amount);
 
 }

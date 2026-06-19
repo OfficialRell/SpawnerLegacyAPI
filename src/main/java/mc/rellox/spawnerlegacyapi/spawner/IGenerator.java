@@ -1,8 +1,10 @@
 package mc.rellox.spawnerlegacyapi.spawner;
 
 import mc.rellox.spawnerlegacyapi.hologram.IHologramHolder;
+import mc.rellox.spawnerlegacyapi.metadata.IMetadata;
 import mc.rellox.spawnerlegacyapi.modifier.instance.IModifierMap;
 import mc.rellox.spawnerlegacyapi.spawner.cache.ICache;
+import mc.rellox.spawnerlegacyapi.spawner.display.IGeneratorDisplay;
 import mc.rellox.spawnerlegacyapi.spawner.location.Pos;
 import mc.rellox.spawnerlegacyapi.spawner.summoner.ISummoner;
 import mc.rellox.spawnerlegacyapi.spawner.warning.IValidation;
@@ -56,10 +58,10 @@ public interface IGenerator extends IGeneratorTags {
 	ISummoner summoner();
 	
 	/**
-	 * @return Display name of this spawner
+	 * @return Display data of this spawner
 	 */
 	
-	IDisplay display();
+	IGeneratorDisplay display();
 	
 	/**
 	 * @return Spawner validation and warning manager
@@ -78,6 +80,12 @@ public interface IGenerator extends IGeneratorTags {
 	 */
 	
 	IModifierMap modifiers();
+
+	/**
+	 * @return Spawner metadata or {@code null}
+	 */
+
+	IMetadata metadata();
 	
 	/**
 	 * @return {@code true} if this generator is active (not removed), otherwise {@code false}

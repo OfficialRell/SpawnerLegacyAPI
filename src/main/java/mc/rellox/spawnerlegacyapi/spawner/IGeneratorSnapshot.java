@@ -1,0 +1,192 @@
+package mc.rellox.spawnerlegacyapi.spawner;
+
+import mc.rellox.spawnerlegacyapi.SLAPI;
+import mc.rellox.spawnerlegacyapi.spawner.IGeneratorTags.Tag;
+import mc.rellox.spawnerlegacyapi.spawner.type.SpawnerType;
+import mc.rellox.spawnerlegacyapi.spawner.type.UpgradeType;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
+import java.util.stream.Stream;
+
+public interface IGeneratorSnapshot extends IVirtual {
+
+    static Builder builder(SpawnerType type) {
+        return new Builder(type);
+    }
+
+    /**
+     * @param other generator snapshot to compare with
+     * @return {@code true} if generator snapshot are exactly equal, otherwise {@code false}
+     */
+
+    boolean exact(IGeneratorSnapshot other);
+
+    /**
+     * @return Spawner type of this generator snapshot
+     */
+
+    SpawnerType type();
+
+    /**
+     * @return Upgrade levels of this generator snapshot
+     */
+
+    int[] levels();
+
+    /**
+     * @return Spawner charges of this generator snapshot
+     */
+
+    int charges();
+
+    /**
+     * @return Spawnable entity limit of this generator snapshot
+     */
+
+    int spawnable();
+
+    /**
+     * @return {@code true} if this generator snapshot is empty, otherwise {@code false}
+     */
+
+    boolean empty();
+
+    /**
+     * @return Spawner meta data or {@code null}
+     */
+
+    String meta();
+
+    /**
+     * @return Generator tags
+     */
+
+    int tags();
+
+    /**
+     * @param player player who placed
+     */
+
+    void player(Player player);
+
+    /**
+     * @return Player who played
+     */
+
+    Player player();
+
+    /**
+     * @return The placed spawner item or {@code null}
+     */
+
+    ItemStack spawner();
+
+    /**
+     * @param amount amount
+     * @return Virtual spawner item stack
+     */
+
+    ItemStack toItem(int amount);
+
+    /**
+     * @return Generator snapshot item stack
+     */
+
+    default ItemStack toItem() {
+        return toItem(1);
+    }
+
+    /**
+     * Places a natural spawner with the generator snapshot values at the specified block.
+     *
+     * @param block block
+     */
+
+    default void place(Block block) {
+        place(null, block);
+    }
+
+    /**
+     * Places a natural (if owner is {@code null}) or owned spawner
+     * with the generator snapshot values at the specified block.
+     *
+     * @param owner owner
+     * @param block block
+     */
+
+    default void place(Player owner, Block block) {
+        SLAPI.spawners().place(block, owner, this);
+    }
+
+    class Builder {
+
+        SpawnerType type;
+        int[] levels;
+        int charges;
+        int spawnable;
+        boolean empty;
+        String meta;
+        int tags;
+
+        private Builder(SpawnerType type) {
+            this.type = type;
+        }
+
+        public Builder levels(int[] levels) {
+            if(levels != null && levels.length != UpgradeType.values().length)
+                throw new IllegalArgumentException("Levels array must have a length of " + UpgradeType.values().length);
+            this.levels = levels;
+            return this;
+        }
+
+        public Builder level(UpgradeType upgrade, int level) {
+            if(levels == null) levels = new int[UpgradeType.values().length];
+            levels[upgrade.ordinal()] = Math.max(1, level);
+            return this;
+        }
+
+        public Builder charges(int charges) {
+            this.charges = charges;
+            return this;
+        }
+
+        public Builder spawnable(int spawnable) {
+            this.spawnable = spawnable;
+            return this;
+        }
+
+        public Builder empty(boolean empty) {
+            this.empty = empty;
+            return this;
+        }
+
+        public Builder meta(String meta) {
+            this.meta = meta;
+            return this;
+        }
+
+        public Builder tags(int tags) {
+            this.tags = tags;
+            return this;
+        }
+
+        public Builder tags(Tag... tags) {
+            this.tags = Stream.of(tags)
+                    .mapToInt(Tag::index)
+                    .reduce(0, this::or);
+            return this;
+        }
+
+        public IGeneratorSnapshot build() {
+            return SLAPI.spawners().of(type, levels, charges, spawnable, empty, meta, tags);
+        }
+
+        private int or(int a, int b) {
+            return a | b;
+        }
+
+    }
+
+}
