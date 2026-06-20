@@ -15,7 +15,8 @@ public final class Version {
         server = s.substring(s.lastIndexOf('.') + 1);
         String bukkit = Bukkit.getBukkitVersion();
 
-        if(bukkit.startsWith("26.1.2")
+        if(bukkit.startsWith("26.2")
+                || bukkit.startsWith("26.1.2")
                 || bukkit.startsWith("26.1.1")
                 || bukkit.startsWith("26.1")) version = VersionType.v_26;
         else if(server.contains("v1_21_R7")
