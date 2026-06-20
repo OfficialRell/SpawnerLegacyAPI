@@ -245,6 +245,17 @@ public final class Reflect {
         }
 
         /**
+         * Returns whether a class exists from the given class path.
+         *
+         * @param name class path
+         * @return {@code true} if a class was found
+         */
+
+        public static boolean exists(String name) {
+            return RF.get(name) != null;
+        }
+
+        /**
          * Returns a class from the given class path.
          *
          * @param name class path
@@ -254,9 +265,7 @@ public final class Reflect {
         public static Class<?> get(String name) {
             try {
                 return Class.forName(name);
-            } catch(Exception e) {
-                RF.debug(e);
-            }
+            } catch(Exception ignored) {}
             return null;
         }
 
