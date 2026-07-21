@@ -131,10 +131,18 @@ public interface IPlayerData extends ILocationMutable, ICommit {
      * Removes the specified spawner location.
      *
      * @param block spawner block
-     * @return {@code true} if this location did not exist
+     * @return {@code true} if this block was removed
      */
 
     boolean remove(Block block);
+
+    /**
+     * Removed all spawner locations, but does not remove them from the world.
+     *
+     * @return {@code true} if this any block was removed
+     */
+
+    boolean remove();
 
     /**
      * Adds the specified spawner location.

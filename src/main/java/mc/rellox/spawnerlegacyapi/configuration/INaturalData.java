@@ -70,6 +70,12 @@ public interface INaturalData extends ICommit {
     void remove(Block block);
 
     /**
+     * Removes all spawner locations, but does not remove them from the world.
+     */
+
+    void remove();
+
+    /**
      * Loads all values from the file if not loaded already.
      */
 
