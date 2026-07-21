@@ -1,13 +1,10 @@
 package mc.rellox.spawnerlegacyapi.configuration.settings;
 
+import mc.rellox.spawnerlegacyapi.configuration.filter.IFilterContext;
 import org.bukkit.entity.Player;
 
 public interface IPermissions extends ILoad {
-	
-	int get(Player player, int fallback);
-	
-	double get(Player player, double fallback);
-	
-	boolean empty();
+
+	boolean has(Player player, IFilterContext context);
 
 }

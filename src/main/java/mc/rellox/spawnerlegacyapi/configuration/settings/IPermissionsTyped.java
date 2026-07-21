@@ -1,11 +1,10 @@
 package mc.rellox.spawnerlegacyapi.configuration.settings;
 
+import mc.rellox.spawnerlegacyapi.spawner.type.SpawnerType;
 import org.bukkit.entity.Player;
 
-import mc.rellox.spawnerlegacyapi.spawner.type.SpawnerType;
+public interface IPermissionsTyped extends ILoad {
 
-public interface ITypePermissions extends ILoad {
-	
 	boolean has(Player player, SpawnerType type);
 
 }
