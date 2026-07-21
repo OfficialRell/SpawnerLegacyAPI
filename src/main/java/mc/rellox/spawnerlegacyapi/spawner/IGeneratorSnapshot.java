@@ -1,6 +1,7 @@
 package mc.rellox.spawnerlegacyapi.spawner;
 
 import mc.rellox.spawnerlegacyapi.SLAPI;
+import mc.rellox.spawnerlegacyapi.configuration.filter.IFilterContext;
 import mc.rellox.spawnerlegacyapi.spawner.IGeneratorTags.Tag;
 import mc.rellox.spawnerlegacyapi.spawner.type.SpawnerType;
 import mc.rellox.spawnerlegacyapi.spawner.type.UpgradeType;
@@ -118,6 +119,35 @@ public interface IGeneratorSnapshot extends IVirtual {
 
     default void place(Player owner, Block block) {
         SLAPI.spawners().place(block, owner, this);
+    }
+
+    /**
+     * @return Filter context of this generator snapshot
+     */
+
+    IFilterContext context();
+
+    /**
+     * @param type spawner type
+     * @return A new snapshot builder with a different spawner type
+     */
+
+    default Builder toBuilder(SpawnerType type) {
+        return builder(type)
+                .levels(levels())
+                .charges(charges())
+                .spawnable(spawnable())
+                .empty(empty())
+                .meta(meta())
+                .tags(tags());
+    }
+
+    /**
+     * @return A new snapshot builder
+     */
+
+    default Builder toBuilder() {
+        return toBuilder(type());
     }
 
     class Builder {

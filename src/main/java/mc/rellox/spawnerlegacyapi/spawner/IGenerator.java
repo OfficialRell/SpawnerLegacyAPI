@@ -1,5 +1,6 @@
 package mc.rellox.spawnerlegacyapi.spawner;
 
+import mc.rellox.spawnerlegacyapi.configuration.filter.IFilterContext;
 import mc.rellox.spawnerlegacyapi.hologram.IHologramHolder;
 import mc.rellox.spawnerlegacyapi.metadata.IMetadata;
 import mc.rellox.spawnerlegacyapi.modifier.instance.IModifierMap;
@@ -20,6 +21,12 @@ import org.bukkit.entity.Player;
  */
 
 public interface IGenerator extends IGeneratorTags {
+
+	/**
+	 * @return A snapshot of this generator
+	 */
+
+	IGeneratorSnapshot snapshot();
 	
 	/**
 	 * @return This spawner
@@ -50,6 +57,12 @@ public interface IGenerator extends IGeneratorTags {
 	 */
 	
 	ICache cache();
+
+	/**
+	 * @return Spawner filter context
+	 */
+
+	IFilterContext context();
 	
 	/**
 	 * @return Entity summoner

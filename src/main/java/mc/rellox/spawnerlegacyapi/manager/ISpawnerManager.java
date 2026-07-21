@@ -1,5 +1,6 @@
 package mc.rellox.spawnerlegacyapi.manager;
 
+import mc.rellox.spawnerlegacyapi.configuration.filter.IFilterContext;
 import mc.rellox.spawnerlegacyapi.item.IItemCollector;
 import mc.rellox.spawnerlegacyapi.spawner.IGenerator;
 import mc.rellox.spawnerlegacyapi.spawner.IGeneratorSnapshot;
@@ -98,11 +99,22 @@ public interface ISpawnerManager {
     boolean disabled(SpawnerType type);
 
     /**
+     * @param context filter context
+     * @param list    list of blocks
+     * @return Spawner location selector
+     */
+
+    ISelector selector(IFilterContext context, List<Block> list);
+
+    /**
+     * Deprecated, use {@link #selector(IFilterContext, List)} instead.
+     *
      * @param type spawner type
      * @param list list of blocks
      * @return Spawner location selector for the given spawner type and list of blocks
      */
 
+    @Deprecated(since = "2.2.0", forRemoval = true)
     ISelector selector(SpawnerType type, List<Block> list);
 
 }

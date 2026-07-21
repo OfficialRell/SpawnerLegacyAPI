@@ -8,6 +8,33 @@ import java.util.function.Function;
 
 public interface IValueManager {
 
+    /**
+     * @param id filter name
+     * @return Filter by the id or {@code null}
+     */
+
+    IFilter filter(String id);
+
+    /**
+     * Creates a simple filter context.
+     *
+     * @param world world
+     * @param type spawner type
+     * @return Newly created filter context
+     */
+
+    IFilterContext context(World world, SpawnerType type);
+
+    /**
+     * Registers a new filter.
+     *
+     * @param filter filter
+     *
+     * @throws IllegalArgumentException if a filter with the same name already exists
+     */
+
+    void submit(IFilter filter);
+
     <T> IValue<T> of(IValueBuilder<T, ?> builder, String path, String suffix);
 
     <T extends Enum<T>> IValue<T> of(IFile file, String path, String suffix, Class<T> type);
