@@ -168,6 +168,52 @@ public final class Text {
         return new String(out);
     }
 
+    /**
+     * Lightens a color by a given amount.<br>
+     * The larger the amount value is, the lighter the color becomes.
+     *
+     * @param color  color in RGB format
+     * @param amount amount to lighten the color, between 0.0 and 1.0.
+     * @return The lightened color in RGB format
+     */
+
+    public static int lighten(int color, double amount) {
+        amount = Math.clamp(amount, 0.0, 1.0);
+
+        int r = (color >> 16) & 0xFF;
+        int g = (color >> 8) & 0xFF;
+        int b = color & 0xFF;
+
+        r = (int) Math.round(r + (255 - r) * amount);
+        g = (int) Math.round(g + (255 - g) * amount);
+        b = (int) Math.round(b + (255 - b) * amount);
+
+        return (r << 16) | (g << 8) | b;
+    }
+
+    /**
+     * Darkens a color by a given amount.<br>
+     * The larger the amount value is, the darker the color becomes.
+     *
+     * @param color  color in RGB format
+     * @param amount amount to darken the color, between 0.0 and 1.0.
+     * @return The darkened color in RGB format
+     */
+
+    public static int darken(int color, double amount) {
+        amount = Math.clamp(amount, 0.0, 1.0);
+
+        int r = (color >> 16) & 0xFF;
+        int g = (color >> 8) & 0xFF;
+        int b = color & 0xFF;
+
+        r = (int) Math.round(r * (1.0 - amount));
+        g = (int) Math.round(g * (1.0 - amount));
+        b = (int) Math.round(b * (1.0 - amount));
+
+        return (r << 16) | (g << 8) | b;
+    }
+
     public static String format(double value, int p) {
         return String.format("%." + p + "f", value);
     }

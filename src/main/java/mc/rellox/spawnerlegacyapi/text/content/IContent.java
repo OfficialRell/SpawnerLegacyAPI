@@ -41,11 +41,19 @@ public interface IContent {
     }
 
     static IContent of(List<IContent> list) {
-        return new ContentList(list);
+        return switch(list.size()) {
+            case 0 -> empty();
+            case 1 -> list.getFirst();
+            default -> new ContentList(list);
+        };
     }
 
     static IContent of(IContent... cs) {
-        return new ContentList(cs);
+        return switch(cs.length) {
+            case 0 -> empty();
+            case 1 -> cs[0];
+            default -> new ContentList(cs);
+        };
     }
 
     static IContent of(IColorer colorer, IContent content) {
