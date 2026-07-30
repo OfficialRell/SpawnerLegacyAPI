@@ -23,6 +23,7 @@ public enum KeyType {
     ENTITY_BY_SPAWNER("by_spawner"),
     ENTITY_XP("upgrade_xp"),
     ENTITY_DROPS("upgrade_drops"),
+    ENTITY_MODIFIED("modified"),
 
     ENTITY_STACK("stack_size"),
 
