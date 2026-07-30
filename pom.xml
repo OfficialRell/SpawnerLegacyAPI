@@ -7,9 +7,11 @@
   <artifactId>SpawnerLegacyAPI</artifactId>
   <version>2.2.1</version>
   <name>SpawnerLegacyAPI</name>
+  <description>API dependency for SpawnerLegacy with support for Minecraft 1.20 through 26.2.</description>
   
   <properties>
 	  <java.version>21</java.version>
+    <maven.compiler.release>${java.version}</maven.compiler.release>
   </properties>
   
   <repositories>
@@ -39,8 +41,7 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.13.0</version>
         <configuration>
-		   <source>${java.version}</source>
-		   <target>${java.version}</target>
+		   <release>${maven.compiler.release}</release>
         </configuration>
       </plugin>
     </plugins>

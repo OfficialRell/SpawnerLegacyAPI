@@ -2,6 +2,7 @@ package mc.rellox.spawnerlegacyapi.view.layout;
 
 import mc.rellox.spawnerlegacyapi.SLAPI;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +12,8 @@ import java.util.stream.Stream;
 
 public interface IViewMeta<T> {
 
-    Map<String, IViewMeta<?>> VALUES = new HashMap<>();
+    @Deprecated(since = "2.2.1", forRemoval = false)
+    Map<String, IViewMeta<?>> VALUES = Collections.unmodifiableMap(Holder.VALUES);
 
     IViewMeta<Byte> BYTE = a("BYTE", IViewMeta::parseByte);
     IViewMeta<Short> SHORT = a("SHORT", IViewMeta::parseShort);
@@ -75,8 +77,12 @@ public interface IViewMeta<T> {
     });
 
     private static <T> IViewMeta<T> a(String name, IViewMeta<T> type) {
-        VALUES.put(name, type);
+        Holder.VALUES.put(name, type);
         return type;
+    }
+
+    static Map<String, IViewMeta<?>> values() {
+        return VALUES;
     }
 
     /**
@@ -170,6 +176,14 @@ public interface IViewMeta<T> {
             return Double.parseDouble(o.toString());
         } catch(Exception ignored) {}
         return null;
+    }
+
+    final class Holder {
+
+        private static final Map<String, IViewMeta<?>> VALUES = new HashMap<>();
+
+        private Holder() {}
+
     }
 
 }

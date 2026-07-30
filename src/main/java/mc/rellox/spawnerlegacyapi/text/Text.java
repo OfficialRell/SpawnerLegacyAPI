@@ -291,54 +291,65 @@ public final class Text {
     }
 
     public static String fromLegacy(String s) {
+        if(s == null || s.isEmpty()) return s;
+        if(s.indexOf('<') >= 0) return s;
+
         StringBuilder sb = new StringBuilder();
-        boolean l = false, h = false, i = false;
-        String x = "";
-        for(char c : s.toCharArray()) {
-            if(c == '<') i = true;
-            else if(c == '&') l = true;
-            else if(c == '#') h = true;
-            else {
-                if(l) {
-                    String o = switch(c) {
-						case 'a' -> "<#00ff00>";
-	                    case 'b' -> "<#00ffff>";
-						case 'c' -> "<#ff0000>";
-						case 'd' -> "<#ff00ff>";
-                        case 'e' -> "<#ffff00>";
-                        case 'f' -> "<#ffffff>";
-                        case '1' -> "<#000080>";
-                        case '2' -> "<#008000>";
-                        case '3' -> "<#008080>";
-                        case '4' -> "<#800000>";
-                        case '5' -> "<#800080>";
-                        case '6' -> "<#ff8000>";
-                        case '7' -> "<#c4c4c4>";
-                        case '8' -> "<#595959>";
-                        case '9' -> "<#0000ff>";
-                        case '0' -> "<#000000>";
-                        case 'k' -> "<!obfuscated>";
-                        case 'l' -> "<!bold>";
-                        case 'm' -> "<!strikethrough>";
-                        case 'n' -> "<!underline>";
-                        case 'o' -> "<!italic>";
-                        default -> "";
-                    };
-                    sb.append(o);
-                    l = false;
-                } else if(h) {
-                    x += "" + c;
-                    if(x.length() >= 6) {
-                        sb.append("<#").append(x).append('>');
-                        x = "";
-                        h = false;
-                    }
-                } else sb.append(c);
+        for(int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+
+            if(c == '&' && i + 1 < s.length()) {
+                String legacy = legacy(s.charAt(i + 1));
+                if(legacy != null) {
+                    sb.append(legacy);
+                    i++;
+                    continue;
+                }
             }
-            if(i && l || h) return s;
-            i = false;
+
+            if(c == '#' && i + 6 < s.length() && hex(s, i + 1, i + 7)) {
+                sb.append("<#").append(s, i + 1, i + 7).append('>');
+                i += 6;
+                continue;
+            }
+
+            sb.append(c);
         }
         return sb.toString();
+    }
+
+    private static String legacy(char c) {
+        return switch(Character.toLowerCase(c)) {
+            case 'a' -> "<#00ff00>";
+            case 'b' -> "<#00ffff>";
+            case 'c' -> "<#ff0000>";
+            case 'd' -> "<#ff00ff>";
+            case 'e' -> "<#ffff00>";
+            case 'f' -> "<#ffffff>";
+            case '1' -> "<#000080>";
+            case '2' -> "<#008000>";
+            case '3' -> "<#008080>";
+            case '4' -> "<#800000>";
+            case '5' -> "<#800080>";
+            case '6' -> "<#ff8000>";
+            case '7' -> "<#c4c4c4>";
+            case '8' -> "<#595959>";
+            case '9' -> "<#0000ff>";
+            case '0' -> "<#000000>";
+            case 'k' -> "<!obfuscated>";
+            case 'l' -> "<!bold>";
+            case 'm' -> "<!strikethrough>";
+            case 'n' -> "<!underline>";
+            case 'o' -> "<!italic>";
+            default -> null;
+        };
+    }
+
+    private static boolean hex(String s, int from, int to) {
+        for(int i = from; i < to; i++) {
+            if(Character.digit(s.charAt(i), 16) < 0) return false;
+        }
+        return true;
     }
 
     public static void send(Player player, IContent content) {

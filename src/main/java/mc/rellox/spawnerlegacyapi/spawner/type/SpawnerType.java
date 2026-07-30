@@ -3,7 +3,7 @@ package mc.rellox.spawnerlegacyapi.spawner.type;
 import mc.rellox.spawnerlegacyapi.SLAPI;
 import mc.rellox.spawnerlegacyapi.text.content.IContent;
 import mc.rellox.spawnerlegacyapi.utility.reflect.Reflect.RF;
-import mc.rellox.spawnerlegacyapi.utility.region.IEntityMulitbox;
+import mc.rellox.spawnerlegacyapi.utility.region.IEntityMultibox;
 import mc.rellox.spawnerlegacyapi.utility.region.type.EntityBox;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -179,7 +179,7 @@ public enum SpawnerType {
      */
 
     public EntityBox box() {
-        return box instanceof IEntityMulitbox multi ? multi.box() : box;
+        return box instanceof IEntityMultibox multi ? multi.box() : box;
     }
 
     /**

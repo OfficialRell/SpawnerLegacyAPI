@@ -1,13 +1,8 @@
 package mc.rellox.spawnerlegacyapi.utility.region;
 
-import mc.rellox.spawnerlegacyapi.utility.region.type.EntityBox;
-
-public interface IEntityMulitbox {
-	
-	/**
-	 * @return Entity box instance
-	 */
-	
-	EntityBox box();
-
+/**
+ * @deprecated Typo kept for compatibility, use {@link IEntityMultibox} instead.
+ */
+@Deprecated(since = "2.2.1", forRemoval = false)
+public interface IEntityMulitbox extends IEntityMultibox {
 }

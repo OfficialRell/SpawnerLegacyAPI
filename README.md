@@ -5,8 +5,8 @@
 ```
 <dependency>
   <groupId>com.github.OfficialRell</groupId>
-  <artifactId>spawnerlegacyapi</artifactId>
-  <version>latest</version>
+  <artifactId>SpawnerLegacyAPI</artifactId>
+  <version>2.2.1</version>
   <scope>provided</scope>
 </dependency>
 
@@ -23,11 +23,16 @@ repositories {
     maven { url 'https://jitpack.io' }
 }
 dependencies {
-    compile 'com.github.OfficialRell:spawnerlegacyapi:latest'
+    compileOnly 'com.github.OfficialRell:SpawnerLegacyAPI:2.2.1'
 }
 ```
 
-## API versions:
+## Supported Minecraft versions
+
+1.20 to 26.2
+
+## API versions
+
 https://github.com/OfficialRell/SpawnerLegacyAPI/releases
 
 ## Contacting me

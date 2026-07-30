@@ -4,7 +4,7 @@ import mc.rellox.spawnerlegacyapi.spawner.IGenerator;
 import mc.rellox.spawnerlegacyapi.spawner.IGeneratorTags.Tag;
 import mc.rellox.spawnerlegacyapi.spawner.requirement.ErrorCounter.ErrorSubmit;
 import mc.rellox.spawnerlegacyapi.spawner.requirement.IRequirements;
-import mc.rellox.spawnerlegacyapi.utility.region.IEntityMulitbox;
+import mc.rellox.spawnerlegacyapi.utility.region.IEntityMultibox;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 
@@ -23,21 +23,21 @@ public abstract class EntityBox {
 	public static final EntityBox doubled = new EntityBoxHigh(2);
 	
 	public static EntityBox box(int x, int y, int z) {
-		if(x <= 0 || y <= 0 | z <= 0) return empty;
+		if(x <= 0 || y <= 0 || z <= 0) return empty;
 		if(x == 1 && y == 1 && z == 1) return single;
 		if(x == 1 && y > 1 && z == 1) return new EntityBoxHigh(y);
 		return new EntityBoxLarge(x, y, z);
 	}
 	
 	public static EntityBox multibox(IntSupplier multiplier) {
-		return new EntityMulitbox(multiplier);
+		return new EntityMultibox(multiplier);
 	}
 	
-	private static class EntityMulitbox extends EntityBoxSingle implements IEntityMulitbox {
+	private static class EntityMultibox extends EntityBoxSingle implements IEntityMultibox {
 		
 		private final IntSupplier multiplier;
 
-		protected EntityMulitbox(IntSupplier multiplier) {
+		protected EntityMultibox(IntSupplier multiplier) {
 			this.multiplier = multiplier;
 		}
 		
@@ -157,7 +157,7 @@ public abstract class EntityBox {
 		@Override
 		public Location check(Block block, IRequirements requirements,
 				IGenerator generator, ErrorSubmit submit) {
-			boolean envoronment = false, light = false;
+			boolean environment = false, light = false;
 
 			Block b;
 			for(int ix = 0; ix < x; ix++) {
@@ -166,13 +166,13 @@ public abstract class EntityBox {
 						b = block.getRelative(ix, iy, iz);
 						if(iy == 0 && ground(b.getRelative(0, -1, 0), requirements, generator))
 							submit.ground();
-						if(!requirements.environment().is(b)) envoronment = true;
+						if(!requirements.environment().is(b)) environment = true;
 						if(light(b, requirements, generator)) light = true;
 					}
 				}
 			}
 
-			if(envoronment) {
+			if(environment) {
 				submit.environment();
 				if(light) submit.light();
 			} else if(light) submit.lighted();

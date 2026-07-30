@@ -67,7 +67,7 @@ public final class ItemBuilder {
     }
 
     private ItemBuilder(ItemBuilder builder) {
-        this.item = builder.item;
+        this.item = builder.item.clone();
         this.modifiers = new LinkedList<>(builder.modifiers);
         this.content = builder.content.clone();
     }
@@ -645,6 +645,7 @@ public final class ItemBuilder {
         protected ItemIContent clone() {
             ItemIContent copy = new ItemIContent();
             copy.name = name;
+            copy.replace.addAll(replace);
             copy.lore.addAll(lore);
             return copy;
         }
