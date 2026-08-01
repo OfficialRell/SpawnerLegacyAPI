@@ -1,14 +1,11 @@
 package mc.rellox.spawnerlegacyapi.modifier.effect;
 
 public enum ModifierEffectType {
-	
-	EVALUATE_DAMAGE, // changes entity damage
-	EVALUATE_HEALTH, // changes entity health
 
-	EVALUATE_UPGRADE, // change upgrade value
-	
-	GIVE_POTION, // give potion effect
-	
-	EVALUATE_SCALE, // changes entity scale
+	CHANGE_ATTRIBUTE, // changes selected attribute value
+
+	CHANGE_UPGRADE, // changes upgrade value
+
+	GIVE_POTION, // gives potion effect
 
 }

@@ -1,6 +1,7 @@
 package mc.rellox.spawnerlegacyapi.manager;
 
-import mc.rellox.spawnerlegacyapi.modifier.IModifier;
+import mc.rellox.spawnerlegacyapi.modifier.IModifierDefinition;
+import mc.rellox.spawnerlegacyapi.modifier.IModifierRegistry;
 import mc.rellox.spawnerlegacyapi.modifier.instance.IModifierInstance;
 import mc.rellox.spawnerlegacyapi.spawner.IGenerator;
 import org.bukkit.inventory.ItemStack;
@@ -9,87 +10,31 @@ import java.util.List;
 
 public interface IModifierManager {
 
-    /**
-     * @param key key
-     * @return Modifier by the specified key or {@code null}
-     */
+    IModifierRegistry registry();
 
-    IModifier of(String key);
+    IModifierDefinition get(String key);
 
-    /**
-     * @return List of all existing modifiers
-     */
+    List<IModifierDefinition> list();
 
-    List<IModifier> all();
+    IModifierInstance load(IGenerator generator, IModifierDefinition definition);
 
-    /**
-     * Tries to load the modifier instance specified by the modifier from this generator.
-     *
-     * @param generator generator
-     * @param modifier  modifier
-     * @return Modifier instance or {@code null}
-     */
-
-    IModifierInstance load(IGenerator generator, IModifier modifier);
-
-    /**
-     * Loads all modifier instances saved on the specified generator.
-     *
-     * @param generator generator
-     * @return List of all saved modifier instances
-     */
+    IModifierInstance load(IGenerator generator, String key);
 
     List<IModifierInstance> load(IGenerator generator);
 
-    /**
-     * Saves all modifier instance values.
-     *
-     * @param instance instance
-     */
-
     void save(IModifierInstance instance);
 
-    /**
-     * Removes the modifier instance specified by the modifier.
-     *
-     * @param generator generator
-     * @param modifier  modifier
-     */
+    void remove(IGenerator generator, IModifierDefinition definition);
 
-    void remove(IGenerator generator, IModifier modifier);
-
-    /**
-     * Removes the modifier instance.
-     *
-     * @param instance instance
-     */
+    void remove(IGenerator generator, String key);
 
     void remove(IModifierInstance instance);
 
-    /**
-     * @param instance instance
-     * @return Item stack with data about the modifier instance
-     */
-
     ItemStack item(IModifierInstance instance);
 
-    /**
-     * Gets the modifier of the specified item or {@code null}
-     * if not a modifier item.
-     *
-     * @param item item
-     * @return Modifier from this item or {@code null}
-     */
-
-    IModifier modifier(ItemStack item);
-
-    /**
-     * Tries to read the modifier instance from the specified item.
-     *
-     * @param item item
-     * @return Modifier instance from this item or {@code null}
-     */
+    IModifierDefinition modifier(ItemStack item);
 
     IModifierInstance instance(ItemStack item);
 
 }
+

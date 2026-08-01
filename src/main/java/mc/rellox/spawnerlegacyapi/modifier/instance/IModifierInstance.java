@@ -1,7 +1,8 @@
 package mc.rellox.spawnerlegacyapi.modifier.instance;
 
 import mc.rellox.spawnerlegacyapi.SLAPI;
-import mc.rellox.spawnerlegacyapi.modifier.IModifier;
+import mc.rellox.spawnerlegacyapi.modifier.IModifierData;
+import mc.rellox.spawnerlegacyapi.modifier.IModifierDefinition;
 import mc.rellox.spawnerlegacyapi.modifier.effect.IEffect;
 import mc.rellox.spawnerlegacyapi.spawner.IGenerator;
 import org.bukkit.inventory.ItemStack;
@@ -29,7 +30,13 @@ public interface IModifierInstance {
      * @return The modifier of this instance
      */
 
-    IModifier modifier();
+    IModifierDefinition definition();
+
+    /**
+     * @return Modifier stored values
+     */
+
+    IModifierData data();
 
     /**
      * @return The modifier effect instance

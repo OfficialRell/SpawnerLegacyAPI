@@ -1,6 +1,6 @@
 package mc.rellox.spawnerlegacyapi.modifier.instance;
 
-import mc.rellox.spawnerlegacyapi.modifier.IModifier;
+import mc.rellox.spawnerlegacyapi.modifier.IModifierDefinition;
 import mc.rellox.spawnerlegacyapi.modifier.executor.IExecutor;
 import mc.rellox.spawnerlegacyapi.spawner.IGenerator;
 
@@ -26,7 +26,7 @@ public interface IModifierMap {
      * @return {@code true} if a modifier instance with the specified modifier exists
      */
 
-    boolean exists(IModifier modifier);
+    boolean exists(IModifierDefinition definition);
 
     /**
      * Adds a modifier instance to this generator.

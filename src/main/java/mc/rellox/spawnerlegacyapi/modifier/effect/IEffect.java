@@ -3,9 +3,7 @@ package mc.rellox.spawnerlegacyapi.modifier.effect;
 import mc.rellox.spawnerlegacyapi.modifier.effect.parameter.IParameterMap;
 import mc.rellox.spawnerlegacyapi.modifier.instance.IEffectInstance;
 import mc.rellox.spawnerlegacyapi.modifier.instance.IModifierInstance;
-import mc.rellox.spawnerlegacyapi.spawner.type.UpgradeType;
 import org.bukkit.persistence.PersistentDataContainer;
-import org.bukkit.potion.PotionEffectType;
 
 public interface IEffect {
 
@@ -30,71 +28,5 @@ public interface IEffect {
      */
 
     IParameterMap parameters();
-
-    interface IEffectEvaluate extends IEffect {
-
-        /**
-         * @return Evaluation type
-         */
-
-        EvaluateType evaluate();
-    }
-
-    interface IEffectEvaluateDamage extends IEffectEvaluate {
-
-        @Override
-        default ModifierEffectType type() {
-            return ModifierEffectType.EVALUATE_DAMAGE;
-        }
-
-    }
-
-    interface IEffectEvaluateHealth extends IEffectEvaluate {
-
-        @Override
-        default ModifierEffectType type() {
-            return ModifierEffectType.EVALUATE_HEALTH;
-        }
-
-    }
-
-    interface IEffectEvaluateUpgrade extends IEffectEvaluate {
-
-        @Override
-        default ModifierEffectType type() {
-            return ModifierEffectType.EVALUATE_UPGRADE;
-        }
-
-        /**
-         * @return Upgrade type
-         */
-
-        UpgradeType upgrade();
-
-    }
-
-    interface IEffectGivePotion extends IEffect {
-
-        @Override
-        default ModifierEffectType type() {
-            return ModifierEffectType.GIVE_POTION;
-        }
-
-        /**
-         * @return Potion effect type
-         */
-
-        PotionEffectType potion();
-
-    }
-
-    interface IEffectEvaluateScale extends IEffectEvaluate {
-
-        @Override
-        default ModifierEffectType type() {
-            return ModifierEffectType.EVALUATE_SCALE;
-        }
-
-    }
 
 }

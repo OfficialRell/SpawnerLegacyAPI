@@ -1,11 +1,8 @@
 package mc.rellox.spawnerlegacyapi.modifier.instance;
 
 import mc.rellox.spawnerlegacyapi.item.builder.ItemBuilder;
-import mc.rellox.spawnerlegacyapi.modifier.IModifier;
+import mc.rellox.spawnerlegacyapi.modifier.IModifierDefinition;
 import mc.rellox.spawnerlegacyapi.modifier.effect.IEffect;
-import mc.rellox.spawnerlegacyapi.modifier.effect.IEffect.*;
-import mc.rellox.spawnerlegacyapi.modifier.executor.IExecutor.IExecutorEntity;
-import mc.rellox.spawnerlegacyapi.modifier.executor.IExecutor.IExecutorUpgrades;
 import org.bukkit.persistence.PersistentDataContainer;
 
 /**
@@ -20,7 +17,7 @@ public interface IEffectInstance<E extends IEffect> {
      * @return Modifier
      */
 
-    IModifier modifier();
+    IModifierDefinition definition();
 
     /**
      * @return Modifier instance
@@ -49,45 +46,5 @@ public interface IEffectInstance<E extends IEffect> {
      */
 
     void replace(ItemBuilder builder);
-
-    interface IEffectInstanceEvaluateHealth extends IEffectInstance<IEffectEvaluateHealth>, IExecutorEntity, IUsage {
-
-        double value();
-
-        double chance();
-
-    }
-
-    interface IEffectInstanceEvaluateDamage extends IEffectInstance<IEffectEvaluateDamage>, IExecutorEntity, IUsage {
-
-        double value();
-
-        double chance();
-
-    }
-
-    interface IEffectInstanceEvaluateUpgrade extends IEffectInstance<IEffectEvaluateUpgrade>, IExecutorUpgrades {
-
-        double value();
-
-    }
-
-    interface IEffectInstanceGivePotion extends IEffectInstance<IEffectGivePotion>, IExecutorEntity, IUsage {
-
-        int duration();
-
-        int amplifier();
-
-        double chance();
-
-    }
-
-    interface IEffectInstanceEvaluateScale extends IEffectInstance<IEffectEvaluateScale>, IExecutorEntity, IUsage {
-
-        double value();
-
-        double chance();
-
-    }
 
 }
