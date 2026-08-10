@@ -12,8 +12,8 @@ public record GradientImpl(Colors colors, Format format) implements IGradient {
 
     @Override
     public String color(String text) {
-		// don't color if already colored
-        if(text.indexOf(Text.color_char) >= 0) return text;
+        // don't color if already fully colored
+        if(text.indexOf(Text.color_char) == 0) return text;
 
         var builder = new StringBuilder();
         int l = text.length();
@@ -45,11 +45,11 @@ public record GradientImpl(Colors colors, Format format) implements IGradient {
             return;
         }
 
-        if(content instanceof ContentVariable variableContent) {
-            String value = variableContent.text(variables);
+        if(content instanceof ContentVariable variable) {
+            String value = variable.text(variables);
             if(value == null || value.isEmpty()) return;
 
-            if(value.indexOf(Text.color_char) >= 0) {
+            if(value.indexOf(Text.color_char) == 0) {
                 builder.append(value);
                 state.index += length(value);
             } else {
@@ -101,12 +101,14 @@ public record GradientImpl(Colors colors, Format format) implements IGradient {
     }
 
     private static class State {
+
         private final int length;
         private int index;
 
         private State(int length) {
             this.length = length;
         }
+
     }
 
     public static int merge(double r, int... os) {

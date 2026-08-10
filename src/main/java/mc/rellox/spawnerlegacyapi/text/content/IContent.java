@@ -48,11 +48,11 @@ public interface IContent {
         };
     }
 
-    static IContent of(IContent... cs) {
-        return switch(cs.length) {
+    static IContent of(IContent... array) {
+        return switch(array.length) {
             case 0 -> empty();
-            case 1 -> cs[0];
-            default -> new ContentList(cs);
+            case 1 -> array[0];
+            default -> new ContentList(array);
         };
     }
 

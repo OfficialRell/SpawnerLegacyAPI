@@ -11,8 +11,8 @@ public record ColorerImpl(String color, Format format) implements IColorer {
 
     @Override
     public String color(String text) {
-		// don't color if already colored
-        if(text.indexOf(Text.color_char) >= 0) return text;
+		// don't color if already fully colored
+        if(text.indexOf(Text.color_char) == 0) return text;
 
         return color + format + text;
     }
@@ -33,9 +33,8 @@ public record ColorerImpl(String color, Format format) implements IColorer {
     private void append(StringBuilder builder, IContent content, IVariables variables) {
         if(content instanceof ContentVariable variable) {
             String value = variable.text(variables);
-            if(value.indexOf(Text.color_char) >= 0) {
+            if(value.indexOf(Text.color_char) == 0) {
                 builder.append(value);
-                builder.append(color).append(format);
             } else {
                 builder.append(color).append(format).append(value);
             }
