@@ -23,7 +23,7 @@ repositories {
     maven { url 'https://jitpack.io' }
 }
 dependencies {
-    compile 'com.github.OfficialRell:spawnerlegacyapi:latest'
+    compileOnly 'com.github.OfficialRell:spawnerlegacyapi:latest'
 }
 ```
 
@@ -32,4 +32,4 @@ https://github.com/OfficialRell/SpawnerLegacyAPI/releases
 
 ## Contacting me
 
-Discord server: https://discord.com/invite/NU9aVbb79d
+[Discord server](https://discord.com/invite/NU9aVbb79d)
