@@ -9,6 +9,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 
+import java.util.Locale;
 import java.util.stream.Stream;
 
 public enum SpawnerType {
@@ -235,7 +236,7 @@ public enum SpawnerType {
 
     public static SpawnerType of(String name) {
         try {
-            SpawnerType type = valueOf(name.toUpperCase());
+            SpawnerType type = valueOf(name.toUpperCase(Locale.ROOT));
             return type.exists() ? type : null;
         } catch(Exception e) {
             return null;

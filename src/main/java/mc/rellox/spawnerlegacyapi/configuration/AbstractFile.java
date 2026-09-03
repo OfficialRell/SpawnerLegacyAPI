@@ -11,23 +11,21 @@ import java.io.IOException;
 public abstract class AbstractFile implements IFile {
 
     public static AbstractFile of(File yaml) {
-        return new AbstractFile(yaml) {
-            @Override
-            protected void initialize() {}
-        };
+        return new AbstractFileImpl(yaml);
     }
 
     public static AbstractFile of(String name) {
-        return new AbstractFile(name) {
-            @Override
-            protected void initialize() {}
-        };
+        return new AbstractFileImpl(name);
+    }
+
+    public static AbstractFile of(File file, String name) {
+        return new AbstractFileImpl(file, name);
     }
 
     private final File parent;
     private final String name;
 
-    private File f;
+    protected File io;
     protected FileConfiguration file;
 
     private boolean newly;
@@ -47,6 +45,11 @@ public abstract class AbstractFile implements IFile {
             throw new NullPointerException("cannot initialize abstract file, null parameters");
     }
 
+    @Override
+    public IMemory parent() {
+        return null;
+    }
+
     public boolean exists() {
         return new File(parent, name + ".yml").exists();
     }
@@ -54,17 +57,17 @@ public abstract class AbstractFile implements IFile {
     @Override
     public final void create() {
         newly = false;
-        f = new File(parent, name + ".yml");
-        if(!f.getParentFile().exists()) f.getParentFile().mkdirs();
-        if(!f.exists()) {
+        io = new File(parent, name + ".yml");
+        if(!io.getParentFile().exists()) io.getParentFile().mkdirs();
+        if(!io.exists()) {
             try {
                 newly = true;
-                f.createNewFile();
+                io.createNewFile();
             } catch(IOException e) {
                 RF.debug(e);
             }
         }
-        file = YamlConfiguration.loadConfiguration(f);
+        file = YamlConfiguration.loadConfiguration(io);
     }
 
     public void load() {
@@ -98,7 +101,7 @@ public abstract class AbstractFile implements IFile {
     @Override
     public final void save() {
         try {
-            file.save(f);
+            file.save(io);
         } catch(IOException e) {
             RF.debug(e);
         }
@@ -106,8 +109,27 @@ public abstract class AbstractFile implements IFile {
 
     @Override
     public void free() {
-        f = null;
+        io = null;
         file = null;
+    }
+
+    public static class AbstractFileImpl extends AbstractFile {
+
+        public AbstractFileImpl(File yaml) {
+            super(yaml);
+        }
+
+        public AbstractFileImpl(String name) {
+            super(name);
+        }
+
+        public AbstractFileImpl(File parent, String name) {
+            super(parent, name);
+        }
+
+        @Override
+        protected void initialize() {}
+
     }
 
 }

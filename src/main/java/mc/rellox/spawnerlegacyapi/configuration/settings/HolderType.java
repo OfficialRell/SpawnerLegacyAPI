@@ -1,5 +1,7 @@
 package mc.rellox.spawnerlegacyapi.configuration.settings;
 
+import java.util.Locale;
+
 public enum HolderType {
 
 	/**
@@ -23,7 +25,7 @@ public enum HolderType {
 	 * @return Key of this holder type
 	 */
 	public String key() {
-		return name().toLowerCase();
+		return name().toLowerCase(Locale.ROOT);
 	}
 
 }

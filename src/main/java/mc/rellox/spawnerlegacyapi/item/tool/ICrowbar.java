@@ -8,7 +8,7 @@ import org.bukkit.inventory.ItemStack;
 public interface ICrowbar {
 
     /**
-     * @return Unique crowbar ID
+     * @return Unique crowbar identifier
      */
 
     String key();

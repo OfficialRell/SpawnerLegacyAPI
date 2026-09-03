@@ -7,6 +7,8 @@ import java.util.Random;
 
 public final class Calculate {
 
+    public static final int INFINITE = 1_000_000_000;
+
     private static final Random R = new Random();
 
     public static double round(double d) {

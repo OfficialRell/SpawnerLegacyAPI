@@ -39,8 +39,8 @@ public record GradientImpl(Colors colors, Format format) implements IGradient {
     }
 
     private void append(StringBuilder builder, IContent content, IVariables variables, State state) {
-        if(content instanceof ContentList list) {
-            for(IContent part : list.list)
+        if(content instanceof ContentList(var list)) {
+            for(IContent part : list)
                 append(builder, part, variables, state);
             return;
         }
@@ -87,9 +87,9 @@ public record GradientImpl(Colors colors, Format format) implements IGradient {
     }
 
     private int length(IContent content, IVariables variables) {
-        if(content instanceof ContentList list) {
+        if(content instanceof ContentList(var list)) {
             int sum = 0;
-            for(IContent part : list.list) sum += length(part, variables);
+            for(IContent part : list) sum += length(part, variables);
             return sum;
         }
         String text = content.text(variables);

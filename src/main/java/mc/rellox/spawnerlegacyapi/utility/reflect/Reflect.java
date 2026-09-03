@@ -9,6 +9,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -118,7 +119,7 @@ public final class Reflect {
                 return Enum.valueOf(clazz, name);
             } catch(Exception ignored) {}
             try {
-                return Enum.valueOf(clazz, name.toUpperCase());
+                return Enum.valueOf(clazz, name.toUpperCase(Locale.ROOT));
             } catch(Exception ignored) {}
             return fallback;
         }

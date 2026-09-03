@@ -4,16 +4,19 @@ import mc.rellox.spawnerlegacyapi.text.content.IContent;
 import mc.rellox.spawnerlegacyapi.text.content.color.IColorer;
 import mc.rellox.spawnerlegacyapi.text.content.variable.IVariables;
 
-public record ContentColored(IContent content, IColorer colorer) implements IContent {
-
-	@Override
-	public String text(IVariables variables) {
-		return colorer.color(content, variables);
-	}
+public record ContentColored(
+        IContent content,
+        IColorer colorer
+) implements IContent {
 
     @Override
-	public String toString() {
-		return text();
-	}
+    public String text(IVariables variables) {
+        return colorer.color(content, variables);
+    }
+
+    @Override
+    public String toString() {
+        return text();
+    }
 
 }

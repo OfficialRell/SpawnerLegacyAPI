@@ -11,7 +11,7 @@ public record ColorerImpl(String color, Format format) implements IColorer {
 
     @Override
     public String color(String text) {
-		// don't color if already fully colored
+        // don't color if already fully colored
         if(text.indexOf(Text.color_char) == 0) return text;
 
         return color + format + text;
@@ -19,9 +19,9 @@ public record ColorerImpl(String color, Format format) implements IColorer {
 
     @Override
     public String color(IContent content, IVariables variables) {
-        if(content instanceof ContentList list) {
+        if(content instanceof ContentList(var list)) {
             StringBuilder builder = new StringBuilder();
-            for(IContent part : list.list) {
+            for(IContent part : list) {
                 append(builder, part, variables);
             }
             return builder.toString();
@@ -41,8 +41,8 @@ public record ColorerImpl(String color, Format format) implements IColorer {
             return;
         }
 
-        if(content instanceof ContentList list) {
-            for(IContent part : list.list) append(builder, part, variables);
+        if(content instanceof ContentList(var list)) {
+            for(IContent part : list) append(builder, part, variables);
             return;
         }
 

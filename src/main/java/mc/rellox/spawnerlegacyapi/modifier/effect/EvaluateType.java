@@ -2,53 +2,53 @@ package mc.rellox.spawnerlegacyapi.modifier.effect;
 
 public enum EvaluateType {
 
-    ADD {
-        @Override
-        public double calculate(double value, double change) {
-            return +change;
-        }
-    },
-    SUBTRACT {
-        @Override
-        public double calculate(double value, double change) {
-            return -change;
-        }
-    },
-    MULTIPLY {
-        @Override
-        public double calculate(double value, double change) {
-            return value * (change - 1);
-        }
-    },
-    DIVIDE {
-        @Override
-        public double calculate(double value, double change) {
-            return value / change - value;
-        }
-    },
-    ADD_PERCENT {
-        @Override
-        public double calculate(double value, double change) {
-            return value * (change * 0.01);
-        }
-    },
-    SUBTRACT_PERCENT {
-        @Override
-        public double calculate(double value, double change) {
-            return -value * (change * 0.01);
-        }
-    };
+    SET,
+    ADD,
+    SUBTRACT,
+    MULTIPLY,
+    DIVIDE,
+    ADD_PERCENT,
+    SUBTRACT_PERCENT;
 
     /**
      * Returns only the calculated change value.<br>
      * This method does not modify the base value.
      *
-     * @param value  base value
+     * @param base   base value
      * @param change change value
      * @return The calculated change value
      */
 
-    public abstract double calculate(double value, double change);
+    public double partial(double base, double change) {
+        return switch(this) {
+            case SET -> change - base;
+            case ADD -> +change;
+            case SUBTRACT -> -change;
+            case MULTIPLY -> base * (change - 1);
+            case DIVIDE -> base / change - base;
+            case ADD_PERCENT -> base * (change * 0.01);
+            case SUBTRACT_PERCENT -> -base * (change * 0.01);
+        };
+    }
 
+    /**
+     * Returns the new value after applying the change to the base value.
+     *
+     * @param base   base value
+     * @param change change value
+     * @return The new value after applying the change
+     */
+
+    public double full(double base, double change) {
+        return switch(this) {
+            case SET -> change;
+            case ADD -> base + change;
+            case SUBTRACT -> base - change;
+            case MULTIPLY -> base * change;
+            case DIVIDE -> base / change;
+            case ADD_PERCENT -> base + (base * (change * 0.01));
+            case SUBTRACT_PERCENT -> base - (base * (change * 0.01));
+        };
+    }
 
 }

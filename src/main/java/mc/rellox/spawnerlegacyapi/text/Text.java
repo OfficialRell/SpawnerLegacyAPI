@@ -16,6 +16,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -229,7 +230,7 @@ public final class Text {
     public static String path(String s) {
         if(s == null) return null;
         if(s.isEmpty()) return "";
-        return s.toLowerCase().replace('_', '-');
+        return s.toLowerCase(Locale.ROOT).replace('_', '-');
     }
 
     public static String normalize(String s) {
@@ -245,7 +246,7 @@ public final class Text {
     private static String upper(String s) {
         if(s == null || s.isEmpty()) return "";
         return Character.toUpperCase(s.charAt(0))
-                + s.substring(1).toLowerCase();
+                + s.substring(1).toLowerCase(Locale.ROOT);
     }
 
     public static String unicode(String code) {
@@ -282,63 +283,6 @@ public final class Text {
 
     public static <T> String or(T object, String nulled, Function<T, String> mapper) {
         return object == null ? nulled : mapper.apply(object);
-    }
-
-    public static List<String> fromLegacy(List<String> list) {
-        return list.stream()
-                .map(Text::fromLegacy)
-                .collect(Collectors.toList());
-    }
-
-    public static String fromLegacy(String s) {
-        StringBuilder sb = new StringBuilder();
-        boolean l = false, h = false, i = false;
-        String x = "";
-        for(char c : s.toCharArray()) {
-            if(c == '<') i = true;
-            else if(c == '&') l = true;
-            else if(c == '#') h = true;
-            else {
-                if(l) {
-                    String o = switch(c) {
-						case 'a' -> "<#00ff00>";
-	                    case 'b' -> "<#00ffff>";
-						case 'c' -> "<#ff0000>";
-						case 'd' -> "<#ff00ff>";
-                        case 'e' -> "<#ffff00>";
-                        case 'f' -> "<#ffffff>";
-                        case '1' -> "<#000080>";
-                        case '2' -> "<#008000>";
-                        case '3' -> "<#008080>";
-                        case '4' -> "<#800000>";
-                        case '5' -> "<#800080>";
-                        case '6' -> "<#ff8000>";
-                        case '7' -> "<#c4c4c4>";
-                        case '8' -> "<#595959>";
-                        case '9' -> "<#0000ff>";
-                        case '0' -> "<#000000>";
-                        case 'k' -> "<!obfuscated>";
-                        case 'l' -> "<!bold>";
-                        case 'm' -> "<!strikethrough>";
-                        case 'n' -> "<!underline>";
-                        case 'o' -> "<!italic>";
-                        default -> "";
-                    };
-                    sb.append(o);
-                    l = false;
-                } else if(h) {
-                    x += "" + c;
-                    if(x.length() >= 6) {
-                        sb.append("<#").append(x).append('>');
-                        x = "";
-                        h = false;
-                    }
-                } else sb.append(c);
-            }
-            if(i && l || h) return s;
-            i = false;
-        }
-        return sb.toString();
     }
 
     public static void send(Player player, IContent content) {

@@ -1,6 +1,6 @@
 package mc.rellox.spawnerlegacyapi.item;
 
-import mc.rellox.spawnerlegacyapi.configuration.IFile;
+import mc.rellox.spawnerlegacyapi.configuration.IMemory;
 import mc.rellox.spawnerlegacyapi.text.Text;
 import mc.rellox.spawnerlegacyapi.text.content.ContentParser;
 import mc.rellox.spawnerlegacyapi.text.content.IContent;
@@ -18,34 +18,34 @@ public final class ItemMatcher {
 
     public static final ItemMatcher DEFAULT = new ItemMatcher(Material.GOLD_INGOT);
 
-    public static void parse(ItemStack item, IFile file, String path) {
+    public static void parse(ItemStack item, IMemory memory) {
         if(item == null) return;
 
-        file.set(path + ".material", item.getType().name());
+        memory.hold("material", item.getType().name());
         ItemMeta meta = item.getItemMeta();
         if(meta != null) {
-            if(meta.hasDisplayName()) file.set(path + ".name", meta.getDisplayName());
-            if(meta.hasCustomModelData()) file.set(path + ".model", meta.getCustomModelData());
+            if(meta.hasDisplayName()) memory.hold("name", meta.getDisplayName());
+            if(meta.hasCustomModelData()) memory.hold("model", meta.getCustomModelData());
         }
     }
 
-    public static ItemMatcher from(IFile file, String path) {
-        if(file == null) return DEFAULT;
+    public static ItemMatcher from(IMemory memory) {
+        if(memory == null) return DEFAULT;
 
-        Material material = file.getMaterial(path + ".material");
+        Material material = memory.getMaterial("material");
         if(material == null) return DEFAULT;
 
         ItemMatcher matcher = new ItemMatcher(material);
 
-        String name = file.getString(path + ".name");
+        String name = memory.getString("name");
         if(name != null && !name.isEmpty())
             matcher.name(ContentParser.parse(name));
 
-        List<String> lore = file.getStrings(path + ".lore");
+        List<String> lore = memory.getStrings("lore");
         if(lore != null && !lore.isEmpty())
             matcher.lore(ContentParser.parse(lore));
 
-        int model = file.getInteger(path + ".model");
+        int model = memory.getInteger("model");
         if(model > 0) matcher.model(model);
 
         return matcher;

@@ -1,6 +1,6 @@
 package mc.rellox.spawnerlegacyapi.item;
 
-import mc.rellox.spawnerlegacyapi.configuration.IFile;
+import mc.rellox.spawnerlegacyapi.configuration.IMemory;
 import mc.rellox.spawnerlegacyapi.item.builder.ItemBuilder;
 import mc.rellox.spawnerlegacyapi.text.Text;
 import mc.rellox.spawnerlegacyapi.text.content.IContent;
@@ -10,38 +10,21 @@ import java.util.List;
 
 public interface IItemConstant {
 
-    static IItemConstant read(IFile file, String path) {
-        Material material = file.getMaterial(path + ".material");
+    static IItemConstant of(Material material, boolean glint, IContent name, List<IContent> lore, int model) {
+        return new ItemConstant(material, glint, name, lore, model);
+    }
+
+    static IItemConstant read(IMemory memory) {
+        Material material = memory.getMaterial("material");
         if(material == null) {
-            Text.failure("Invalid material for path: #0", path);
+            Text.failure("Invalid material for path: " + memory.path());
             return null;
         }
-        boolean glint = file.getBoolean(path + ".glint");
-        IContent name = IContent.parse(file.getString(path + ".name"));
-        List<IContent> lore = IContent.parse(file.getStringOrStrings(path + ".lore"));
-        int model = file.getInteger(path + ".model");
-        return new IItemConstant() {
-            @Override
-            public Material material() {
-                return material;
-            }
-            @Override
-            public boolean glint() {
-                return glint;
-            }
-            @Override
-            public IContent name() {
-                return name;
-            }
-            @Override
-            public List<IContent> lore() {
-                return lore;
-            }
-            @Override
-            public int model() {
-                return model;
-            }
-        };
+        boolean glint = memory.getBoolean("glint");
+        IContent name = IContent.parse(memory.getString("name"));
+        List<IContent> lore = IContent.parse(memory.getStringOrStrings("lore"));
+        int model = memory.getInteger("model");
+        return of(material, glint, name, lore, model);
     }
 
     /**
@@ -86,5 +69,13 @@ public interface IItemConstant {
                 .modelled(model())
                 .flagged();
     }
+
+    record ItemConstant(
+            Material material,
+            boolean glint,
+            IContent name,
+            List<IContent> lore,
+            int model
+    ) implements IItemConstant {}
 
 }
