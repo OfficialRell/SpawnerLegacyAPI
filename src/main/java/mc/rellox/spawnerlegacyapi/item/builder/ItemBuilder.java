@@ -2,8 +2,7 @@ package mc.rellox.spawnerlegacyapi.item.builder;
 
 import mc.rellox.spawnerlegacyapi.SLAPI;
 import mc.rellox.spawnerlegacyapi.item.ItemUtility;
-import mc.rellox.spawnerlegacyapi.registry.KeyType;
-import mc.rellox.spawnerlegacyapi.registry.Keys;
+import mc.rellox.spawnerlegacyapi.registry.IKey;
 import mc.rellox.spawnerlegacyapi.text.Text;
 import mc.rellox.spawnerlegacyapi.text.content.IContent;
 import mc.rellox.spawnerlegacyapi.text.content.variable.IVariables;
@@ -362,7 +361,7 @@ public final class ItemBuilder {
      */
 
     public ItemBuilder randomize() {
-        return keyed(Keys.of(KeyType.RANDOM), Calculate.random());
+        return keyed(IKey.RANDOM.get(), Calculate.random());
     }
 
     /**
