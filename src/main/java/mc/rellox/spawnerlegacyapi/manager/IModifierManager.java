@@ -1,11 +1,18 @@
 package mc.rellox.spawnerlegacyapi.manager;
 
-import mc.rellox.spawnerlegacyapi.modifier.IModifier;
-import mc.rellox.spawnerlegacyapi.modifier.instance.IModifierInstance;
+import mc.rellox.spawnerlegacyapi.configuration.IMemory;
+import mc.rellox.spawnerlegacyapi.modifier.IModifierDefinition;
+import mc.rellox.spawnerlegacyapi.modifier.IModifierInstance;
+import mc.rellox.spawnerlegacyapi.modifier.effect.IEffectBuilder;
+import mc.rellox.spawnerlegacyapi.modifier.parameter.IParameter;
+import mc.rellox.spawnerlegacyapi.modifier.parameter.IParameterBuilder;
+import mc.rellox.spawnerlegacyapi.modifier.parameter.IParameterType;
+import mc.rellox.spawnerlegacyapi.modifier.requirement.IRequirement;
 import mc.rellox.spawnerlegacyapi.spawner.IGenerator;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
+import java.util.function.Function;
 
 public interface IModifierManager {
 
@@ -14,13 +21,13 @@ public interface IModifierManager {
      * @return Modifier by the specified key or {@code null}
      */
 
-    IModifier of(String key);
+    IModifierDefinition of(String key);
 
     /**
      * @return List of all existing modifiers
      */
 
-    List<IModifier> all();
+    List<IModifierDefinition> all();
 
     /**
      * Tries to load the modifier instance specified by the modifier from this generator.
@@ -30,7 +37,7 @@ public interface IModifierManager {
      * @return Modifier instance or {@code null}
      */
 
-    IModifierInstance load(IGenerator generator, IModifier modifier);
+    IModifierInstance load(IGenerator generator, IModifierDefinition modifier);
 
     /**
      * Loads all modifier instances saved on the specified generator.
@@ -56,7 +63,7 @@ public interface IModifierManager {
      * @param modifier  modifier
      */
 
-    void remove(IGenerator generator, IModifier modifier);
+    void remove(IGenerator generator, IModifierDefinition modifier);
 
     /**
      * Removes the modifier instance.
@@ -81,7 +88,7 @@ public interface IModifierManager {
      * @return Modifier from this item or {@code null}
      */
 
-    IModifier modifier(ItemStack item);
+    IModifierDefinition modifier(ItemStack item);
 
     /**
      * Tries to read the modifier instance from the specified item.
@@ -91,5 +98,34 @@ public interface IModifierManager {
      */
 
     IModifierInstance instance(ItemStack item);
+
+    /**
+     * Creates a new effect builder with the specified id and parameters.
+     *
+     * @param id         effect id
+     * @param parameters effect parameters
+     * @return Effect builder
+     */
+
+    IEffectBuilder builder(String id, IParameter<?>... parameters);
+
+    /**
+     * Creates a new parameter builder with the specified id and type.
+     *
+     * @param id   parameter id
+     * @param type parameter type
+     * @return Parameter builder
+     */
+
+    <T> IParameterBuilder<T> builder(String id, IParameterType<T> type);
+
+    /**
+     * Registers a new requirement builder.
+     *
+     * @param id      requirement builder id
+     * @param builder requirement builder
+     */
+
+    void register(String id, Function<IMemory, IRequirement> builder);
 
 }

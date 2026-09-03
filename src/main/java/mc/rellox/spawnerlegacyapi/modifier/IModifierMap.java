@@ -1,11 +1,11 @@
-package mc.rellox.spawnerlegacyapi.modifier.instance;
+package mc.rellox.spawnerlegacyapi.modifier;
 
-import mc.rellox.spawnerlegacyapi.modifier.IModifier;
-import mc.rellox.spawnerlegacyapi.modifier.executor.IExecutor;
+import mc.rellox.spawnerlegacyapi.modifier.effect.IEffectExecutor;
+import mc.rellox.spawnerlegacyapi.modifier.effect.IEffectInstance;
 import mc.rellox.spawnerlegacyapi.spawner.IGenerator;
 
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
 
 public interface IModifierMap {
 
@@ -26,7 +26,7 @@ public interface IModifierMap {
      * @return {@code true} if a modifier instance with the specified modifier exists
      */
 
-    boolean exists(IModifier modifier);
+    boolean exists(IModifierDefinition modifier);
 
     /**
      * Adds a modifier instance to this generator.
@@ -50,6 +50,13 @@ public interface IModifierMap {
     void remove(IModifierInstance instance);
 
     /**
+     * @param clazz executor class
+     * @return {@code true} if an effect instance with the specified executor class exists
+     */
+
+    boolean has(Class<? extends IEffectExecutor> clazz);
+
+    /**
      * Runs the action for all matching executor type classes.
      *
      * @param <E>    executor type
@@ -57,6 +64,6 @@ public interface IModifierMap {
      * @param action action to perform
      */
 
-    <E extends IExecutor> void execute(Class<E> clazz, Consumer<E> action);
+    <E extends IEffectExecutor> void execute(Class<E> clazz, BiConsumer<IEffectInstance, E> action);
 
 }
