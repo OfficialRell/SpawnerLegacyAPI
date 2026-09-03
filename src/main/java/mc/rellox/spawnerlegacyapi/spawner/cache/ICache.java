@@ -248,4 +248,20 @@ public interface ICache {
         return is == null ? 0 : is[index];
     }
 
+    /**
+     * Calculates and returns the upgrade values for the current levels.
+     *
+     * @return The upgrade values
+     */
+
+    IUpgradeValues upgrades();
+
+    /**
+     * Recalculates the upgrade values and writes them to the cache.
+     */
+
+    default void recalculate() {
+        write(ICacheType.UPGRADES, upgrades().values());
+    }
+
 }
