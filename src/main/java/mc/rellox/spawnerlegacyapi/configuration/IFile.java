@@ -1,14 +1,11 @@
 package mc.rellox.spawnerlegacyapi.configuration;
 
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.FileConfigurationOptions;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-public interface IFile extends IFileValues {
+public interface IFile extends IMemory, IFileValues {
 
     /**
      * Creates or initializes this file.
@@ -41,27 +38,6 @@ public interface IFile extends IFileValues {
     void save();
 
     /**
-     * Sets an object to the path, without saving this file.
-     *
-     * @param path   path
-     * @param object object to set
-     */
-
-    default void hold(String path, Object object) {
-        file().set(path, object);
-    }
-
-    /**
-     * Removes specified path, without saving this file.
-     *
-     * @param path path to remove
-     */
-
-    default void delete(String path) {
-        file().set(path, null);
-    }
-
-    /**
      * Sets an object to the path and saves this file.
      *
      * @param path   path
@@ -74,7 +50,7 @@ public interface IFile extends IFileValues {
     }
 
     /**
-     * Removes specified path and saved this file.
+     * Removes specified path and saves this file.
      *
      * @param path path to remove
      */
@@ -85,71 +61,8 @@ public interface IFile extends IFileValues {
     }
 
     /**
-     * Copies the object from the specified path to a different path,
-     * removing the previous path, without saving
-     *
-     * @param from path from
-     * @param to   path to copy
-     */
-
-    default void copy(String from, String to) {
-        copy(from, to, false);
-    }
-
-    /**
-     * Copies the object from the specified path to a different path,
-     * removing the previous path.
-     *
-     * @param from path from
-     * @param to   path to copy
-     * @param save should save
-     */
-
-    default void copy(String from, String to, boolean save) {
-        Object o = file().get(from);
-        if(save) clear(from);
-        else delete(from);
-        if(o != null) {
-            if(save) set(to, o);
-            else hold(to, o);
-        }
-    }
-
-    /**
-     * @param path path
-     * @return {@code true} if this path has a value
-     */
-
-    default boolean exists(String path) {
-        return file().isSet(path);
-    }
-
-    /**
-     * Get all keys from the specified path.
-     *
-     * @param path path
-     * @return Set of path keys
-     */
-
-    default Set<String> keys(String path) {
-        ConfigurationSection section = file().getConfigurationSection(path);
-        return section == null ? new HashSet<>() : section.getKeys(false);
-    }
-
-    /**
-     * Sets a default value.
-     *
-     * @param path  path
-     * @param value default value
-     */
-
-    default void defaulted(String path, Object value) {
-        file().addDefault(path, value);
-    }
-
-    /**
      * Clears file memory.<br>
-	 * After using this method most other methods will throw {@link NullPointerException}.
+     * After using this method most other methods will throw {@link NullPointerException}.
      */
 
     void free();
@@ -180,10 +93,12 @@ public interface IFile extends IFileValues {
      * @return New commenter for this file
      */
 
+    @Deprecated(since = "3.0.0", forRemoval = true)
     default Commenter commenter() {
         return new Commenter(this);
     }
 
+    @Deprecated(since = "3.0.0", forRemoval = true)
     record Commenter(IFile file) {
 
         /**
@@ -193,6 +108,7 @@ public interface IFile extends IFileValues {
          * @param comments comments
          */
 
+        @Deprecated(since = "3.0.0", forRemoval = true)
         public void comment(String path, String... comments) {
             comment(path, List.of(comments));
         }
@@ -204,6 +120,7 @@ public interface IFile extends IFileValues {
          * @param list comments
          */
 
+        @Deprecated(since = "3.0.0", forRemoval = true)
         public void comment(String path, List<String> list) {
             file.file().setComments(path, list);
         }
