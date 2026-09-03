@@ -1,5 +1,6 @@
 package mc.rellox.spawnerlegacyapi.spawner;
 
+import mc.rellox.spawnerlegacyapi.spawner.type.UpgradeType;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.inventory.ItemStack;
 
@@ -72,6 +73,13 @@ public interface ISpawner {
      */
 
     int level();
+
+    /**
+     * @param types upgrade types
+     * @return Total spawner upgrade level from the given upgrades
+     */
+
+    int level(UpgradeType... types);
 
     /**
      * @return List of spawner items
