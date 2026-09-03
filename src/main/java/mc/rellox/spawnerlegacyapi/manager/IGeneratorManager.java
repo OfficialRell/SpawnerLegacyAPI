@@ -1,5 +1,6 @@
 package mc.rellox.spawnerlegacyapi.manager;
 
+import mc.rellox.spawnerlegacyapi.spawner.GeneratorRemoval;
 import mc.rellox.spawnerlegacyapi.spawner.IGenerator;
 import mc.rellox.spawnerlegacyapi.spawner.IGeneratorSnapshot;
 import mc.rellox.spawnerlegacyapi.spawner.info.IInfo;
@@ -99,21 +100,36 @@ public interface IGeneratorManager {
     void update();
 
     /**
-     * Removes generator at the block.<br>
-     * Does not remove the spawner block.
+     * Removes the generator only from the cache.
      *
      * @param block block
      */
 
-    void remove(Block block);
+    default void remove(Block block) {
+        remove(block, GeneratorRemoval.CACHE);
+    }
 
     /**
-     * Removes generator at the block.
+     * Removes the generator.
+     *
+     * @param block   block
+     * @param removal removal type
+     */
+
+    void remove(Block block, GeneratorRemoval removal);
+
+    /**
+     * Removes the generator.
+     * <p>
+     * Deprecated, use {@link #remove(Block, GeneratorRemoval)} instead.
      *
      * @param block block
      * @param fully if {@code true}, removes spawner block
      */
 
-    void remove(Block block, boolean fully);
+    @Deprecated(since = "3.0.0", forRemoval = true)
+    default void remove(Block block, boolean fully) {
+        remove(block, fully ? GeneratorRemoval.ALL : GeneratorRemoval.CACHE);
+    }
 
 }

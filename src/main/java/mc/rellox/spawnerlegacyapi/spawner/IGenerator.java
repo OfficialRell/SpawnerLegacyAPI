@@ -3,11 +3,12 @@ package mc.rellox.spawnerlegacyapi.spawner;
 import mc.rellox.spawnerlegacyapi.configuration.filter.IFilterContext;
 import mc.rellox.spawnerlegacyapi.hologram.IHologramHolder;
 import mc.rellox.spawnerlegacyapi.metadata.IMetadata;
-import mc.rellox.spawnerlegacyapi.modifier.instance.IModifierMap;
+import mc.rellox.spawnerlegacyapi.modifier.IModifierMap;
 import mc.rellox.spawnerlegacyapi.spawner.cache.ICache;
 import mc.rellox.spawnerlegacyapi.spawner.display.IGeneratorDisplay;
 import mc.rellox.spawnerlegacyapi.spawner.location.Pos;
 import mc.rellox.spawnerlegacyapi.spawner.summoner.ISummoner;
+import mc.rellox.spawnerlegacyapi.spawner.type.SpawnerType;
 import mc.rellox.spawnerlegacyapi.spawner.warning.IValidation;
 import mc.rellox.spawnerlegacyapi.view.IUpgrades;
 import org.bukkit.Chunk;
@@ -22,245 +23,289 @@ import org.bukkit.entity.Player;
 
 public interface IGenerator extends IGeneratorTags {
 
-	/**
-	 * @return A snapshot of this generator
-	 */
-
-	IGeneratorSnapshot snapshot();
-	
-	/**
-	 * @return This spawner
-	 */
-	
-	ISpawner spawner();
-	
-	/**
-	 * @return Spawner block
-	 */
-	
-	Block block();
-	
-	/**
-	 * @return Generator world
-	 */
-	
-	World world();
-	
-	/**
-	 * @return Center location, as {@code loc.add(0.5, 0.5, 0.5)}
-	 */
-	
-	Location center();
-	
-	/**
-	 * @return Spawner cache
-	 */
-	
-	ICache cache();
-
-	/**
-	 * @return Spawner filter context
-	 */
-
-	IFilterContext context();
-	
-	/**
-	 * @return Entity summoner
-	 */
-	
-	ISummoner summoner();
-	
-	/**
-	 * @return Display data of this spawner
-	 */
-	
-	IGeneratorDisplay display();
-	
-	/**
-	 * @return Spawner validation and warning manager
-	 */
-	
-	IValidation validation();
-	
-	/**
-	 * @return All hologram holder
-	 */
-	
-	IHologramHolder holograms();
-	
-	/**
-	 * @return Spawner modifiers
-	 */
-	
-	IModifierMap modifiers();
-
-	/**
-	 * @return Spawner metadata or {@code null}
-	 */
-
-	IMetadata metadata();
-	
-	/**
-	 * @return {@code true} if this generator is active (not removed), otherwise {@code false}
-	 */
-	
-	boolean active();
-	
-	/**
-	 * @return {@code true} if this spawner currently is ticking, otherwise {@code false}
-	 */
-	
-	boolean ticking();
-	
-	/**
-	 * @return {@code true} if spawner tags has been changed
-	 */
-	
-	boolean changed();
-	
-	/**
-	 * Checks if this spawner is valid or exists in the world.<br>
-	 * It will be marked for removal if invalid.
-	 */
-	
-	void examine();
-	
-	/**
-	 * @return {@code true} if this spawner is rotating
-	 */
-	
-	boolean rotating();
-	
-	/**
-	 * Always returns {@code true} if the owner is online or option 'spawn-if-online'
-	 * is set to true, otherwise checks if the owner is offline or has been offline
-	 * for more then the 'offline-timeout' time.
-	 * 
-	 * @return {@code true} or {@code false}
-	 */
-	
-	boolean online();
-	
-	/**
-	 * Removes this generator.<br>
-	 * If fully is {@code true} then this generator will be
-	 *  fully removed including the block and location.
-	 * 
-	 * @param fully should this generator be removed fully
-	 */
-	
-	void remove(boolean fully);
-	
-	/**
-	 * Removes this generator.<br>
-	 * If fully is {@code true} then this generator will be
-	 *  fully removed including the block.<br>
-	 * If files is {@code true} then it will remove this generator from files,
-	 *  only if fully is {@code true}.
-	 *  
-	 * @param fully should this generator be removed fully
-	 * @param files should this generator be removed from location files
-	 */
-	
-	void remove(boolean fully, boolean files);
-	
-	/**
-	 * Ticks this spawner.
-	 */
-	
-	void tick();
-	
-	/**
-	 * @return The remaining ticks until spawning entities
-	 */
-	
-	int ticks();
-	
-	/**
-	 * @return The time the spawner can spawn again
-	 */
-	
-	int delay();
-	
-	/**
-	 * Updates spawner delay, upgrades and other.
-	 */
-	
-	void update();
-	
-	/**
-	 * Updates hologram and warning text, if exists.
-	 */
-	
-	void rewrite();
-	
-	/**
-	 * Does all spawner updates and checks.
-	 */
-	
-	void refresh();
-	
-	/**
-	 * Updates spawner options that might control it.
-	 */
-	
-	void control();
-	
-	/**
-	 * Updates spawner summoner.
-	 */
-	
-	void resummon();
-	
-	/**
-	 * Tries to spawn entities from this spawner.
-	 */
-	
-	boolean spawn();
-	
-	/**
-	 * @return Spawner upgrade GUI or {@code null} if not opened
-	 */
-	
-	IUpgrades upgrades();
-	
-	/**
-	 * Opens upgrade GUI for the specific player.
-	 * 
-	 * @param player player
+    /**
+     * @return A snapshot of this generator
      */
-	
-	void open(Player player);
-	
-	/**
-	 * Closes and unregisters upgrade GUI.
-	 */
-	
-	void close();
-	
-	/**
-	 * Closes spawner upgrade GUI if active.
-	 */
-	
-	void clear();
-	
-	/**
-	 * @return Position of this spawner
-	 */
-	
-	default Pos position() {
-		return Pos.of(block());
-	}
-	
-	/**
-	 * @param chunk chunk
-	 * @return {@code true} if this spawner is in the specified chunk
-	 */
-	
-	default boolean in(Chunk chunk) {
-		Block block = block();
-		if(!block.getWorld().equals(chunk.getWorld())) return false;
-		return chunk.getX() == (block.getX() >> 4) && chunk.getZ() == (block.getZ() >> 4);
-	}
+
+    IGeneratorSnapshot snapshot();
+
+    /**
+     * @return This spawner
+     */
+
+    ISpawner spawner();
+
+    /**
+     * @return Spawner block
+     */
+
+    Block block();
+
+    /**
+     * @return Generator world
+     */
+
+    World world();
+
+    /**
+     * @return Center location, as {@code loc.add(0.5, 0.5, 0.5)}
+     */
+
+    Location center();
+
+    /**
+     * @return Spawner cache
+     */
+
+    ICache cache();
+
+    /**
+     * @return Spawner type
+     */
+
+    default SpawnerType type() {
+        return cache().type();
+    }
+
+    /**
+     * @return Spawner filter context
+     */
+
+    IFilterContext context();
+
+    /**
+     * @return Entity summoner
+     */
+
+    ISummoner summoner();
+
+    /**
+     * @return Display data of this spawner
+     */
+
+    IGeneratorDisplay display();
+
+    /**
+     * @return Spawner validation and warning manager
+     */
+
+    IValidation validation();
+
+    /**
+     * @return All hologram holder
+     */
+
+    IHologramHolder holograms();
+
+    /**
+     * @return Spawner modifiers
+     */
+
+    IModifierMap modifiers();
+
+    /**
+     * @return Spawner metadata or {@code null}
+     */
+
+    IMetadata metadata();
+
+    /**
+     * @return {@code true} if this generator is active (not removed)
+     */
+
+    boolean active();
+
+    /**
+     * @return {@code true} if this spawner currently is ticking
+     */
+
+    boolean ticking();
+
+    /**
+     * @return {@code true} if spawner tags has been changed
+     */
+
+    boolean changed();
+
+    /**
+     * Checks if this spawner is valid or exists in the world.<br>
+     * It will be marked for removal if invalid.
+     */
+
+    void examine();
+
+    /**
+     * @return {@code true} if this spawner is rotating
+     */
+
+    boolean rotating();
+
+    /**
+     * Always returns {@code true} if the owner is online or option 'spawn-if-online'
+     * is set to true, otherwise checks if the owner is offline or has been offline
+     * for more then the 'offline-timeout' time.
+     *
+     * @return {@code true} or {@code false}
+     */
+
+    boolean online();
+
+    /**
+     * Removes this generator from the cache only.
+     */
+
+    default void remove() {
+        remove(GeneratorRemoval.CACHE);
+    }
+
+    /**
+     * Removes this generator.<br>
+     * If removal is {@link GeneratorRemoval#CACHE} then this generator will be
+     * removed from the cache only.<br>
+     * If removal is {@link GeneratorRemoval#ALL} then this generator will be
+     * fully removed including the block and location files.
+     *
+     * @param removal generator removal type
+     */
+
+    void remove(GeneratorRemoval removal);
+
+    /**
+     * Removes this generator.<br>
+     * If fully is {@code true} then this generator will be
+     * fully removed including the block and location.
+     *
+     * <p>
+     * Deprecated, use {@link #remove(GeneratorRemoval)} instead.
+     *
+     * @param fully should this generator be removed fully
+     */
+
+    @Deprecated(since = "3.0.0", forRemoval = true)
+    default void remove(boolean fully) {
+        remove(fully
+                ? GeneratorRemoval.ALL
+                : GeneratorRemoval.CACHE);
+    }
+
+    /**
+     * Removes this generator.<br>
+     * If fully is {@code true} then this generator will be
+     * fully removed including the block and location files.<br>
+     * Argument 'files' is ignored.
+     * <p>
+     * Deprecated, use {@link #remove(GeneratorRemoval)} instead.
+     *
+     * @param fully should this generator be removed fully
+     * @param files should this generator be removed from location files
+     */
+
+    @Deprecated(since = "3.0.0", forRemoval = true)
+    default void remove(boolean fully, boolean files) {
+        remove(fully
+                ? GeneratorRemoval.ALL
+                : GeneratorRemoval.CACHE);
+    }
+
+    /**
+     * Ticks this spawner.
+     */
+
+    void tick();
+
+    /**
+     * @return The remaining ticks until spawning entities
+     */
+
+    int ticks();
+
+    /**
+     * @return The time between spawns in ticks
+     */
+
+    int delay();
+
+    /**
+     * Updates spawner delay, upgrades and other.
+     */
+
+    void update();
+
+    /**
+     * Updates hologram and warning text, if exists.
+     */
+
+    void rewrite();
+
+    /**
+     * Does all spawner updates and checks.
+     */
+
+    void refresh();
+
+    /**
+     * Updates spawner options that might control it.
+     */
+
+    void control();
+
+    /**
+     * Updates spawner summoner.
+     */
+
+    void resummon();
+
+    /**
+     * Tries to spawn entities from this spawner.
+     *
+     * @return {@code true} if spawned
+     */
+
+    boolean spawn();
+
+    /**
+     * @return Spawner upgrade GUI or {@code null} if not opened
+     */
+
+    IUpgrades upgrades();
+
+    /**
+     * Opens upgrade GUI for the specific player.
+     *
+     * @param player player
+     */
+
+    void open(Player player);
+
+    /**
+     * Closes and unregisters upgrade GUI.
+     */
+
+    void close();
+
+    /**
+     * Closes spawner upgrade GUI if active.
+     */
+
+    void clear();
+
+    /**
+     * @return Position of this spawner
+     */
+
+    default Pos position() {
+        return Pos.of(block());
+    }
+
+    /**
+     * @param chunk chunk
+     * @return {@code true} if this spawner is in the specified chunk
+     */
+
+    default boolean in(Chunk chunk) {
+        Block block = block();
+        if(!block.getWorld().equals(chunk.getWorld())) return false;
+        return chunk.getX() == (block.getX() >> 4) && chunk.getZ() == (block.getZ() >> 4);
+    }
 
 }
