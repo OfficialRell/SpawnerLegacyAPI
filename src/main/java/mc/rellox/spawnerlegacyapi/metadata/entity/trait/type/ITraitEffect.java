@@ -35,10 +35,4 @@ public interface ITraitEffect extends ITrait {
 
     boolean particles();
 
-    /**
-     * @return Whether the potion effect has an icon
-     */
-
-    boolean icon();
-
 }
