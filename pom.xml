@@ -1,48 +1,48 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  
-  <groupId>mc.rellox</groupId>
-  <artifactId>SpawnerLegacyAPI</artifactId>
-  <version>2.2.2</version>
-  <name>SpawnerLegacyAPI</name>
-  
-  <properties>
-	  <java.version>21</java.version>
-  </properties>
-  
-  <repositories>
-  	<repository>
-	  <id>jitpack.io</id>
-	  <url>https://jitpack.io</url>
-    </repository>
-    <repository>
-      <id>spigot-repo</id>
-      <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
-    </repository>
-  </repositories>
-  
-  <dependencies>
-    <dependency>
-      <groupId>org.spigotmc</groupId>
-      <artifactId>spigot-api</artifactId>
-      <version>26.2-R0.1-SNAPSHOT</version>
-      <scope>provided</scope>
-    </dependency>
-  </dependencies>
-  
-  <build>
-    <sourceDirectory>src/main/java</sourceDirectory>
-    <plugins>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.13.0</version>
-        <configuration>
-		   <source>${java.version}</source>
-		   <target>${java.version}</target>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>mc.rellox</groupId>
+    <artifactId>SpawnerLegacyAPI</artifactId>
+    <version>3.0.0</version>
+    <name>SpawnerLegacyAPI</name>
+
+    <properties>
+        <java.version>21</java.version>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+        <repository>
+            <id>spigot-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
+            <version>26.2-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
