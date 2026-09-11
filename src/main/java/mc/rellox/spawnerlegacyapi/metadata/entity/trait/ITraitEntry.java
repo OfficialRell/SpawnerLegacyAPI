@@ -39,4 +39,29 @@ public interface ITraitEntry {
 
     void current(Entity entity);
 
+    /**
+     * Creates a new {@link ITraitResult} with the given success value.
+     *
+     * @param success whether the trait was successfully applied
+     * @return Result instance
+     */
+
+    ITraitResult result(boolean success);
+
+    /**
+     * @return Successful result instance
+     */
+
+    default ITraitResult success() {
+        return result(true);
+    }
+
+    /**
+     * @return Failed result instance
+     */
+
+    default ITraitResult failure() {
+        return result(false);
+    }
+
 }

@@ -6,7 +6,7 @@ import mc.rellox.spawnerlegacyapi.spawner.display.IGeneratorName;
 public interface IMetadata {
 
     /**
-     * @return ID of this metadata
+     * @return Metadata identifier
      */
 
     String id();

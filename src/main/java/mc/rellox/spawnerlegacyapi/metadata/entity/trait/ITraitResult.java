@@ -5,12 +5,6 @@ import org.bukkit.entity.Entity;
 public interface ITraitResult {
 
     /**
-     * @return Trait that was executed
-     */
-
-    ITrait trait();
-
-    /**
      * @return Entry that was executed
      */
 

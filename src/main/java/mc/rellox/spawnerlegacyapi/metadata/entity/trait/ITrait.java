@@ -1,5 +1,6 @@
 package mc.rellox.spawnerlegacyapi.metadata.entity.trait;
 
+import mc.rellox.spawnerlegacyapi.SLAPI;
 import mc.rellox.spawnerlegacyapi.utility.IChance;
 import mc.rellox.spawnerlegacyapi.utility.ILimit;
 import org.bukkit.entity.Entity;
@@ -8,11 +9,21 @@ import java.util.List;
 
 public interface ITrait {
 
+    static ITraitBuilder builder(String id) {
+        return SLAPI.metadata().builder(id);
+    }
+
     /**
-     * @return Trait ID
+     * @return Trait identifier
      */
 
     String id();
+
+    /**
+     * @return Trait definition
+     */
+
+    ITraitDefinition definition();
 
     /**
      * @return Trait execution chance

@@ -1,27 +1,41 @@
 package mc.rellox.spawnerlegacyapi.metadata.entity.trait;
 
-import mc.rellox.spawnerlegacyapi.utility.IChance;
-import mc.rellox.spawnerlegacyapi.utility.ILimit;
+import mc.rellox.spawnerlegacyapi.configuration.IMemory;
 
-import java.util.Map;
+import java.util.function.Function;
 
 public interface ITraitBuilder {
 
     /**
-     * Reads the values from the configuration map and creates a new trait instance.
+     * Adds a value reader that is executed when a trait definition is created.
      *
-     * @param data trait data
-     * @param map  trait configuration map
-     * @return Newly created trait
-     * @throws RuntimeException if the trait could not be created
+     * @param id     value id
+     * @param reader value reader
+     * @param <T>    type of the value
+     * @return This builder
      */
 
-    ITrait build(TraitData data, Map<?, ?> map);
+    <T> ITraitBuilder value(String id, Function<IMemory, T> reader);
 
-    record TraitData(String id,
-                     IChance chance,
-                     ILimit limit,
-                     ITraitChain chain) {
+    /**
+     * Sets the executor to this trait builder.
+     *
+     * @param executor executor instance
+     * @return This builder
+     */
+
+    ITraitBuilder executor(ITraitExecutor executor);
+
+    /**
+     * Registers this trait builder.
+     */
+
+    void register();
+
+    interface ITraitExecutor {
+
+        ITraitResult execute(ITraitDefinition definition, ITraitContext context, ITraitEntry entry);
+
     }
 
 }
