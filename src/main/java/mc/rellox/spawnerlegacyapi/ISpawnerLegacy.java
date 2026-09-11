@@ -108,4 +108,10 @@ public interface ISpawnerLegacy {
 
     ICraftingManager crafting();
 
+    /**
+     * @return Metadata manager
+     */
+
+    IMetadataManager metadata();
+
 }

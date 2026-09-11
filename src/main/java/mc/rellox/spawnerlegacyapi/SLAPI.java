@@ -166,6 +166,14 @@ public final class SLAPI {
         return INSTANCE.crafting();
     }
 
+    /**
+     * @return Metadata manager
+     */
+
+    public static IMetadataManager metadata() {
+        return INSTANCE.metadata();
+    }
+
     public interface ISpawnerLegacyPlugin extends Plugin {
 
         ISpawnerLegacy instance();
