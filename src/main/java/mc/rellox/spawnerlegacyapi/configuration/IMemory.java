@@ -5,6 +5,7 @@ import mc.rellox.spawnerlegacyapi.text.content.IContent;
 import mc.rellox.spawnerlegacyapi.utility.reflect.Reflect;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.MemoryConfiguration;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -531,6 +532,9 @@ public interface IMemory {
     }
 
     /**
+     * Gets a list of maps.<br>
+     * Method {@link getMemories} should be preferred over this method.
+     *
      * @param path path
      * @return List of maps, can be empty
      */
@@ -539,7 +543,64 @@ public interface IMemory {
         return file().getMapList(path);
     }
 
-    record Memory(IMemory parent, ConfigurationSection file) implements IMemory {
+    /**
+     * Converts a list of maps to a list of memories,
+     * where each map is converted to a memory with this memory as the parent.<br>
+     * This allows for easier value reading without the requirement for checks or casting.
+     *
+     * @param path path
+     * @return List of memories, can be empty
+     */
+
+    default List<IMemory> getMemories(String path) {
+        Object value = get(path);
+
+        if(!(value instanceof List<?> list)) {
+            return List.of();
+        }
+
+        return list.stream()
+                .map(object -> {
+                    if(object instanceof Map<?, ?> map)
+                        return toMemory(this, map);
+                    if(object instanceof ConfigurationSection section)
+                        return new Memory(this, section);
+                    return null;
+                })
+                .filter(Objects::nonNull)
+                .toList();
+    }
+
+    record Memory(IMemory parent, ConfigurationSection file) implements IMemory {}
+
+    private static IMemory toMemory(IMemory parent, Map<?, ?> map) {
+        ConfigurationSection configuration = (ConfigurationSection) convert(map);
+        return new Memory(parent, configuration);
+    }
+
+    private static Object convert(Object value) {
+        if(value instanceof ConfigurationSection section) return section;
+
+        if(value instanceof Map<?, ?> map) {
+            ConfigurationSection configuration = new MemoryConfiguration();
+
+            for(Map.Entry<?, ?> entry : map.entrySet()) {
+                configuration.set(
+                        String.valueOf(entry.getKey()),
+                        convert(entry.getValue())
+                );
+            }
+
+            return configuration;
+        }
+
+        if(value instanceof List<?> list) {
+            return list.stream()
+                    .map(IMemory::convert)
+                    .toList();
+        }
+
+        return value;
     }
 
 }
