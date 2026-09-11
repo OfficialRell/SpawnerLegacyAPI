@@ -35,7 +35,7 @@ public interface IEffectBuilder {
      * @param executor executor instance
      * @param <T>      type of the executor
      * @return This builder
-     * @throws IllegalArgumentException if the executor is not a direct subclass of IEffectExecutor
+     * @throws IllegalArgumentException if the executor is not a direct subclass of {@link IEffectExecutor}
      */
 
     <T extends IEffectExecutor> IEffectBuilder executor(Class<T> clazz, T executor);
