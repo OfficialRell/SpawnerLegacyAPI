@@ -106,15 +106,4 @@ public interface ISpawnerManager {
 
     ISelector selector(IFilterContext context, List<Block> list);
 
-    /**
-     * Deprecated, use {@link #selector(IFilterContext, List)} instead.
-     *
-     * @param type spawner type
-     * @param list list of blocks
-     * @return Spawner location selector for the given spawner type and list of blocks
-     */
-
-    @Deprecated(since = "2.2.0", forRemoval = true)
-    ISelector selector(SpawnerType type, List<Block> list);
-
 }
