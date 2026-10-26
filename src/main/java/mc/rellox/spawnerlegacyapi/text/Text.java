@@ -43,6 +43,8 @@ public final class Text {
                 .toArray(ItemFlag[]::new);
     }
 
+    private static final Map<Material, String> CACHED_DISPLAY_NAMES = new EnumMap<>(Material.class);
+
     public static void success(String success, Object... os) {
         String w = color_dark_green + "(!) " + color_green + success;
         if(os != null)
@@ -95,7 +97,16 @@ public final class Text {
         return i;
     }
 
+    public static String display(Material material) {
+        return CACHED_DISPLAY_NAMES.computeIfAbsent(material, m -> display(new ItemStack(m)));
+    }
+
     public static String display(ItemStack item) {
+        if(item == null) return "null";
+
+        String cached = CACHED_DISPLAY_NAMES.get(item.getType());
+        if(cached != null) return cached;
+
         try {
             Class<?> clazz = RF.craft("inventory.CraftItemStack");
             Object nms_item = RF.order(clazz, "asNMSCopy", ItemStack.class).invoke(item);
@@ -116,7 +127,9 @@ public final class Text {
             if(name == null)
                 Bukkit.getLogger().warning("Null name got returned when trying to fetch item name");
 
-            return ChatColor.stripColor(name);
+            String stripped = ChatColor.stripColor(name);
+            CACHED_DISPLAY_NAMES.put(item.getType(), stripped);
+            return stripped;
         } catch(Exception e) {
             Bukkit.getLogger().warning("Cannot get item display name");
             return "null";
