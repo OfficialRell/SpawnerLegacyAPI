@@ -5,18 +5,13 @@ import mc.rellox.spawnerlegacyapi.text.content.IContent;
 import mc.rellox.spawnerlegacyapi.text.content.color.IColorer.Colors;
 import mc.rellox.spawnerlegacyapi.utility.reflect.Reflect.RF;
 import mc.rellox.spawnerlegacyapi.version.Version;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -111,12 +106,16 @@ public final class Text {
             Class<?> clazz = RF.craft("inventory.CraftItemStack");
             Object nms_item = RF.order(clazz, "asNMSCopy", ItemStack.class).invoke(item);
 
-            String[] names = switch(Version.version) {
-                case v_20_4 -> new String[] {"x", "getString"};
-                case v_21_1 -> new String[] {"w", "getString"};
-                case v_26 -> new String[] {"getHoverName", "getString"};
-                default -> new String[] {"y", "getString"};
-            };
+            String[] names;
+            if(Version.atLeast(Version.VersionType.v_26_1))
+                names = new String[] { "getHoverName", "getString" };
+            else {
+                names = switch(Version.TYPE) {
+                    case v_20_4 -> new String[] { "x", "getString" };
+                    case v_21_1 -> new String[] { "w", "getString" };
+                    default -> new String[] { "y", "getString" };
+                };
+            }
 
             String a = names[0];
             String b = names[1];

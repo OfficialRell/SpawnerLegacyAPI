@@ -59,7 +59,7 @@ public final class ItemUtility {
 
     @SuppressWarnings("deprecation")
     public static void glint(ItemMeta meta) {
-        if(Version.version.atleast(VersionType.v_20_4)) {
+        if(Version.atLeast(VersionType.v_20_4)) {
             RF.order(meta, "setEnchantmentGlintOverride", Boolean.class)
                     .invoke(true);
         } else {

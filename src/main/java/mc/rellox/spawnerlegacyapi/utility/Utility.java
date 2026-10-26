@@ -55,7 +55,7 @@ public final class Utility {
     public static final Attribute attribute_health = RF.fielded(Attribute.class, "GENERIC_MAX_HEALTH", "MAX_HEALTH");
 
     public static boolean isWindCharge(Entity entity) {
-        if(!Version.version.atleast(VersionType.v_21_1)) return false;
+        if(!Version.atLeast(VersionType.v_21_1)) return false;
         return switch(entity.getType().name()) {
             case "WIND_CHARGE", "BREEZE_WIND_CHARGE" -> true;
             default -> false;
