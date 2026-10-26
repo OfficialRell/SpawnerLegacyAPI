@@ -8,7 +8,7 @@ import java.util.function.Consumer;
 public interface IPriceManager {
 
     /**
-     * Returned price is 100 x experience points.
+     * Returned price is {@code 100 x experience points}.
      *
      * @return Default price
      */

@@ -20,7 +20,7 @@ public interface ICraftingManager {
     /**
      * Gets the active craft for a player by UUID.
      *
-     * @param id player ID
+     * @param id player identifier
      * @return Craft, or {@code null} if none exists
      */
 
@@ -38,7 +38,7 @@ public interface ICraftingManager {
     /**
      * Checks if the player is currently crafting.
      *
-     * @param id player ID
+     * @param id player identifier
      * @return {@code true} if crafting
      */
 
@@ -64,7 +64,7 @@ public interface ICraftingManager {
     /**
      * Cancels and removes the craft, if any.
      *
-     * @param id player ID
+     * @param id player identifier
      */
 
     void remove(UUID id);
@@ -80,7 +80,7 @@ public interface ICraftingManager {
     /**
      * Gets the crafting result.
      *
-     * @param id player ID
+     * @param id player identifier
      * @return Crafting result, or {@code null} if none exists
      */
 
@@ -98,7 +98,7 @@ public interface ICraftingManager {
     /**
      * Takes the crafting result, removing it.
      *
-     * @param id player ID
+     * @param id player identifier
      * @return Crafting result, or {@code null} if none exists
      */
 

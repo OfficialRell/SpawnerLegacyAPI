@@ -63,7 +63,7 @@ public interface IViewMeta<T> {
         return is;
     });
     IViewMeta<String[]> STRING_ARRAY = a("STRING_ARRAY", o -> {
-        if(o instanceof String s) return new String[] {s};
+        if(o instanceof String s) return new String[] { s };
         if(o instanceof List<?> l) return l.stream()
                 .map(Object::toString)
                 .toArray(String[]::new);
@@ -83,7 +83,7 @@ public interface IViewMeta<T> {
      * Parses the given object.
      * The object can be a regular object, a list or any primitive wrapper.
      *
-     * @param object - object
+     * @param object object
      * @return Parsed data
      */
 
@@ -92,7 +92,7 @@ public interface IViewMeta<T> {
     /**
      * Converts the input value to a valid savable value.
      *
-     * @param value - value to save
+     * @param value value to save
      * @return Converted value
      */
 

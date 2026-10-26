@@ -13,7 +13,7 @@ import java.util.function.Function;
 public interface IValueManager {
 
     /**
-     * @param id filter name
+     * @param id filter identifier
      * @return Filter by the id or {@code null}
      */
 

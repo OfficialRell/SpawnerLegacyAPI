@@ -10,134 +10,134 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public interface ILayout extends ISave {
-	
-	/**
-	 * @param slot slot
-	 */
-	
-	void set(ISlot slot);
-	
-	/**
-	 * @param slot inventory slot
-	 * @param field layout field
-	 * @return {@code true} if this slot is defined by this layout field
-	 */
-	
-	boolean is(int slot, SlotField field);
-	
-	/**
-	 * @return All defined slots
-	 */
-	
-	List<ISlot> all();
-	
-	/**
-	 * @param field layout field
-	 * @return Slot of this layout field or {@code null}
-	 */
-	
-	ISlot get(SlotField field);
-	
-	/**
-	 * @return Rows of this layout
-	 */
-	
-	int rows();
-	
-	/**
-	 * @param field layout field
-	 * @return All slots occupied by this layout field or {@code null}
-	 */
-	
-	int[] slots(SlotField field);
-	
-	/**
-	 * Fills all slots with this item stack.
-	 * 
-	 * @param inventory inventory
-	 * @param field layout field
-	 * @param modifier item modifier
-	 */
-	
-	void fill(Inventory inventory, SlotField field, Consumer<ItemBuilder> modifier);
-	
-	/**
-	 * Fills all slots with this item stack with an amount.
-	 * 
-	 * @param inventory inventory
-	 * @param field layout field
-	 * @param modifier item modifier
-	 * @param amount amount
-	 */
-	
-	void fill(Inventory inventory, SlotField field, Consumer<ItemBuilder> modifier, int amount);
-	
-	/**
-	 * Safely fills the slot with the item.
-	 * 
-	 * @param inventory inventory
-	 * @param slot slot
-	 * @param item item
-	 */
-	
-	void fill(Inventory inventory, int slot, ItemBuilder item);
-	
-	/**
-	 * Safely fills the slot with the item.
-	 * 
-	 * @param inventory inventory
-	 * @param slot slot
-	 * @param item item
-	 */
-	
-	void fill(Inventory inventory, int slot, ItemStack item);
-	
-	/**
-	 * @param field layout field
-	 * @return {@code true} if this layout field is defined
-	 */
-	
-	boolean defined(SlotField field);
-	
-	/**
-	 * @return Slot data of the background
-	 */
-	
-	IBackground background();
-	
-	/**
-	 * Fills in all background slots.
-	 */
-	
-	void fill(Inventory inventory);
-	
-	/**
-	 * @param name name of the inventory
-	 * @return Newly created inventory
-	 */
-	
-	Inventory create(IContent name);
-	
-	/**
-	 * Gets the meta value of this layout.
-	 * 
-	 * @param <T> meta type
-	 * @param key meta key
-	 * @param type parser
-	 * @return Meta value object or {@code null}
-	 */
-	
-	<T> T meta(String key, IViewMeta<T> type);
-	
-	/**
-	 * Sets meta value to this layout.
-	 * 
-	 * @param <T> meta type
-	 * @param key meta key
-	 * @param type parser
-	 * @param value meta value
-	 */
-	
-	<T> void meta(String key, IViewMeta<T> type, T value);
+
+    /**
+     * @param slot slot
+     */
+
+    void set(ISlot slot);
+
+    /**
+     * @param slot  inventory slot
+     * @param field layout field
+     * @return {@code true} if this slot is defined by this layout field
+     */
+
+    boolean is(int slot, SlotField field);
+
+    /**
+     * @return All defined slots
+     */
+
+    List<ISlot> all();
+
+    /**
+     * @param field layout field
+     * @return Slot of this layout field or {@code null}
+     */
+
+    ISlot get(SlotField field);
+
+    /**
+     * @return Rows of this layout
+     */
+
+    int rows();
+
+    /**
+     * @param field layout field
+     * @return All slots occupied by this layout field or {@code null}
+     */
+
+    int[] slots(SlotField field);
+
+    /**
+     * Fills all slots with this item stack.
+     *
+     * @param inventory inventory
+     * @param field     layout field
+     * @param modifier  item modifier
+     */
+
+    void fill(Inventory inventory, SlotField field, Consumer<ItemBuilder> modifier);
+
+    /**
+     * Fills all slots with this item stack with an amount.
+     *
+     * @param inventory inventory
+     * @param field     layout field
+     * @param modifier  item modifier
+     * @param amount    amount
+     */
+
+    void fill(Inventory inventory, SlotField field, Consumer<ItemBuilder> modifier, int amount);
+
+    /**
+     * Safely fills the slot with the item.
+     *
+     * @param inventory inventory
+     * @param slot      slot
+     * @param item      item
+     */
+
+    void fill(Inventory inventory, int slot, ItemBuilder item);
+
+    /**
+     * Safely fills the slot with the item.
+     *
+     * @param inventory inventory
+     * @param slot      slot
+     * @param item      item
+     */
+
+    void fill(Inventory inventory, int slot, ItemStack item);
+
+    /**
+     * @param field layout field
+     * @return {@code true} if this layout field is defined
+     */
+
+    boolean defined(SlotField field);
+
+    /**
+     * @return Slot data of the background
+     */
+
+    IBackground background();
+
+    /**
+     * Fills in all background slots.
+     */
+
+    void fill(Inventory inventory);
+
+    /**
+     * @param name name of the inventory
+     * @return Newly created inventory
+     */
+
+    Inventory create(IContent name);
+
+    /**
+     * Gets the meta value of this layout.
+     *
+     * @param <T>  meta type
+     * @param key  meta key
+     * @param type parser
+     * @return Meta value object or {@code null}
+     */
+
+    <T> T meta(String key, IViewMeta<T> type);
+
+    /**
+     * Sets meta value to this layout.
+     *
+     * @param <T>   meta type
+     * @param key   meta key
+     * @param type  parser
+     * @param value meta value
+     */
+
+    <T> void meta(String key, IViewMeta<T> type, T value);
 
 }

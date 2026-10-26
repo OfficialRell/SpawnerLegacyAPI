@@ -212,10 +212,10 @@ public final class ItemBuilder {
      */
 
     public ItemBuilder shining(boolean shining) {
-		return shining ? modify(meta -> {
-			ItemUtility.glint(meta);
-			meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		}) : this;
+        return shining ? modify(meta -> {
+            ItemUtility.glint(meta);
+            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        }) : this;
     }
 
     /**
@@ -269,8 +269,8 @@ public final class ItemBuilder {
 
     public <Z> ItemBuilder keyed(NamespacedKey key, PersistentDataType<?, Z> type, Z value) {
         return value == null ? this : modify(meta -> {
-            PersistentDataContainer p = meta.getPersistentDataContainer();
-            p.set(key, type, value);
+            PersistentDataContainer container = meta.getPersistentDataContainer();
+            container.set(key, type, value);
         });
     }
 
@@ -496,8 +496,8 @@ public final class ItemBuilder {
         return list.isEmpty()
                 ? (fallback == null ? this : describe(fallback))
                 : describe(list.stream()
-                           .map(mapper)
-                           .collect(Collectors.toList()));
+                .map(mapper)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -597,7 +597,7 @@ public final class ItemBuilder {
     }
 
     public interface Modifier {
-        void modify(ItemMeta m);
+        void modify(ItemMeta meta);
     }
 
     protected static class ItemIContent {

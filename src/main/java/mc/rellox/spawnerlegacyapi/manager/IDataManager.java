@@ -18,10 +18,10 @@ public interface IDataManager {
     /**
      * Returns player data file of the specified player. Never {@code null}.
      *
-     * @param id player ID
+     * @param id player identifier
      * @return Player data file
      * @throws IllegalArgumentException thrown if the player with
-     *                                  the specified ID has never player before
+     *                                  the specified identifier has never played before
      */
 
     IPlayerData fromID(UUID id) throws IllegalArgumentException;
@@ -41,7 +41,7 @@ public interface IDataManager {
      * Returns player data file of the specified player.
      * {@code null} if a file for this player does not exist.
      *
-     * @param id player ID
+     * @param id player identifier
      * @return Player data file
      */
 
@@ -62,7 +62,7 @@ public interface IDataManager {
     /**
      * Tries to find a player data file from the specified player name.
      *
-     * @param player player
+     * @param player player name
      * @return Player data file
      */
 

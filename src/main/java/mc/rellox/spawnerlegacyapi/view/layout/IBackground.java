@@ -5,19 +5,20 @@ import mc.rellox.spawnerlegacyapi.item.builder.ItemBuilder;
 import mc.rellox.spawnerlegacyapi.utility.ISave;
 
 public interface IBackground extends ISave {
-	
-	IBackground empty = new IBackground() {
-		@Override
-		public void save(IFile file, String path) {}
-		@Override
-		public ItemBuilder[] items() {return null;}
-	};
-	
-	
-	/**
-	 * @return Array of background items or {@code null} if not specified
-	 */
-	
-	ItemBuilder[] items();
-	
+
+    IBackground empty = new IBackground() {
+        @Override
+        public void save(IFile file, String path) {}
+
+        @Override
+        public ItemBuilder[] items() {return null;}
+    };
+
+
+    /**
+     * @return Array of background items or {@code null} if not specified
+     */
+
+    ItemBuilder[] items();
+
 }

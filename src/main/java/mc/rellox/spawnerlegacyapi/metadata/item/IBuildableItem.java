@@ -46,7 +46,7 @@ public interface IBuildableItem extends ISave {
     int model();
 
     /**
-     * @return Item id
+     * @return Item identifier
      */
 
     String id();

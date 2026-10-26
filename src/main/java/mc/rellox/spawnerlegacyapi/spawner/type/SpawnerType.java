@@ -234,6 +234,10 @@ public enum SpawnerType {
         return SLAPI.spawners().disabled(this);
     }
 
+    public static int size() {
+        return VALUES.length;
+    }
+
     public static SpawnerType of(String name) {
         try {
             SpawnerType type = valueOf(name.toUpperCase(Locale.ROOT));
