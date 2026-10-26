@@ -36,23 +36,12 @@ public final class ItemUtility {
     }
 
     public static void add(Player player, ItemStack item) {
-        int f = 0, a = item.getAmount();
         PlayerInventory inventory = player.getInventory();
-        ItemStack slot;
-        for(int i = 0; f < a && i < 36; i++) {
-            if((slot = inventory.getItem(i)) == null) f += 64;
-            else if(slot.isSimilar(item)) f += 64 - slot.getAmount();
-        }
-        if(f >= a) inventory.addItem(item);
-        else {
-            ItemStack give = item.clone();
-            give.setAmount(f);
-            ItemStack sink = item.clone();
-            sink.setAmount(a - f);
-            inventory.addItem(give);
+        var to_drop = inventory.addItem(item);
+        to_drop.forEach((slot, sink) -> {
             Item drop = player.getWorld().dropItem(player.getLocation(), sink);
             drop.setVelocity(new Vector());
-        }
+        });
     }
 
     public static void remove(Player player, ItemStack item, int amount) {

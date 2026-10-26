@@ -225,9 +225,9 @@ public final class ItemBuilder {
      */
 
     public ItemBuilder flagged() {
-        if(Version.version == null) return this;
+        if(Version.TYPE == null) return this;
         return modify(meta -> {
-            if(Version.version == VersionType.v_20_4)
+            if(Version.TYPE == VersionType.v_20_4)
                 meta.addAttributeModifier(Utility.attribute_damage, attribute());
             meta.addItemFlags(Text.item_flags);
         });
@@ -252,7 +252,7 @@ public final class ItemBuilder {
      */
 
     public ItemBuilder hidden() {
-        if(Version.version != null && !Version.version.atleast(VersionType.v_20_4)) return this;
+        if(!Version.atLeast(VersionType.v_20_4)) return this;
         return modify(meta ->
                 RF.order(meta, "setHideTooltip", boolean.class).invoke(true));
     }
