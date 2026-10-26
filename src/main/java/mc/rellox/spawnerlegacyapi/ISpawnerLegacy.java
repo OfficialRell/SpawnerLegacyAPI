@@ -114,4 +114,10 @@ public interface ISpawnerLegacy {
 
     IMetadataManager metadata();
 
+    /**
+     * @return Virtual manager
+     */
+
+    IVirtualManager virtual();
+
 }

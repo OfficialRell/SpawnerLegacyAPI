@@ -67,13 +67,19 @@ public interface IGeneratorSnapshot {
     int tags();
 
     /**
+     * @return {@code true} if this generator snapshot is virtual, otherwise {@code false}
+     */
+
+    boolean virtual();
+
+    /**
      * @param player player who placed
      */
 
     void player(Player player);
 
     /**
-     * @return Player who played
+     * @return Player who placed
      */
 
     Player player();
@@ -139,7 +145,8 @@ public interface IGeneratorSnapshot {
                 .spawnable(spawnable())
                 .empty(empty())
                 .meta(meta())
-                .tags(tags());
+                .tags(tags())
+                .virtual(virtual());
     }
 
     /**
@@ -159,6 +166,7 @@ public interface IGeneratorSnapshot {
         boolean empty;
         String meta;
         int tags;
+        boolean virtual;
 
         private Builder(SpawnerType type) {
             this.type = type;
@@ -202,6 +210,11 @@ public interface IGeneratorSnapshot {
             return this;
         }
 
+        public Builder virtual(boolean virtual) {
+            this.virtual = virtual;
+            return this;
+        }
+
         public Builder tags(Tag... tags) {
             this.tags = Stream.of(tags)
                     .mapToInt(Tag::index)
@@ -210,7 +223,7 @@ public interface IGeneratorSnapshot {
         }
 
         public IGeneratorSnapshot build() {
-            return SLAPI.spawners().of(type, levels, charges, spawnable, empty, meta, tags);
+            return SLAPI.spawners().of(type, levels, charges, spawnable, empty, meta, tags, virtual);
         }
 
         private int or(int a, int b) {

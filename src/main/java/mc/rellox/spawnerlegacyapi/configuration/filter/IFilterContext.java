@@ -70,4 +70,10 @@ public interface IFilterContext {
 
     IMetadata metadata();
 
+    /**
+     * @return Whether the spawner is virtual
+     */
+
+    boolean virtual();
+
 }

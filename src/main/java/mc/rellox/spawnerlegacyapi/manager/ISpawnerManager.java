@@ -37,7 +37,7 @@ public interface ISpawnerManager {
 
     /**
      * @param generator generator
-     * @return Virtual spawner
+     * @return Generator snapshot
      */
 
     IGeneratorSnapshot of(IGenerator generator);
@@ -50,11 +50,27 @@ public interface ISpawnerManager {
      * @param empty     empty
      * @param metadata  metadata
      * @param tags      tags
-     * @return Virtual spawner
+     * @return Generator snapshot
      */
 
     IGeneratorSnapshot of(SpawnerType type, int[] levels, int charges,
                           int spawnable, boolean empty, String metadata, int tags);
+
+    /**
+     * @param type      spawner type
+     * @param levels    levels
+     * @param charges   charges
+     * @param spawnable spawnable
+     * @param empty     empty
+     * @param metadata  metadata
+     * @param tags      tags
+     * @param virtual   virtual
+     * @return Generator snapshot
+     */
+
+    IGeneratorSnapshot of(SpawnerType type, int[] levels, int charges,
+                          int spawnable, boolean empty, String metadata,
+                          int tags, boolean virtual);
 
     /**
      * @param block    block

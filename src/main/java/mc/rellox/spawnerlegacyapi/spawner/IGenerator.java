@@ -9,6 +9,7 @@ import mc.rellox.spawnerlegacyapi.spawner.display.IGeneratorDisplay;
 import mc.rellox.spawnerlegacyapi.spawner.location.Pos;
 import mc.rellox.spawnerlegacyapi.spawner.summoner.ISummoner;
 import mc.rellox.spawnerlegacyapi.spawner.type.SpawnerType;
+import mc.rellox.spawnerlegacyapi.spawner.virtual.IVirtualStorage;
 import mc.rellox.spawnerlegacyapi.spawner.warning.IValidation;
 import mc.rellox.spawnerlegacyapi.view.IUpgrades;
 import org.bukkit.Chunk;
@@ -108,6 +109,12 @@ public interface IGenerator extends IGeneratorTags {
      */
 
     IMetadata metadata();
+
+    /**
+     * @return Virtual storage of this spawner or {@code null}
+     */
+
+    IVirtualStorage storage();
 
     /**
      * @return {@code true} if this generator is active (not removed)

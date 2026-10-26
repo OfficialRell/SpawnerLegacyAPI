@@ -11,10 +11,10 @@ public interface ICacheType<T> {
     // constants
 
     ICacheType<SpawnerType> TYPE = SLAPI.cache().of(0);
-	ICacheType<UUID> OWNER = SLAPI.cache().of(1);
-	ICacheType<Integer> STACK = SLAPI.cache().of(2);
-	ICacheType<double[]> UPGRADES = SLAPI.cache().of(3);
-	ICacheType<int[]> LEVELS = SLAPI.cache().of(4);
+    ICacheType<UUID> OWNER = SLAPI.cache().of(1);
+    ICacheType<Integer> STACK = SLAPI.cache().of(2);
+    ICacheType<double[]> UPGRADES = SLAPI.cache().of(3);
+    ICacheType<int[]> LEVELS = SLAPI.cache().of(4);
     ICacheType<Integer> CHARGES = SLAPI.cache().of(5);
     ICacheType<Integer> SPAWNABLE = SLAPI.cache().of(6);
     ICacheType<Boolean> EMPTY = SLAPI.cache().of(7);
@@ -22,6 +22,7 @@ public interface ICacheType<T> {
     ICacheType<String> METADATA = SLAPI.cache().of(9);
     ICacheType<Integer> TAGS = SLAPI.cache().of(10);
     ICacheType<Boolean> GENERATED = SLAPI.cache().of(11);
+    ICacheType<Boolean> VIRTUAL = SLAPI.cache().of(12);
 
     // class methods
 

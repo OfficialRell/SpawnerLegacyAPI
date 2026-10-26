@@ -174,6 +174,14 @@ public final class SLAPI {
         return INSTANCE.metadata();
     }
 
+    /**
+     * @return Virtual manager
+     */
+
+    public static IVirtualManager virtual() {
+        return INSTANCE.virtual();
+    }
+
     public interface ISpawnerLegacyPlugin extends Plugin {
 
         ISpawnerLegacy instance();

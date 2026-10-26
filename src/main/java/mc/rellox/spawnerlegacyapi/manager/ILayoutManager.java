@@ -44,6 +44,12 @@ public interface ILayoutManager {
     ILayout types();
 
     /**
+     * @return Layout for spawner virtual storage GUI
+     */
+
+    ILayout storage();
+
+    /**
      * @return Layout for spawner crafting GUI
      */
 

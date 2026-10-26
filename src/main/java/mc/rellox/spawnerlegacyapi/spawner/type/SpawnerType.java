@@ -8,6 +8,7 @@ import mc.rellox.spawnerlegacyapi.utility.region.type.EntityBox;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 
 import java.util.Locale;
 import java.util.stream.Stream;
@@ -192,6 +193,15 @@ public enum SpawnerType {
 
     public boolean unique() {
         return unique;
+    }
+
+    /**
+     * @return {@code true} if this type supports virtual spawners
+     */
+
+    public boolean virtual() {
+        return type != null
+                && LivingEntity.class.isAssignableFrom(type.getEntityClass());
     }
 
     /**

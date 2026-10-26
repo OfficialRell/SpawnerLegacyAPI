@@ -201,6 +201,14 @@ public interface ICache {
     }
 
     /**
+     * @return {@code true} if this spawner is flagged as virtual
+     */
+
+    default boolean virtual() {
+        return get(ICacheType.VIRTUAL, false);
+    }
+
+    /**
      * @return {@code true} if owned by a player
      */
 

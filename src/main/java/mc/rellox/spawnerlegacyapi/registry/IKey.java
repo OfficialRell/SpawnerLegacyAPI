@@ -21,9 +21,14 @@ public interface IKey {
     IKey SPAWNER_METADATA = of("metadata");
     IKey SPAWNER_TAGS = of("tags");
     IKey SPAWNER_GENERATED = of("generated");
+    IKey SPAWNER_VIRTUAL = of("virtual");
 
     IKey ITEM_NAME = of("item_name");
     IKey ITEM_LORE = of("item_lore");
+
+    IKey VIRTUAL_ITEMS = of("virtual_items");
+    IKey VIRTUAL_XP = of("virtual_xp");
+    IKey VIRTUAL_TIME = of("virtual_time");
 
     IKey ENTITY_BY_SPAWNER = of("by_spawner");
     IKey ENTITY_XP = of("upgrade_xp");
