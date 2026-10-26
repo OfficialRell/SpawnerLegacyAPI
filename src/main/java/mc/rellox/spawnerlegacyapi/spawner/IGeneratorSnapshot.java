@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.stream.Stream;
 
-public interface IGeneratorSnapshot extends IVirtual {
+public interface IGeneratorSnapshot {
 
     static Builder builder(SpawnerType type) {
         return new Builder(type);

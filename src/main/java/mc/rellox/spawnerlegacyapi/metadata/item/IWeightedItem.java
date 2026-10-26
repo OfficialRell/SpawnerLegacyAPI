@@ -5,8 +5,7 @@ import mc.rellox.spawnerlegacyapi.utility.IRange;
 import mc.rellox.spawnerlegacyapi.utility.ISave;
 import org.bukkit.inventory.ItemStack;
 
-public interface IWeightedItem extends ISave,
-        mc.rellox.spawnerlegacyapi.spawner.meta.item.IWeightedItem {
+public interface IWeightedItem extends ISave {
 
     /**
      * @return Item to drop

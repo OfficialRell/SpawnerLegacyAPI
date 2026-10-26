@@ -10,14 +10,6 @@ import mc.rellox.spawnerlegacyapi.text.content.variable.IVariables;
 public record ColorerImpl(String color, Format format) implements IColorer {
 
     @Override
-    public String color(String text) {
-        // don't color if already fully colored
-        if(text.indexOf(Text.color_char) == 0) return text;
-
-        return color + format + text;
-    }
-
-    @Override
     public String color(IContent content, IVariables variables) {
         if(content instanceof ContentList(var list)) {
             StringBuilder builder = new StringBuilder();
@@ -27,7 +19,9 @@ public record ColorerImpl(String color, Format format) implements IColorer {
             return builder.toString();
         }
         String text = content.text(variables);
-        return color(text);
+        if(text.indexOf(Text.color_char) == 0) return text;
+
+        return color + format + text;
     }
 
     private void append(StringBuilder builder, IContent content, IVariables variables) {

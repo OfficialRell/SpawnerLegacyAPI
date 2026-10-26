@@ -218,11 +218,6 @@ public final class ItemBuilder {
 		}) : this;
     }
 
-    @Deprecated(since = "2.0.0", forRemoval = true)
-    public ItemBuilder flaged() {
-        return flagged();
-    }
-
     /**
      * Sets all item flags.
      *

@@ -36,14 +36,6 @@ public interface IColorer {
     }
 
     /**
-     * @param text input text
-     * @return Colored text
-     */
-
-    @Deprecated(since = "2.0.0", forRemoval = true)
-    String color(String text);
-
-    /**
      *
      * @param content   input content
      * @param variables variables

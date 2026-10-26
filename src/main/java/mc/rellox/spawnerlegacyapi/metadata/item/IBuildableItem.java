@@ -2,7 +2,6 @@ package mc.rellox.spawnerlegacyapi.metadata.item;
 
 import mc.rellox.spawnerlegacyapi.configuration.IFile;
 import mc.rellox.spawnerlegacyapi.item.builder.ItemBuilder;
-import mc.rellox.spawnerlegacyapi.spawner.meta.item.IMetaItem;
 import mc.rellox.spawnerlegacyapi.text.content.IContent;
 import mc.rellox.spawnerlegacyapi.utility.ISave;
 import org.bukkit.Material;
@@ -14,8 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public interface IBuildableItem extends ISave,
-        IMetaItem {
+public interface IBuildableItem extends ISave {
 
     /**
      * @return Item material

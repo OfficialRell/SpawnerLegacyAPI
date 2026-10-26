@@ -39,19 +39,9 @@ public class SpawnerPlaceEvent extends SpawnerPlayerEvent implements IPriceEvent
 	 * @return Generator snapshot that is being placed
 	 */
 
-	public IGeneratorSnapshot snapshot() {
-		return snapshot;
-	}
-	
-	/**
-	 * Deprecated, use {@link #snapshot()} instead.
-	 *
-	 * @return New virtual spawner
-	 */
-	
-	public final IVirtual virtual() {
-		return snapshot;
-	}
+    public IGeneratorSnapshot snapshot() {
+        return snapshot;
+    }
 
 	@Override
 	public IPrice price() {

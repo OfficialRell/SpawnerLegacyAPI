@@ -26,19 +26,8 @@ public class SpawnerStackEvent extends SpawnerInteractEvent {
 	 * @return Generator snapshot that is being stacked
 	 */
 
-	public IGeneratorSnapshot snapshot() {
-		return snapshot;
-	}
-	
-	/**
-	 * Deprecated, use {@link #snapshot()} instead.
-	 *
-	 * @return Virtual spawner that is stacked
-	 */
-
-	@Deprecated(since = "1.8.0", forRemoval = true)
-	public final IVirtual virtual() {
-		return snapshot;
-	}
+    public IGeneratorSnapshot snapshot() {
+        return snapshot;
+    }
 
 }

@@ -2,7 +2,6 @@ package mc.rellox.spawnerlegacyapi.metadata.item;
 
 import mc.rellox.spawnerlegacyapi.configuration.IFile;
 import mc.rellox.spawnerlegacyapi.metadata.IMetadata;
-import mc.rellox.spawnerlegacyapi.spawner.meta.item.IItemData;
 import mc.rellox.spawnerlegacyapi.utility.Calculate;
 import mc.rellox.spawnerlegacyapi.utility.ISave;
 import org.bukkit.inventory.ItemStack;
@@ -11,8 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public interface IItemMetadata extends IMetadata, ISave,
-        IItemData {
+public interface IItemMetadata extends IMetadata, ISave {
 
     /**
      * @return Weighted item list

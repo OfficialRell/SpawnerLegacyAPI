@@ -11,23 +11,6 @@ import org.bukkit.ChatColor;
 public record GradientImpl(Colors colors, Format format) implements IGradient {
 
     @Override
-    public String color(String text) {
-        // don't color if already fully colored
-        if(text.indexOf(Text.color_char) == 0) return text;
-
-        var builder = new StringBuilder();
-        int l = text.length();
-        if(l <= 1) builder.append(colors.color(0)).append(format).append(text);
-        else {
-            double v = 1.0 / (l - 1);
-            for(int i = 0; i < l; i++)
-                builder.append(Text.colorFast(merge(v * i, colors.rgb())))
-                        .append(format).append(text.charAt(i));
-        }
-        return builder.toString();
-    }
-
-    @Override
     public String color(IContent content, IVariables variables) {
         int length = length(content, variables);
         if(length <= 0) return "";
