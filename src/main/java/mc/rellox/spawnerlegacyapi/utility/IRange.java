@@ -53,6 +53,14 @@ public interface IRange {
     int roll();
 
     /**
+     * @return The average value
+     */
+
+    default double average() {
+        return (minimum() + maximum()) * 0.5;
+    }
+
+    /**
      * @return {@code true} if minimum or maximum is {@code 0}
      */
 
