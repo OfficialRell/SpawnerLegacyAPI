@@ -5,6 +5,7 @@ import mc.rellox.spawnerlegacyapi.configuration.IMemory;
 
 import java.util.List;
 
+@Deprecated(since = "4.1.0", forRemoval = true)
 public interface ValueType<U> {
 
     ValueType<String> STRING = IMemory::getString;
