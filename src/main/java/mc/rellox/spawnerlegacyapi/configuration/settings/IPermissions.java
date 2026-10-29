@@ -5,6 +5,6 @@ import org.bukkit.entity.Player;
 
 public interface IPermissions extends ILoad {
 
-	boolean has(Player player, IFilterContext context);
+    boolean has(Player player, IFilterContext context);
 
 }

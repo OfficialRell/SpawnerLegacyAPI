@@ -8,8 +8,8 @@ import java.util.stream.Stream;
 
 public interface IPricesTypedValue extends ILoad {
 
-	List<IPrice> get(SpawnerType type);
+    List<IPrice> get(SpawnerType type);
 
-	Stream<List<IPrice>> stream();
+    Stream<List<IPrice>> stream();
 
 }

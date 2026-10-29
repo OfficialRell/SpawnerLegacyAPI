@@ -6,8 +6,8 @@ import java.util.stream.DoubleStream;
 
 public interface IDoubleTypedValue extends ILoad {
 
-	double get(SpawnerType type);
+    double get(SpawnerType type);
 
-	DoubleStream stream();
+    DoubleStream stream();
 
 }

@@ -6,10 +6,10 @@ import java.util.stream.Stream;
 
 public interface IBooleanTypedValue extends ILoad {
 
-	boolean get(SpawnerType type);
-	
-	boolean any(boolean b);
+    boolean get(SpawnerType type);
 
-	Stream<Boolean> stream();
-	
+    boolean any(boolean comparing);
+
+    Stream<Boolean> stream();
+
 }

@@ -6,10 +6,10 @@ import java.util.stream.Stream;
 
 public interface IBooleanValue extends ILoad {
 
-	boolean get(IFilterContext context);
-	
-	boolean any(boolean b);
+    boolean get(IFilterContext context);
 
-	Stream<Boolean> stream();
-	
+    boolean any(boolean comparing);
+
+    Stream<Boolean> stream();
+
 }

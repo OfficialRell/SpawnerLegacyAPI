@@ -7,8 +7,8 @@ import java.util.stream.Stream;
 
 public interface IPriceValue extends ILoad {
 
-	IPrice get(IFilterContext context);
+    IPrice get(IFilterContext context);
 
-	Stream<IPrice> stream();
+    Stream<IPrice> stream();
 
 }

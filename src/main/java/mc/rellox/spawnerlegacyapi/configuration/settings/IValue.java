@@ -6,8 +6,8 @@ import java.util.stream.Stream;
 
 public interface IValue<T> extends ILoad {
 
-	T get(IFilterContext context);
+    T get(IFilterContext context);
 
-	Stream<T> stream();
+    Stream<T> stream();
 
 }

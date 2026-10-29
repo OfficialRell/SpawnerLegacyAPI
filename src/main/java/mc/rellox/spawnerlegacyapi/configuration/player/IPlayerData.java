@@ -40,22 +40,22 @@ public interface IPlayerData extends ILocationMutable, ICommit {
     void use();
 
     /**
-     * @return ID of the player
+     * @return Player identifier
      */
 
     UUID id();
 
     /**
-     * @return Player object or {@code null} if offline
+     * @return Player or {@code null} if offline
      */
 
     Player player();
 
     /**
-     * Returns an unmodifiable set of all trusted player IDs.
+     * Returns an unmodifiable set of all trusted player identifiers.
      * <p> Trusted players can manipulate with spawners the same as their owner.
      *
-     * @return Set of player IDs
+     * @return Set of player identifiers
      */
 
     Set<UUID> trusted();
@@ -70,7 +70,7 @@ public interface IPlayerData extends ILocationMutable, ICommit {
     UUID trusted(String name);
 
     /**
-     * @param id player ID
+     * @param id player identifier
      * @return {@code true} if this player is trusted
      */
 
@@ -86,7 +86,7 @@ public interface IPlayerData extends ILocationMutable, ICommit {
     /**
      * Adds this player to the trust list.
      *
-     * @param id player ID
+     * @param id player identifier
      * @return {@code true} if this player was not trusted before
      */
 
@@ -104,7 +104,7 @@ public interface IPlayerData extends ILocationMutable, ICommit {
     /**
      * Removes this player from the trust list.
      *
-     * @param id player ID
+     * @param id player identifier
      * @return {@code true} if this player was trusted before
      */
 

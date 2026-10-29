@@ -6,8 +6,8 @@ import java.util.stream.IntStream;
 
 public interface IIntTypedValue extends ILoad {
 
-	int get(SpawnerType type);
+    int get(SpawnerType type);
 
-	IntStream stream();
-	
+    IntStream stream();
+
 }

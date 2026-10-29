@@ -6,8 +6,8 @@ import java.util.stream.Stream;
 
 public interface ITypedValue<T> extends ILoad {
 
-	T get(SpawnerType type);
+    T get(SpawnerType type);
 
-	Stream<T> stream();
+    Stream<T> stream();
 
 }

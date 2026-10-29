@@ -8,8 +8,8 @@ import java.util.stream.Stream;
 
 public interface IPricesArrayValue extends ILoad {
 
-	List<IPrice[]> get(IFilterContext context);
+    List<IPrice[]> get(IFilterContext context);
 
-	Stream<List<IPrice[]>> stream();
+    Stream<List<IPrice[]>> stream();
 
 }

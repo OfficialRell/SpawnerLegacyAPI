@@ -2,8 +2,8 @@ package mc.rellox.spawnerlegacyapi.configuration.settings;
 
 public interface ILoad {
 
-	String UNSPECIFIED = "DEFAULT";
+    String UNSPECIFIED = "DEFAULT";
 
-	void load();
+    void load();
 
 }

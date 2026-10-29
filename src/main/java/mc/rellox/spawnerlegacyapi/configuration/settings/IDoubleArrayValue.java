@@ -6,8 +6,8 @@ import java.util.stream.Stream;
 
 public interface IDoubleArrayValue extends ILoad {
 
-	double[] get(IFilterContext context);
+    double[] get(IFilterContext context);
 
-	Stream<double[]> stream();
+    Stream<double[]> stream();
 
 }

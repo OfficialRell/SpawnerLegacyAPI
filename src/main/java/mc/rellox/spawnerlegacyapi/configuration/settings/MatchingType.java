@@ -37,9 +37,9 @@ public enum MatchingType {
      * Applies the filter to each value in the collection according to the matching type.
      *
      * @param collection collection
-     * @param filter filter
+     * @param filter     filter
+     * @param <T>        type of the collection
      * @return Whether the collection matches the filter
-     * @param <T> type of the collection
      */
     public abstract <T> boolean matches(Collection<T> collection, Predicate<T> filter);
 

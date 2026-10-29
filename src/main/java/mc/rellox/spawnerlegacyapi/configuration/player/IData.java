@@ -5,7 +5,7 @@ import mc.rellox.spawnerlegacyapi.configuration.IFile;
 public interface IData<T> {
 
     /**
-     * @return ID of this data provider
+     * @return Data provider identifier
      */
 
     String id();

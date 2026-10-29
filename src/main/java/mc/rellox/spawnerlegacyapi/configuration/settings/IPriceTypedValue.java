@@ -7,8 +7,8 @@ import java.util.stream.Stream;
 
 public interface IPriceTypedValue extends ILoad {
 
-	IPrice get(SpawnerType type);
+    IPrice get(SpawnerType type);
 
-	Stream<IPrice> stream();
+    Stream<IPrice> stream();
 
 }

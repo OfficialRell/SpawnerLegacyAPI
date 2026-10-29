@@ -6,8 +6,8 @@ import java.util.stream.DoubleStream;
 
 public interface IDoubleValue extends ILoad {
 
-	double get(IFilterContext context);
+    double get(IFilterContext context);
 
-	DoubleStream stream();
+    DoubleStream stream();
 
 }
