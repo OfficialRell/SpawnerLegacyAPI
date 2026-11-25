@@ -1,14 +1,15 @@
 package mc.rellox.spawnerlegacyapi.manager;
 
 import mc.rellox.spawnerlegacyapi.configuration.IFile;
-import mc.rellox.spawnerlegacyapi.configuration.settings.*;
 import mc.rellox.spawnerlegacyapi.configuration.filter.IFilter;
 import mc.rellox.spawnerlegacyapi.configuration.filter.IFilterContext;
+import mc.rellox.spawnerlegacyapi.configuration.settings.*;
 import mc.rellox.spawnerlegacyapi.price.Group;
 import mc.rellox.spawnerlegacyapi.spawner.type.SpawnerType;
 import org.bukkit.World;
 
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public interface IValueManager {
 
@@ -23,7 +24,7 @@ public interface IValueManager {
      * Creates a simple filter context.
      *
      * @param world world
-     * @param type spawner type
+     * @param type  spawner type
      * @return Newly created filter context
      */
 
@@ -33,7 +34,6 @@ public interface IValueManager {
      * Registers a new filter.
      *
      * @param filter filter
-     *
      * @throws IllegalArgumentException if a filter with the same name already exists
      */
 
@@ -41,17 +41,21 @@ public interface IValueManager {
 
     <T> IValue<T> of(IValueBuilder<T, ?> builder, String path, String suffix);
 
-    <T extends Enum<T>> IValue<T> of(IFile file, String path, String suffix, Class<T> type);
-
     <T> IValue<T> of(IValueBuilder<T, ?> builder, String path);
+
+    <T> IValue<T> of(IValueBuilder<T, ?> builder, String path, String suffix, Supplier<T> fallback);
+
+    <T> IValue<T> of(IValueBuilder<T, ?> builder, String path, Supplier<T> fallback);
+
+    <T extends Enum<T>> IValue<T> of(IFile file, String path, String suffix, Class<T> type);
 
     <T extends Enum<T>> IValue<T> of(IFile file, String path, Class<T> type);
 
     <T> ITypedValue<T> ofTyped(IValueBuilder<T, ?> builder, String path, String suffix);
 
-    <T extends Enum<T>> ITypedValue<T> ofTyped(IFile file, String path, String suffix, Class<T> type);
-
     <T> ITypedValue<T> ofTyped(IValueBuilder<T, ?> builder, String path);
+
+    <T extends Enum<T>> ITypedValue<T> ofTyped(IFile file, String path, String suffix, Class<T> type);
 
     <T extends Enum<T>> ITypedValue<T> ofTyped(IFile file, String path, Class<T> type);
 
