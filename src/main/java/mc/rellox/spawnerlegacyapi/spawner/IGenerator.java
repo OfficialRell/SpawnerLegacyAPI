@@ -111,10 +111,24 @@ public interface IGenerator extends IGeneratorTags {
     IMetadata metadata();
 
     /**
+     * Will return {@code null} if virtual settings are disabled
+     * or {@link ICache.GeneratorAccess#VIRTUAL} has not been granted
+     * (and virtual access settings are enabled).
+     *
      * @return Virtual storage of this spawner or {@code null}
      */
 
     IVirtualStorage storage();
+
+    /**
+     * Granting or denying access via {@link ICache#access(ICache.GeneratorAccess)} will do nothing
+     * if this method returns {@code false}.
+     *
+     * @param access generator access
+     * @return Whether this generator has all the required settings to use access
+     */
+
+    boolean eligible(ICache.GeneratorAccess access);
 
     /**
      * @return {@code true} if this generator is active (not removed)

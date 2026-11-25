@@ -3,6 +3,7 @@ package mc.rellox.spawnerlegacyapi.spawner;
 import mc.rellox.spawnerlegacyapi.SLAPI;
 import mc.rellox.spawnerlegacyapi.configuration.filter.IFilterContext;
 import mc.rellox.spawnerlegacyapi.spawner.IGeneratorTags.Tag;
+import mc.rellox.spawnerlegacyapi.spawner.cache.ICache;
 import mc.rellox.spawnerlegacyapi.spawner.type.SpawnerType;
 import mc.rellox.spawnerlegacyapi.spawner.type.UpgradeType;
 import org.bukkit.block.Block;
@@ -71,6 +72,12 @@ public interface IGeneratorSnapshot {
      */
 
     boolean virtual();
+
+    /**
+     * @return Generator access
+     */
+
+    int access();
 
     /**
      * @param player player who placed
@@ -146,7 +153,8 @@ public interface IGeneratorSnapshot {
                 .empty(empty())
                 .meta(meta())
                 .tags(tags())
-                .virtual(virtual());
+                .virtual(virtual())
+                .access(access());
     }
 
     /**
@@ -167,6 +175,7 @@ public interface IGeneratorSnapshot {
         String meta;
         int tags;
         boolean virtual;
+        int access;
 
         private Builder(SpawnerType type) {
             this.type = type;
@@ -210,11 +219,6 @@ public interface IGeneratorSnapshot {
             return this;
         }
 
-        public Builder virtual(boolean virtual) {
-            this.virtual = virtual;
-            return this;
-        }
-
         public Builder tags(Tag... tags) {
             this.tags = Stream.of(tags)
                     .mapToInt(Tag::index)
@@ -222,8 +226,25 @@ public interface IGeneratorSnapshot {
             return this;
         }
 
+        public Builder virtual(boolean virtual) {
+            this.virtual = virtual;
+            return this;
+        }
+
+        public Builder access(int access) {
+            this.access = access;
+            return this;
+        }
+
+        public Builder access(ICache.GeneratorAccess... access) {
+            this.access = Stream.of(access)
+                    .mapToInt(ICache.GeneratorAccess::index)
+                    .reduce(0, this::or);
+            return this;
+        }
+
         public IGeneratorSnapshot build() {
-            return SLAPI.spawners().of(type, levels, charges, spawnable, empty, meta, tags, virtual);
+            return SLAPI.spawners().of(type, levels, charges, spawnable, empty, meta, tags, virtual, access);
         }
 
         private int or(int a, int b) {

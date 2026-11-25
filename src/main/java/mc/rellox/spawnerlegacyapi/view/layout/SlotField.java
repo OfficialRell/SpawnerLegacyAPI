@@ -12,6 +12,7 @@ public enum SlotField {
     upgrade_charges("charges"),
     upgrade_types("types"),
     upgrade_storage("storage"),
+    upgrade_access_virtual("access-virtual"),
 
     spawners_current("current"),
     spawners_page("page"),
@@ -51,7 +52,7 @@ public enum SlotField {
                 upgrade_stats, upgrade_range, upgrade_delay,
                 upgrade_amount, upgrade_nearby, upgrade_xp,
                 upgrade_drops, upgrade_charges, upgrade_types,
-                upgrade_storage
+                upgrade_storage, upgrade_access_virtual
         };
     }
 

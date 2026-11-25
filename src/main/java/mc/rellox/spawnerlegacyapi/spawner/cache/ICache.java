@@ -272,4 +272,53 @@ public interface ICache {
         write(ICacheType.UPGRADES, upgrades().values());
     }
 
+    /**
+     * Note, that this only works when the specific access option is set to {@code true}.
+     *
+     * @param access generator access
+     * @return {@code true} if this generator has the specified access
+     */
+
+    default boolean access(GeneratorAccess access) {
+        int value = get(ICacheType.ACCESS, 0);
+        return (value & access.index()) != 0;
+    }
+
+    /**
+     * Grants the specified access to the generator.
+     *
+     * @param access generator access
+     */
+
+    default void grant(GeneratorAccess access) {
+        int value = get(ICacheType.ACCESS, 0);
+        value |= access.index();
+        write(ICacheType.ACCESS, value);
+    }
+
+    /**
+     * Denies the specified access to the generator.
+     *
+     * @param access generator access
+     */
+
+    default void deny(GeneratorAccess access) {
+        int value = get(ICacheType.ACCESS, 0);
+        value &= ~access.index();
+        write(ICacheType.ACCESS, value);
+    }
+
+    enum GeneratorAccess {
+
+        /**
+         * Access to enable virtual spawners.
+         */
+        VIRTUAL;
+
+        public int index() {
+            return 1 << ordinal();
+        }
+
+    }
+
 }

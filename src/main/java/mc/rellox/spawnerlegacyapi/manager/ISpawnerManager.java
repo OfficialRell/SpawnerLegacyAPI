@@ -73,6 +73,23 @@ public interface ISpawnerManager {
                           int tags, boolean virtual);
 
     /**
+     * @param type      spawner type
+     * @param levels    levels
+     * @param charges   charges
+     * @param spawnable spawnable
+     * @param empty     empty
+     * @param metadata  metadata
+     * @param tags      tags
+     * @param virtual   virtual
+     * @param access    access
+     * @return Generator snapshot
+     */
+
+    IGeneratorSnapshot of(SpawnerType type, int[] levels, int charges,
+                          int spawnable, boolean empty, String metadata,
+                          int tags, boolean virtual, int access);
+
+    /**
      * @param block    block
      * @param player   player
      * @param snapshot generator snapshot

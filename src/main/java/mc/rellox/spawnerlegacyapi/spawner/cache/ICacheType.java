@@ -23,6 +23,7 @@ public interface ICacheType<T> {
     ICacheType<Integer> TAGS = SLAPI.cache().of(10);
     ICacheType<Boolean> GENERATED = SLAPI.cache().of(11);
     ICacheType<Boolean> VIRTUAL = SLAPI.cache().of(12);
+    ICacheType<Integer> ACCESS = SLAPI.cache().of(13);
 
     // class methods
 
