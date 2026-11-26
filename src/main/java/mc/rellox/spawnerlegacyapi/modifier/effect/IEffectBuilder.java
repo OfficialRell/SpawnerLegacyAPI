@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 public interface IEffectBuilder {
 
     /**
-     * Sets the effect to be executable only if the specified predicate returns true.<br>
+     * Sets the effect to be executable only if the specified predicate returns {@code true}.<br>
      * This predicate is called every time the effect is executed.
      *
      * @param predicate predicate to check
