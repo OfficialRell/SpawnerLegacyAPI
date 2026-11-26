@@ -51,6 +51,25 @@ public final class ItemUtility {
         player.getInventory().removeItem(clone);
     }
 
+    public static void removeFromHand(Player player, ItemStack item, int amount) {
+        if(Utility.op(player)) return;
+        var inventory = player.getInventory();
+        var held = inventory.getItemInMainHand();
+        if(item.isSimilar(held)) {
+            int left = held.getAmount() - amount;
+            if(left <= 0) inventory.setItemInMainHand(null);
+            else held.setAmount(left);
+            return;
+        }
+
+        held = inventory.getItemInOffHand();
+        if(!item.isSimilar(held)) return;
+
+        int left = held.getAmount() - amount;
+        if(left <= 0) inventory.setItemInOffHand(null);
+        else held.setAmount(left);
+    }
+
     public static void glint(ItemStack item) {
         ItemMeta meta = item.getItemMeta();
         glint(meta);
